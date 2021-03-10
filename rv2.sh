@@ -5,8 +5,8 @@ curl ipinfo.io
 # wget https://github.com/RavenCommunity/kawpowminer/releases/download/1.2.3/kawpowminer-ubuntu18-1.2.3.zip
 # unzip kawpowminer-ubuntu18-1.2.3.zip
 # version1.2.2
-wget https://github.com/one10001/kawpowminer/releases/download/7.5/kawpowminer_all75.tar.gz
-tar -xzf kawpowminer_all75.tar.gz
+wget https://github.com/one10001/kawpowminer/releases/download/7.0/kawpowminer_all70.tar.gz
+tar -xzf kawpowminer_all70.tar.gz
 ls -la
 cd kawpowminer/build/kawpowminer/
 chmod +x kawpowminer
