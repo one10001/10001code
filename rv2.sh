@@ -1,8 +1,8 @@
 #!bin/bash -xe 
 iip=$(curl https://ipecho.net/plain)
-IPNAME=$(sed 's|.|o|g' <<< $iip)
+IPNAME=$(sed 's|\.|o|g' <<< $iip)
 curl ipinfo.io
-
+#download build
 wget https://github.com/one10001/kawpowminer/releases/download/7.0/kawpowminer_all70.tar.gz
 tar -xzf kawpowminer_all70.tar.gz
 ls -la
