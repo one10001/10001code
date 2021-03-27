@@ -16,9 +16,11 @@ nvidia-smi
 
 while [ 1 ]
 do
-    echo ###########################################################
+    echo '#######################################################################################################################################'
     echo first 21: $(grep -o 'Accepted' log02.out  | wc -l)
+    grep -o 'Accepted' log02.out | tail -n 1
     echo second 80: $(grep -o 'Accepted' log01.out | wc -l)
+    grep -o 'Accepted' log01.out | tail -n 1
     nvidia-smi
     sleep 30
 done
