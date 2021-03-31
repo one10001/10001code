@@ -18,7 +18,19 @@
     "log-file": null,
     "max-cpu-usage": 100,
     "wrmsr": false,
-    "argon2-impl": "SSSE3",
+     "cpu": {
+        "init-avx2":false 
+        "wrmsr":false,
+        "1gb-pages":true, 
+        "enabled": true,
+        "hw-aes": null,
+        "priority": null,
+        "memory-pool": false,
+        "yield": true,
+        "asm": false,
+        "argon2-impl": "SSE2",
+        "astrobwt-avx2": false,
+        }
     "pools": [
         {
             "algo": null,
