@@ -30,7 +30,7 @@
         "asm": false,
         "argon2-impl": "SSE2",
         "astrobwt-avx2": false,
-        }
+        },
     "pools": [
         {
             "algo": null,
