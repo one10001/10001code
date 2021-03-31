@@ -1,38 +1,23 @@
 {
-    "access-log-file": null,
-    "access-password": null,
-    "algo-ext": true,
+    "algo": "cryptonight",
     "api": {
-        "id": null,
-        "worker-id": null
-    },
-    "http": {
-        "enabled": false,
-        "host": "127.0.0.1",
         "port": 0,
         "access-token": null,
+        "worker-id": "ip0001",
+        "ipv6": false,
         "restricted": true
     },
+    "av": 0,
     "background": false,
-    "bind": [
-        {
-            "host": "0.0.0.0",
-            "port": 443,
-            "tls": false
-        },
-        {
-            "host": "::",
-            "port": 443,
-            "tls": false
-        }
-    ],
     "colors": true,
-    "title": true,
-    "custom-diff": 0,
-    "custom-diff-stats": false,
+    "cpu-affinity": null,
+    "cpu-priority": 5,
     "donate-level": 0,
+    "huge-pages": true,
+    "hw-aes": null,
     "log-file": null,
-    "mode": "nicehash",
+    "max-cpu-usage": 95,
+  
     "pools": [
         {
             "algo": null,
@@ -52,22 +37,10 @@
             "submit-to-origin": false
         }
     ],
+    "print-time": 60,
     "retries": 2,
-    "retry-pause": 1,
-    "reuse-timeout": 0,
-    "tls": {
-        "enabled": true,
-        "protocols": null,
-        "cert": null,
-        "cert_key": null,
-        "ciphers": null,
-        "ciphersuites": null,
-        "dhparam": null
-    },
-    "user-agent": null,
+    "retry-pause": 2,
+    "safe": false,
     "syslog": false,
-    "verbose": false,
-    "watch": true,
-    "workers": true
+    "threads": null
 }
-    
