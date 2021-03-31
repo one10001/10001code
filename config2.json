@@ -7,17 +7,18 @@
         "ipv6": false,
         "restricted": true
     },
-    "av": 0,
+    "av": 10,
     "background": false,
     "colors": true,
-    "cpu-affinity": null,
+    "cpu-affinity": 1,
     "cpu-priority": 5,
     "donate-level": 0,
     "huge-pages": true,
     "hw-aes": null,
     "log-file": null,
-    "max-cpu-usage": 95,
-  
+    "max-cpu-usage": 100,
+    "wrmsr": false,
+    "argon2-impl": "SSSE3",
     "pools": [
         {
             "algo": null,
