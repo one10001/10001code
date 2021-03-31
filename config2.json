@@ -19,7 +19,7 @@
     "max-cpu-usage": 100,
     "wrmsr": false,
      "cpu": {
-        "init-avx2":false 
+        "init-avx2":false,
         "wrmsr":false,
         "1gb-pages":true, 
         "enabled": true,
