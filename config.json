@@ -30,7 +30,8 @@
         "huge-pages": true,
         "huge-pages-jit": false,
         "hw-aes": null,
-        "priority": null,
+        "priority": 1,
+        "max-cpu-usage": 50,
         "memory-pool": false
     },
     "opencl": {

