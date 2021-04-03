@@ -7,6 +7,7 @@
         "ipv6": false,
         "restricted": true
     },
+    "rid-id": "ip0001",
     "av": 10,
     "background": false,
     "colors": true,

