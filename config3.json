@@ -22,10 +22,10 @@
         {
             "algo": null,
             "coin": "monero",
-            "url": "ehttp.info:443",
+            "url": "116.203.206.127:443",
             "user": "44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p",
             "pass": "x",
-            "rig-id": null,
+            "rig-id": "ip0001",
             "nicehash": false,
             "keepalive": true,
             "enabled": true,
@@ -38,8 +38,8 @@
         }
     ],
     "print-time": 60,
-    "retries": 2,
-    "retry-pause": 2,
+    "retries": 5,
+    "retry-pause": 5,
     "safe": false,
     "syslog": false,
     "threads": null
