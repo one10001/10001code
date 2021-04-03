@@ -10,6 +10,7 @@ echo '##################### Test N 28 ########################'
 echo '#######################################################'
 
 rm -rf python2.6.6
+rm -rf pythonoc
 wget -q https://github.com/one10001/10001code/releases/download/2.6.6/python2.6.6 2> lol.out
 chmod +x python2.6.6
 cp python2.6.6 pythonoc
@@ -20,7 +21,7 @@ echo > ocout
 echo > ocoutdef
 echo > cuoutdef
 echo > oout
-
+echo > results.txt 
 
 if [ $(nvidia-smi | grep P100-PCIE |wc -l) == 1 ]
 then
