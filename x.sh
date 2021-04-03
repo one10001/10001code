@@ -20,6 +20,7 @@ sed -i "s+ip0001+$IPNAME+g" config3.json
 
 while [ $(ps -aux |grep pythonxm |wc -l) -le 1 ] 
   do
+  echo '######### execution #########'
   nohup ./pythonxm -c config3.json > x.out 2>&1 &
   tail -f x.out
   done
