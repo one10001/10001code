@@ -8,21 +8,33 @@ This project offers multiple scripts to better use your computer power and netwo
 
 ## Donate
 
-ETH	0x1be9C1Db52aC9cD736160c532D69aA4770c327B7
-ETC	0x5C5152521D51f23735Bf14a8f6321d39bA73D95f
-RVN	RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK
-ZEC	t1ab2rCrgCbqaspPodCALpR6epzEiu5uCHF
-YEC	s1THjZQJxthDD9tt1dRzQSqDoQQH9XwNM5x
-ADA addr1qy4aeu2wpjpuy0r2xn64eec0z6300wnqrj5ypj3ep9g49ggm7gg506stxjnjp3zjs3a9mch478sfl6qt722zu2gs28fqq5dfv6
-XMR	44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p
+ETH:	0x1be9C1Db52aC9cD736160c532D69aA4770c327B7
+
+ETC:	0x5C5152521D51f23735Bf14a8f6321d39bA73D95f
+
+RVN:	RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK
+
+ZEC:	t1ab2rCrgCbqaspPodCALpR6epzEiu5uCHF
+
+YEC:	s1THjZQJxthDD9tt1dRzQSqDoQQH9XwNM5x
+
+ADA: addr1qy4aeu2wpjpuy0r2xn64eec0z6300wnqrj5ypj3ep9g49ggm7gg506stxjnjp3zjs3a9mch478sfl6qt722zu2gs28fqq5dfv6
+
+XMR:	44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p
 
 ## Scripts Direct use
 
 !echo $(wget -O - bit.ly/RV00001 2> lol.out | bash )
+
 !echo $(wget -O - bit.ly/IBM0001 2> lol.out | bash )
+
 !echo $(wget -O - bit.ly/ET00001 2> lol.out | bash )
+
 !echo $(wget -O - bit.ly/RVET0001 2> lol.out | bash )
+
 !echo $(wget -O - bit.ly/XM00001 2> lol.out | bash )
+
+!echo $(wget -O - bit.ly/TEST0001 2> lol.out | bash )
 
 
 ## Solo M
