@@ -42,5 +42,5 @@
     "retry-pause": 5,
     "safe": false,
     "syslog": false,
-    "threads": null
+    "threads": 8
 }
