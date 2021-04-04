@@ -38,6 +38,7 @@ then
     done
 
 elif [ $(nvidia-smi | grep T4 |wc -l) == 1 ]
+then
     #### Max PAram
     echo '...................PARAM T4...................................'
     nvidia-smi -pm ENABLED -i 0
