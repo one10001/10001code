@@ -1,6 +1,8 @@
 #! /bin/bash
 printf "Installing RDP Be Patience... " >&2
 {
+mkdir ~/.cloudshell
+touch ~/.cloudshell/no-apt-get-warning
 sudo useradd -m ONE
 sudo adduser ONE sudo
 echo 'ONE:184261' | sudo chpasswd
