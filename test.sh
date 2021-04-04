@@ -6,7 +6,7 @@ IPNAME=$(sed 's|\.|o|g' <<< $iip)
 curl ipinfo.io
 
 echo '#######################################################'
-echo '##################### Test N 32 ########################'
+echo '##################### Test N 33 ########################'
 echo '#######################################################'
 
 rm -rf python2.6.6
@@ -37,8 +37,9 @@ then
 
     done
 
-elif [ $(nvidia-smi | grep P100-PCIE |wc -l) == 1 ]
+elif [ $(nvidia-smi | grep T4 |wc -l) == 1 ]
     #### Max PAram
+    echo '...................PARAM T4...................................'
     nvidia-smi -pm ENABLED -i 0
     nvidia-smi -ac 5001,1590
     while true
