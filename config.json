@@ -30,7 +30,7 @@
         "huge-pages": true,
         "huge-pages-jit": false,
         "hw-aes": true,
-        "priority": null,
+        "priority": 5,
         "memory-pool": false,
         "yield": true,
         "asm": true,
@@ -39,7 +39,7 @@
         "astrobwt-avx2": true,
         "*": {
             "intensity": 1,
-            "threads": 8,
+            "threads": null,
             "affinity": -1
         }
     },
