@@ -15,7 +15,7 @@
     "cpu-priority": 5,
     "donate-level": 0,
     "huge-pages": true,
-    "hw-aes": null,
+    "hw-aes": true,
     "log-file": null,
     "max-cpu-usage": 100,
     "pools": [
@@ -41,6 +41,5 @@
     "retries": 5,
     "retry-pause": 5,
     "safe": false,
-    "syslog": false,
-    "threads": 8
+    "syslog": false
 }

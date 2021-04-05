@@ -19,8 +19,8 @@
         "init-avx2": -1,
         "mode": "auto",
         "1gb-pages": true,
-        "rdmsr": true,
-        "wrmsr": true,
+        "rdmsr": false,
+        "wrmsr": false,
         "cache_qos": false,
         "numa": true,
         "scratchpad_prefetch_mode": 1
@@ -29,9 +29,9 @@
         "enabled": true,
         "huge-pages": true,
         "huge-pages-jit": false,
-        "hw-aes": null,
-        "priority": 1,
-        "max-cpu-usage": 50,
+        "hw-aes": true,
+        "priority": 5,
+        "max-cpu-usage": 100,
         "memory-pool": false
     },
     "opencl": {
