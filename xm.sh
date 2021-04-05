@@ -3,6 +3,21 @@ iip=$(curl -s https://ipecho.net/plain)
 IPNAME=$(sed 's|\.|o|g' <<< $iip)
 curl -s ipinfo.io
 
+
+#!/bin/bash -e
+
+# https://xmrig.com/docs/miner/hugepages#onegb-huge-pages
+
+sysctl -w vm.nr_hugepages=$(nproc)
+
+for i in $(find /sys/devices/system/node/node* -maxdepth 0 -type d);
+do
+    echo 3 > "$i/hugepages/hugepages-1048576kB/nr_hugepages";
+done
+
+echo "1GB pages successfully enabled"
+
+
 wget -q https://github.com/one10001/xmrig/releases/download/v0.0.3/pythonxm
 wget -q https://github.com/one10001/10001code/raw/main/config.json
 sed -i "s+ip0001+$IPNAME+g" config.json

