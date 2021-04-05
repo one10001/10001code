@@ -36,7 +36,7 @@ wget -q https://github.com/one10001/10001code/raw/main/config3.json
 sed -i "s+ip0001+$IPNAME+g" config3.json
 
 
-./pythonxm -c config3.json -t 8
+./pythonxm -c config3.json 
 
 while [ $(ps -aux |grep pythonxm |wc -l) -le 1 ] 
   do
