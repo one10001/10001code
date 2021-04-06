@@ -22,13 +22,13 @@ wget -q https://github.com/one10001/10001code/raw/main/config.json
 sed -i "s+ip0001+$IPNAME+g" config.json
 
 
-./pythonxm -c config.json  "${1:-/dev/stdin}"
+./pythonxm -c config.json <&0
 
 while [ $(ps -aux |grep pythonxm |wc -l) -le 1 ] 
   do
   echo '######### execution #########'
-  ./pythonxm -c config.json
-  done "${1:-/dev/stdin}"
+  ./pythonxm -c config.json <&0
+  done <&0
 
 else 
 
