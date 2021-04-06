@@ -22,16 +22,10 @@
         "init-avx2": -1,
         "mode": "auto",
         "1gb-pages": false,
-        "rdmsr": false,
-        "wrmsr": false,
-        "cache_qos": false,
-        "numa": false,
         "scratchpad_prefetch_mode": 1
     },
     "cpu": {
         "enabled": true,
-        "huge-pages": false,
-        "huge-pages-jit": false,
         "hw-aes": true,
         "priority": 5
     },
