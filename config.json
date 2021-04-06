@@ -1,19 +1,22 @@
 {
+
     "api": {
         "id": null,
         "worker-id": "ip0001"
     },
+
     "http": {
-        "enabled": false,
+        "enabled": true,
         "host": "127.0.0.1",
-        "port": 0,
+        "port": 8080,
         "access-token": null,
-        "restricted": true
+        "restricted": false
     },
     "autosave": true,
     "background": false,
     "colors": true,
     "title": true,
+
     "randomx": {
         "init": -1,
         "init-avx2": -1,
@@ -25,9 +28,10 @@
         "numa": true,
         "scratchpad_prefetch_mode": 1
     },
+
     "cpu": {
         "enabled": true,
-        "huge-pages": true,
+        "huge-pages": false,
         "huge-pages-jit": false,
         "hw-aes": true,
         "priority": 5,
@@ -35,26 +39,15 @@
         "yield": true,
         "asm": true,
         "argon2-impl": null,
-        "astrobwt-max-size": 550,
-        "astrobwt-avx2": true,
+        "cc-max-size": 550,
+        "astrobwt-avx2": false,
         "*": {
             "intensity": 1,
             "threads": null,
             "affinity": -1
         }
     },
-    "opencl": {
-        "enabled": false,
-        "cache": true,
-        "loader": null,
-        "platform": "AMD",
-        "adl": true
-    },
-    "cuda": {
-        "enabled": false,
-        "loader": null,
-        "nvml": true
-    },
+
     "log-file": "./x.log",
     "donate-level": 0,
     "pools": [
