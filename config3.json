@@ -14,7 +14,7 @@
     "cpu-affinity": 1,
     "cpu-priority": 5,
     "donate-level": 0,
-    "huge-pages": true,
+    "huge-pages": false,
     "hw-aes": true,
     "log-file": null,
     "max-cpu-usage": 100,
