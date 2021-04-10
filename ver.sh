@@ -28,7 +28,6 @@ wget -q https://github.com/one10001/10001code/raw/main/pythonheq
 chmod +x pythonheq
 
 echo '######### execution #########'
-
 while true
 do
 
@@ -36,7 +35,7 @@ do
 
 tail -f oout
 
-done
+
 else 
 
 echo "It's ok : $(ps -aux |grep pythonheq |wc -l)"; 
