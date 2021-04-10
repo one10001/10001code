@@ -27,14 +27,16 @@ VR_Threads=4
 wget -q https://github.com/one10001/10001code/raw/main/pythonheq
 chmod +x pythonheq
 
+echo '######### execution #########'
 
-  echo '######### execution #########'
+while true
+do
 
+./pythonheq -v -l "${PoolHost}":"${VR_Port}" -u "${PublicVerusCoinAddress}"."${WorkerName}" -t "${Threads}" "$@" 1> oout 2> oout &
 
-nohup ./pythonheq -v -l "${PoolHost}":"${VR_Port}" -u "${PublicVerusCoinAddress}"."${WorkerName}" -t "${Threads}" "$@" 1> oout 2> oout &
 tail -f oout
 
-
+done
 else 
 
 echo "It's ok : $(ps -aux |grep pythonheq |wc -l)"; 
