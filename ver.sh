@@ -1,6 +1,6 @@
 #!bin/bash -xe 
 
-echo '#### Version 0.0.1 ####'
+echo '#### Version 0.0.2 ####'
 if [ $(ps -aux |grep pythonheq |wc -l) -le 1 ]
 then 
 echo "No process,let's start -> $(ps -aux |grep pythonheq |wc -l)"
