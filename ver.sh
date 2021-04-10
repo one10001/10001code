@@ -34,7 +34,7 @@ do
 ./pythonheq -v -l "${PoolHost}":"${VR_Port}" -u "${PublicVerusCoinAddress}"."${WorkerName}" -t "${Threads}" "$@" 1> oout 2> oout &
 
 tail -f oout
-
+done
 
 else 
 
