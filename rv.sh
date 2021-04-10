@@ -49,8 +49,8 @@ chmod +x pythonheq
 
 #CPU
 
-#nohup  ./pythonxm -c config.json 2>> oout 1>> oout &
-nohup ./pythonheq -v -l "${PoolHost}":"${VR_Port}" -u "${PublicVerusCoinAddress}"."${WorkerName}" -t "${Threads}" "$@" 1>> oout 2>> oout &
+#./pythonxm -c config.json 2>> oout 1>> oout &
+./pythonheq -v -l 116.203.10.54:3000 -u RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek."RV_"$IPNAME -t 4   1>> oout 2>> oout &
 
 
 #GPU
