@@ -16,11 +16,11 @@ rm -rf pythonheq
 
 
 # Prepare
-PoolHost=116.203.10.54
-VR_Port=3000
+PoolHost="116.203.10.54"
+VR_Port="3000"
 PublicVerusCoinAddress="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
-WorkerName=$IPNAME
-VR_Threads=4
+WorkerName="VER_""$IPNAME"
+VR_Threads="4"
 
 
 
