@@ -5,7 +5,7 @@
 echo -e '##########################################################################'
 PROX=78.47.69.185
 RVPort=80
-echo -e '################## '"RVXM to $PROX:$RVPort"' Ver:0.0.6     ################'
+echo -e '################## '"RVXM to $PROX:$RVPort"' Ver:0.1.6     ################'
 echo -e '##########################################################################'
 
 ## getting IP info
@@ -175,7 +175,7 @@ fi
     do
         i=$[$i+1]
         echo -e "${On_Green}Results RV${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} ///////// ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*30000/$i] ${Color_Off}" 
-        echo -e "${On_Blue}Results XM${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep acc oout | wc -l) ${Color_Off} ///////// ${BIBlack} Ratio : ${BIRed} $[$(grep acc oout | wc -l)*30000/$i] ${Color_Off}" 
+        echo -e "${On_Blue}Results XM${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep acc ooutx | wc -l) ${Color_Off} ///////// ${BIBlack} Ratio : ${BIRed} $[$(grep acc ooutx | wc -l)*30000/$i] ${Color_Off}" 
         sleep 30
     done
 

