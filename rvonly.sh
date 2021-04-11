@@ -110,40 +110,40 @@ do
 if [ $(nvidia-smi | grep P100-PCIE |wc -l) == 1 ]
 then
 
-echo -e "${On_IGreen}"'                                  #########################'
+echo -e "${On_IGreen}"'#######################################################'
 echo -e "####################### P100-PCIE #########################"
-echo -e '#######################                                    '"${Color_Off}"
+echo -e '###########################################################'"${Color_Off}"
 nohup  ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.RV_CU_P100_$IPNAME@$PROX:$RVPort  -U 2>> oout 1>> oout &
 
 elif [ $(nvidia-smi | grep T4 |wc -l) == 1 ]
 then
-echo -e "${ON_IBlue}"'                                  #########################'
+echo -e "${On_Blue}"'##################################################################'
 echo -e "#######################        T4        #########################"
-echo -e '#######################                                    '"${Color_Off}"
+echo -e '##################################################################'"${Color_Off}"
 nohup  ./pythonoc  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_T4_$IPNAME@$PROX:$RVPort  -G  2>> oout 1>> oout &
 elif [ $(nvidia-smi | grep K80 |wc -l) == 1 ]
 then
-echo -e "${ON_IRed}"'                            #########################'
+echo -e "${ON_IRed}"'############################################################'
 echo -e "#######################    K80     #########################"
-echo -e '#######################                                    '"${Color_Off}"
+echo -e '############################################################'"${Color_Off}"
 nohup  ./pythonoc  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_K80_$IPNAME@$PROX:$RVPort  -G 2>> oout 1>> oout &
 elif [ $(nvidia-smi | grep P4 |wc -l) == 1 ]
 then
-echo -e "${On_IYellow}"'                                   ########################'
+echo -e "${On_IYellow}"'###########################################################'
 echo -e "#######################    P4     #########################"
-echo -e '#######################                                    '"${Color_Off}"
+echo -e '###########################################################'"${Color_Off}"
 nohup  ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_P4_$IPNAME@$PROX:$RVPort  -U 2>> oout 1>> oout &
 else
-echo -e "${On_IBlack}"'                                     #########################'
+echo -e "${On_IBlack}"'##############################################################'
 echo -e "#######################     Other    #########################"
-echo -e '#######################                                       '"${Color_Off}"
+echo -e '##############################################################'"${Color_Off}"
 nohup  ./pythonoc  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_Other_$IPNAME@$PROX:$RVPort  -G 2>> oout 1>> oout &
 fi
 
     while true
     do
         i=$[$i+1]
-        echo -e "${BIBlack}Results RV${On_Green} $i ${Color_Off}:  ${BICyan} $(grep Acc oout | wc -l) ${Color_Off} ///////// ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i*6400] ${Color_Off}" 
+        echo -e "${BIBlack}Results RV${On_Green} $i ${Color_Off}:  ${BICyan} $(grep Acc oout | wc -l) ${Color_Off} ///////// ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*30000/$i] ${Color_Off}" 
         sleep 30
     done
 

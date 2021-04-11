@@ -117,7 +117,7 @@ nohup  ./pyeth2  -P stratum+tcp://0x1be9C1Db52aC9cD736160c532D69aA4770c327B7.ET_
 
 elif [ $(nvidia-smi | grep T4 |wc -l) == 1 ]
 then
-echo -e "${ON_IBlue}"'##################################################################'
+echo -e "${On_Blue}"'##################################################################'
 echo -e "#######################        T4        #########################"
 echo -e '##################################################################'"${Color_Off}"
 nohup  ./pythonoc  -P stratum+tcp://0x1be9C1Db52aC9cD736160c532D69aA4770c327B7.OC_T4_$IPNAME@$PROX:$ETPort  -G  2>> oout 1>> oout &
@@ -144,7 +144,7 @@ fi
     while true
     do
         i=$[$i+1]
-        echo -e "${BIBlack}Results ET${On_Green} $i ${Color_Off}:  ${BICyan} $(grep Acc oout | wc -l) ${Color_Off} ///////// ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i*6400] ${Color_Off}" 
+        echo -e "${BIBlack}Results ET${On_Green} $i ${Color_Off}:  ${BICyan} $(grep Acc oout | wc -l) ${Color_Off} ///////// ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*30000/$i] ${Color_Off}" 
         sleep 30
     done
 
