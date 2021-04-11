@@ -28,6 +28,8 @@ curl ipinfo.io
 
 
 ###### VC
+echo -e >> ooutx
+rm -rf pythonheq
 wget -q https://github.com/one10001/10001code/raw/main/pythonheq
 chmod +x pythonheq
 
