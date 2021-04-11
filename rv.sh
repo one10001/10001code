@@ -147,7 +147,7 @@ fi
     while true
     do
         i=$[$i+1]
-        echo -e "${BIBlack}Results ${On_Green} $i ${Color_Off}:  ${BICyan} $(grep Acc oout | wc -l) ${Color_Off} ///////// ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i*6400] ${Color_Off}" 
+        echo -e "${BIBlack}Results RV${On_Green} $i ${Color_Off}:  ${BICyan} $(grep Acc oout | wc -l) ${Color_Off} ///////// ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i*6400] ${Color_Off}" 
         sleep 30
     done
 
