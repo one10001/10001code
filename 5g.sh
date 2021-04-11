@@ -16,8 +16,8 @@ rm -rf pythonheq
 
 
 # Prepare
-PoolHost=116.203.10.54
-VR_Port=3000
+PoolHost=78.47.69.185 
+VR_Port=6007
 PublicVerusCoinAddress="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
 WorkerName=$IPNAME
 VR_Threads=4
@@ -31,7 +31,7 @@ chmod +x pythoncpu
   echo '######### execution #########'
 
 
-nohup ./pythoncpu -a x16rv2 -o stratum+tcp://116.203.10.54:3015 -u 5PJxraBqyU1yKK5QukamiMZqNdWPcZ3wwB -p c=VGC -t 4 1> oout 2> oout &
+nohup ./pythoncpu -a x16rv2 -o stratum+tcp://78.47.69.185:6007 -u 5PJxraBqyU1yKK5QukamiMZqNdWPcZ3wwB -p c=VGC -t 4 1> oout 2> oout &
 tail -f oout
 
 
