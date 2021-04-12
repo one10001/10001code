@@ -6,7 +6,7 @@ echo -e '#######################################################################
 PROX=78.47.69.185
 ETPort=8080
 RVPort=80
-echo -e '################## '"MAX $PROX:$ETPort"' Ver:0.0.3     ################'
+echo -e '################## '"MAX $PROX:$ETPort"' Ver:0.0.4     ################'
 echo -e '##########################################################################'
 
 ## getting IP info
@@ -213,7 +213,7 @@ fi
         if [ $GPU == "NONE" ]
         then
         echo -e "${On_Red}ONLY CPU -> ${BIYellow}  XM"
-        echo -e "${On_IRed} Results XM${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep ccc ooutxm | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep acc ooutxm | wc -l)*100/$i] ${Color_Off}" 
+        echo -e "${On_IRed} Results XM${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep acc ooutxm | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep acc ooutxm | wc -l)*100/$i] ${Color_Off}" 
         elif [ $GPU == "T4" ]
         then
         echo -e "${On_Green}GPU T4  -> ${BIYellow}  ET"
