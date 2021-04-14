@@ -1,0 +1,30 @@
+version: '3.3'
+services:
+    haproxy:
+        build:
+            context: /docker/haproxy
+        volumes:
+            - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+        ports:
+            - '80:3333'
+            - '21:12346'
+            - '6060:6060'
+            - '3333:14444'
+            - '990:2020'
+            - '443:4444'
+            - '8010:8010'
+            - '3000:3956'
+            - '8080:3956'
+            - '6007:3015'
+            - '3030:3363'
+            - '8083:8083' 
+        container_name: haprox
+        restart: unless-stopped
+
+## ETH = 4444-Etheminer
+## RVN = 3333-flypool  6060-2miner  7070-solo-2miner  8013-solopool
+## grin = 3030-2miner 4040-solo-2miner
+## XMR = ssl-443-pool.minexmr.com 14444-xmr-eu1.nanopool.org 8010-xmr.solopool.org 2222-xmr.2miners.com 12346-de.minexmr.com 12347-pool.supportxmr.com  44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p
+## VRSC = 3956-eu.luckpool.net  https://luckpool.net/verus/miner.html?RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek nheqminer
+## VGC 5G Cash (x16rv2)  = 5PJxraBqyU1yKK5QukamiMZqNdWPcZ3wwB cpuminer-opt   CCMiner eurohash.eu:3015  stratum+tcp://pool.alphax.pro:3363	Difficulty Variable / 2 ↔ ∞ 
+## DGB DigiByte  8083-europe.dgb256.online
