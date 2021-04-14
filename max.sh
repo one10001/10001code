@@ -174,7 +174,7 @@ wget -q https://github.com/one10001/10001code/raw/main/config.json
 sed -i "s+ip0001+RV_$INFO+g" config.json
 sed -i "s+xxpppxx+$PROX+g" config.json
 
-./pythonxm -c config.json -l ooutxm 2>> ooutxm 1>> ooutxm &
+#./pythonxm -c config.json -l ooutxm 2>> ooutxm 1>> ooutxm &
 elif [ $( nvidia-smi  2>&1 |  grep "not found" |wc -l) == 1 ]
 then
 echo -e "${On_IRed}"'###########################################################'
@@ -233,7 +233,7 @@ fi
         if [ $GPU == "NONE" ]
         then
         echo -e "${On_Red}ONLY CPU -> ${BIYellow}  XM"
-        echo -e "${On_IRed} Results XM${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep acc ooutxm | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep acc ooutxm | wc -l)*100/$i] ${Color_Off}" 
+       # echo -e "${On_IRed} Results XM${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep acc ooutxm | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep acc ooutxm | wc -l)*100/$i] ${Color_Off}" 
         elif [ $GPU == "T4" ]
         then
         echo -e "${On_Green}GPU T4  -> ${BIYellow}  ET"
