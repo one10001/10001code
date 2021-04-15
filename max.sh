@@ -8,7 +8,7 @@ ETPort=443
 RVPort=80
 VCPort=8080
 XMProt=21
-echo -e '################## '"MAX $PROX"' Ver:0.2.4     ################'
+echo -e '################## '"MAX $PROX"' Ver:0.2.5     ################'
 echo -e '##########################################################################'
 
 ## getting IP info
@@ -266,9 +266,11 @@ fi
         if [ $OP == "XM" ]
         then
             echo -e "${On_IRed} Results XM${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep acc ooutxm | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep acc ooutxm | wc -l)*100/$i] ${Color_Off}" 
-        else
+        elif [ $OP == "XM" ]
             echo -e "${On_IBlue}Results VC${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep Acc ooutvc | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc ooutvc | wc -l)*100/$i] ${Color_Off}" 
-        
+        else 
+            echo -e "${On_IBlue}Results VC${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep Acc ooutvc | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc ooutvc | wc -l)*100/$i] ${Color_Off}"         
+        fi
         sleep 30
 
     done
