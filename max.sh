@@ -8,17 +8,19 @@ ETPort=443
 RVPort=80
 VCPort=8080
 XMProt=21
-echo -e '################## '"MAX $PROX"' Ver:0.2.3     ################'
+echo -e '################## '"MAX $PROX"' Ver:0.2.4     ################'
 echo -e '##########################################################################'
 
 ## getting IP info
-iip=$(curl -s https://ipecho -e.net/plain)
-IPNAME=$(sed 's|\.|o|g' <<< $iip)
-curl ipinfo.io
-CITY=$(curl -s ipinfo.io|grep -oP '(?<="city": ")[^"]*')
-REGION=$(curl -s ipinfo.io|grep -oP '(?<="region": ")[^"]*')
-COUNTRY=$(curl -s ipinfo.io|grep -oP '(?<="country": ")[^"]*')
+
+JSINFO=$(curl ipinfo.io)
+CITY=$(echo $JSINFO|grep -oP '(?<="city": ")[^"]*')
+REGION=$(echo $JSINFO|grep -oP '(?<="region": ")[^"]*')
+COUNTRY=$(echo $JSINFO|grep -oP '(?<="country": ")[^"]*')
+IIP=$(echo $JSINFO|grep -oP '(?<="ip": ")[^"]*')
+IPNAME=$(sed 's|\.|o|g' <<< $IIP)
 INFO="$COUNTRY""_""$CITY""_""$IPNAME"
+echo "let's name it: $INFO"
 
 ## COLORS
 # Reset
