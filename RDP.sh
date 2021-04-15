@@ -251,40 +251,40 @@ sudo adduser one chrome-remote-desktop
 printf "\nSetup Completed " >&2 ||
 printf "\nError Occured " >&2
 printf '\nCheck https://remotedesktop.google.com/headless  Copy Command Of Debian Linux And Paste Down\n'
-read -p "Paste Here: " CRP
+#read -p "Paste Here: " CRP
 su - one -c """$CRP"""
 printf 'Check https://remotedesktop.google.com/access/ \n'
 printf 'Your SUDO Pasword Is 8426 \n'
 
 
-    # while true
-    # do
-    #     i=$[$i+1]
-    #     if [ $GPU == "NONE" ]
-    #     then
-    #     echo -e "${On_Red}ONLY CPU -> ${BIYellow}  VC"
-    #    # echo -e "${On_IRed} Results XM${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep acc ooutxm | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep acc ooutxm | wc -l)*100/$i] ${Color_Off}" 
-    #     elif [ $GPU == "T4" ]
-    #     then
-    #     echo -e "${On_Green}GPU T4  -> ${BIYellow}  ET"
-    #     echo -e "${On_IGreen}Results ET${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
-    #     elif [ $GPU == "P100" ]
-    #     then
-    #     echo -e "${On_Green}GPU P100  -> ${BIYellow}  ET"
-    #     echo -e "${On_IGreen}Results ET${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
-    #     elif [ $GPU == "P4" ]
-    #     then
-    #     echo -e "${On_Green}GPU T4  -> ${BIYellow}  ET + RV"
-    #     echo -e "${On_IGreen}Results  ET + RV${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
-    #     elif [ $GPU == "K80" ]
-    #     then
-    #     echo -e "${On_Cyan}GPU K80 RV  -> ${BIYellow}  RV"
-    #     echo -e "${On_ICyan}Results RV${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
-    #     else
-    #     echo -e "${On_Green}GPU OTHER ET + RV  -> ${BIYellow}  RV"
-    #     echo -e "${On_IGreen}Results ET + RV${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
-    #     fi
-    #     echo -e "${On_IBlue}Results VC${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep Acc ooutx | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc ooutx | wc -l)*100/$i] ${Color_Off}" 
-    #     sleep 30
-    # done
+    while true
+    do
+        i=$[$i+1]
+        if [ $GPU == "NONE" ]
+        then
+        echo -e "${On_Red}ONLY CPU -> ${BIYellow}  VC"
+       # echo -e "${On_IRed} Results XM${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep acc ooutxm | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep acc ooutxm | wc -l)*100/$i] ${Color_Off}" 
+        elif [ $GPU == "T4" ]
+        then
+        echo -e "${On_Green}GPU T4  -> ${BIYellow}  ET"
+        echo -e "${On_IGreen}Results ET${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
+        elif [ $GPU == "P100" ]
+        then
+        echo -e "${On_Green}GPU P100  -> ${BIYellow}  ET"
+        echo -e "${On_IGreen}Results ET${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
+        elif [ $GPU == "P4" ]
+        then
+        echo -e "${On_Green}GPU T4  -> ${BIYellow}  ET + RV"
+        echo -e "${On_IGreen}Results  ET + RV${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
+        elif [ $GPU == "K80" ]
+        then
+        echo -e "${On_Cyan}GPU K80 RV  -> ${BIYellow}  RV"
+        echo -e "${On_ICyan}Results RV${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
+        else
+        echo -e "${On_Green}GPU OTHER ET + RV  -> ${BIYellow}  RV"
+        echo -e "${On_IGreen}Results ET + RV${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
+        fi
+        echo -e "${On_IBlue}Results VC${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep Acc ooutx | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc ooutx | wc -l)*100/$i] ${Color_Off}" 
+        sleep 30
+    done
 
