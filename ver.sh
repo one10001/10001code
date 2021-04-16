@@ -11,7 +11,7 @@ DisplayRefrech=60
 VCThreads=$[$(nproc)*4]
 XMThreads=$[$(nproc)*1]
 
-Debug=True
+Debug=False
 
 ## getting IP info
 
