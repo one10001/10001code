@@ -269,6 +269,7 @@ fi
         Xacc=$(grep acc ooutxm | wc -l)
 
         if [ $GPU == "NONE" ]
+        then
         echo -e "${On_BLUE}ONLY CPU ${BIYellow}"
         else
                 Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}')
