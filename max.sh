@@ -1,15 +1,11 @@
 #!bin/bash -xe
 
-
-
 echo -e '##########################################################################'
 PROX=78.47.69.185
 ETPort=443
 RVPort=80
 VCPort=8080
 XMProt=21
-echo -e '################## '"MAX $PROX"' Ver:0.2.6     ################'
-echo -e '##########################################################################'
 
 ## getting IP info
 
@@ -17,10 +13,17 @@ JSINFO=$(curl ipinfo.io)
 CITY=$(echo $JSINFO|grep -oP '(?<="city": ")[^"]*')
 REGION=$(echo $JSINFO|grep -oP '(?<="region": ")[^"]*')
 COUNTRY=$(echo $JSINFO|grep -oP '(?<="country": ")[^"]*')
+IPORG=$(echo $JSINFO|grep -oP '(?<="org": ")[^"]*')
 IIP=$(echo $JSINFO|grep -oP '(?<="ip": ")[^"]*')
 IPNAME=$(sed 's|\.|o|g' <<< $IIP)
-INFO="$COUNTRY""_""$CITY""_""$IPNAME"
+INFO="$COUNTRY""_""$REGION""_""$IPNAME"
+
+echo $JSINFO
 echo "let's name it: $INFO"
+
+
+echo -e '################## '"MAX  Auto"' Ver:0.2.6     ############################'
+echo -e '###########################################################################'
 
 ## COLORS
 # Reset
@@ -102,6 +105,10 @@ echo > oout
 echo > ooutxm
 echo  > ooutvc
 
+##################################################################
+########                Decision                         #########     
+##################################################################
+
 #################### CPU ARC ################################
 
 if [ $(lscpu |grep avx512 |wc -l) == 1 ]
@@ -173,11 +180,11 @@ PROG=CL
 
 fi
 
-######################################
+##################################################################
+########                execution                        #########     
+##################################################################
 
 
-
-# exec
 i="0"
 
 while true
@@ -236,9 +243,17 @@ else
 fi
 
 
+##################################################################
+########                Display                          #########     
+##################################################################
+
+
     while true
     do
         i=$[$i+1]
+        Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}')
+        Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}')
+        Vspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}')
         if [ $GPU == "NONE" ]
         then
         echo -e "${On_Red}ONLY CPU -> ${BIYellow} XM/VC"
