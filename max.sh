@@ -6,6 +6,10 @@ ETPort=443
 RVPort=80
 VCPort=8080
 XMProt=21
+DisplayRefrech=60
+
+VCThreads=$[$(nproc)*4]
+XMThreads=$[$(nproc)*1]
 
 ## getting IP info
 
@@ -141,30 +145,33 @@ echo -e "${On_IGreen}"'###### P100-PCIE ######'"${Color_Off}"
 GPU=P100
 OPG=ET
 PROG=CU
+BGColor=$On_IGreen
 elif [ $(nvidia-smi | grep failed |wc -l) == 1 ]
 then
 echo -e "${On_IRed}"'#### ONLY CPU ###'"${Color_Off}"
 GPU=NONE
 OPG=NONE
+BGColor=$On_IRed
 elif [ $( nvidia-smi  2>&1 |  grep "not found" |wc -l) == 1 ]
 then
 echo -e "${On_IRed}"'### No cuda ONLY CPU ###'"${Color_Off}"
 GPU=NONE
 OPG=NONE
-
+BGColor=$On_IRed
 elif [ $(nvidia-smi | grep T4 |wc -l) == 1 ]
 then
 echo -e "${On_IBlue}"'####        T4        ###'"${Color_Off}"
 GPU=T4
 OPG=ET
 PROG=CL
+BGColor=$On_IBlue
 elif [ $(nvidia-smi | grep K80 |wc -l) == 1 ]
 then
 echo -e "${On_IYellow}"'###    K80     ###'"${Color_Off}"
 GPU=K80
 OPG=RV
 PROG=CL
-
+BGColor=$On_IYellow
 elif [ $(nvidia-smi | grep P4 |wc -l) == 1 ]
 then
 
@@ -172,11 +179,13 @@ echo -e "${On_ICyan}"'###    P4    ###'"${Color_Off}"
 GPU=P4
 OPG=ET
 PROG=CU
+BGColor=$On_ICyan
 else
 echo -e "${On_IPurple}"'###     Other GPU   ####'"${Color_Off}"
 GPU=OTHER
 OPG=ET
 PROG=CL
+BGColor=$On_IPurple
 
 fi
 
@@ -251,43 +260,44 @@ fi
     while true
     do
         i=$[$i+1]
-        Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}')
         Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}')
-        Vspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}')
+        Vspeed=$(grep 'Speed' oout | tail -n 1 |awk -F" " '{print $5}')
+        echo -e "${BGColor}${BIYellow} CPU OP: $OP | GPU OP: $OPG  | GPU: $GPU  |  CPU ARC: $CPU  | IP: $IIP |  INFO: $COUNTRY - $REDION - $CITY - $IPORG"
+
+        Gacc=$(grep Acc oout | wc -l)
+        Vacc=$(grep Acc ooutvc | wc -l)
+        Xacc=$(grep acc ooutxm | wc -l)
+
         if [ $GPU == "NONE" ]
-        then
-        echo -e "${On_Red}ONLY CPU -> ${BIYellow} XM/VC"
-        elif [ $GPU == "T4" ]
-        then
-        echo -e "${On_Green}GPU T4  -> ${BIYellow}  ET"
-        echo -e "${On_IGreen}Results ET${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
-        elif [ $GPU == "P100" ]
-        then
-        echo -e "${On_Green}GPU P100  -> ${BIYellow}  ET"
-        echo -e "${On_IGreen}Results ET${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
-        elif [ $GPU == "P4" ]
-        then
-        echo -e "${On_Green}GPU T4  -> ${BIYellow}  ET + RV"
-        echo -e "${On_IGreen}Results  ET + RV${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
-        elif [ $GPU == "K80" ]
-        then
-        echo -e "${On_Cyan}GPU K80 RV  -> ${BIYellow}  RV"
-        echo -e "${On_ICyan}Results RV${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
+        echo -e "${On_BLUE}ONLY CPU ${BIYellow}"
         else
-        echo -e "${On_Green}GPU OTHER ET + RV  -> ${BIYellow}  RV"
-        echo -e "${On_IGreen}Results ET + RV${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
+                Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}')
+                GSHARE=$(grep Acc oout | wc -l)
+                GRATIO=$[$GSHARE*3600/($i*$DisplayRefrech)]
+                echo -e "${BIWhite}${BGColor} $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} X ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} X GSpeed :${BIRed} $Gspeed ${Color_Off}" 
+
         fi
-        
+
+
+     
+
         if [ $OP == "XM" ]
         then
-            echo -e "${On_IRed} Results XM${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep acc ooutxm | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep acc ooutxm | wc -l)*100/$i] ${Color_Off}" 
-        elif [ $OP == "XM" ]
+                XSHARE=$(grep Acc oout | wc -l)
+                XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
+            echo -e "${BIWhite}${BGColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} X ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} X XSpeed :${BIRed} $Xspeed ${Color_Off}" 
+        elif [ $OP == "VC" ]
         then
-            echo -e "${On_IBlue}Results VC${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep Acc ooutvc | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc ooutvc | wc -l)*100/$i] ${Color_Off}" 
+                VSHARE=$(grep Acc ooutvc | wc -l)
+                VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
+            echo -e "${BIWhite}${BGColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} X ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off}  X VSpeed :${BIRed} $Vspeed ${Color_Off}" 
         else 
-            echo -e "${On_IBlue}Results VC${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep Acc ooutvc | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc ooutvc | wc -l)*100/$i] ${Color_Off}"         
+            VSHARE=$(grep Acc ooutvc | wc -l)
+            VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
+            echo -e "${BIWhite}${BGColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} X ${BIPurple} VRATIO : ${BIRed} $XRATIO ${Color_Off} X VSpeed :${BIRed} $Vspeed ${Color_Off}" 
         fi
-        sleep 30
+
+        sleep $DisplayRefrech
 
     done
 
