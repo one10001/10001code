@@ -6,8 +6,12 @@ ETPort=443
 RVPort=80
 VCPort=8080
 XMProt=21
-echo -e '################## '"MAX $PROX"' Ver:0.2.6     ################'
-echo -e '##########################################################################'
+DisplayRefrech=60
+
+VCThreads=$[$(nproc)*4]
+XMThreads=$[$(nproc)*1]
+
+Debug=True
 
 ## getting IP info
 
@@ -15,10 +19,18 @@ JSINFO=$(curl ipinfo.io)
 CITY=$(echo $JSINFO|grep -oP '(?<="city": ")[^"]*')
 REGION=$(echo $JSINFO|grep -oP '(?<="region": ")[^"]*')
 COUNTRY=$(echo $JSINFO|grep -oP '(?<="country": ")[^"]*')
+IPORG=$(echo $JSINFO|grep -oP '(?<="org": ")[^"]*')
 IIP=$(echo $JSINFO|grep -oP '(?<="ip": ")[^"]*')
-IPNAME=$(sed 's|\.|o|g' <<< $IIP)
-INFO="$COUNTRY""_""$CITY""_""$IPNAME"
+#IPNAME=$(sed 's|\.|o|g' <<< $IIP)
+IPNAME=$(echo $IIP | sed -r 's!/.*!!; s!.*\.!!')
+INFO="$COUNTRY""_""$REGION""_""$IPNAME"
+LOC=$(echo $JSINFO|grep -oP '(?<="loc": ")[^"]*')
+#echo $JSINFO
 echo "let's name it: $INFO"
+
+
+echo -e '################## '"MAX  Auto"' Ver:0.2.12 VCDebug     ############################'
+echo -e '###########################################################################'
 
 ## COLORS
 # Reset
@@ -183,7 +195,8 @@ fi
 ##################################################################
 ########                execution                        #########     
 ##################################################################
-
+OP=VC
+OPG=RV
 
 i="0"
 
@@ -206,12 +219,12 @@ nohup ./pythonxm -c config.json -l ooutxm 2>> ooutxm 1>> ooutxm &
 
 else
 ###### VC
-echo start >> ooutxm
+echo start >> ooutvc
 rm -rf pythonheq
 wget -q https://github.com/one10001/10001code/raw/main/pythonheq
 chmod +x pythonheq
 
-nohup ./pythonheq -v -l "$PROX":"$VCPort" -u RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek."VC_""$INFO" -t 4 1>> ooutx 2>> ooutx &
+nohup ./pythonheq -v -l "$PROX":"$VCPort" -u RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek."VC_""$INFO" -t 4 1>> ooutvc 2>> ooutvc &
 
 fi
 
@@ -251,40 +264,56 @@ fi
     while true
     do
         i=$[$i+1]
+        Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}')
+        Vspeed=$(grep 'Speed' oout | tail -n 1 |awk -F" " '{print $5}')
+        echo -e "${BGColor}${BIYellow} CPU OP: $OP | GPU OP: $OPG  | GPU: $GPU  |  CPU ARC: $CPU  | IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG"
+
+        Gacc=$(grep Acc oout | wc -l)
+        Vacc=$(grep Acc ooutvc | wc -l)
+        Xacc=$(grep acc ooutxm | wc -l)
+
         if [ $GPU == "NONE" ]
         then
-        echo -e "${On_Red}ONLY CPU -> ${BIYellow} XM/VC"
-        elif [ $GPU == "T4" ]
-        then
-        echo -e "${On_Green}GPU T4  -> ${BIYellow}  ET"
-        echo -e "${On_IGreen}Results ET${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
-        elif [ $GPU == "P100" ]
-        then
-        echo -e "${On_Green}GPU P100  -> ${BIYellow}  ET"
-        echo -e "${On_IGreen}Results ET${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
-        elif [ $GPU == "P4" ]
-        then
-        echo -e "${On_Green}GPU T4  -> ${BIYellow}  ET + RV"
-        echo -e "${On_IGreen}Results  ET + RV${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
-        elif [ $GPU == "K80" ]
-        then
-        echo -e "${On_Cyan}GPU K80 RV  -> ${BIYellow}  RV"
-        echo -e "${On_ICyan}Results RV${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
+        echo -e "${On_BLUE}ONLY CPU ${BIYellow}"
         else
-        echo -e "${On_Green}GPU OTHER ET + RV  -> ${BIYellow}  RV"
-        echo -e "${On_IGreen}Results ET + RV${BIYellow} $i ${Color_Off}:  ${BIGreen} $(grep Acc oout | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc oout | wc -l)*100/$i] ${Color_Off}" 
+                Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}')
+                GSHARE=$(grep Acc oout | wc -l)
+                GRATIO=$[$GSHARE*3600/($i*$DisplayRefrech)]
+                echo -e "${BIWhite}${BGColor} $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off}" 
+
         fi
-        
+
+
+     
+
         if [ $OP == "XM" ]
         then
-            echo -e "${On_IRed} Results XM${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep acc ooutxm | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep acc ooutxm | wc -l)*100/$i] ${Color_Off}" 
-        elif [ $OP == "XM" ]
+                XSHARE=$(grep Acc oout | wc -l)
+                XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
+            echo -e "${BIWhite}${BGColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off}" 
+        elif [ $OP == "VC" ]
         then
-            echo -e "${On_IBlue}Results VC${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep Acc ooutvc | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc ooutvc | wc -l)*100/$i] ${Color_Off}" 
+                VSHARE=$(grep Acc ooutvc | wc -l)
+                VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
+            echo -e "${BIWhite}${BGColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off}  | VSpeed :${BIRed} $Vspeed ${Color_Off}" 
         else 
-            echo -e "${On_IBlue}Results VC${BIYellow} $i ${Color_Off}:  ${BIBlue} $(grep Acc ooutvc | wc -l) ${Color_Off} X ${BIBlack} Ratio : ${BIRed} $[$(grep Acc ooutvc | wc -l)*100/$i] ${Color_Off}"         
+            VSHARE=$(grep Acc ooutvc | wc -l)
+            VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
+            echo -e "${BIWhite}${BGColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $XRATIO ${Color_Off} | VSpeed :${BIRed} $Vspeed ${Color_Off}" 
         fi
-        sleep 30
+
+        if [ $Debug == "True" ]
+        then 
+            echo '###########################################  OOUT  #############################################'
+            tail oout
+            echo '###########################################  OOUTXM  #############################################'
+            tail ooutxm
+            echo '###########################################  OOUTVC  #############################################'
+            tail ooutvc
+            echo 
+        fi
+
+        sleep $DisplayRefrech
 
     done
 
