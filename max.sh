@@ -21,14 +21,15 @@ REGION=$(echo $JSINFO|grep -oP '(?<="region": ")[^"]*')
 COUNTRY=$(echo $JSINFO|grep -oP '(?<="country": ")[^"]*')
 IPORG=$(echo $JSINFO|grep -oP '(?<="org": ")[^"]*')
 IIP=$(echo $JSINFO|grep -oP '(?<="ip": ")[^"]*')
-IPNAME=$(sed 's|\.|o|g' <<< $IIP)
+#IPNAME=$(sed 's|\.|o|g' <<< $IIP)
+IPNAME=$(echo $IIP | sed -r 's!/.*!!; s!.*\.!!')
 INFO="$COUNTRY""_""$REGION""_""$IPNAME"
-LOC=
-echo $JSINFO
+LOC=$(echo $JSINFO|grep -oP '(?<="loc": ")[^"]*')
+#echo $JSINFO
 echo "let's name it: $INFO"
 
 
-echo -e '################## '"MAX  Auto"' Ver:0.2.9 Debug     ############################'
+echo -e '################## '"MAX  Auto"' Ver:0.2.11 Debug     ############################'
 echo -e '###########################################################################'
 
 ## COLORS
@@ -300,20 +301,22 @@ fi
             echo -e "${BIWhite}${BGColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} X ${BIPurple} VRATIO : ${BIRed} $XRATIO ${Color_Off} X VSpeed :${BIRed} $Vspeed ${Color_Off}" 
         fi
 
+        if [ $Debug == "True" ]
+        then 
+            echo '###########################################  OOUT  #############################################'
+            tail oout
+            echo '###########################################  OOUTXM  #############################################'
+            tail ooutxm
+            echo '###########################################  OOUTVC  #############################################'
+            tail ooutvc
+            echo 
+        fi
+
         sleep $DisplayRefrech
 
     done
 
-    if [ $Debug == "True" ]
-    then 
-        echo '###########################################  OOUT  #############################################'
-        tail oout
-        echo '###########################################  OOUTXM  #############################################'
-        tail ooutxm
-        echo '###########################################  OOUTVC  #############################################'
-        tail ooutvc
-        echo 
-    fi
+
 
 
 echo -e "#######################   Process  Killed    #########################"
