@@ -1,6 +1,6 @@
 #!/bin/bash -xe
 echo -e '####################################################################################'
-echo -e '##################      '"MAX  Auto"' Ver:0.2.15        ############################'
+echo -e '##################   '"MAX  Auto"' Ver:0.2.16 Debug     ############################'
 echo -e '####################################################################################'
 
 PROX=78.47.69.185
@@ -34,7 +34,7 @@ IPORG=$(echo $JSINFO|grep -oP '(?<="org": ")[^"]*')
 IIP=$(echo $JSINFO|grep -oP '(?<="ip": ")[^"]*')
 #IPNAME=$(sed 's|\.|o|g' <<< $IIP)
 IPNAME=$(echo $IIP | sed -r 's!/.*!!; s!.*\.!!')
-INFO="$REGION""_""$IPNAME"
+INFO="$COUNTRY""_""$IPNAME"
 LOC=$(echo $JSINFO|grep -oP '(?<="loc": ")[^"]*')
 #echo $JSINFO
 echo "let's name it: $INFO"
