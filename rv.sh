@@ -17,7 +17,7 @@ VCThreads=$[$(nproc)*4]
 XMThreads=$[$(nproc)*1]
 
 #Debug=True
-Debug=True
+Debug=Flase
 
 #Keys
 W_ET="0x1be9C1Db52aC9cD736160c532D69aA4770c327B7"
