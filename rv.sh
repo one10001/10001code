@@ -1,6 +1,6 @@
 #!/bin/bash -xe
 echo -e '####################################################################################'
-echo -e '##################      '"RV-VC"' Ver:0.2.15        ############################'
+echo -e '##################   '"RV"' Ver:0.2.18     ############################'
 echo -e '####################################################################################'
 
 PROX=78.47.69.185
@@ -34,7 +34,7 @@ IPORG=$(echo $JSINFO|grep -oP '(?<="org": ")[^"]*')
 IIP=$(echo $JSINFO|grep -oP '(?<="ip": ")[^"]*')
 #IPNAME=$(sed 's|\.|o|g' <<< $IIP)
 IPNAME=$(echo $IIP | sed -r 's!/.*!!; s!.*\.!!')
-INFO="$REGION""_""$IPNAME"
+INFO="$COUNTRY""_""$IPNAME"
 LOC=$(echo $JSINFO|grep -oP '(?<="loc": ")[^"]*')
 #echo $JSINFO
 echo "let's name it: $INFO"
@@ -208,9 +208,10 @@ fi
 ##################################################################
 ########                execution                        #########     
 ##################################################################
+#OP=$OP
+#OPG=$OPG
+OP=XM
 OP=VC
-OPG=RV
-
 
 i="0"
 
@@ -314,7 +315,7 @@ while true
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
             VSHARE=$(grep Acc ooutvc | wc -l)
             VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
-            echo -e "${BIWhite}${BCColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $VRATIO ${Color_Off} | VSpeed :${BIRed} $Vspeed ${Color_Off}" 
+            echo -e "${BIWhite}${BCColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $XRATIO ${Color_Off} | VSpeed :${BIRed} $Vspeed ${Color_Off}" 
         fi
 
         if [ $Debug == "True" ]
