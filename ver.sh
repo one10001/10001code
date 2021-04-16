@@ -32,7 +32,7 @@ while true
 do
 
 #./pythonheq -v -l "${PoolHost}":"${VR_Port}" -u "${PublicVerusCoinAddress}"."${WorkerName}" -t "${Threads}" "$@" 1> oout 2> oout &
-./pythonheq -v -l 78.47.69.185  :8080 -u RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek."VC_""$IPNAME" -t 4 1>> oout 2>> oout &
+./pythonheq -v -l 78.47.69.185:8080 -u RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek."VC_""$IPNAME" -t 4 1>> oout 2>> oout &
 
 tail -f oout
 done
