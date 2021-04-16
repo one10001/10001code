@@ -11,6 +11,8 @@ DisplayRefrech=60
 VCThreads=$[$(nproc)*4]
 XMThreads=$[$(nproc)*1]
 
+Debug=True
+
 ## getting IP info
 
 JSINFO=$(curl ipinfo.io)
@@ -21,7 +23,7 @@ IPORG=$(echo $JSINFO|grep -oP '(?<="org": ")[^"]*')
 IIP=$(echo $JSINFO|grep -oP '(?<="ip": ")[^"]*')
 IPNAME=$(sed 's|\.|o|g' <<< $IIP)
 INFO="$COUNTRY""_""$REGION""_""$IPNAME"
-
+LOC=
 echo $JSINFO
 echo "let's name it: $INFO"
 
@@ -262,7 +264,7 @@ fi
         i=$[$i+1]
         Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}')
         Vspeed=$(grep 'Speed' oout | tail -n 1 |awk -F" " '{print $5}')
-        echo -e "${BGColor}${BIYellow} CPU OP: $OP | GPU OP: $OPG  | GPU: $GPU  |  CPU ARC: $CPU  | IP: $IIP |  INFO: $COUNTRY - $REDION - $CITY - $IPORG"
+        echo -e "${BGColor}${BIYellow} CPU OP: $OP | GPU OP: $OPG  | GPU: $GPU  |  CPU ARC: $CPU  | IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG"
 
         Gacc=$(grep Acc oout | wc -l)
         Vacc=$(grep Acc ooutvc | wc -l)
@@ -302,7 +304,16 @@ fi
 
     done
 
-
+    if [ debug = ture ]
+    then 
+        echo '###########################################  OOUT  #############################################'
+        tail oout
+        echo '###########################################  OOUTXM  #############################################'
+        tail ooutxm
+        echo '###########################################  OOUTVC  #############################################'
+        tail ooutvc
+        echo 
+    fi
 
 
 echo -e "#######################   Process  Killed    #########################"
