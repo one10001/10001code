@@ -138,13 +138,13 @@ BCColor="$On_Green""$BICyan"
 elif [ $(lscpu |grep avx2 |wc -l) == 1 ]
 then
 echo -e "${On_IBlue}"'##CPU AVX2 ##'"${Color_Off}"
-OP=XM
+OP=VC
 CPU='AVX2'
 BCColor="$On_Blue""$BICyan"
 elif [ $(lscpu |grep avx |wc -l) == 1 ]
 then
 echo -e "${On_IYellow}"'## CPU AVX ##'"${Color_Off}"
-OP=XM
+OP=VC
 CPU='AVX'
 BCColor="$On_Yellow""$BICyan"
 else
