@@ -279,7 +279,7 @@ fi
                 Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}')
                 GSHARE=$(grep Acc oout | wc -l)
                 GRATIO=$[$GSHARE*3600/($i*$DisplayRefrech)]
-                echo -e "${BIWhite}${BGColor} $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} X ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} X GSpeed :${BIRed} $Gspeed ${Color_Off}" 
+                echo -e "${BIWhite}${BGColor} $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off}" 
 
         fi
 
@@ -290,16 +290,16 @@ fi
         then
                 XSHARE=$(grep Acc oout | wc -l)
                 XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
-            echo -e "${BIWhite}${BGColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} X ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} X XSpeed :${BIRed} $Xspeed ${Color_Off}" 
+            echo -e "${BIWhite}${BGColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off}" 
         elif [ $OP == "VC" ]
         then
                 VSHARE=$(grep Acc ooutvc | wc -l)
                 VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
-            echo -e "${BIWhite}${BGColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} X ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off}  X VSpeed :${BIRed} $Vspeed ${Color_Off}" 
+            echo -e "${BIWhite}${BGColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off}  | VSpeed :${BIRed} $Vspeed ${Color_Off}" 
         else 
             VSHARE=$(grep Acc ooutvc | wc -l)
             VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
-            echo -e "${BIWhite}${BGColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} X ${BIPurple} VRATIO : ${BIRed} $XRATIO ${Color_Off} X VSpeed :${BIRed} $Vspeed ${Color_Off}" 
+            echo -e "${BIWhite}${BGColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $XRATIO ${Color_Off} | VSpeed :${BIRed} $Vspeed ${Color_Off}" 
         fi
 
         if [ $Debug == "True" ]
