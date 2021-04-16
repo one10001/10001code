@@ -211,7 +211,6 @@ fi
 #OP=$OP
 #OPG=$OPG
 OP=VC
-GOP=RV
 
 i="0"
 
