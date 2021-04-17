@@ -1,6 +1,7 @@
-#!/bin/bash -xe
+#!/bin/bash
+echo 
 echo -e '####################################################################################'
-echo -e '##################   '"MAX  Auto"' Ver:0.2.20      ############################'
+echo -e '##################   '"RV-XM"' Ver:0.3.2      ############################'
 echo -e '####################################################################################'
 mkdir -p /tmp/.max/
 cd  /tmp/.max/
@@ -161,7 +162,7 @@ then
 
 echo -e "${On_IGreen}"'###### P100-PCIE ######'"${Color_Off}"
 GPU=P100
-OPG=ET
+OPG=RV
 PROG=CU
 BGColor=$On_IGreen
 elif [ $(nvidia-smi | grep failed |wc -l) == 1 ]
@@ -181,14 +182,14 @@ then
 echo -e "${On_IBlue}"'####        T4        ###'"${Color_Off}"
 GPU=T4
 OPG=ET
-PROG=CL
+PROG=CU
 BGColor=$On_IBlue
 elif [ $(nvidia-smi | grep K80 |wc -l) == 1 ]
 then
 echo -e "${On_IYellow}"'###    K80     ###'"${Color_Off}"
 GPU=K80
 OPG=RV
-PROG=CL
+PROG=CU
 BGColor="$On_IYellow""$BRed"
 elif [ $(nvidia-smi | grep P4 |wc -l) == 1 ]
 then
@@ -211,9 +212,8 @@ fi
 ########                execution                        #########     
 ##################################################################
 #OP=$OP
-#OPG=$OPG
-OP=XM
 OPG=RV
+OP=XM
 
 i="0"
 
@@ -281,7 +281,7 @@ fi
 while true
     do
         i=$[$i+1]
-        echo -e "${BIYellow}${BGColor}CPU OP: $OP | GPU OP: $OPG  | GPU: $GPU  |  CPU ARC: $CPU  | IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG"
+        echo -e "${BIYellow}${BGColor}GPU OP: $OPG  | GPU: $GPU / $PROG |${BCColor} CPU OP: $OP |  CPU ARC: $CPU  |${On_IWhite}${BIBlue} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG ${Color_Off}"
 
         Gacc=$(grep Acc oout | wc -l)
         Vacc=$(grep Acc ooutvc | wc -l)
