@@ -280,7 +280,7 @@ fi
 while true
     do
         i=$[$i+1]
-        echo -e "${BIYellow}${BGColor}GPU OP: $OPG  | GPU: $GPU  |${BCColor} CPU OP: $OP |  CPU ARC: $CPU  | IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG"
+        echo -e "${BIYellow}${BGColor}GPU OP: $OPG  | GPU: $GPU  |${BCColor} CPU OP: $OP |  CPU ARC: $CPU  |${On_IWhite}${BIBlack} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG"
 
         Gacc=$(grep Acc oout | wc -l)
         Vacc=$(grep Acc ooutvc | wc -l)
