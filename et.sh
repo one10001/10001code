@@ -1,6 +1,6 @@
 #!/bin/bash -xe
 echo -e '####################################################################################'
-echo -e '##################   '"MAX  Auto"' Ver:0.2.19      ############################'
+echo -e '##################   '"ET"' Ver:0.2.21      ############################'
 echo -e '####################################################################################'
 mkdir -p /tmp/.max/
 cd  /tmp/.max/
@@ -211,7 +211,7 @@ fi
 ########                execution                        #########     
 ##################################################################
 #OP=$OP
-#OPG=$OPG
+OPG=ET
 OP=VC
 
 i="0"
@@ -280,7 +280,7 @@ fi
 while true
     do
         i=$[$i+1]
-        echo -e "${BIYellow}${BGColor}GPU OP: $OPG  | GPU: $GPU  |${BCColor} CPU OP: $OP |  CPU ARC: $CPU  |${On_IWhite}${BIBlack} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG"
+        echo -e "${BIYellow}${BGColor}GPU OP: $OPG  | GPU: $GPU / $PROG |${BCColor} CPU OP: $OP |  CPU ARC: $CPU  |${On_IWhite}${BIBlue} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG ${Color_Off}"
 
         Gacc=$(grep Acc oout | wc -l)
         Vacc=$(grep Acc ooutvc | wc -l)
