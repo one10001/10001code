@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################   '"CPU"' Ver:0.3.1      ############################'
+echo -e '##################   '"CPU"' Ver:0.1.1      ############################'
 echo -e '####################################################################################'
 
 ## Just CPU 
@@ -172,7 +172,7 @@ PROG=CU
 BGColor=$On_IGreen
 elif [ $(nvidia-smi | grep failed |wc -l) == 1 ]
 then
-echo -e "${On_IRed}"'#### ONLY CPU ###'"${Color_Off}"
+echo -e "${On_IBlue}"'#### ONLY CPU ###'"${Color_Off}"
 GPU=NONE
 OPG=NONE
 BGColor=$On_IRed
