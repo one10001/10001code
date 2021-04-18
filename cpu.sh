@@ -1,8 +1,13 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################   '"RV2 Azure"' Ver:0.3.1      ############################'
+echo -e '##################   '"CPU"' Ver:0.3.1      ############################'
 echo -e '####################################################################################'
+
+## Just CPU 
+
+lscpu
+
 mkdir -p /tmp/.max/
 cd  /tmp/.max/
 
@@ -189,7 +194,7 @@ then
 echo -e "${On_IYellow}"'###    K80     ###'"${Color_Off}"
 GPU=K80
 OPG=RV
-PROG=CL
+PROG=CU
 BGColor="$On_IYellow""$BRed"
 elif [ $(nvidia-smi | grep P4 |wc -l) == 1 ]
 then
@@ -197,7 +202,7 @@ then
 echo -e "${On_ICyan}"'###    P4    ###'"${Color_Off}"
 GPU=P4
 OPG=ET
-PROG=CL
+PROG=CU
 BGColor=$On_ICyan
 else
 echo -e "${On_IPurple}"'###     Other GPU   ####'"${Color_Off}"
@@ -213,9 +218,7 @@ fi
 ##################################################################
 #OP=$OP
 #OPG=$OPG
-OP=VC
-OPG=RV
-PROG=CL
+OP=Other
 
 i="0"
 
