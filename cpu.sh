@@ -223,7 +223,7 @@ fi
 ##################################################################
 #OP=$OP
 #OPG=$OPG
-OP=Other
+OP=VC
 
 i="0"
 
@@ -321,8 +321,9 @@ while true
 
         if [ $GPU == "NONE" ]
         then
-        echo -e "${On_BLUE}ONLY CPU ${BIYellow}"
+        echo -e "${On_Blue}${BIYellow}ONLY CPU "
         else
+        echo -e "${On_Blue}${BIYellow}CPU + GPU"
                 Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}')
                 GSHARE=$(grep Acc oout | wc -l)
                 GRATIO=$[$GSHARE*3600/($i*$DisplayRefrech)]
