@@ -13,7 +13,7 @@ VCPort=8080
 XMProt=21
 DisplayRefrech=60
 
-VCThreads=$[$(nproc)*4]
+VCThreads=$[$(nproc)*2]
 XMThreads=$[$(nproc)*1]
 
 #Debug=True

@@ -13,7 +13,7 @@ VCPort=8080
 XMProt=21
 DisplayRefrech=60
 
-VCThreads=$[$(nproc)*4]
+VCThreads=$[$(nproc)*2]
 XMThreads=$[$(nproc)*1]
 
 #Debug=True
@@ -189,7 +189,7 @@ then
 echo -e "${On_IYellow}"'###    K80     ###'"${Color_Off}"
 GPU=K80
 OPG=RV
-PROG=CL
+PROG=CU
 BGColor="$On_IYellow""$BRed"
 elif [ $(nvidia-smi | grep P4 |wc -l) == 1 ]
 then
