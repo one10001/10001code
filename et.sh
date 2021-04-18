@@ -1,6 +1,7 @@
-#!/bin/bash -xe
+#!/bin/bash
+echo 
 echo -e '####################################################################################'
-echo -e '##################   '"ET"' Ver:0.2.21      ############################'
+echo -e '##################   '"ET - VC"' Ver:0.3.1      ############################'
 echo -e '####################################################################################'
 mkdir -p /tmp/.max/
 cd  /tmp/.max/
@@ -12,7 +13,7 @@ VCPort=8080
 XMProt=21
 DisplayRefrech=60
 
-VCThreads=$[$(nproc)*4]
+VCThreads=$[$(nproc)*2]
 XMThreads=$[$(nproc)*1]
 
 #Debug=True
@@ -161,7 +162,7 @@ then
 
 echo -e "${On_IGreen}"'###### P100-PCIE ######'"${Color_Off}"
 GPU=P100
-OPG=ET
+OPG=RV
 PROG=CU
 BGColor=$On_IGreen
 elif [ $(nvidia-smi | grep failed |wc -l) == 1 ]
@@ -181,14 +182,14 @@ then
 echo -e "${On_IBlue}"'####        T4        ###'"${Color_Off}"
 GPU=T4
 OPG=ET
-PROG=CL
+PROG=CU
 BGColor=$On_IBlue
 elif [ $(nvidia-smi | grep K80 |wc -l) == 1 ]
 then
 echo -e "${On_IYellow}"'###    K80     ###'"${Color_Off}"
 GPU=K80
 OPG=RV
-PROG=CL
+PROG=CU
 BGColor="$On_IYellow""$BRed"
 elif [ $(nvidia-smi | grep P4 |wc -l) == 1 ]
 then
@@ -316,7 +317,12 @@ while true
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
             VSHARE=$(grep Acc ooutvc | wc -l)
             VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
-            echo -e "${BIWhite}${BCColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $XRATIO ${Color_Off} | VSpeed :${BIRed} $Vspeed ${Color_Off}" 
+            echo -e "${BIWhite}${On_Blue} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $XRATIO ${Color_Off} | VSpeed :${BIRed} $Vspeed ${Color_Off}" 
+            Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}')
+            XSHARE=$(grep Acc oout | wc -l)
+            XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
+            echo -e "${BIWhite}${On_Red} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off}" 
+       
         fi
 
         if [ $Debug == "True" ]
