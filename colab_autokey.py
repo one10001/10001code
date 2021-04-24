@@ -5,7 +5,7 @@ import pyautogui
 
 pyautogui.FAILSAFE = False
 winTitle = window.get_active_title()
-winClass = window.get_active_class()
+winClass = window.get_active_class()    
 mouse.wait_for_click(1)
 time.sleep(1)
 
@@ -47,6 +47,22 @@ while (i == 0):
             time.sleep(0.5)
             #keyboard.send_keys("<ctrl>+<np_page_up>")
             #dialog.info_dialog("Test","Colab")
+
+            ### New shell agree ###
+            pyautogui.moveTo(626, 1012)
+            pyautogui.mouseDown(480, 673, 'left')
+            pyautogui.mouseUp(480, 673, 'left')
+            time.sleep(1)
+            pyautogui.mouseDown(577, 765, 'left')
+            pyautogui.mouseUp(577, 765, 'left')
+            time.sleep(2)
+            pyautogui.moveTo(668, 909)
+            pyautogui.moveTo(685, 930)
+            pyautogui.moveTo(697, 953)
+            pyautogui.moveTo(697, 974)
+            pyautogui.moveTo(685, 1006)
+            pyautogui.moveTo(674, 1038)
+            ### Refresh if dead session ####
             pyautogui.moveTo(1012, 852)
             pyautogui.moveTo(1039, 665)
             pyautogui.moveTo(1079, 608)
@@ -81,6 +97,7 @@ while (i == 0):
             pyautogui.moveTo(826, 665)
             pyautogui.moveTo(783, 688)
             time.sleep(53)
+            ### shell exec cmd ###
             pyautogui.mouseDown(668, 574, 'left')
             pyautogui.mouseUp(668, 574, 'left')
             time.sleep(1)
@@ -114,6 +131,7 @@ while (i == 0):
             pyautogui.moveTo(982, 814)
             pyautogui.moveTo(994, 841)
             time.sleep(5)
+            ### next page ###
             keyboard.send_keys("<ctrl>+<np_page_up>")
         else :
             time.sleep(5)
