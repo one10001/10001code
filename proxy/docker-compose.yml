@@ -18,6 +18,7 @@ services:
             - '6007:3015'
             - '3030:3363'
             - '8083:8083' 
+            - '81:3030'
         container_name: haprox
         restart: unless-stopped
 
