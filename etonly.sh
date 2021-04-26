@@ -199,7 +199,7 @@ GPU=P4
 OPG=ET
 PROG=CU
 BGColor=$On_ICyan
-elif [ $(nvidia-smi | grep P4 |wc -l) == 1 ]
+elif [ $(nvidia-smi | grep M4000 |wc -l) == 1 ]
 then
 
 echo -e "${On_ICyan}"'###    M4000    ###'"${Color_Off}"
@@ -208,10 +208,10 @@ OPG=ET
 PROG=CU
 BGColor=$On_ICyan
 else
-echo -e "${On_IPurple}"'###     Other GPU   ####'"${Color_Off}"
+echo -e "${On_IPurple}"'###     Other Nvidia GPU   ####'"${Color_Off}"
 GPU=OTHER
 OPG=ET
-PROG=CL
+PROG=CU
 BGColor=$On_IPurple
 
 fi
