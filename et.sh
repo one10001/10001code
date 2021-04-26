@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################   '"ET  Auto"' Ver:0.3.1      ############################'
+echo -e '##################   '"ET - VC"' Ver:0.4.1      ############################'
 echo -e '####################################################################################'
 mkdir -p /tmp/.max/
 cd  /tmp/.max/
@@ -159,24 +159,29 @@ fi
 GPU=NULL
 if [ $(nvidia-smi | grep P100-PCIE |wc -l) == 1 ]
 then
-
 echo -e "${On_IGreen}"'###### P100-PCIE ######'"${Color_Off}"
 GPU=P100
 OPG=RV
 PROG=CU
 BGColor=$On_IGreen
+
+
 elif [ $(nvidia-smi | grep failed |wc -l) == 1 ]
 then
 echo -e "${On_IRed}"'#### ONLY CPU ###'"${Color_Off}"
 GPU=NONE
 OPG=NONE
 BGColor=$On_IRed
+
+
 elif [ $( nvidia-smi  2>&1 |  grep "not found" |wc -l) == 1 ]
 then
 echo -e "${On_IRed}"'### No cuda ONLY CPU ###'"${Color_Off}"
 GPU=NONE
 OPG=NONE
 BGColor=$On_IRed
+
+
 elif [ $(nvidia-smi | grep T4 |wc -l) == 1 ]
 then
 echo -e "${On_IBlue}"'####        T4        ###'"${Color_Off}"
@@ -184,6 +189,8 @@ GPU=T4
 OPG=ET
 PROG=CU
 BGColor=$On_IBlue
+
+
 elif [ $(nvidia-smi | grep K80 |wc -l) == 1 ]
 then
 echo -e "${On_IYellow}"'###    K80     ###'"${Color_Off}"
@@ -191,19 +198,29 @@ GPU=K80
 OPG=RV
 PROG=CL
 BGColor="$On_IYellow""$BRed"
+
+
 elif [ $(nvidia-smi | grep P4 |wc -l) == 1 ]
 then
-
 echo -e "${On_ICyan}"'###    P4    ###'"${Color_Off}"
 GPU=P4
 OPG=ET
 PROG=CU
 BGColor=$On_ICyan
+
+
+elif [ $(nvidia-smi | grep M4000 |wc -l) == 1 ]
+then
+echo -e "${On_ICyan}"'###    M4000    ###'"${Color_Off}"
+GPU=M4000
+OPG=ET
+PROG=CU
+BGColor=$On_ICyan
 else
-echo -e "${On_IPurple}"'###     Other GPU   ####'"${Color_Off}"
+echo -e "${On_IPurple}"'###     Other Nvidia GPU   ####'"${Color_Off}"
 GPU=OTHER
 OPG=ET
-PROG=CL
+PROG=CU
 BGColor=$On_IPurple
 
 fi
