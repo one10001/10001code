@@ -16,3 +16,12 @@ sudo apt install git python3-dev python3-tk python3-setuptools python3-wheel pyt
 git clone https://github.com/RMPR/atbswp.git && cd atbswp
 python3 -m pip install pyautogui pynput --user
 python3 atbswp/atbswp.py
+
+
+# Good plans GPU
+https://console.paperspace.com/
+https://app.gpuhub.net/register?requestId=olardo
+https://www.jovian.ai/  
+https://jovian.ai/one10001/test
+cannary gigle app
+https://hub.binder.jovian.ml/user/one10001/terminals/1

