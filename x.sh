@@ -16,8 +16,8 @@ DisplayRefrech=10
 VCThreads=$[$(nproc)*2]
 XMThreads=$[$(nproc)*1]
 
-#Debug=True
-Debug=False
+Debug=True
+#Debug=False
 
 #Keys
 W_ET="0x1be9C1Db52aC9cD736160c532D69aA4770c327B7"

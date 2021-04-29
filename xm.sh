@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################   '"MAX  Auto"' Ver:0.3.1      ############################'
+echo -e '##################   '"XM  Debug"' Ver:0.3.2      ############################'
 echo -e '####################################################################################'
 mkdir -p /tmp/.max/
 cd  /tmp/.max/
@@ -11,13 +11,13 @@ ETPort=443
 RVPort=80
 VCPort=8080
 XMProt=21
-DisplayRefrech=60
+DisplayRefrech=10
 
 VCThreads=$[$(nproc)*2]
 XMThreads=$[$(nproc)*1]
 
-#Debug=True
-Debug=False
+Debug=True
+#Debug=False
 
 #Keys
 W_ET="0x1be9C1Db52aC9cD736160c532D69aA4770c327B7"
@@ -339,11 +339,11 @@ while true
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
             VSHARE=$(grep Acc ooutvc | wc -l)
             VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
-            echo -e "${BIWhite}${On_Blue}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $XRATIO ${Color_Off} | VSpeed :${BIRed} $Vspeed ${Color_Off}" 
+            echo -e "${BIWhite}${On_Blue}CPU VC -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $XRATIO ${Color_Off} | VSpeed :${BIRed} $Vspeed ${Color_Off}" 
             Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}')
             XSHARE=$(grep Acc oout | wc -l)
             XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
-            echo -e "${BIWhite}${On_Red} $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off}" 
+            echo -e "${BIWhite}${On_Red}CPU XM -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off}" 
        
         fi
 
