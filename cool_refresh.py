@@ -19,7 +19,38 @@ while (i == 0):
     winClass = window.get_active_class()
     if ( winClass == "Navigator.Firefox" ) :
         if  winTitle.find("Colaboratory") != -1 :
+            #### Auto refresh page ####
+            pyautogui.moveTo(800, 879)
+            pyautogui.mouseDown(813, 851, 'left')
+            pyautogui.mouseUp(813, 851, 'left')
+            time.sleep(2)
+            pyautogui.keyDown('f5')
+            pyautogui.keyUp('f5')
+            time.sleep(3)
+            pyautogui.moveTo(825, 828)
+            pyautogui.moveTo(854, 784)
+            pyautogui.moveTo(891, 749)
+            pyautogui.moveTo(925, 726)
+            pyautogui.moveTo(952, 708)
+            pyautogui.moveTo(973, 685)
+            pyautogui.moveTo(997, 656)
+            pyautogui.moveTo(1021, 634)
+            pyautogui.moveTo(1046, 615)
+            pyautogui.moveTo(1068, 596)
+            pyautogui.moveTo(1089, 568)
+            pyautogui.mouseDown(1089, 568, 'left')
+            pyautogui.mouseUp(1089, 568, 'left')
+            time.sleep(25)
+            pyautogui.moveTo(1087, 591)
+            pyautogui.moveTo(1047, 617)
+            pyautogui.moveTo(950, 641)
+            pyautogui.moveTo(870, 663)
+            time.sleep(1)
+            keyboard.send_keys("<ctrl>+<enter>")
+            time.sleep(2)
+  
 
+            ###############################
             time.sleep(0.5)
             pyautogui.moveTo(80, 350)
             pyautogui.moveTo(80, 351)
