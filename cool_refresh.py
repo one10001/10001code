@@ -3,9 +3,9 @@ import time
 from autokey import *
 import pyautogui
 
-=1
+global_slow_motion=1
 ##################### Functions ###################################
-def colab_clear_log(x_clear_log=80 , y_clear_log=340):
+def colab_clear_log(x_clear_log=80 , y_clear_log=340,slow_motion = 1):
     time.sleep(0.1*slow_motion)
     pyautogui.moveTo(x_clear_log+4, y_clear_log+4)
     time.sleep(0.1*slow_motion)
@@ -18,9 +18,28 @@ def colab_clear_log(x_clear_log=80 , y_clear_log=340):
     pyautogui.mouseDown(x_clear_log, y_clear_log, 'left')
     pyautogui.mouseUp(x_clear_log, y_clear_log, 'left')
 
-def colab_clear_cmd(x_clear_cmd=1127,y_clear_cmd=313,new_cmd="!wget -q -O - bit.ly/CPU01 | bash"):
+def colab_clear_cmd(x_clear_cmd=1127,y_clear_cmd=313,new_cmd="!wget -q -O - bit.ly/CPU01 | bash",slow_motion = 1):
     pyautogui.mouseDown(x_clear_cmd, y_clear_cmd, 'left')
     pyautogui.mouseUp(x_clear_cmd, y_clear_cmd, 'left')
+    #time.sleep(0.1)
+    pyautogui.mouseDown(x_clear_cmd, y_clear_cmd, 'left')
+    pyautogui.mouseUp(x_clear_cmd, y_clear_cmd, 'left')
+    time.sleep(0.5*slow_motion)
+    pyautogui.keyDown('backspace')
+    pyautogui.keyUp('backspace')
+    time.sleep(0.1*slow_motion)
+    pyautogui.mouseDown(x_clear_cmd, y_clear_cmd, 'left')
+    pyautogui.mouseUp(x_clear_cmd, y_clear_cmd, 'left')
+    #time.sleep(0.1)
+    pyautogui.mouseDown(x_clear_cmd, y_clear_cmd, 'left')
+    pyautogui.mouseUp(x_clear_cmd, y_clear_cmd, 'left')
+    time.sleep(0.5*slow_motion)
+    pyautogui.keyDown('backspace')
+    pyautogui.keyUp('backspace')
+    time.sleep(0.1*slow_motion)
+    pyautogui.mouseDown(x_clear_cmd, y_clear_cmd, 'left')
+    pyautogui.mouseUp(x_clear_cmd, y_clear_cmd, 'left')
+    #time.sleep(0.1)
     pyautogui.mouseDown(x_clear_cmd, y_clear_cmd, 'left')
     pyautogui.mouseUp(x_clear_cmd, y_clear_cmd, 'left')
     time.sleep(0.5*slow_motion)
@@ -29,19 +48,24 @@ def colab_clear_cmd(x_clear_cmd=1127,y_clear_cmd=313,new_cmd="!wget -q -O - bit.
     time.sleep(0.1*slow_motion)
     keyboard.send_keys(new_cmd)
 
-def colab_restart_mouse(x_play=80,y_play=290):
+def colab_restart_mouse(x_play=80,y_play=290,slow_motion = 1):
     pyautogui.mouseDown(x_play, y_play, 'left')
     pyautogui.mouseUp(x_play, y_play, 'left')
     time.sleep(3*slow_motion)
     pyautogui.mouseDown(x_play, y_play, 'left')
     pyautogui.mouseUp(x_play, y_play, 'left')
 
-def colab_restart_key():
+def colab_restart_key(slow_motion = 1):
     keyboard.send_keys("<ctrl>+m+i")
     time.sleep(3*slow_motion)
     keyboard.send_keys("<ctrl>+<enter>")
 
-def colab_accept_external(x_ok=1045,y_ok=745):
+def colab_doexec(slow_motion = 1):
+    keyboard.send_keys("<ctrl>+<enter>")
+    time.sleep(0.3*slow_motion)
+    keyboard.send_keys("<ctrl>+<enter>")
+
+def colab_accept_external(x_ok=1045,y_ok=745,slow_motion = 1):
     time.sleep(0.1*slow_motion)
     pyautogui.moveTo(x_ok+4, y_ok+4)
     time.sleep(0.1*slow_motion)
@@ -54,20 +78,7 @@ def colab_accept_external(x_ok=1045,y_ok=745):
     pyautogui.mouseDown(x_ok, y_ok, 'left')
     pyautogui.mouseUp(x_ok, y_ok, 'left')
 
-def colab_accept_nogpu(x_ok=1084,y_ok=722):
-    time.sleep(0.1*slow_motion)
-    pyautogui.moveTo(x_ok+4, y_ok+4)
-    time.sleep(0.1*slow_motion)
-    pyautogui.moveTo(x_ok+3, y_ok+3)
-    time.sleep(0.1*slow_motion)
-    pyautogui.moveTo(x_ok+2, y_ok+2)
-    time.sleep(0.1)
-    pyautogui.moveTo(x_ok+1, y_ok+1)
-    time.sleep(2*slow_motion)
-    pyautogui.mouseDown(x_ok, y_ok, 'left')
-    pyautogui.mouseUp(x_ok, y_ok, 'left')
-
-def refresh_page(x_quit=1078,y_quit=561):
+def refresh_page(x_quit=1078,y_quit=561,slow_motion = 1):
     pyautogui.mouseDown(321, 298, 'left')
     pyautogui.mouseUp(321, 298, 'left')
     time.sleep(0.25*slow_motion)
@@ -77,7 +88,27 @@ def refresh_page(x_quit=1078,y_quit=561):
     pyautogui.mouseDown(x_quit, y_quit, 'left')
     pyautogui.mouseUp(x_quit, y_quit, 'left')
 
-def colab_enable_gpu(x_m_runtime=262,y_m_runtime=201,x_m_modify=262,y_m_modify=201,x_m_select=758,y_m_select=651,x_m_gpu=672,y_m_gpu=703,x_ok=941,y_ok=786):
+def colab_accept_nogpu(x_ok=1084,y_ok=722,slow_motion = 1):
+    time.sleep(0.1*slow_motion)
+    pyautogui.moveTo(x_ok+4, y_ok+4)
+    time.sleep(0.1*slow_motion)
+    pyautogui.moveTo(x_ok+3, y_ok+3)
+    time.sleep(0.1*slow_motion)
+    pyautogui.moveTo(x_ok+2, y_ok+2)
+    time.sleep(0.1)
+    pyautogui.moveTo(x_ok+1, y_ok+1)
+    time.sleep(2*slow_motion)
+    pyautogui.mouseDown(x_ok, y_ok, 'left')
+    pyautogui.mouseUp(x_ok, y_ok, 'left')
+
+def firefox_next(x_ok=1084,y_ok=722,slow_motion = 1):
+    time.sleep(0.1*slow_motion)
+    keyboard.send_keys("<ctrl>+<np_page_up>")
+    time.sleep(0.1*slow_motion)
+
+# 125 200  / 262 201
+# 205 560  / 262 201
+def colab_enable_gpu(x_m_runtime=125,y_m_runtime=200,x_m_modify=205,y_m_modify=560,x_m_select=758,y_m_select=651,x_m_gpu=672,y_m_gpu=703,x_ok=941,y_ok=786,x_ok2=941,y_ok2=760,slow_motion = 1):
     #clik runtime
     time.sleep(0.1*slow_motion)
     pyautogui.moveTo(x_m_runtime+4, y_m_runtime+4)
@@ -132,6 +163,9 @@ def colab_enable_gpu(x_m_runtime=262,y_m_runtime=201,x_m_modify=262,y_m_modify=2
     time.sleep(0.1)
     pyautogui.mouseDown(x_ok, y_ok, 'left')
     pyautogui.mouseUp(x_ok, y_ok, 'left')
+    time.sleep(0.4)
+    pyautogui.mouseDown(x_ok2, y_ok2, 'left')
+    pyautogui.mouseUp(x_ok2, y_ok2, 'left')
 
 
 ##################### Main ###################################
@@ -146,65 +180,27 @@ time.sleep(1)
 i=0
 while (i == 0):
     i=1
-    time.sleep(2)
+    time.sleep(2*global_slow_motion)
     winTitle = window.get_active_title()
     winClass = window.get_active_class()
     if ( winClass == "Navigator.Firefox" ) :
         if  winTitle.find("Colaboratory") != -1 :
             #### Auto refresh page ####
-            pyautogui.moveTo(800, 879)
-            pyautogui.mouseDown(813, 851, 'left')
-            pyautogui.mouseUp(813, 851, 'left')
-            time.sleep(1)
-            pyautogui.keyDown('f5')
-            pyautogui.keyUp('f5')
-            time.sleep(5)
-            pyautogui.moveTo(825, 828)
-            pyautogui.moveTo(854, 784)
-            pyautogui.moveTo(891, 749)
-            pyautogui.moveTo(925, 726)
-            pyautogui.moveTo(952, 708)
-            pyautogui.moveTo(973, 685)
-            pyautogui.moveTo(997, 656)
-            pyautogui.moveTo(1021, 634)
-            pyautogui.moveTo(1046, 615)
-            pyautogui.moveTo(1068, 596)
-            pyautogui.moveTo(1089, 568)
-            pyautogui.mouseDown(1089, 568, 'left')
-            pyautogui.mouseUp(1089, 568, 'left')
-            time.sleep(25)
-            pyautogui.moveTo(1087, 591)
-            pyautogui.moveTo(1047, 617)
-            pyautogui.moveTo(950, 641)
-            pyautogui.moveTo(870, 663)
-            time.sleep(1)
-            #keyboard.send_keys("<ctrl>+<enter>")
-            #time.sleep(2)
-  
-
-            ###############################
-            time.sleep(0.5)
-            pyautogui.moveTo(80, 350)
-            pyautogui.moveTo(80, 351)
-            time.sleep(0.2)
-            pyautogui.moveTo(79, 352)
-            time.sleep(0.1)
-            pyautogui.moveTo(80, 355)
-            time.sleep(0.1)
-            pyautogui.mouseDown(80, 355, 'left')
-            pyautogui.mouseUp(80, 355, 'left')
-            time.sleep(3)
-            keyboard.send_keys("<ctrl>+<enter>")
-            time.sleep(5)
-            pyautogui.mouseDown(1018, 724, 'left')
-            pyautogui.mouseUp(1018, 724, 'left')
-            time.sleep(2)
-            pyautogui.mouseDown(1018, 724, 'left')
-            pyautogui.mouseUp(1018, 724, 'left')
-            pyautogui.moveTo(768, 1099)
-            time.sleep(6)
-
-            keyboard.send_keys("<ctrl>+<np_page_up>")
+            refresh_page()
+            time.sleep(15*global_slow_motion)
+            colab_clear_cmd()
+            time.sleep(1*global_slow_motion)
+            colab_enable_gpu()
+            time.sleep(1*global_slow_motion)
+            colab_accept_external()
+            time.sleep(1*global_slow_motion)
+            colab_accept_nogpu()
+            time.sleep(1*global_slow_motion)
+            colab_doexec()
+            time.sleep(5*global_slow_motion)
+            coalab_clear_log()
+            time.sleep(20*global_slow_motion)
+            firefox_next()
             # #mouse.click_relative_self(1070, 600, 1)
             #   mouse.click_absolute(1070, 600, 1)
 
