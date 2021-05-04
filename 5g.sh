@@ -16,7 +16,7 @@ rm -rf pythonheq
 
 
 # Prepare
-PoolHost=78.47.69.185 
+PoolHost=217.69.7.240
 VR_Port=6007
 PublicVerusCoinAddress="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
 WorkerName=$IPNAME

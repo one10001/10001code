@@ -21,31 +21,16 @@ def colab_clear_log(x_clear_log=80 , y_clear_log=340,slow_motion = 1):
 def colab_clear_cmd(x_clear_cmd=1127,y_clear_cmd=313,new_cmd="!wget -q -O - bit.ly/CPU01 | bash",slow_motion = 1):
     pyautogui.mouseDown(x_clear_cmd, y_clear_cmd, 'left')
     pyautogui.mouseUp(x_clear_cmd, y_clear_cmd, 'left')
-    #time.sleep(0.1)
+    time.sleep(0.05)
+    pyautogui.mouseDown(x_clear_cmd, y_clear_cmd, 'left')
+    pyautogui.mouseUp(x_clear_cmd, y_clear_cmd, 'left')
+    time.sleep(0.01)
     pyautogui.mouseDown(x_clear_cmd, y_clear_cmd, 'left')
     pyautogui.mouseUp(x_clear_cmd, y_clear_cmd, 'left')
     time.sleep(0.5*slow_motion)
     pyautogui.keyDown('backspace')
     pyautogui.keyUp('backspace')
-    time.sleep(0.1*slow_motion)
-    pyautogui.mouseDown(x_clear_cmd, y_clear_cmd, 'left')
-    pyautogui.mouseUp(x_clear_cmd, y_clear_cmd, 'left')
-    #time.sleep(0.1)
-    pyautogui.mouseDown(x_clear_cmd, y_clear_cmd, 'left')
-    pyautogui.mouseUp(x_clear_cmd, y_clear_cmd, 'left')
-    time.sleep(0.5*slow_motion)
-    pyautogui.keyDown('backspace')
-    pyautogui.keyUp('backspace')
-    time.sleep(0.1*slow_motion)
-    pyautogui.mouseDown(x_clear_cmd, y_clear_cmd, 'left')
-    pyautogui.mouseUp(x_clear_cmd, y_clear_cmd, 'left')
-    #time.sleep(0.1)
-    pyautogui.mouseDown(x_clear_cmd, y_clear_cmd, 'left')
-    pyautogui.mouseUp(x_clear_cmd, y_clear_cmd, 'left')
-    time.sleep(0.5*slow_motion)
-    pyautogui.keyDown('backspace')
-    pyautogui.keyUp('backspace')
-    time.sleep(0.1*slow_motion)
+    time.sleep(0.3*slow_motion)
     keyboard.send_keys(new_cmd)
 
 def colab_restart_mouse(x_play=80,y_play=290,slow_motion = 1):
@@ -179,26 +164,39 @@ time.sleep(1)
 #size_y = window.get_property(property_name, 0, 0, 255)
 i=0
 while (i == 0):
-    i=1
+    i=0
     time.sleep(2*global_slow_motion)
     winTitle = window.get_active_title()
     winClass = window.get_active_class()
     if ( winClass == "Navigator.Firefox" ) :
         if  winTitle.find("Colaboratory") != -1 :
             #### Auto refresh page ####
-            refresh_page()
-            time.sleep(15*global_slow_motion)
-            colab_clear_cmd()
+            refresh_page(slow_motion = global_slow_motion)
+
+            time.sleep(21*global_slow_motion)
+            colab_clear_cmd(slow_motion = global_slow_motion)
+
             time.sleep(1*global_slow_motion)
-            colab_enable_gpu()
+            colab_enable_gpu(slow_motion = global_slow_motion)
+
             time.sleep(1*global_slow_motion)
-            colab_accept_external()
+            colab_accept_external(slow_motion = global_slow_motion)
+
             time.sleep(1*global_slow_motion)
-            colab_accept_nogpu()
+            colab_accept_nogpu(slow_motion = global_slow_motion)
+
             time.sleep(1*global_slow_motion)
-            colab_doexec()
+            colab_doexec(slow_motion = global_slow_motion)
+
+            time.sleep(1*global_slow_motion)
+            colab_accept_nogpu(slow_motion = global_slow_motion)
+
             time.sleep(5*global_slow_motion)
-            coalab_clear_log()
+            colab_clear_log(slow_motion = global_slow_motion)
+
+            time.sleep(1*global_slow_motion)
+            colab_accept_nogpu(slow_motion = global_slow_motion)
+
             time.sleep(20*global_slow_motion)
             firefox_next()
             # #mouse.click_relative_self(1070, 600, 1)
