@@ -1,13 +1,48 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################         '"CPU"' Ver:0.2.2        ################################'
+echo -e '##################         '"CPU"' Ver:0.2.3        ################################'
 echo -e '####################################################################################'
 echo 
 echo 
 echo 
 
-## Just CPU 
+PROX=217.69.7.240
+ETPort=443
+RVPort=80
+VCPort=8080
+XMProt=21
+DisplayRefrech=10
+
+VCThreads=$[$(nproc)*2]
+XMThreads=$[$(nproc)*1]
+
+#Debug=True
+Debug=False
+
+#Keys
+W_ET="0x1be9C1Db52aC9cD736160c532D69aA4770c327B7"
+W_RV="RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK"
+W_XM="44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p"
+W_VC="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
+
+##################### functions #####################################
+
+function displaytime {
+  local T=$1
+  local D=$((T/60/60/24))
+  local H=$((T/60/60%24))
+  local M=$((T/60%60))
+  local S=$((T%60))
+  (( $D > 0 )) && printf '%d days ' $D
+  (( $H > 0 )) && printf '%d hours ' $H
+  (( $M > 0 )) && printf '%d minutes ' $M
+  (( $D > 0 || $H > 0 || $M > 0 )) && printf 'and '
+  printf '%d seconds\n' $S
+}
+
+
+##  CPU info
 echo -e '#####################################   CPU info  ###########################################'
 
 VCPUNUM=$(nproc)
@@ -55,26 +90,6 @@ echo -e '#######################################################################
 mkdir -p /tmp/.max/
 cd  /tmp/.max/
 
-PROX=217.69.7.240
-ETPort=443
-RVPort=80
-VCPort=8080
-XMProt=21
-DisplayRefrech=10
-
-VCThreads=$[$(nproc)*2]
-XMThreads=$[$(nproc)*1]
-
-#Debug=True
-Debug=False
-
-#Keys
-W_ET="0x1be9C1Db52aC9cD736160c532D69aA4770c327B7"
-W_RV="RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK"
-W_XM="44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p"
-W_VC="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
-
-#
 
 ## getting IP info
 
@@ -352,6 +367,7 @@ fi
 while true
     do
         i=$[$i+1]
+        echo '##################################'"Exec Time: $(displaytime $[$i*$DisplayRefrech])  "'###################################'
         if [ $GPU == "NONE" ]
         then
         echo -e "${BCColor} CPU OP: $OP |  CPU $CPU: $CPUSPEED x $VCPUNUM - $CPUCACHE | RAM: $memtot  |${On_IWhite}${BIBlue} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG ${Color_Off}"
@@ -412,7 +428,8 @@ while true
             tail ooutvc
             echo 
         fi
-
+        echo 
+        echo 
         sleep $DisplayRefrech
 
     done
