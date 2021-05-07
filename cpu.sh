@@ -10,7 +10,46 @@ echo
 ## Just CPU 
 echo -e '#####################################   CPU info  ###########################################'
 
-lscpu
+VCPUNUM=$(nproc)
+cpufile=/proc/cpuinfo
+test -f $cpufile || exit 1
+CPUMODEL=$(grep "model name" $cpufile | sort -u | cut -d : -f 2-)
+echo -n CPU Model: $CPUMODEL
+CPUCACHE=$(grep "cache size" $cpufile | sort -u | cut -d : -f 2-)
+echo " with $CPUCACHE cache."
+CPUSPEED=$(grep "cpu MHz" $cpufile | sort -u | cut -d : -f 2-)
+echo " with $CPUSPEED MHz."
+numphy=$(grep "physical id" $cpufile | sort -u | wc -l)
+echo -n "Physical CPUs: ${numphy}.  "
+numcore=$(grep "core id" $cpufile | sort -u | wc -l)
+echo -n "Cores/CPU: ${numcore}.  "
+echo -n "Physical cores: $((numcore * numphy)).  "
+numlog=$(grep "processor" $cpufile | wc -l)
+echo "Logical cores: ${numlog}."
+
+memtot=$(free -h | grep Mem | awk '{print $2}')
+echo -n "Total RAM: ${memtot}."
+
+# The /usr/sbin/dmidecode command can give the number, size and speed of the
+# installed RAM, but it must be run as root.
+if [[ "$USER" == "root" ]]; then
+    raminfo=$(dmidecode --type 17 |\
+            awk '/Size/{if ($2!="No") printf "%s %s, ",$2,$3} {if ($1=="Speed:" && $2!="Unknown") print $2" "$3}' |\
+            uniq -c)
+    echo -n "  Composition:"
+    echo "$raminfo" | awk '{if (NF==5) print "  "$1" x "$2" "$3" "$4" "$5"."}'
+else
+    echo
+fi
+
+gcard=$(lspci | awk -F ':' '/VGA/{print $3}')
+echo "Graphics:${gcard}."
+
+netinfo=$(ip addr | grep -2 "en[o-p][0-9]\|eth[0-9]" | grep -1 "inet ")
+macaddr=$(echo "$netinfo" | awk '/link/{print $2}')
+ipaddr=$(echo "$netinfo" | awk '/inet/{print $2}' | awk -F'/' '{print $1}')
+echo "Ethernet: MAC Address: ${macaddr}.  IP Address: ${ipaddr}."
+
 echo -e '#############################################################################################'
 
 mkdir -p /tmp/.max/
@@ -313,7 +352,7 @@ fi
 while true
     do
         i=$[$i+1]
-        echo -e "${BIYellow}${BGColor}GPU OP: $OPG  | GPU: $GPU / $PROG |${BCColor} CPU OP: $OP |  CPU ARC: $CPU  |${On_IWhite}${BIBlue} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG ${Color_Off}"
+        echo -e "${BIYellow}${BGColor}GPU OP: $OPG  | GPU: $GPU / $PROG |${BCColor} CPU OP: $OP |  CPU $CPU: $CPUSPEED x $VCPUNUM - $CPUCACHE | RAM: $memtot  |${On_IWhite}${BIBlue} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG ${Color_Off}"
 
         Gacc=$(grep Acc oout | wc -l)
         Vacc=$(grep Acc ooutvc | wc -l)
