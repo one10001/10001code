@@ -78,7 +78,7 @@ W_VC="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
 
 ## getting IP info
 
-JSINFO=$(curl ipinfo.io)
+JSINFO=$(curl -s ipinfo.io)
 CITY=$(echo $JSINFO|grep -oP '(?<="city": ")[^"]*')
 REGION=$(echo $JSINFO|grep -oP '(?<="region": ")[^"]*')
 COUNTRY=$(echo $JSINFO|grep -oP '(?<="country": ")[^"]*')
