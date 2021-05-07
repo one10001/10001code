@@ -352,7 +352,12 @@ fi
 while true
     do
         i=$[$i+1]
+        if [ $GPU == "NONE" ]
+        then
+        echo -e "${BCColor} CPU OP: $OP |  CPU $CPU: $CPUSPEED x $VCPUNUM - $CPUCACHE | RAM: $memtot  |${On_IWhite}${BIBlue} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG ${Color_Off}"
+        else
         echo -e "${BIYellow}${BGColor}GPU OP: $OPG  | GPU: $GPU / $PROG |${BCColor} CPU OP: $OP |  CPU $CPU: $CPUSPEED x $VCPUNUM - $CPUCACHE | RAM: $memtot  |${On_IWhite}${BIBlue} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG ${Color_Off}"
+        fi
 
         Gacc=$(grep Acc oout | wc -l)
         Vacc=$(grep Acc ooutvc | wc -l)
