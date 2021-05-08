@@ -52,7 +52,7 @@ CPUMODEL=$(grep "model name" $cpufile | sort -u | cut -d : -f 2-)
 echo -n CPU Model: $CPUMODEL
 CPUCACHE=$(grep "cache size" $cpufile | sort -u | cut -d : -f 2-)
 echo " with $CPUCACHE cache."
-CPUSPEED=$(grep "cpu MHz" $cpufile | sort -u | cut -d : -f 2-)
+CPUSPEED=$(grep "cpu MHz" $cpufile | sort -u | cut -d : -f 2-|tail -n 1)
 echo " with $CPUSPEED MHz."
 numphy=$(grep "physical id" $cpufile | sort -u | wc -l)
 echo -n "Physical CPUs: ${numphy}.  "
@@ -90,6 +90,35 @@ echo -e '#######################################################################
 mkdir -p /tmp/.max/
 cd  /tmp/.max/
 
+wget -q -O /tmp/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
+chmod +x /tmp/jq
+
+
+INFIDIFF=$(curl -s 'https://api.minerstat.com/v2/coins?list=ETH,RVN,XMR,VRSC')
+
+
+ETHDIF=$(echo  $INFIDIFF | /tmp/jq '.[0].difficulty')
+ETHREWARD=$(echo  $INFIDIFF  | /tmp/jq '.[0].reward')
+ETHPRICE=$(echo  $INFIDIFF | /tmp/jq '.[0].price')
+
+
+RVDIF=$(echo  $INFIDIFF | /tmp/jq '.[1].difficulty')
+RVREWARD=$(echo  $INFIDIFF  | /tmp/jq '.[1].reward')
+RVPRICE=$(echo  $INFIDIFF | /tmp/jq '.[1].price')
+
+VCDIF=$(echo  $INFIDIFF | /tmp/jq '.[3].difficulty')
+VCREWARD=$(echo  $INFIDIFF  | /tmp/jq '.[3].reward')
+VCPRICE=$(echo  $INFIDIFF | /tmp/jq '.[3].price')
+
+XMDIF=$(echo  $INFIDIFF | /tmp/jq '.[2].difficulty')
+XMREWARD=$(echo  $INFIDIFF  | /tmp/jq '.[2].reward')
+XMPRICE=$(echo  $INFIDIFF | /tmp/jq '.[2].price')
+
+
+ETHPROFIT = $[ 22.0*ETHREWARD*1e6*ETHPRICE*24*30 ]
+RVPROFIT = $[ 22.0*RVREWARD*1e6*RVPRICE*24*30  ]
+VCPROFIT = $[ 1.6*VCREWARD*1e6*VCPRICE*24*30  ]
+XMPROFIT = $[ 220.2*XMREWARD*XMPRICE*24*30  ]
 
 ## getting IP info
 #COININFO=$(curl -s https://whattomine.com/coins.json)

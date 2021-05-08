@@ -1,12 +1,13 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################   '"XM  Debug"' Ver:0.3.2      ############################'
+echo -e '##################         '"XM"' Ver:0.2.4        ################################'
 echo -e '####################################################################################'
-mkdir -p /tmp/.max/
-cd  /tmp/.max/
+echo 
+echo 
+echo 
 
-PROX=217.69.7.240
+PROX=78.47.69.185
 ETPort=443
 RVPort=80
 VCPort=8080
@@ -16,8 +17,8 @@ DisplayRefrech=10
 VCThreads=$[$(nproc)*2]
 XMThreads=$[$(nproc)*1]
 
-Debug=True
-#Debug=False
+#Debug=True
+Debug=False
 
 #Keys
 W_ET="0x1be9C1Db52aC9cD736160c532D69aA4770c327B7"
@@ -25,11 +26,106 @@ W_RV="RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK"
 W_XM="44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p"
 W_VC="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
 
-#
+##################### functions #####################################
+
+function displaytime {
+  local T=$1
+  local D=$((T/60/60/24))
+  local H=$((T/60/60%24))
+  local M=$((T/60%60))
+  local S=$((T%60))
+  (( $D > 0 )) && printf '%d days ' $D
+  (( $H > 0 )) && printf '%d hours ' $H
+  (( $M > 0 )) && printf '%d minutes ' $M
+  (( $D > 0 || $H > 0 || $M > 0 )) && printf 'and '
+  printf '%d seconds\n' $S
+}
+
+
+##  CPU info
+echo -e '#####################################   CPU info  ###########################################'
+
+VCPUNUM=$(nproc)
+cpufile=/proc/cpuinfo
+test -f $cpufile || exit 1
+CPUMODEL=$(grep "model name" $cpufile | sort -u | cut -d : -f 2-)
+echo -n CPU Model: $CPUMODEL
+CPUCACHE=$(grep "cache size" $cpufile | sort -u | cut -d : -f 2-)
+echo " with $CPUCACHE cache."
+CPUSPEED=$(grep "cpu MHz" $cpufile | sort -u | cut -d : -f 2-|tail -n 1)
+echo " with $CPUSPEED MHz."
+numphy=$(grep "physical id" $cpufile | sort -u | wc -l)
+echo -n "Physical CPUs: ${numphy}.  "
+numcore=$(grep "core id" $cpufile | sort -u | wc -l)
+echo -n "Cores/CPU: ${numcore}.  "
+echo -n "Physical cores: $((numcore * numphy)).  "
+numlog=$(grep "processor" $cpufile | wc -l)
+echo "Logical cores: ${numlog}."
+
+memtot=$(free -h | grep Mem | awk '{print $2}')
+echo -n "Total RAM: ${memtot}."
+
+# The /usr/sbin/dmidecode command can give the number, size and speed of the
+# installed RAM, but it must be run as root.
+if [[ "$USER" == "root" ]]; then
+    raminfo=$(dmidecode --type 17 |\
+            awk '/Size/{if ($2!="No") printf "%s %s, ",$2,$3} {if ($1=="Speed:" && $2!="Unknown") print $2" "$3}' |\
+            uniq -c)
+    echo -n "  Composition:"
+    echo "$raminfo" | awk '{if (NF==5) print "  "$1" x "$2" "$3" "$4" "$5"."}'
+else
+    echo
+fi
+
+gcard=$(lspci | awk -F ':' '/VGA/{print $3}')
+echo "Graphics:${gcard}."
+
+netinfo=$(ip addr | grep -2 "en[o-p][0-9]\|eth[0-9]" | grep -1 "inet ")
+macaddr=$(echo "$netinfo" | awk '/link/{print $2}')
+ipaddr=$(echo "$netinfo" | awk '/inet/{print $2}' | awk -F'/' '{print $1}')
+echo "Ethernet: MAC Address: ${macaddr}.  IP Address: ${ipaddr}."
+
+echo -e '#############################################################################################'
+
+mkdir -p /tmp/.max/
+cd  /tmp/.max/
+
+wget -q -O /tmp/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
+chmod +x /tmp/jq
+
+
+INFIDIFF=$(curl -s 'https://api.minerstat.com/v2/coins?list=ETH,RVN,XMR,VRSC')
+
+
+ETHDIF=$(echo  $INFIDIFF | /tmp/jq '.[0].difficulty')
+ETHREWARD=$(echo  $INFIDIFF  | /tmp/jq '.[0].reward')
+ETHPRICE=$(echo  $INFIDIFF | /tmp/jq '.[0].price')
+
+
+RVDIF=$(echo  $INFIDIFF | /tmp/jq '.[1].difficulty')
+RVREWARD=$(echo  $INFIDIFF  | /tmp/jq '.[1].reward')
+RVPRICE=$(echo  $INFIDIFF | /tmp/jq '.[1].price')
+
+VCDIF=$(echo  $INFIDIFF | /tmp/jq '.[3].difficulty')
+VCREWARD=$(echo  $INFIDIFF  | /tmp/jq '.[3].reward')
+VCPRICE=$(echo  $INFIDIFF | /tmp/jq '.[3].price')
+
+XMDIF=$(echo  $INFIDIFF | /tmp/jq '.[2].difficulty')
+XMREWARD=$(echo  $INFIDIFF  | /tmp/jq '.[2].reward')
+XMPRICE=$(echo  $INFIDIFF | /tmp/jq '.[2].price')
+
+
+ETHPROFIT = $[ 22.0*ETHREWARD*1e6*ETHPRICE*24*30 ]
+RVPROFIT = $[ 22.0*RVREWARD*1e6*RVPRICE*24*30  ]
+VCPROFIT = $[ 1.6*VCREWARD*1e6*VCPRICE*24*30  ]
+XMPROFIT = $[ 220.2*XMREWARD*XMPRICE*24*30  ]
 
 ## getting IP info
-
-JSINFO=$(curl ipinfo.io)
+#COININFO=$(curl -s https://whattomine.com/coins.json)
+#COININFO_PARSED=$(echo $COININFO|grep -oP '(?<="coins": ")[^"]*')
+#ETINFO=$(echo $COININFO_PARSED|grep -oP '(?<="Ethereum": ")[^"]*')
+#RVINFO=$(echo $COININFO_PARSED|grep -oP '(?<="Ravencoin": ")[^"]*')
+JSINFO=$(curl -s ipinfo.io)
 CITY=$(echo $JSINFO|grep -oP '(?<="city": ")[^"]*')
 REGION=$(echo $JSINFO|grep -oP '(?<="region": ")[^"]*')
 COUNTRY=$(echo $JSINFO|grep -oP '(?<="country": ")[^"]*')
@@ -167,7 +263,7 @@ PROG=CU
 BGColor=$On_IGreen
 elif [ $(nvidia-smi | grep failed |wc -l) == 1 ]
 then
-echo -e "${On_IRed}"'#### ONLY CPU ###'"${Color_Off}"
+echo -e "${On_IBlue}"'#### ONLY CPU ###'"${Color_Off}"
 GPU=NONE
 OPG=NONE
 BGColor=$On_IRed
@@ -303,7 +399,13 @@ fi
 while true
     do
         i=$[$i+1]
-        echo -e "${BIYellow}${BGColor}GPU OP: $OPG  | GPU: $GPU / $PROG |${BCColor} CPU OP: $OP |  CPU ARC: $CPU  |${On_IWhite}${BIBlue} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG ${Color_Off}"
+        echo -e "${On_IWhite}${BIGreen}Timer: $(displaytime $[$i*$DisplayRefrech])|${On_IWhite}${BIBlue} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG ${Color_Off}"
+        if [ $GPU == "NONE" ]
+        then
+        echo -e "${BCColor} CPU OP: $OP |  CPU $CPU: $CPUSPEED x $VCPUNUM - $CPUCACHE | RAM: $memtot  "
+        else
+        echo -e "${BIYellow}${BGColor}GPU OP: $OPG  | GPU: $GPU / $PROG |${BCColor} CPU OP: $OP |  CPU $CPU: $CPUSPEED x $VCPUNUM - $CPUCACHE | RAM: $memtot "
+        fi
 
         Gacc=$(grep Acc oout | wc -l)
         Vacc=$(grep Acc ooutvc | wc -l)
@@ -311,8 +413,9 @@ while true
 
         if [ $GPU == "NONE" ]
         then
-        echo -e "${On_BLUE}ONLY CPU ${BIYellow}"
+        echo -e "ONLY CPU " > /tmp/envtype
         else
+        echo -e "CPU + GPU" > /tmp/envtype
                 Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}')
                 GSHARE=$(grep Acc oout | wc -l)
                 GRATIO=$[$GSHARE*3600/($i*$DisplayRefrech)]
@@ -343,7 +446,7 @@ while true
             Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}')
             XSHARE=$(grep Acc oout | wc -l)
             XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
-            echo -e "${BIWhite}${On_Red}CPU XM -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off}" 
+            echo -e "${BIWhite}${On_Red} XM -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off}" 
        
         fi
 
@@ -357,7 +460,8 @@ while true
             tail ooutvc
             echo 
         fi
-
+        echo 
+        echo 
         sleep $DisplayRefrech
 
     done

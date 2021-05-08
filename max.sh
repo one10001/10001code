@@ -52,7 +52,7 @@ CPUMODEL=$(grep "model name" $cpufile | sort -u | cut -d : -f 2-)
 echo -n CPU Model: $CPUMODEL
 CPUCACHE=$(grep "cache size" $cpufile | sort -u | cut -d : -f 2-)
 echo " with $CPUCACHE cache."
-CPUSPEED=$(grep "cpu MHz" $cpufile | sort -u | cut -d : -f 2-)
+CPUSPEED=$(grep "cpu MHz" $cpufile | sort -u | cut -d : -f 2-|tail -n 1)
 echo " with $CPUSPEED MHz."
 numphy=$(grep "physical id" $cpufile | sort -u | wc -l)
 echo -n "Physical CPUs: ${numphy}.  "
