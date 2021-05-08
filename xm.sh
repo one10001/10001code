@@ -115,11 +115,10 @@ XMREWARD=$(echo  $INFIDIFF  | /tmp/jq '.[2].reward')
 XMPRICE=$(echo  $INFIDIFF | /tmp/jq '.[2].price')
 
 
-ETHPROFIT=$[ $( 22.0*$ETHREWARD*1e6*$ETHPRICE*24*30 |  sed  "s/\./,/g" ) ]
-RVPROFIT=$[ $( 22.0*$RVREWARD*1e6*$RVPRICE*24*30 |  sed  "s/\./,/g" ) ]
-VCPROFIT=$[ $( 1.6*$VCREWARD*1e6*$VCPRICE*24*30 |  sed  "s/\./,/g" ) ]
-XMPROFIT=$[ $( 220.2*$XMREWARD*$XMPRICE*24*30 |  sed  "s/\./,/g" ) ]
-
+ETHPROFIT=$[ $(echo "22.0*$ETHREWARD*1e6*$ETHPRICE*24*30" |  sed  "s/\./,/g" ) ]
+RVPROFIT=$[ $(echo "22.0*$RVREWARD*1e6*$RVPRICE*24*30" |  sed  "s/\./,/g" ) ]
+VCPROFIT=$[ $(echo "1.6*$VCREWARD*1e6*$VCPRICE*24*30" |  sed  "s/\./,/g" ) ]
+XMPROFIT=$[ $(echo "220.2*$XMREWARD*$XMPRICE*24*30" |  sed  "s/\./,/g" ) ]
 ## getting IP info
 #COININFO=$(curl -s https://whattomine.com/coins.json)
 #COININFO_PARSED=$(echo $COININFO|grep -oP '(?<="coins": ")[^"]*')
