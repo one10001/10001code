@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################         '"CPU"' Ver:0.2.4        ################################'
+echo -e '##################         '"CPU"' Ver:0.7.4        ################################'
 echo -e '####################################################################################'
 echo 
 echo 
@@ -117,10 +117,13 @@ XMPRICE=$(echo  $INFIDIFF | /tmp/jq '.[2].price')
 
 
 
-ETHPROFIT=$[ $(echo "22.0*$ETHREWARD*1e6*$ETHPRICE*24*30" |  sed  "s/\./,/g" ) ]
-RVPROFIT=$[ $(echo "22.0*$RVREWARD*1e6*$RVPRICE*24*30" |  sed  "s/\./,/g" ) ]
-VCPROFIT=$[ $(echo "1.6*$VCREWARD*1e6*$VCPRICE*24*30" |  sed  "s/\./,/g" ) ]
-XMPROFIT=$[ $(echo "220.2*$XMREWARD*$XMPRICE*24*30" |  sed  "s/\./,/g" ) ]
+ETHPROFIT=$(python3 -c "print( 22.0*$ETHREWARD*1e6*$ETHPRICE*24*30 )"  )
+RVPROFIT=$(python3 -c "print( 8.0*$RVREWARD*1e6*$RVPRICE*24*30 )"  )
+VCPROFIT=$(python3 -c "print( 1.6*$VCREWARD*1e6*$VCPRICE*24*30 )")
+XMPROFIT=$(python3 -c "print(  220.2*$XMREWARD*$XMPRICE*24*30 )"   )
+
+echo "Normal Month worth : ET = $ETHPROFIT , RV = $RVPROFIT , VC = $VCPROFIT , XM = $XMPROFIT"
+
 
 ## getting IP info
 #COININFO=$(curl -s https://whattomine.com/coins.json)
@@ -421,7 +424,12 @@ while true
                 Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}')
                 GSHARE=$(grep Acc oout | wc -l)
                 GRATIO=$[$GSHARE*3600/($i*$DisplayRefrech)]
-                echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off}" 
+                if [ $OPG == "RV" ]
+                then
+                GPROFIT=$(python3 -c "print(  $Gspeed*$RVREWARD*$RVPRICE*24*30 )"   )
+                else
+                GPROFIT=$(python3 -c "print(  $Gspeed*$ETHREWARD*$ETHPRICE*24*30 )"   )
+                echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off} | PerMonth :${BIRed} $GPROFIT ${Color_Off}" 
 
         fi
 
@@ -433,13 +441,15 @@ while true
             Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}')
             XSHARE=$(grep Acc oout | wc -l)
             XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
-            echo -e "${BIWhite}${BCColor}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off}" 
+            XMPROFIT=$(python3 -c "print(  $Xspeed*$XMREWARD*$XMPRICE*24*30 )"   )
+            echo -e "${BIWhite}${BCColor}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off} | PerMonth :${BIRed} $XMPROFIT ${Color_Off}" 
         elif [ $OP == "VC" ]
         then
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
             VSHARE=$(grep Acc ooutvc | wc -l)
             VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
-            echo -e "${BIWhite}${BCColor}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $VRATIO ${Color_Off}  | VSpeed :${BIRed} $Vspeed ${Color_Off}" 
+            VCPROFIT=$(python3 -c "print( $Vspeed*$VCREWARD*1e6*$VCPRICE*24*30 )")
+            echo -e "${BIWhite}${BCColor}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $VRATIO ${Color_Off}  | VSpeed :${BIRed} $Vspeed ${Color_Off} | PerMonth :${BIRed} $VCPROFIT ${Color_Off}" 
         else 
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
             VSHARE=$(grep Acc ooutvc | wc -l)
