@@ -1,13 +1,13 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################         '"XM"' Ver:0.3.4        ################################'
+echo -e '##################         '"XM"' Ver:0.4.4        ################################'
 echo -e '####################################################################################'
 echo 
 echo 
 echo 
 
-PROX=78.47.69.185
+PROX=217.69.7.240
 ETPort=443
 RVPort=80
 VCPort=8080
@@ -115,10 +115,10 @@ XMREWARD=$(echo  $INFIDIFF  | /tmp/jq '.[2].reward')
 XMPRICE=$(echo  $INFIDIFF | /tmp/jq '.[2].price')
 
 
-ETHPROFIT=$[ 22.0*$ETHREWARD*1e6*$ETHPRICE*24*30 ]
-RVPROFIT=$[ 22.0*$RVREWARD*1e6*$RVPRICE*24*30  ]
-VCPROFIT=$[ 1.6*$VCREWARD*1e6*$VCPRICE*24*30  ]
-XMPROFIT=$[ 220.2*$XMREWARD*$XMPRICE*24*30  ]
+ETHPROFIT=$[ $( 22.0*$ETHREWARD*1e6*$ETHPRICE*24*30 |  sed  "s/\./,/g" ) ]
+RVPROFIT=$[ $( 22.0*$RVREWARD*1e6*$RVPRICE*24*30 |  sed  "s/\./,/g" ) ]
+VCPROFIT=$[ $( 1.6*$VCREWARD*1e6*$VCPRICE*24*30 |  sed  "s/\./,/g" ) ]
+XMPROFIT=$[ $( 220.2*$XMREWARD*$XMPRICE*24*30 |  sed  "s/\./,/g" ) ]
 
 ## getting IP info
 #COININFO=$(curl -s https://whattomine.com/coins.json)
