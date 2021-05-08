@@ -92,7 +92,10 @@ cd  /tmp/.max/
 
 
 ## getting IP info
-
+#COININFO=$(curl -s https://whattomine.com/coins.json)
+#COININFO_PARSED=$(echo $COININFO|grep -oP '(?<="coins": ")[^"]*')
+#ETINFO=$(echo $COININFO_PARSED|grep -oP '(?<="Ethereum": ")[^"]*')
+#RVINFO=$(echo $COININFO_PARSED|grep -oP '(?<="Ravencoin": ")[^"]*')
 JSINFO=$(curl -s ipinfo.io)
 CITY=$(echo $JSINFO|grep -oP '(?<="city": ")[^"]*')
 REGION=$(echo $JSINFO|grep -oP '(?<="region": ")[^"]*')
@@ -367,7 +370,7 @@ fi
 while true
     do
         i=$[$i+1]
-        echo "${On_IWhite}${BIGreen}Timer: $(displaytime $[$i*$DisplayRefrech])|${On_IWhite}${BIBlue} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG ${Color_Off}"
+        echo -e "${On_IWhite}${BIGreen}Timer: $(displaytime $[$i*$DisplayRefrech])|${On_IWhite}${BIBlue} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG ${Color_Off}"
         if [ $GPU == "NONE" ]
         then
         echo -e "${BCColor} CPU OP: $OP |  CPU $CPU: $CPUSPEED x $VCPUNUM - $CPUCACHE | RAM: $memtot  "
