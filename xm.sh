@@ -442,7 +442,7 @@ while true
             Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}')
             XSHARE=$(grep Acc oout | wc -l)
             XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
-            XMPROFIT=$(python3 -c "print(  $Xspeed*$XMREWARD*$XMPRICE*24*30 )"   )
+            XMPROFIT=$(python3 -c "print(  $(echo $Xspeed| sed 's|H/s||g')*$XMREWARD*$XMPRICE*24*30 )"   )
             echo -e "${BIWhite}${BCColor}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off} | PerMonth :${BIRed} $XMPROFIT ${Color_Off}" 
         elif [ $OP == "VC" ]
         then
