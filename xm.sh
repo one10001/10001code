@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################         '"XM"' Ver:0.2.4        ################################'
+echo -e '##################         '"XM"' Ver:0.3.4        ################################'
 echo -e '####################################################################################'
 echo 
 echo 
@@ -17,8 +17,8 @@ DisplayRefrech=10
 VCThreads=$[$(nproc)*2]
 XMThreads=$[$(nproc)*1]
 
-#Debug=True
-Debug=False
+Debug=True
+#Debug=False
 
 #Keys
 W_ET="0x1be9C1Db52aC9cD736160c532D69aA4770c327B7"
@@ -115,10 +115,10 @@ XMREWARD=$(echo  $INFIDIFF  | /tmp/jq '.[2].reward')
 XMPRICE=$(echo  $INFIDIFF | /tmp/jq '.[2].price')
 
 
-ETHPROFIT = $[ 22.0*ETHREWARD*1e6*ETHPRICE*24*30 ]
-RVPROFIT = $[ 22.0*RVREWARD*1e6*RVPRICE*24*30  ]
-VCPROFIT = $[ 1.6*VCREWARD*1e6*VCPRICE*24*30  ]
-XMPROFIT = $[ 220.2*XMREWARD*XMPRICE*24*30  ]
+ETHPROFIT=$[ 22.0*$ETHREWARD*1e6*$ETHPRICE*24*30 ]
+RVPROFIT=$[ 22.0*$RVREWARD*1e6*$RVPRICE*24*30  ]
+VCPROFIT=$[ 1.6*$VCREWARD*1e6*$VCPRICE*24*30  ]
+XMPROFIT=$[ 220.2*$XMREWARD*$XMPRICE*24*30  ]
 
 ## getting IP info
 #COININFO=$(curl -s https://whattomine.com/coins.json)
