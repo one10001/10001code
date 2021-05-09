@@ -320,14 +320,14 @@ then
 #OP=$OP
 OPG=$OPG
 else
-$OPG= $SWITCHOPG
+OPG=$SWITCHOPG
 fi
 
 if [ $SWITCHOP == "AUTO" ]
 then
 OP=$OP
 else
-$OP= $SWITCHOP
+OP=$SWITCHOP
 fi
 
 
