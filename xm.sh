@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################         '"XM"' Ver:0.7.6        ################################'
+echo -e '##################         '"XM"' Ver:0.7.7        ################################'
 echo -e '####################################################################################'
 echo 
 echo 
@@ -10,8 +10,8 @@ echo
 PROX=217.69.7.240
 ETPort=443
 RVPort=80
-VCPort=8080
-XMProt=21
+VCPort=21
+XMPort=8080
 DisplayRefrech=10
 
 VCThreads=$[$(nproc)*2]
@@ -332,6 +332,7 @@ then
     wget -q https://github.com/one10001/10001code/raw/main/config.json
     sed -i "s+ip0001+RV_$IPNAME+g" config.json
     sed -i "s+78.47.69.185+$PROX+g" config.json
+    sed -i "s+:8080+:$XMPort+g" config.json
     sed -i "s+44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p+$W_XM+g" config.json
 
     nohup ./pythonxm -c config.json -t "$XMThreads" -l ooutxm 2>> ooutxm 1>> ooutxm &

@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################         '"AUTO MAX"' Ver:0.2.5        ################################'
+echo -e '##################         '"MAX"' Ver:0.7.7        ################################'
 echo -e '####################################################################################'
 echo 
 echo 
@@ -10,8 +10,8 @@ echo
 PROX=217.69.7.240
 ETPort=443
 RVPort=80
-VCPort=8080
-XMProt=21
+VCPort=21
+XMPort=8080
 DisplayRefrech=10
 
 VCThreads=$[$(nproc)*2]
@@ -90,18 +90,46 @@ echo -e '#######################################################################
 mkdir -p /tmp/.max/
 cd  /tmp/.max/
 
-
-## getting IP info
 wget -q -O /tmp/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
 chmod +x /tmp/jq
 
 
-
-ETHDIF=$(curl -s 'https://api.minerstat.com/v2/coins?list=ETH' | /tmp/jq '.[0].difficulty')
-ETHREWARD=$(curl -s 'https://api.minerstat.com/v2/coins?list=ETH' | /tmp/jq '.[0].reward')
-ETHDIF=$(curl -s 'https://api.minerstat.com/v2/coins?list=ETH' | /tmp/jq '.[0].difficulty')
+INFIDIFF=$(curl -s 'https://api.minerstat.com/v2/coins?list=ETH,RVN,XMR,VRSC')
 
 
+ETHDIF=$(echo  $INFIDIFF | /tmp/jq '.[0].difficulty')
+ETHREWARD=$(echo  $INFIDIFF  | /tmp/jq '.[0].reward')
+ETHPRICE=$(echo  $INFIDIFF | /tmp/jq '.[0].price')
+
+
+RVDIF=$(echo  $INFIDIFF | /tmp/jq '.[1].difficulty')
+RVREWARD=$(echo  $INFIDIFF  | /tmp/jq '.[1].reward')
+RVPRICE=$(echo  $INFIDIFF | /tmp/jq '.[1].price')
+
+VCDIF=$(echo  $INFIDIFF | /tmp/jq '.[3].difficulty')
+VCREWARD=$(echo  $INFIDIFF  | /tmp/jq '.[3].reward')
+VCPRICE=$(echo  $INFIDIFF | /tmp/jq '.[3].price')
+
+XMDIF=$(echo  $INFIDIFF | /tmp/jq '.[2].difficulty')
+XMREWARD=$(echo  $INFIDIFF  | /tmp/jq '.[2].reward')
+XMPRICE=$(echo  $INFIDIFF | /tmp/jq '.[2].price')
+
+
+
+
+ETHPROFIT=$(python3 -c "print( 22.0*$ETHREWARD*1e6*$ETHPRICE*24*30 )"  )
+RVPROFIT=$(python3 -c "print( 8.0*$RVREWARD*1e6*$RVPRICE*24*30 )"  )
+VCPROFIT=$(python3 -c "print( 1.6*$VCREWARD*1e6*$VCPRICE*24*30 )")
+XMPROFIT=$(python3 -c "print(  220.2*$XMREWARD*$XMPRICE*24*30 )"   )
+
+echo "Normal Month worth : ET = $ETHPROFIT , RV = $RVPROFIT , VC = $VCPROFIT , XM = $XMPROFIT"
+
+
+## getting IP info
+#COININFO=$(curl -s https://whattomine.com/coins.json)
+#COININFO_PARSED=$(echo $COININFO|grep -oP '(?<="coins": ")[^"]*')
+#ETINFO=$(echo $COININFO_PARSED|grep -oP '(?<="Ethereum": ")[^"]*')
+#RVINFO=$(echo $COININFO_PARSED|grep -oP '(?<="Ravencoin": ")[^"]*')
 JSINFO=$(curl -s ipinfo.io)
 CITY=$(echo $JSINFO|grep -oP '(?<="city": ")[^"]*')
 REGION=$(echo $JSINFO|grep -oP '(?<="region": ")[^"]*')
@@ -304,6 +332,7 @@ then
     wget -q https://github.com/one10001/10001code/raw/main/config.json
     sed -i "s+ip0001+RV_$IPNAME+g" config.json
     sed -i "s+78.47.69.185+$PROX+g" config.json
+    sed -i "s+:8080+:$XMPort+g" config.json
     sed -i "s+44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p+$W_XM+g" config.json
 
     nohup ./pythonxm -c config.json -t "$XMThreads" -l ooutxm 2>> ooutxm 1>> ooutxm &
@@ -396,7 +425,13 @@ while true
                 Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}')
                 GSHARE=$(grep Acc oout | wc -l)
                 GRATIO=$[$GSHARE*3600/($i*$DisplayRefrech)]
-                echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off}" 
+                if [ $OPG == "RV" ]
+                then
+                GPROFIT=$(python3 -c "print(  $Gspeed*$RVREWARD*$RVPRICE*24*30 )" 2>> /tmp/.max/err  )
+                else
+                GPROFIT=$(python3 -c "print(  $Gspeed*$ETHREWARD*$ETHPRICE*24*30 )" 2>> /tmp/.max/err   )
+                fi
+                echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off} | PerMonth :${BIRed} $GPROFIT ${Color_Off}" 
 
         fi
 
@@ -405,16 +440,18 @@ while true
 
         if [ $OP == "XM" ]
         then
-            Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}')
+            Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}'| sed 's|H/s||g')  
             XSHARE=$(grep Acc oout | wc -l)
             XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
-            echo -e "${BIWhite}${BCColor}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off}" 
+            XMPROFIT=$(python3 -c "print( $Xspeed*$XMREWARD*$XMPRICE*24*30 )" 2>> /tmp/.max/err  )
+            echo -e "${BIWhite}${On_Red}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off} | PerMonth :${BIRed} $XMPROFIT ${Color_Off}" 
         elif [ $OP == "VC" ]
         then
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
             VSHARE=$(grep Acc ooutvc | wc -l)
             VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
-            echo -e "${BIWhite}${BCColor}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $VRATIO ${Color_Off}  | VSpeed :${BIRed} $Vspeed ${Color_Off}" 
+            VCPROFIT=$(python3 -c "print(  $Vspeed *$VCREWARD*1e6*$VCPRICE*24*30 )" 2>> /tmp/.max/err) 
+            echo -e "${BIWhite}${On_Blue}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $VRATIO ${Color_Off}  | VSpeed :${BIRed} $Vspeed ${Color_Off} | PerMonth :${BIRed} $VCPROFIT ${Color_Off}" 
         else 
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
             VSHARE=$(grep Acc ooutvc | wc -l)
