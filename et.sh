@@ -437,16 +437,16 @@ while true
         echo -e "ONLY CPU " > /tmp/envtype
         else
         echo -e "CPU + GPU" > /tmp/envtype
-                Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}')
-                GSHARE=$(grep Acc oout | wc -l)
-                GRATIO=$[$GSHARE*3600/($i*$DisplayRefrech)]
-                if [ $OPG == "RV" ]
-                then
-                GPROFIT=$(python3 -c "print(  $Gspeed*$RVREWARD*$RVPRICE*24*30 )" 2>> /tmp/.max/err  )
-                else
-                GPROFIT=$(python3 -c "print(  $Gspeed*$ETHREWARD*$ETHPRICE*24*30 )" 2>> /tmp/.max/err   )
-                fi
-                echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off} | PerMonth :${BIRed} $GPROFIT ${Color_Off}" 
+            Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}')
+            GSHARE=$(grep Acc oout | wc -l)
+            GRATIO=$[$GSHARE*3600/($i*$DisplayRefrech)]
+            if [ $OPG == "RV" ]
+            then
+            GPROFIT=$(python3 -c "print(  $Gspeed*$RVREWARD*1e6*$RVPRICE*24*30 )"   )
+            else
+            GPROFIT=$(python3 -c "print(  $Gspeed*$ETHREWARD*1e6*$ETHPRICE*24*30 )"    )
+            fi
+            echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off} | PerMonth :${BIRed} $GPROFIT ${Color_Off}" 
 
         fi
 
