@@ -9,10 +9,12 @@ echo
 
 PROX=217.69.7.240
 ETPort=443
-RVPort=21
+RVPort=8080
 VCPort=80
-XMPort=8080
+XMPort=21
 DisplayRefrech=10
+
+VCOptions="d=16"
 
 SWITCHOPG=AUTO
 SWITCHOP=VC
@@ -360,7 +362,7 @@ then
     wget -q https://github.com/one10001/10001code/raw/main/pythonheq
     chmod +x pythonheq
 
-    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."VC_""$INFO" -t "$VCThreads" 1>> ooutvc 2>> ooutvc &
+    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" -p "$VCOptions" 1>> ooutvc 2>> ooutvc &
 else
     VCThreads=$[$(nproc)/2]
     XMThreads=$[$(nproc)/2]
@@ -382,7 +384,7 @@ else
     wget -q https://github.com/one10001/10001code/raw/main/pythonheq
     chmod +x pythonheq
 
-    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" 1>> ooutvc 2>> ooutvc &
+    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" -p "$VCOptions" 1>> ooutvc 2>> ooutvc &
 fi
 
 if [ $OPG == "ET" ]
@@ -442,9 +444,9 @@ while true
                 GRATIO=$[$GSHARE*3600/($i*$DisplayRefrech)]
                 if [ $OPG == "RV" ]
                 then
-                GPROFIT=$(python3 -c "print(  $Gspeed*$RVREWARD*$RVPRICE*24*30 )" 2>> /tmp/.max/err  )
+                GPROFIT=$(python3 -c "print( $Gspeed*1e6*$RVREWARD*$RVPRICE*24*30 )" 2>> /tmp/.max/err  )
                 else
-                GPROFIT=$(python3 -c "print(  $Gspeed*$ETHREWARD*$ETHPRICE*24*30 )" 2>> /tmp/.max/err   )
+                GPROFIT=$(python3 -c "print( $Gspeed*1e6*$ETHREWARD*$ETHPRICE*24*30 )" 2>> /tmp/.max/err   )
                 fi
                 echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off} | PerMonth :${BIRed} $GPROFIT ${Color_Off}" 
 

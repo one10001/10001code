@@ -9,9 +9,9 @@ echo
 
 PROX=217.69.7.240
 ETPort=443
-RVPort=21
+RVPort=8080
 VCPort=80
-XMPort=8080
+XMPort=21
 DisplayRefrech=10
 
 SWITCHOPG=ET
