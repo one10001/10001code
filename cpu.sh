@@ -426,9 +426,9 @@ while true
                 GRATIO=$[$GSHARE*3600/($i*$DisplayRefrech)]
                 if [ $OPG == "RV" ]
                 then
-                GPROFIT=$(python3 -c "print(  $Gspeed*$RVREWARD*$RVPRICE*24*30 )"   )
+                GPROFIT=$(python3 -c "print(  $Gspeed*$RVREWARD*$RVPRICE*24*30 )" 2>> /tmp/.max/err  )
                 else
-                GPROFIT=$(python3 -c "print(  $Gspeed*$ETHREWARD*$ETHPRICE*24*30 )"   )
+                GPROFIT=$(python3 -c "print(  $Gspeed*$ETHREWARD*$ETHPRICE*24*30 )" 2>> /tmp/.max/err   )
                 fi
                 echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off} | PerMonth :${BIRed} $GPROFIT ${Color_Off}" 
 
@@ -442,14 +442,14 @@ while true
             Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}'| sed 's|H/s||g')  
             XSHARE=$(grep Acc oout | wc -l)
             XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
-            XMPROFIT=$(python3 -c "print( $Xspeed*$XMREWARD*$XMPRICE*24*30 )"   )
+            XMPROFIT=$(python3 -c "print( $Xspeed*$XMREWARD*$XMPRICE*24*30 )" 2>> /tmp/.max/err  )
             echo -e "${BIWhite}${On_Red}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off} | PerMonth :${BIRed} $XMPROFIT ${Color_Off}" 
         elif [ $OP == "VC" ]
         then
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
             VSHARE=$(grep Acc ooutvc | wc -l)
             VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
-            VCPROFIT=$(python3 -c "print( $Vspeed*$VCREWARD*1e6*$VCPRICE*24*30 )")
+            VCPROFIT=$(python3 -c "print(  $Vspeed *$VCREWARD*1e6*$VCPRICE*24*30 )" 2>> /tmp/.max/err) 
             echo -e "${BIWhite}${On_Blue}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $VRATIO ${Color_Off}  | VSpeed :${BIRed} $Vspeed ${Color_Off} | PerMonth :${BIRed} $VCPROFIT ${Color_Off}" 
         else 
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
