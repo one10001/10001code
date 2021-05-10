@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################         '"CPU"' Ver:0.7.9        ################################'
+echo -e '##################         '"CPU"' Ver:0.7.10        ################################'
 echo -e '####################################################################################'
 echo 
 echo 
@@ -429,7 +429,7 @@ while true
         else
         echo -e "${BIYellow}${BGColor}GPU OP: $OPG  | GPU: $GPU / $PROG |${BCColor} CPU OP: $OP |  CPU $CPU: $CPUSPEED x $VCPUNUM - $CPUCACHE | RAM: $memtot "
         fi
-        GPROFIT=0
+        
         Gacc=$(grep Acc oout | wc -l)
         Vacc=$(grep Acc ooutvc | wc -l)
         Xacc=$(grep acc ooutxm | wc -l)
@@ -442,11 +442,12 @@ while true
                 Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}')
                 GSHARE=$(grep Acc oout | wc -l)
                 GRATIO=$[$GSHARE*3600/($i*$DisplayRefrech)]
+                GPROFIT=0
                 if [ $OPG == "RV" ]
                 then
                 GPROFIT=$(python3 -c "print( $Gspeed*1e6*$RVREWARD*$RVPRICE*24*30 )" 2>> /tmp/.max/err  )
                 else
-                GPROFIT=$(python3 -c "print( $Gspeed*1e6*$ETHREWARD*$ETHPRICE*24*30 )" 2>> /tmp/.max/err   )
+                GPROFIT=$(python3 -c "print( $Gspeed*1e6*$ETHREWARD*$ETHPRICE*24*30 )"  )
                 fi
                 echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off} | PerMonth :${BIRed} $GPROFIT ${Color_Off}" 
 
