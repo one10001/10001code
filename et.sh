@@ -7,7 +7,7 @@ echo
 echo 
 echo 
 
-PROX=78.47.69.185
+PROX=49.12.115.117
 ETPort=443
 RVPort=8080
 VCPort=80
