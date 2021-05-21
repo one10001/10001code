@@ -33,7 +33,8 @@ useragent = {
   "focus" : "Mozilla/5.0 (Linux; Android 9) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Focus/4.7.1 Chrome/75.0.3770.143 Mobile Safari/537.36",
   "ubuntu" : "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:65.0) Gecko/20100101 Firefox/88.0",
   "win_firefox" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:83.0) Gecko/20100101 Firefox/83.0",
-  "win_chrome" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
+  "win_chrome" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36",
+  "ff2mobile" : "Mozilla/5.0 (Android 11; Mobile; rv:68.0) Gecko/68.0 Firefox/88.0"
 
 }
 
@@ -65,7 +66,7 @@ useragent = {
 profile = webdriver.FirefoxProfile()
 profile.set_preference("dom.webdriver.enabled", False)
 profile.set_preference('useAutomationExtension', False)
-profile.set_preference("general.useragent.override", useragent["firefox_android"] )
+profile.set_preference("general.useragent.override", useragent["ff2mobile"] )
 profile.update_preferences()
 desired = DesiredCapabilities.FIREFOX
 
@@ -77,21 +78,64 @@ actions = webdriver.ActionChains(driver)
 print(driver.execute_script("return navigator.userAgent;"))
 
 def newacc_step1():
-    #driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
-    driver.set_window_size(360, 667)
-    driver.get("https://console.cloud.google.com/")
-    actions.key_down(Keys.TAB).key_up(Keys.TAB ).perform()
+    try:  
+        #driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+        driver.set_window_size(360, 667)
+        driver.get("https://console.cloud.google.com/")
+        time.sleep(3*slow_motion)
+        actions.key_down(Keys.TAB).key_up(Keys.TAB).perform()
+        time.sleep(0.1*slow_motion)
+        actions.key_down(Keys.TAB).key_up(Keys.TAB).perform()
+        time.sleep(0.1*slow_motion)
+        actions.key_down(Keys.TAB).key_up(Keys.TAB).perform()
+        time.sleep(0.1*slow_motion)
+        actions.key_down(Keys.TAB).key_up(Keys.TAB).perform()
+        time.sleep(0.1*slow_motion)
+        time.sleep(0.2*slow_motion)
+        actions.key_down(Keys.ENTER).key_up(Keys.ENTER).perform()
+        #actions.pause(1)
+        #actions.key_down(Keys.ARROW_DOWN).key_up(Keys.ARROW_DOWN).perform()
+        #time.sleep(0.1*slow_motion)
+        #actions.key_down(Keys.ARROW_UP).key_up(Keys.ARROW_UP).perform()
+        #time.sleep(0.1*slow_motion)
+        #actions.key_down(Keys.ARROW_UP).key_up(Keys.ARROW_UP).perform()
+        time.sleep(0.7*slow_motion)
+        #actions.key_down(Keys.ENTER).key_up(Keys.ENTER).perform()    
+        #driver.find_element(By.XPATH, "//div[6]/div/div").send_keys(Keys.ENTER)
+        driver.find_element(By.XPATH, "//span[contains(.,'Pour moi')]").send_keys(Keys.ENTER)
+        time.sleep(1*slow_motion)
+        return "step 1 OK"
+    except:
+        print ("error step 1")
+        return "step 1 OK"
+
+def newacc_step2(firstName,lastName,username,password):
+    time.sleep(2*slow_motion)
+    driver.find_element(By.ID, "firstName").send_keys(firstName)
     time.sleep(0.1*slow_motion)
-    driver.send_keys("t1")
-    actions.key_down(Keys.TAB).key_up(Keys.TAB ).perform()
+    driver.find_element(By.ID, "lastName").click()
     time.sleep(0.1*slow_motion)
-    driver.send_keys("t2")
-    actions.key_down(Keys.TAB).key_up(Keys.TAB ).perform()
+    driver.find_element(By.ID, "lastName").send_keys(lastName)
+    time.sleep(0.5*slow_motion)
+    #actions.key_down(Keys.TAB).key_up(Keys.TAB).perform()
+    #time.sleep(0.1*slow_motion)
+    #actions.key_down(Keys.TAB).key_up(Keys.TAB).perform()
+    #time.sleep(0.2*slow_motion)
+    #actions.key_down(Keys.ENTER).key_up(Keys.ENTER).perform()
+    #driver.find_element(By.XPATH, "//span[contains(.,'Créer une nouvelle adresse Gmail à la place')]").click()
+    driver.find_element(By.XPATH, "//button/div[2]").click()
+    time.sleep(0.7*slow_motion)
+    driver.find_element(By.ID, "username").send_keys(username)
     time.sleep(0.1*slow_motion)
-    driver.send_keys("t4")
-    actions.key_down(Keys.TAB).key_up(Keys.TAB ).perform()
+    driver.find_element(By.NAME, "Passwd").send_keys(password)
     time.sleep(0.1*slow_motion)
-    driver.send_keys("t5")
+    driver.find_element(By.NAME, "ConfirmPasswd").send_keys(password)
+    time.sleep(0.1*slow_motion)
+
+    nextButton = driver.find_elements_by_xpath('//*[@id ="passwordNext"]')
+    #nextButton[0].click()
+
+
 
 
 def change_ip():
@@ -215,12 +259,13 @@ def clear_logs():
 
 time.sleep(0.1*slow_motion)
 print(0.1*slow_motion)         
-#driver.set_window_size(360, 667)
+
 driver.get("about:blank")
 driver.maximize_window() 
 change_ip()
+driver.set_window_size(360, 667)
 time.sleep(2*slow_motion)
 
 newacc_step1()
-
+newacc_step2(firstName="ahmed",lastName="elkakio",username='aelkakio10001',password='Ms123456789')
 #driver.close()
