@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################         '"ET"' Ver:0.7.10       ################################'
+echo -e '##################         '"CPU"' Ver:0.7.12        ################################'
 echo -e '####################################################################################'
 echo 
 echo 
@@ -14,7 +14,9 @@ VCPort=80
 XMPort=21
 DisplayRefrech=10
 
-SWITCHOPG=ET
+VCOptions="d=16"
+
+SWITCHOPG=AUTO
 SWITCHOP=VC
 
 VCThreads=$[$(nproc)*2]
@@ -266,7 +268,7 @@ then
 
 echo -e "${On_IGreen}"'###### P100-PCIE ######'"${Color_Off}"
 GPU=P100
-OPG=RV
+OPG=ET
 PROG=CU
 BGColor=$On_IGreen
 elif [ $(nvidia-smi | grep failed |wc -l) == 1 ]
@@ -318,7 +320,7 @@ fi
 if [ $SWITCHOPG == "AUTO" ]
 then
 #OP=$OP
-OPG=$OPG
+OPG=ET
 else
 OPG=$SWITCHOPG
 fi
@@ -360,7 +362,7 @@ then
     wget -q https://github.com/one10001/10001code/raw/main/pythonheq
     chmod +x pythonheq
 
-    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."VC_""$INFO" -t "$VCThreads" 1>> ooutvc 2>> ooutvc &
+    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" -p "$VCOptions" 1>> ooutvc 2>> ooutvc &
 else
     VCThreads=$[$(nproc)/2]
     XMThreads=$[$(nproc)/2]
@@ -382,7 +384,7 @@ else
     wget -q https://github.com/one10001/10001code/raw/main/pythonheq
     chmod +x pythonheq
 
-    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" 1>> ooutvc 2>> ooutvc &
+    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" -p "$VCOptions" 1>> ooutvc 2>> ooutvc &
 fi
 
 if [ $OPG == "ET" ]
@@ -427,7 +429,7 @@ while true
         else
         echo -e "${BIYellow}${BGColor}GPU OP: $OPG  | GPU: $GPU / $PROG |${BCColor} CPU OP: $OP |  CPU $CPU: $CPUSPEED x $VCPUNUM - $CPUCACHE | RAM: $memtot "
         fi
-
+        
         Gacc=$(grep Acc oout | wc -l)
         Vacc=$(grep Acc ooutvc | wc -l)
         Xacc=$(grep acc ooutxm | wc -l)
@@ -437,16 +439,17 @@ while true
         echo -e "ONLY CPU " > /tmp/envtype
         else
         echo -e "CPU + GPU" > /tmp/envtype
-            Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}')
-            GSHARE=$(grep Acc oout | wc -l)
-            GRATIO=$[$GSHARE*3600/($i*$DisplayRefrech)]
-            if [ $OPG == "RV" ]
-            then
-            GPROFIT=$(python3 -c "print(  $Gspeed*$RVREWARD*1e6*$RVPRICE*24*30 )"   )
-            else
-            GPROFIT=$(python3 -c "print(  $Gspeed*$ETHREWARD*1e6*$ETHPRICE*24*30 )"    )
-            fi
-            echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off} | PerMonth :${BIRed} $GPROFIT ${Color_Off}" 
+                Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}')
+                GSHARE=$(grep Acc oout | wc -l)
+                GRATIO=$[$GSHARE*3600/($i*$DisplayRefrech)]
+                GPROFIT=0
+                if [ $OPG == "RV" ]
+                then
+                GPROFIT=$(python3 -c "print( $RVREWARD * $Gspeed * 1e6 * $RVPRICE * 24 * 30 )" 2>> /tmp/.max/err  )
+                else
+                GPROFIT=$(python3 -c "print( $ETHREWARD * $Gspeed * 1e6 * $ETHPRICE * 24 * 30 )" 2>> /tmp/.max/err  )
+                fi
+                echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off} | PerMonth :${BIRed} $GPROFIT ${Color_Off}" 
 
         fi
 

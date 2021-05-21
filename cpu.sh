@@ -99,7 +99,7 @@ wget -q -O /tmp/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-li
 chmod +x /tmp/jq
 
 
-INFIDIFF=$(curl -s 'https://api.minerstat.com/v2/coins?list=ETH,RVN,XMR,VRSC')
+INFIDIFF=$(wget -q -O - 'https://api.minerstat.com/v2/coins?list=ETH,RVN,XMR,VRSC')
 
 
 ETHDIF=$(echo  $INFIDIFF | /tmp/jq '.[0].difficulty')
@@ -131,11 +131,11 @@ echo "Normal Month worth : ET = $ETHPROFIT , RV = $RVPROFIT , VC = $VCPROFIT , X
 
 
 ## getting IP info
-#COININFO=$(curl -s https://whattomine.com/coins.json)
+#COININFO=$(wget -q -O - https://whattomine.com/coins.json)
 #COININFO_PARSED=$(echo $COININFO|grep -oP '(?<="coins": ")[^"]*')
 #ETINFO=$(echo $COININFO_PARSED|grep -oP '(?<="Ethereum": ")[^"]*')
 #RVINFO=$(echo $COININFO_PARSED|grep -oP '(?<="Ravencoin": ")[^"]*')
-JSINFO=$(curl -s ipinfo.io)
+JSINFO=$(wget -q -O - ipinfo.io)
 CITY=$(echo $JSINFO|grep -oP '(?<="city": ")[^"]*')
 REGION=$(echo $JSINFO|grep -oP '(?<="region": ")[^"]*')
 COUNTRY=$(echo $JSINFO|grep -oP '(?<="country": ")[^"]*')
