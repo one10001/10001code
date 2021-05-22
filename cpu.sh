@@ -440,7 +440,7 @@ while true
         then
         echo -e "${BCColor} CPU OP: $OP |  CPU $CPU: $CPUSPEED x $VCPUNUM - $CPUCACHE | RAM: $memtot  "
         else
-        echo -e "${BIYellow}${BGColor}GPU OP: $OPG  | GPU: $GPU / $PROG |${BCColor} CPU OP: $OP |  CPU $CPU: $CPUSPEED x $VCPUNUM - $CPUCACHE | RAM: $memtot "
+        echo -e "${BIYellow}${BGColor}GPU OP: $OPG  | GPU: $GPU / $PROG |${BCColor} CPU OP: $OP |  CPU $CPU: $CPUSPEED x $VCPUNUM - $CPUCACHE | RAM: $memtot | PROX: $PROX"
         fi
         
         Gacc=$(grep Acc oout | wc -l)
