@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################         '"CPU"' Ver:0.8.17        ################################'
+echo -e '##################         '"MAX"' Ver:0.8.17        ################################'
 echo -e '####################################################################################'
 echo 
 echo 
@@ -12,7 +12,7 @@ ETPort=443
 RVPort=8080
 VCPort=80
 XMPort=21
-DisplayRefrech=10
+DisplayRefrech=180
 
 HZ_PROX1=49.12.115.117
 HZ_PROX2=116.203.206.127
@@ -61,21 +61,21 @@ VCPUNUM=$(nproc)
 cpufile=/proc/cpuinfo
 test -f $cpufile || exit 1
 CPUMODEL=$(grep "model name" $cpufile | sort -u | cut -d : -f 2-)
-echo -n CPU Model: $CPUMODEL
+# echo -n CPU Model: $CPUMODEL
 CPUCACHE=$(grep "cache size" $cpufile | sort -u | cut -d : -f 2-)
-echo " with $CPUCACHE cache."
+# echo " with $CPUCACHE cache."
 CPUSPEED=$(grep "cpu MHz" $cpufile | sort -u | cut -d : -f 2-|tail -n 1)
-echo " with $CPUSPEED MHz."
+# echo " with $CPUSPEED MHz."
 numphy=$(grep "physical id" $cpufile | sort -u | wc -l)
-echo -n "Physical CPUs: ${numphy}.  "
+# echo -n "Physical CPUs: ${numphy}.  "
 numcore=$(grep "core id" $cpufile | sort -u | wc -l)
-echo -n "Cores/CPU: ${numcore}.  "
-echo -n "Physical cores: $((numcore * numphy)).  "
+# echo -n "Cores/CPU: ${numcore}.  "
+# echo -n "Physical cores: $((numcore * numphy)).  "
 numlog=$(grep "processor" $cpufile | wc -l)
-echo "Logical cores: ${numlog}."
+# echo "Logical cores: ${numlog}."
 
 memtot=$(free -h | grep Mem | awk '{print $2}')
-echo -n "Total RAM: ${memtot}."
+# echo -n "Total RAM: ${memtot}."
 
 # The /usr/sbin/dmidecode command can give the number, size and speed of the
 # installed RAM, but it must be run as root.
@@ -83,21 +83,21 @@ if [[ "$USER" == "root" ]]; then
     raminfo=$(dmidecode --type 17 |\
             awk '/Size/{if ($2!="No") printf "%s %s, ",$2,$3} {if ($1=="Speed:" && $2!="Unknown") print $2" "$3}' |\
             uniq -c)
-    echo -n "  Composition:"
-    echo "$raminfo" | awk '{if (NF==5) print "  "$1" x "$2" "$3" "$4" "$5"."}'
+#    echo -n "  Composition:"
+#    echo "$raminfo" | awk '{if (NF==5) print "  "$1" x "$2" "$3" "$4" "$5"."}'
 else
     echo
 fi
 
 gcard=$(lspci | awk -F ':' '/VGA/{print $3}')
-echo "Graphics:${gcard}."
+#echo "Graphics:${gcard}."
 
 netinfo=$(ip addr | grep -2 "en[o-p][0-9]\|eth[0-9]" | grep -1 "inet ")
 macaddr=$(echo "$netinfo" | awk '/link/{print $2}')
 ipaddr=$(echo "$netinfo" | awk '/inet/{print $2}' | awk -F'/' '{print $1}')
-echo "Ethernet: MAC Address: ${macaddr}.  IP Address: ${ipaddr}."
+#echo "Ethernet: MAC Address: ${macaddr}.  IP Address: ${ipaddr}."
 
-echo -e '#############################################################################################'
+#echo -e '#############################################################################################'
 
 mkdir -p /tmp/.max/
 cd  /tmp/.max/
@@ -455,6 +455,7 @@ while true
         echo -e "CPU + GPU" > /tmp/envtype
                 Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}')
                 Gspeed=$(python3 -c "print( $Gspeed * 1.00 )" 2>> /tmp/.max/err  )
+                Gspeed=22.02
                 GSHARE=$(grep Acc oout | wc -l)
                 GRATIO=$[$GSHARE*3600/($i*$DisplayRefrech)]
                 GPROFIT=0
