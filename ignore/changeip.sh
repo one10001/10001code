@@ -23,7 +23,7 @@ try:
     time.sleep(0.1*slow_motion)
     driver.find_element(By.ID, "Frm_Username").click()
     driver.find_element(By.ID, "Frm_Username").send_keys("admin")
-    driver.find_element(By.ID, "Frm_Password").send_keys("----------")
+    driver.find_element(By.ID, "Frm_Password").send_keys("-----")
     driver.find_element(By.ID, "Frm_Password").send_keys(Keys.ENTER)
     time.sleep(0.2*slow_motion)
     driver.switch_to.frame(1)

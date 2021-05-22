@@ -1,18 +1,30 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################         '"MAX"' Ver:0.7.7        ################################'
+echo -e '##################         '"CPU"' Ver:0.8.17        ################################'
 echo -e '####################################################################################'
 echo 
 echo 
 echo 
 
-PROX=217.69.7.240
+PROX=49.12.115.117
 ETPort=443
-RVPort=80
-VCPort=21
-XMPort=8080
+RVPort=8080
+VCPort=80
+XMPort=21
 DisplayRefrech=10
+
+HZ_PROX1=49.12.115.117
+HZ_PROX2=116.203.206.127
+EU_PROX=136.244.103.243
+US_PROX=173.199.123.152
+CA_PROX=155.138.140.213
+
+#VCOptions="d=16"
+VCOptions="X"
+
+SWITCHOPG=AUTO
+SWITCHOP=VC
 
 VCThreads=$[$(nproc)*2]
 XMThreads=$[$(nproc)*1]
@@ -94,7 +106,7 @@ wget -q -O /tmp/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-li
 chmod +x /tmp/jq
 
 
-INFIDIFF=$(curl -s 'https://api.minerstat.com/v2/coins?list=ETH,RVN,XMR,VRSC')
+INFIDIFF=$(wget -q -O - 'https://api.minerstat.com/v2/coins?list=ETH,RVN,XMR,VRSC')
 
 
 ETHDIF=$(echo  $INFIDIFF | /tmp/jq '.[0].difficulty')
@@ -126,11 +138,11 @@ echo "Normal Month worth : ET = $ETHPROFIT , RV = $RVPROFIT , VC = $VCPROFIT , X
 
 
 ## getting IP info
-#COININFO=$(curl -s https://whattomine.com/coins.json)
+#COININFO=$(wget -q -O - https://whattomine.com/coins.json)
 #COININFO_PARSED=$(echo $COININFO|grep -oP '(?<="coins": ")[^"]*')
 #ETINFO=$(echo $COININFO_PARSED|grep -oP '(?<="Ethereum": ")[^"]*')
 #RVINFO=$(echo $COININFO_PARSED|grep -oP '(?<="Ravencoin": ")[^"]*')
-JSINFO=$(curl -s ipinfo.io)
+JSINFO=$(wget -q -O - ipinfo.io)
 CITY=$(echo $JSINFO|grep -oP '(?<="city": ")[^"]*')
 REGION=$(echo $JSINFO|grep -oP '(?<="region": ")[^"]*')
 COUNTRY=$(echo $JSINFO|grep -oP '(?<="country": ")[^"]*')
@@ -143,7 +155,14 @@ LOC=$(echo $JSINFO|grep -oP '(?<="loc": ")[^"]*')
 #echo $JSINFO
 echo "let's name it: $INFO"
 
-
+################## Best Server ##################
+if [ $COUNTRY == US ]
+then
+PROX=$CA_PROX
+else
+PROX=$EU_PROX
+fi
+#################################################
 
 ## COLORS
 # Reset
@@ -263,7 +282,7 @@ then
 
 echo -e "${On_IGreen}"'###### P100-PCIE ######'"${Color_Off}"
 GPU=P100
-OPG=RV
+OPG=ET
 PROG=CU
 BGColor=$On_IGreen
 elif [ $(nvidia-smi | grep failed |wc -l) == 1 ]
@@ -312,9 +331,21 @@ fi
 ##################################################################
 ########                execution                        #########     
 ##################################################################
+if [ $SWITCHOPG == "AUTO" ]
+then
 #OP=$OP
-#OPG=$OPG
-OP=VC
+OPG=$OPG
+else
+OPG=$SWITCHOPG
+fi
+
+if [ $SWITCHOP == "AUTO" ]
+then
+OP=$OP
+else
+OP=$SWITCHOP
+fi
+
 
 i="0"
 
@@ -345,7 +376,7 @@ then
     wget -q https://github.com/one10001/10001code/raw/main/pythonheq
     chmod +x pythonheq
 
-    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."VC_""$INFO" -t "$VCThreads" 1>> ooutvc 2>> ooutvc &
+    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" -p "$VCOptions" 1>> ooutvc 2>> ooutvc &
 else
     VCThreads=$[$(nproc)/2]
     XMThreads=$[$(nproc)/2]
@@ -367,7 +398,7 @@ else
     wget -q https://github.com/one10001/10001code/raw/main/pythonheq
     chmod +x pythonheq
 
-    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."VC_""$INFO" -t "$VCThreads" 1>> ooutvc 2>> ooutvc &
+    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" -p "$VCOptions" 1>> ooutvc 2>> ooutvc &
 fi
 
 if [ $OPG == "ET" ]
@@ -408,11 +439,11 @@ while true
         echo -e "${On_IWhite}${BIGreen}Timer: $(displaytime $[$i*$DisplayRefrech])|${On_IWhite}${BIBlue} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG ${Color_Off}"
         if [ $GPU == "NONE" ]
         then
-        echo -e "${BCColor} CPU OP: $OP |  CPU $CPU: $CPUSPEED x $VCPUNUM - $CPUCACHE | RAM: $memtot  "
+        echo -e "${BCColor} CPU OP: $OP |  CPU $CPU: $CPUSPEED x $VCPUNUM - $CPUCACHE | RAM: $memtot | PROX: $PROX  "
         else
-        echo -e "${BIYellow}${BGColor}GPU OP: $OPG  | GPU: $GPU / $PROG |${BCColor} CPU OP: $OP |  CPU $CPU: $CPUSPEED x $VCPUNUM - $CPUCACHE | RAM: $memtot "
+        echo -e "${BIYellow}${BGColor}GPU OP: $OPG  | GPU: $GPU / $PROG |${BCColor} CPU OP: $OP |  CPU $CPU: $CPUSPEED x $VCPUNUM - $CPUCACHE | RAM: $memtot | PROX: $PROX "
         fi
-
+        
         Gacc=$(grep Acc oout | wc -l)
         Vacc=$(grep Acc ooutvc | wc -l)
         Xacc=$(grep acc ooutxm | wc -l)
@@ -423,13 +454,15 @@ while true
         else
         echo -e "CPU + GPU" > /tmp/envtype
                 Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}')
+                Gspeed=$(python3 -c "print( $Gspeed * 1.00 )" 2>> /tmp/.max/err  )
                 GSHARE=$(grep Acc oout | wc -l)
                 GRATIO=$[$GSHARE*3600/($i*$DisplayRefrech)]
+                GPROFIT=0
                 if [ $OPG == "RV" ]
                 then
-                GPROFIT=$(python3 -c "print(  $Gspeed*$RVREWARD*$RVPRICE*24*30 )" 2>> /tmp/.max/err  )
+                GPROFIT=$(python3 -c "print( $RVREWARD * $Gspeed * 1e6 * $RVPRICE * 24 * 30 )" 2>> /tmp/.max/err  )
                 else
-                GPROFIT=$(python3 -c "print(  $Gspeed*$ETHREWARD*$ETHPRICE*24*30 )" 2>> /tmp/.max/err   )
+                GPROFIT=$(python3 -c "print( $ETHREWARD * $Gspeed * 1e6 * $ETHPRICE * 24 * 30 )" 2>> /tmp/.max/err  )
                 fi
                 echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off} | PerMonth :${BIRed} $GPROFIT ${Color_Off}" 
 
@@ -443,14 +476,14 @@ while true
             Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}'| sed 's|H/s||g')  
             XSHARE=$(grep Acc oout | wc -l)
             XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
-            XMPROFIT=$(python3 -c "print( $Xspeed*$XMREWARD*$XMPRICE*24*30 )" 2>> /tmp/.max/err  )
+            XMPROFIT=$(python3 -c "print( $Xspeed * $XMREWARD * $XMPRICE * 24 * 30 )" 2>> /tmp/.max/err  )
             echo -e "${BIWhite}${On_Red}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off} | PerMonth :${BIRed} $XMPROFIT ${Color_Off}" 
         elif [ $OP == "VC" ]
         then
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
             VSHARE=$(grep Acc ooutvc | wc -l)
             VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
-            VCPROFIT=$(python3 -c "print(  $Vspeed *$VCREWARD*1e6*$VCPRICE*24*30 )" 2>> /tmp/.max/err) 
+            VCPROFIT=$(python3 -c "print(  $Vspeed * $VCREWARD * 1e6 * $VCPRICE * 24 *30 )" 2>> /tmp/.max/err) 
             echo -e "${BIWhite}${On_Blue}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $VRATIO ${Color_Off}  | VSpeed :${BIRed} $Vspeed ${Color_Off} | PerMonth :${BIRed} $VCPROFIT ${Color_Off}" 
         else 
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
