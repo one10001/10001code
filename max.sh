@@ -453,9 +453,7 @@ while true
         echo -e "ONLY CPU " > /tmp/envtype
         else
         echo -e "CPU + GPU" > /tmp/envtype
-                Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}')
-                Gspeed=$(python3 -c "print( $Gspeed * 1.00 )" 2>> /tmp/.max/err  )
-                Gspeed=22.02
+                Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}'|sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g")
                 GSHARE=$(grep Acc oout | wc -l)
                 GRATIO=$[$GSHARE*3600/($i*$DisplayRefrech)]
                 GPROFIT=0
