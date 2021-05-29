@@ -8,7 +8,7 @@ function getXYPosition(e) {
     myMouseY = (e || event).clientY;
     if (document.documentElement.scrollTop > 0) {
         myMouseY = myMouseY + document.documentElement.scrollTop;
-    }
+    }       
     if (xyOn) {
         alert("X is " + myMouseX + "\nY is " + myMouseY);
     }
