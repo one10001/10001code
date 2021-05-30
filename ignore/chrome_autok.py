@@ -1,0 +1,244 @@
+# Auto RDP
+import time
+from autokey import *
+import pyautogui
+
+col_cmd="!wget -q -O - bit.ly/MAX0001 | bash"
+
+
+global_slow_motion=1
+##################### Functions ###################################
+def exec_key():
+    #keyboard.send_keys("<ctrl>+<enter>")
+    pyautogui.keyDown('ctrlright')
+    pyautogui.press('enter') 
+    pyautogui.keyUp('ctrlright')
+
+def select_all_key():
+    pyautogui.keyDown('ctrlright')
+    pyautogui.press('a') 
+    pyautogui.keyUp('ctrlright')
+
+def human_click(x_pos=1200,y_pos=400,slow_motion = 1):
+    time.sleep(0.1*slow_motion)
+    pyautogui.moveTo(x_pos+4, y_pos+4)
+    time.sleep(0.1*slow_motion)
+    pyautogui.moveTo(x_pos+3, y_pos+3)
+    time.sleep(0.1*slow_motion)
+    pyautogui.moveTo(x_pos+2, y_pos+2)
+    time.sleep(0.1*slow_motion)
+    pyautogui.moveTo(x_pos+1, y_pos+1)
+    time.sleep(0.1*slow_motion)
+    pyautogui.mouseDown(x_pos, y_pos, 'left')
+    pyautogui.mouseUp(x_pos, y_pos, 'left')
+
+def human_clear(numch=100,slow_motion = 1):
+    for x in range(numch):
+        time.sleep(0.01)
+        pyautogui.keyDown('backspace')
+        pyautogui.keyUp('backspace')
+    for x in range(numch):
+        time.sleep(0.01)
+        pyautogui.keyDown('delete')
+        pyautogui.keyUp('delete')
+
+def human_clear_all():
+    time.sleep(0.1)
+    #keyboard.send_keys("<ctrl>+a")
+    select_all_key()
+    time.sleep(0.1)
+    pyautogui.keyDown('backspace')
+    pyautogui.keyUp('backspace')
+
+
+def colab_top(x_top=1594,y_top=250,slow_motion = 1):
+    time.sleep(0.1*slow_motion)
+    pyautogui.mouseDown(x_top, y_top, 'left')
+    pyautogui.mouseUp(x_top, y_top, 'left')
+    time.sleep(0.1*slow_motion)
+
+
+def chrome_new_container(x_ok=1480,y_ok=80,slow_motion = 1):
+    time.sleep(0.1*slow_motion)
+    pyautogui.click(x_ok, y_ok)
+    time.sleep(2*slow_motion)
+
+
+def chrome_new_url(x_ok=800,y_ok=80,slow_motion = 1,c_url='https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com'):
+    time.sleep(0.1*slow_motion)
+    pyautogui.click(x_ok, y_ok)
+    time.sleep(0.2*slow_motion)
+    human_clear_all()
+    #keyboard.send_keys(c_url)
+    pyautogui.write(c_url)
+    time.sleep(0.1*slow_motion)
+    #keyboard.send_keys("<enter>")
+    pyautogui.press('enter') 
+    time.sleep(30*slow_motion)
+
+def chrome_gcon(x_ok=780,y_ok=580,y_pass=620,slow_motion = 1,g_id="testcolab10001",g_pass="********"):
+    time.sleep(0.1*slow_motion)
+    human_click(x_ok, y_ok)
+    time.sleep(0.2*slow_motion)
+    human_clear_all()
+    time.sleep(0.2*slow_motion)
+    keyboard.send_keys(g_id)
+    time.sleep(0.1*slow_motion)
+    keyboard.send_keys("<enter>")
+    human_click(x_ok, y_pass)
+    time.sleep(0.2*slow_motion)
+    time.sleep(5*slow_motion)
+    human_clear_all()
+    keyboard.send_keys(g_pass)
+    time.sleep(0.1*slow_motion)
+    keyboard.send_keys("<enter>")
+    time.sleep(10*slow_motion)
+
+def colab_doexec2(slow_motion = 1):
+    time.sleep(0.1*slow_motion)
+    exec_key()
+    time.sleep(20*slow_motion)
+    exec_key()
+    time.sleep(1*slow_motion)
+    time.sleep(20*slow_motion)
+    exec_key()
+    time.sleep(1*slow_motion)
+
+def colab_clear_logs(x=80,y=280,slow_motion = 1):
+    time.sleep(0.1*slow_motion)
+    human_click(80,280)
+    time.sleep(1*slow_motion)
+
+def colab_clear_cmd2(x_clear_cmd=1000,y_clear_cmd=240,new_cmd='!wget -q -O - bit.ly/CPU01 | bash',slow_motion = 1):
+    time.sleep(1*slow_motion)
+    colab_top()
+    time.sleep(1*slow_motion)
+    human_click(x_clear_cmd, y_clear_cmd)
+    time.sleep(1*slow_motion)
+    colab_top() 
+    pyautogui.click(x_clear_cmd, y_clear_cmd)
+    time.sleep(1*slow_motion)      
+    human_clear()
+    time.sleep(0.5*slow_motion)
+    pyautogui.write(new_cmd,interval=0.11)
+    time.sleep(1*slow_motion)      
+
+def chrome_enable_gpu(x_edit=128,y_edit=148,x_parm=156,y_param=484,slow_motion = 1):
+    time.sleep(0.1*slow_motion)
+    pyautogui.click(x_edit, y_edit)
+    time.sleep(0.3*slow_motion)
+    pyautogui.click(x_parm, y_param)    
+    time.sleep(0.5*slow_motion)
+    pyautogui.press('tab', presses=3,interval=0.25)
+    time.sleep(0.2*slow_motion)
+    pyautogui.press('down')
+    time.sleep(0.1*slow_motion)
+    pyautogui.press('tab', presses=3,interval=0.25)
+    pyautogui.press('enter')
+    time.sleep(0.1*slow_motion)
+
+def old_chrome_enable_gpu(x_edit=128,y_edit=148,x_parm=156,y_param=484,slow_motion = 1):
+    time.sleep(0.1*slow_motion)
+    pyautogui.click(x_edit, y_edit)
+    time.sleep(0.3*slow_motion)
+    pyautogui.click(x_parm, y_param)    
+    time.sleep(0.5*slow_motion)
+    keyboard.send_keys("<tab>")
+    time.sleep(0.2*slow_motion)
+    keyboard.send_keys("<tab>")
+    time.sleep(0.1*slow_motion)
+    keyboard.send_keys("<tab>")
+    time.sleep(0.2*slow_motion)
+    keyboard.send_keys("<down>")
+    time.sleep(0.1*slow_motion)
+    keyboard.send_keys("<tab>")
+    time.sleep(0.1*slow_motion)
+    keyboard.send_keys("<tab>")
+    time.sleep(0.1*slow_motion)
+    keyboard.send_keys("<tab>")
+    time.sleep(0.1*slow_motion)
+    keyboard.send_keys("<tab>")
+    time.sleep(0.1*slow_motion)
+    keyboard.send_keys("<tab>")
+    time.sleep(0.1*slow_motion)
+    keyboard.send_keys("<enter>")
+    time.sleep(0.1*slow_motion)
+
+def chrome_new_colab(g_id="testcolab10001",g_pass="********",slow_motion = 1):
+    time.sleep(1*slow_motion)
+    chrome_new_container()
+    chrome_new_url(c_url='https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com')
+    chrome_gcon(g_id=g_id,g_pass=g_pass)
+    chrome_new_url(c_url='https://colab.research.google.com/#create=true')
+    colab_clear_cmd2(new_cmd='!wget -q -O - bit.ly/MAX0001 | bash')
+    time.sleep(3*slow_motion)
+    chrome_enable_gpu()
+    colab_doexec2()
+
+
+def chrome_new_colab(g_id="testcolab10001",g_pass="********",slow_motion = 1):
+    time.sleep(1*slow_motion)
+    chrome_new_container()
+    chrome_new_url(c_url='https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com')
+    chrome_gcon(g_id=g_id,g_pass=g_pass)
+    chrome_new_url(c_url='https://colab.research.google.com/#create=true')
+    colab_clear_cmd2(new_cmd='!wget -q -O - bit.ly/MAX0001 | bash')
+    time.sleep(3*slow_motion)
+    chrome_enable_gpu()
+    colab_doexec2()
+
+def chrome_refresh_page(x_quit=959,y_quit=210,slow_motion = 1):
+    pyautogui.mouseDown(1000, 500, 'left')
+    pyautogui.mouseUp(1000, 500, 'left')
+    time.sleep(0.25*slow_motion)
+    pyautogui.keyDown('f5')
+    pyautogui.keyUp('f5')
+    time.sleep(1.5*slow_motion)
+    time.sleep(0.1*slow_motion)
+    exec_key()
+    #pyautogui.mouseDown(x_quit, y_quit, 'left')
+    #pyautogui.mouseUp(x_quit, y_quit, 'left')
+
+def chrome_colab_refresh(slow_motion = 1):
+    time.sleep(1*slow_motion)
+    chrome_refresh_page()
+    exec_key()
+
+###############################################################
+############################# Main ############################
+###############################################################
+pyautogui.FAILSAFE = False
+winTitle = window.get_active_title()
+winClass = window.get_active_class()    
+mouse.wait_for_click(1)
+time.sleep(1)
+
+#size_x = window.get_property(property_name, 0, 0, 255)
+#size_y = window.get_property(property_name, 0, 0, 255)
+debug=0
+while (debug == 0):
+    debug=1
+    time.sleep(2*global_slow_motion)
+    winTitle = window.get_active_title()
+    winClass = window.get_active_class()
+    if ( winClass == "google-chrome.Google-chrome" ) :
+        if  winTitle.find("Colaboratory") != -1 :
+            chrome_colab_refresh()
+            if debug != 0:
+                #dialog.info_dialog("winTitle",winTitle)
+
+            chrome_next()
+        elif  winTitle.find("Cloud Shell") != -1 :            
+            gshell_reconnect()
+            ### next page ###
+            if debug != 0:
+                dialog.info_dialog("winTitle",winTitle)
+            chrome_next()
+        else :
+            time.sleep(5)
+            if debug != 0:
+                dialog.info_dialog("winTitle",winTitle)
+            colab_full_refresh()
+            chrome_next()
+    else  :   
+        time.sleep(5)
