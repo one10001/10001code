@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################         '"CPU2"' Ver:0.8.17        ################################'
+echo -e '##################         '"CPU2"' Ver:0.8.19        ################################'
 echo -e '####################################################################################'
 echo 
 echo 
@@ -106,7 +106,7 @@ wget -q -O /tmp/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-li
 chmod +x /tmp/jq
 
 
-INFIDIFF=$(curl - --connect-to api.minerstat.com:443:$PROX:8888  https://api.minerstat.com//v2/coins\?list\=ETH,RVN,XMR,VRSC --insecure)
+INFIDIFF=$(curl -s  --connect-to api.minerstat.com:443:$PROX:8888  https://api.minerstat.com//v2/coins\?list\=ETH,RVN,XMR,VRSC --insecure)
 
 ETHDIF=$(echo  $INFIDIFF | /tmp/jq '.[0].difficulty')
 ETHREWARD=$(echo  $INFIDIFF  | /tmp/jq '.[0].reward')
