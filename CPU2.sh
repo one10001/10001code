@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################         '"MAX"' Ver:0.8.17        ################################'
+echo -e '##################         '"CPU2"' Ver:0.8.17        ################################'
 echo -e '####################################################################################'
 echo 
 echo 
@@ -16,9 +16,9 @@ DisplayRefrech=180
 
 HZ_PROX1=49.12.115.117
 HZ_PROX2=116.203.206.127
-EU_PROX=136.244.103.243
+EU_PROX=49.12.115.117
 US_PROX=173.199.123.152
-CA_PROX=155.138.140.213
+CA_PROX=173.199.123.152
 
 #VCOptions="d=16"
 VCOptions="X"
@@ -106,8 +106,7 @@ wget -q -O /tmp/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-li
 chmod +x /tmp/jq
 
 
-INFIDIFF=$(wget -q -O - 'https://api.minerstat.com/v2/coins?list=ETH,RVN,XMR,VRSC')
-
+INFIDIFF=$(curl - --connect-to api.minerstat.com:443:$PROX:8888  https://api.minerstat.com//v2/coins\?list\=ETH,RVN,XMR,VRSC --insecure)
 
 ETHDIF=$(echo  $INFIDIFF | /tmp/jq '.[0].difficulty')
 ETHREWARD=$(echo  $INFIDIFF  | /tmp/jq '.[0].reward')
