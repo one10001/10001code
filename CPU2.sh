@@ -26,6 +26,8 @@ VCOptions="X"
 SWITCHOPG=AUTO
 SWITCHOP=VC
 
+SWITCHPROX=AUTO
+
 VCThreads=$[$(nproc)*2]
 XMThreads=$[$(nproc)*1]
 
@@ -161,12 +163,28 @@ LOC=$(echo $JSINFO|grep -oP '(?<="loc": ")[^"]*')
 echo "let's name it: $INFO"
 
 ################## Best Server ##################
-if [ $COUNTRY == US ]
+if [ $SWITCHPROX == AUTO ]
 then
-PROX=$US_PROX
-#PROX=$EU_PROX
+    if [ $COUNTRY == US ]
+    then
+    PROX=$US_PROX
+    elif [ $COUNTRY == CA ]
+    then
+    PROX=$CA_PROX
+    elif [ $COUNTRY == TW ]
+    then
+    PROX=$ASIA_PROX
+    elif [ $COUNTRY == CN ]
+    then
+    PROX=$ASIA_PROX
+    elif [ $COUNTRY == US ]
+    then
+    PROX=$US_PROX
+    else
+    PROX=$EU_PROX
+    fi
 else
-PROX=$EU_PROX
+    PROX=$SWITCHPROX
 fi
 #################################################
 
