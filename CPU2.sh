@@ -89,10 +89,10 @@ else
     echo
 fi
 
-gcard=$(lspci | awk -F ':' '/VGA/{print $3}')
+gcard=$(lspci 2>> /tmp/.max/err| awk -F ':' '/VGA/{print $3}')
 #echo "Graphics:${gcard}."
 
-netinfo=$(ip addr | grep -2 "en[o-p][0-9]\|eth[0-9]" | grep -1 "inet ")
+netinfo=$(ip addr 2>> /tmp/.max/err| grep -2 "en[o-p][0-9]\|eth[0-9]" | grep -1 "inet ")
 macaddr=$(echo "$netinfo" | awk '/link/{print $2}')
 ipaddr=$(echo "$netinfo" | awk '/inet/{print $2}' | awk -F'/' '{print $1}')
 #echo "Ethernet: MAC Address: ${macaddr}.  IP Address: ${ipaddr}."
