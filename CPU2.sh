@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################         '"CPU2"' Ver:0.8.20       ################################'
+echo -e '##################         '"CPU2"' Ver:0.8.19        ################################'
 echo -e '####################################################################################'
 echo 
 echo 
@@ -157,7 +157,8 @@ echo "let's name it: $INFO"
 ################## Best Server ##################
 if [ $COUNTRY == US ]
 then
-PROX=$CA_PROX
+PROX=$US_PROX
+PROX=$EU_PROX
 else
 PROX=$EU_PROX
 fi
@@ -434,7 +435,7 @@ fi
 
 while true
     do
-        
+        #i=$[$i+1]
         echo -e "${On_IWhite}${BIGreen}Timer: $(displaytime $[$i*$DisplayRefrech])|${On_IWhite}${BIBlue} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG ${Color_Off}"
         if [ $GPU == "NONE" ]
         then
@@ -508,7 +509,7 @@ while true
         echo 
         echo 
         sleep $DisplayRefrech
-    i=$[$i+1]
+        i=$[$i+1]
     done
 
 
