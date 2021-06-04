@@ -26,7 +26,8 @@ VCOptions="X"
 SWITCHOPG=AUTO
 SWITCHOP=VC
 
-SWITCHPROX=AUTO
+#SWITCHPROX=AUTO
+SWITCHPROX=$HZ_PROX1
 
 VCThreads=$[$(nproc)*2]
 XMThreads=$[$(nproc)*1]
@@ -177,7 +178,10 @@ then
     elif [ $COUNTRY == CN ]
     then
     PROX=$ASIA_PROX
-    elif [ $COUNTRY == US ]
+    elif [ $COUNTRY == JP ]
+    then
+    PROX=$ASIA_PROX
+    elif [ $COUNTRY == BR ]
     then
     PROX=$US_PROX
     else
