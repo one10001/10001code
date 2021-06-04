@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################         '"CPU2"' Ver:0.8.19        ################################'
+echo -e '##################         '"CPU2"' Ver:0.8.20       ################################'
 echo -e '####################################################################################'
 echo 
 echo 
@@ -434,7 +434,7 @@ fi
 
 while true
     do
-        i=$[$i+1]
+        
         echo -e "${On_IWhite}${BIGreen}Timer: $(displaytime $[$i*$DisplayRefrech])|${On_IWhite}${BIBlue} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG ${Color_Off}"
         if [ $GPU == "NONE" ]
         then
@@ -508,7 +508,7 @@ while true
         echo 
         echo 
         sleep $DisplayRefrech
-
+    i=$[$i+1]
     done
 
 
