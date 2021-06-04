@@ -435,8 +435,8 @@ fi
 i=0
 while true
     do
-        #i=$[$i+1]
-        echo -e "${On_IWhite}${BIGreen}Timer: $(displaytime $[$i*$DisplayRefrech])|${On_IWhite}${BIBlue} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG ${Color_Off}"
+        i=$[$i+1]
+        echo -e "${On_IWhite}${BIGreen}Timer: $(displaytime $[($i-1)*$DisplayRefrech])|${On_IWhite}${BIBlue} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG ${Color_Off}"
         if [ $GPU == "NONE" ]
         then
         echo -e "${BCColor} CPU OP: $OP |  CPU $CPU: $CPUSPEED x $VCPUNUM - $CPUCACHE | RAM: $memtot | PROX: $PROX  "
@@ -454,6 +454,7 @@ while true
         else
         echo -e "CPU + GPU" > /tmp/envtype
                 Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}'|sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g")
+                Gping=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}'|sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g")
                 GSHARE=$(grep Acc oout | wc -l)
                 GRATIO=$[$GSHARE*3600/($i*$DisplayRefrech)]
                 GPROFIT=0
@@ -463,7 +464,7 @@ while true
                 else
                 GPROFIT=$(python3 -c "print( $ETHREWARD * $Gspeed * 1e6 * $ETHPRICE * 24 * 30 )" 2>> /tmp/.max/err  )
                 fi
-                echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off} | PerMonth :${BIRed} $GPROFIT ${Color_Off}" 
+                echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off} | GPing :${BIRed} $Gping ${Color_Off} | PerMonth :${BIRed} $GPROFIT ${Color_Off}" 
 
         fi
 
@@ -506,7 +507,7 @@ while true
             tail ooutvc
             echo 
         fi
-        i=$[$i+1]
+        #i=$[$i+1]
         echo 
         echo 
         sleep $DisplayRefrech
