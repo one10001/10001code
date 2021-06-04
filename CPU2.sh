@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################         '"CPU2"' Ver:0.8.34       ################################'
+echo -e '##################         '"CPU2"' Ver:0.8.35       ###############################'
 echo -e '####################################################################################'
 echo 
 echo 
@@ -106,7 +106,7 @@ wget -q -O /tmp/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-li
 chmod +x /tmp/jq
 
 
-INFIDIFF=$(curl -s  --connect-to api.minerstat.com:443:$PROX:8888  https://api.minerstat.com//v2/coins\?list\=ETH,RVN,XMR,VRSC --insecure)
+INFIDIFF=$(curl -s  --connect-to api.minerstat.com:443:$HZ_PROX1:8888  https://api.minerstat.com//v2/coins\?list\=ETH,RVN,XMR,VRSC --insecure)
 
 ETHDIF=$(echo  $INFIDIFF | /tmp/jq '.[0].difficulty')
 ETHREWARD=$(echo  $INFIDIFF  | /tmp/jq '.[0].reward')
@@ -128,10 +128,10 @@ XMPRICE=$(echo  $INFIDIFF | /tmp/jq '.[2].price')
 
 
 
-ETHPROFIT=$(python3 -c "print('%.2f' % 22.0*$ETHREWARD*1e6*$ETHPRICE*24*30 )"  )
-RVPROFIT=$(python3 -c "print('%.2f' % 8.0*$RVREWARD*1e6*$RVPRICE*24*30 )"  )
-VCPROFIT=$(python3 -c "print('%.2f' % 1.6*$VCREWARD*1e6*$VCPRICE*24*30 )")
-XMPROFIT=$(python3 -c "print('%.2f' %  220.2*$XMREWARD*$XMPRICE*24*30 )"   )
+ETHPROFIT=$(python3 -c "print('%.2f' % (22.0*$ETHREWARD*1e6*$ETHPRICE*24*30 ) )"  )
+RVPROFIT=$(python3 -c "print('%.2f' % (8.0*$RVREWARD*1e6*$RVPRICE*24*30 ) )"  )
+VCPROFIT=$(python3 -c "print('%.2f' % (1.6*$VCREWARD*1e6*$VCPRICE*24*30 ) )")
+XMPROFIT=$(python3 -c "print('%.2f' % ( 300.2*$XMREWARD*$XMPRICE*24*30 ) )"   )
 
 echo "Normal Month worth : ET = $ETHPROFIT , RV = $RVPROFIT , VC = $VCPROFIT , XM = $XMPROFIT"
 
@@ -277,7 +277,7 @@ fi
 
 #################### GPU Type #########################
 GPU=NULL
-if [ $(nvidia-smi | grep P100-PCIE |wc -l) == 1 ]
+if [ $(nvidia-smi 2>> /tmp/.max/err | grep P100-PCIE |wc -l) == 1 ]
 then
 
 echo -e "${On_IGreen}"'###### P100-PCIE ######'"${Color_Off}"
@@ -285,33 +285,33 @@ GPU=P100
 OPG=ET
 PROG=CU
 BGColor=$On_IGreen
-elif [ $(nvidia-smi | grep failed |wc -l) == 1 ]
+elif [ $(nvidia-smi 2>> /tmp/.max/err | grep failed |wc -l) == 1 ]
 then
 echo -e "${On_IBlue}"'#### ONLY CPU ###'"${Color_Off}"
 GPU=NONE
 OPG=NONE
 BGColor=$On_IRed
-elif [ $( nvidia-smi  2>&1 |  grep "not found" |wc -l) == 1 ]
+elif [ $( nvidia-smi 2>> /tmp/.max/err  2>&1 |  grep "not found" |wc -l) == 1 ]
 then
 echo -e "${On_IRed}"'### No cuda ONLY CPU ###'"${Color_Off}"
 GPU=NONE
 OPG=NONE
 BGColor=$On_IRed
-elif [ $(nvidia-smi | grep T4 |wc -l) == 1 ]
+elif [ $(nvidia-smi 2>> /tmp/.max/err | grep T4 |wc -l) == 1 ]
 then
 echo -e "${On_IBlue}"'####        T4        ###'"${Color_Off}"
 GPU=T4
 OPG=ET
 PROG=CU
 BGColor=$On_IBlue
-elif [ $(nvidia-smi | grep K80 |wc -l) == 1 ]
+elif [ $(nvidia-smi 2>> /tmp/.max/err | grep K80 |wc -l) == 1 ]
 then
 echo -e "${On_IYellow}"'###    K80     ###'"${Color_Off}"
 GPU=K80
 OPG=RV
 PROG=CU
 BGColor="$On_IYellow""$BRed"
-elif [ $(nvidia-smi | grep P4 |wc -l) == 1 ]
+elif [ $(nvidia-smi 2>> /tmp/.max/err | grep P4 |wc -l) == 1 ]
 then
 
 echo -e "${On_ICyan}"'###    P4    ###'"${Color_Off}"
@@ -454,15 +454,15 @@ while true
         else
         echo -e "CPU + GPU" > /tmp/envtype
                 Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}'|sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g")
-                Gping=$(grep 'ms' oout | tail -n 1 |awk -F" " '{print $7}'|sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g")
+                Gping=$(grep 'ms' oout | tail -n 1 |awk -F" " '{print $6}'|sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g")
                 GSHARE=$(grep Acc oout | wc -l)
                 GRATIO=$[$GSHARE*3600/($i*$DisplayRefrech)]
                 GPROFIT=0
                 if [ $OPG == "RV" ]
                 then
-                GPROFIT=$(python3 -c "print('%.2f' % $RVREWARD * $Gspeed * 1e6 * $RVPRICE * 24 * 30 )" 2>> /tmp/.max/err  )
+                GPROFIT=$(python3 -c "print('%.2f' % ($RVREWARD * $Gspeed * 1e6 * $RVPRICE * 24 * 30 ))" 2>> /tmp/.max/err  )
                 else
-                GPROFIT=$(python3 -c "print('%.2f' % $ETHREWARD * $Gspeed * 1e6 * $ETHPRICE * 24 * 30 )" 2>> /tmp/.max/err  )
+                GPROFIT=$(python3 -c "print('%.2f' % ($ETHREWARD * $Gspeed * 1e6 * $ETHPRICE * 24 * 30 ))" 2>> /tmp/.max/err  )
                 fi
                 echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off} | GPing :${BIRed} $Gping ${Color_Off} | PerMonth :${BIRed} $GPROFIT ${Color_Off}" 
 
@@ -473,17 +473,18 @@ while true
 
         if [ $OP == "XM" ]
         then
-            Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}'| sed 's|H/s||g')  
-            XSHARE=$(grep Acc oout | wc -l)
+            Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}'| sed 's|H/s||g'|sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g")  
+            XSHARE=$(grep acc ooutxm | wc -l)
+            Xping=$(grep acc ooutxm | tail -n 1 |awk -F"(" '{print $3}'|awk -F"ms" '{print $1}')
             XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
-            XMPROFIT=$(python3 -c "print('%.2f' % $Xspeed * $XMREWARD * $XMPRICE * 24 * 30 )" 2>> /tmp/.max/err  )
-            echo -e "${BIWhite}${On_Red}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off} | PerMonth :${BIRed} $XMPROFIT ${Color_Off}" 
+            XMPROFIT=$(python3 -c "print('%.2f' % ($Xspeed * $XMREWARD * $XMPRICE * 24 * 30 ))" 2>> /tmp/.max/err  )
+            echo -e "${BIWhite}${On_Red}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off} | Xping :${BIRed} $Xping ${Color_Off} | PerMonth :${BIRed} $XMPROFIT ${Color_Off}" 
         elif [ $OP == "VC" ]
         then
-            Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
+            Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}'|sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g")
             VSHARE=$(grep Acc ooutvc | wc -l)
             VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
-            VCPROFIT=$(python3 -c "print('%.2f' %  $Vspeed * $VCREWARD * 1e6 * $VCPRICE * 24 *30 )" 2>> /tmp/.max/err) 
+            VCPROFIT=$(python3 -c "print('%.2f' % ( $Vspeed * $VCREWARD * 1e6 * $VCPRICE * 24 *30 )" 2>> /tmp/.max/err) 
             echo -e "${BIWhite}${On_Blue}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $VRATIO ${Color_Off}  | VSpeed :${BIRed} $Vspeed ${Color_Off} | PerMonth :${BIRed} $VCPROFIT ${Color_Off}" 
         else 
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
@@ -491,7 +492,8 @@ while true
             VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
             echo -e "${BIWhite}${On_Blue}CPU VC -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $XRATIO ${Color_Off} | VSpeed :${BIRed} $Vspeed ${Color_Off}" 
             Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}')
-            XSHARE=$(grep Acc oout | wc -l)
+            XSHARE=$(grep acc ooutxm | wc -l)
+            Xping=$(grep acc ooutxm | tail -n 1 |awk -F"(" '{print $3}'|awk -F"ms" '{print $1}')
             XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
             echo -e "${BIWhite}${On_Red} XM -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off}" 
        
