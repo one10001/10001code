@@ -38,6 +38,11 @@ W_RV="RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK"
 W_XM="44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p"
 W_VC="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
 
+# Directory
+Work_Dir="/tmp/.max/"
+mkdir -p $Work_Dir
+cd  $Work_Dir
+
 ##################### functions #####################################
 
 function displaytime {
@@ -54,7 +59,9 @@ function displaytime {
 }
 
 
+
 ##  CPU info
+
 echo -e '#####################################   CPU info  ###########################################'
 
 VCPUNUM=$(nproc)
@@ -97,10 +104,9 @@ macaddr=$(echo "$netinfo" | awk '/link/{print $2}')
 ipaddr=$(echo "$netinfo" | awk '/inet/{print $2}' | awk -F'/' '{print $1}')
 #echo "Ethernet: MAC Address: ${macaddr}.  IP Address: ${ipaddr}."
 
-#echo -e '#############################################################################################'
+echo -e '#############################################################################################'
 
-mkdir -p /tmp/.max/
-cd  /tmp/.max/
+
 
 wget -q -O /tmp/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
 chmod +x /tmp/jq
@@ -484,7 +490,7 @@ while true
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}'|sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g")
             VSHARE=$(grep Acc ooutvc | wc -l)
             VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
-            VCPROFIT=$(python3 -c "print('%.2f' % ( $Vspeed * $VCREWARD * 1e6 * $VCPRICE * 24 *30 )" 2>> /tmp/.max/err) 
+            VCPROFIT=$(python3 -c "print('%.2f' % ( $Vspeed * $VCREWARD * 1e6 * $VCPRICE * 24 *30 ))" 2>> /tmp/.max/err) 
             echo -e "${BIWhite}${On_Blue}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $VRATIO ${Color_Off}  | VSpeed :${BIRed} $Vspeed ${Color_Off} | PerMonth :${BIRed} $VCPROFIT ${Color_Off}" 
         else 
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
