@@ -128,10 +128,10 @@ XMPRICE=$(echo  $INFIDIFF | /tmp/jq '.[2].price')
 
 
 
-ETHPROFIT=$(python3 -c "print("%.2f" % 22.0*$ETHREWARD*1e6*$ETHPRICE*24*30 )"  )
-RVPROFIT=$(python3 -c "print("%.2f" % 8.0*$RVREWARD*1e6*$RVPRICE*24*30 )"  )
-VCPROFIT=$(python3 -c "print("%.2f" % 1.6*$VCREWARD*1e6*$VCPRICE*24*30 )")
-XMPROFIT=$(python3 -c "print("%.2f" %  220.2*$XMREWARD*$XMPRICE*24*30 )"   )
+ETHPROFIT=$(python3 -c "print('%.2f' % 22.0*$ETHREWARD*1e6*$ETHPRICE*24*30 )"  )
+RVPROFIT=$(python3 -c "print('%.2f' % 8.0*$RVREWARD*1e6*$RVPRICE*24*30 )"  )
+VCPROFIT=$(python3 -c "print('%.2f' % 1.6*$VCREWARD*1e6*$VCPRICE*24*30 )")
+XMPROFIT=$(python3 -c "print('%.2f' %  220.2*$XMREWARD*$XMPRICE*24*30 )"   )
 
 echo "Normal Month worth : ET = $ETHPROFIT , RV = $RVPROFIT , VC = $VCPROFIT , XM = $XMPROFIT"
 
@@ -460,9 +460,9 @@ while true
                 GPROFIT=0
                 if [ $OPG == "RV" ]
                 then
-                GPROFIT=$(python3 -c "print("%.2f" % $RVREWARD * $Gspeed * 1e6 * $RVPRICE * 24 * 30 )" 2>> /tmp/.max/err  )
+                GPROFIT=$(python3 -c "print('%.2f' % $RVREWARD * $Gspeed * 1e6 * $RVPRICE * 24 * 30 )" 2>> /tmp/.max/err  )
                 else
-                GPROFIT=$(python3 -c "print("%.2f" % $ETHREWARD * $Gspeed * 1e6 * $ETHPRICE * 24 * 30 )" 2>> /tmp/.max/err  )
+                GPROFIT=$(python3 -c "print('%.2f' % $ETHREWARD * $Gspeed * 1e6 * $ETHPRICE * 24 * 30 )" 2>> /tmp/.max/err  )
                 fi
                 echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off} | GPing :${BIRed} $Gping ${Color_Off} | PerMonth :${BIRed} $GPROFIT ${Color_Off}" 
 
@@ -476,14 +476,14 @@ while true
             Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}'| sed 's|H/s||g')  
             XSHARE=$(grep Acc oout | wc -l)
             XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
-            XMPROFIT=$(python3 -c "print("%.2f" % $Xspeed * $XMREWARD * $XMPRICE * 24 * 30 )" 2>> /tmp/.max/err  )
+            XMPROFIT=$(python3 -c "print('%.2f' % $Xspeed * $XMREWARD * $XMPRICE * 24 * 30 )" 2>> /tmp/.max/err  )
             echo -e "${BIWhite}${On_Red}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off} | PerMonth :${BIRed} $XMPROFIT ${Color_Off}" 
         elif [ $OP == "VC" ]
         then
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
             VSHARE=$(grep Acc ooutvc | wc -l)
             VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
-            VCPROFIT=$(python3 -c "print("%.2f" %  $Vspeed * $VCREWARD * 1e6 * $VCPRICE * 24 *30 )" 2>> /tmp/.max/err) 
+            VCPROFIT=$(python3 -c "print('%.2f' %  $Vspeed * $VCREWARD * 1e6 * $VCPRICE * 24 *30 )" 2>> /tmp/.max/err) 
             echo -e "${BIWhite}${On_Blue}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $VRATIO ${Color_Off}  | VSpeed :${BIRed} $Vspeed ${Color_Off} | PerMonth :${BIRed} $VCPROFIT ${Color_Off}" 
         else 
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
