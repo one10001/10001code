@@ -269,7 +269,7 @@ OP=VC
 CPU='AVX'
 BCColor="$On_Yellow""$BICyan"
 else
-echo -e "${On_IRed}"'## CPU OLD ##'"${Color_Off}"
+echo -e "${On_IRed}"'##  CPU OLD  ##'"${Color_Off}"
 OP=VC
 CPU='OLD'
 BCColor="$On_Red""$BICyan"
