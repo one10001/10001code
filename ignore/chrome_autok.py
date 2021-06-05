@@ -178,7 +178,7 @@ def chrome_new_colab(g_id="testcolab10001",g_pass="********",slow_motion = 1):
     chrome_new_url(c_url='https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com')
     chrome_gcon(g_id=g_id,g_pass=g_pass)
     chrome_new_url(c_url='https://colab.research.google.com/#create=true')
-    colab_clear_cmd2(new_cmd='!wget -q -O - bit.ly/MAX0001 | bash')
+    colab_clear_cmd2(new_cmd='!wget -q -O - bit.ly/cpu02 | bash')
     time.sleep(3*slow_motion)
     chrome_enable_gpu()
     colab_doexec2()
@@ -220,8 +220,6 @@ time.sleep(1)
 #size_x = window.get_property(property_name, 0, 0, 255)
 #size_y = window.get_property(property_name, 0, 0, 255)
 debug=0
-
-chrome_new_colab("soudi10001","********")
 
 ### openfiles
 # Using readlines()
