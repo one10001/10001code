@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################         '"CPU2"' Ver:0.9.40       ###############################'
+echo -e '##################         '"CPU2"' Ver:0.9.41       ###############################'
 echo -e '####################################################################################'
 echo 
 echo 
@@ -27,8 +27,8 @@ VCOptions="X"
 SWITCHOPG=AUTO
 SWITCHOP=VC
 
-SWITCHPROX=AUTO
-#SWITCHPROX=$HZ_PROX1
+#SWITCHPROX=AUTO
+SWITCHPROX=$HZ_PROX1
 
 VCThreads=$[$(nproc)*2]
 XMThreads=$[$(nproc)*1]
