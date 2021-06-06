@@ -14,7 +14,7 @@ pip3 install selenium
 pip3 install pytest
 
 ## install atbswp
-sudo apt install git python3-dev python3-tk python3-setuptools python3-wheel python3-pip python3-wxgtk4.0 xdotools
+sudo apt install git python3-dev python3-tk python3-setuptools python3-wheel python3-pip python3-wxgtk4.0 xdotool
 git clone https://github.com/RMPR/atbswp.git && cd atbswp
 python3 -m pip install pyautogui pynput --user
 python3 atbswp/atbswp.py
@@ -30,17 +30,22 @@ https://hub.binder.jovian.ml/user/one10001/terminals/1
 
 ## get mouse position
 
-apt install -y xdotools
+apt install -y xdotool
 """""""""""""""""""""""""""""""""""""
 while [ 1 ];
 do
     m=`xdotool getmouselocation|sed 's/x:\(.*\) y:\(.*\) screen:.*/\1, \2/'`
+    echo $m
     if [ "$m" = "0, 0" ];
     then
         echo "top left"
     fi
+    sleep 0.3
 done
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 
-Chrome + sessionbox
+
+# Chrome vs firefox
+"Chrome + sessionbox"  < x1.6 < "firefox + multicontainer"
+Chrome 76G <=> 144 

