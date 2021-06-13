@@ -21,7 +21,7 @@ slow_motion=1
 #
 #user_id=sys.argv[1]
 #gpassword=sys.argv[2]
-
+gpass="--------------"
 
 useragent = {
   "original_fi": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:87.0) Gecko/20100101 Firefox/87.0",
@@ -267,5 +267,5 @@ driver.set_window_size(360, 667)
 time.sleep(2*slow_motion)
 
 newacc_step1()
-newacc_step2(firstName="ahmed",lastName="elkakio",username='aelkakio10001',password='Ms123456789')
+newacc_step2(firstName="ahmed",lastName="elkakio",username='aelkakio10001',password=gpass)
 #driver.close()
