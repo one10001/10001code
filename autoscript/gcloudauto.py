@@ -146,7 +146,7 @@ def newacc_step2(firstName,lastName,username,password):
     #actions.key_down(Keys.TAB).key_up(Keys.TAB).perform()
     #time.sleep(0.2*slow_motion)
     #actions.key_down(Keys.ENTER).key_up(Keys.ENTER).perform()
-    #driver.find_element(By.XPATH, "//span[contains(.,'Créer une nouvelle adresse Gmail à la place')]").click()
+    #driver.find_element(By.XPATH, "//span[contains(.,'Crï¿½er une nouvelle adresse Gmail ï¿½ la place')]").click()
     driver.find_element(By.XPATH, "//button/div[2]").click()
     time.sleep(0.7*slow_motion)
     driver.find_element(By.ID, "username").send_keys(username)
@@ -305,12 +305,12 @@ def testo():
     time.sleep(2*slow_motion)
 
     #newacc_step1()
-    #newacc_step2(firstName="ahmed",lastName="elkakio",username='aelkakio10001',password='Ms123456789')
+    #newacc_step2(firstName="ahmed",lastName="elkakio",username='aelkakio10001',password='********')
     #driver.close()
 
     GIDS_LIST="/home/one/gids01.txt"
     #GIDS_LIST=$1
-    PASS="Ms123456789"
+    PASS="********"
 
     ### openfiles
     # Using readlines()
@@ -343,7 +343,7 @@ def rungcloud(gid):
 #                 break
 #         output, error = proc.communicate(input=b'\n')
 
-gid="abjjad03"
+gid="adamdodo10001"
 def newgcloud(gid):
     command_line='docker run -ti --name gcloud-config-'+gid+' gcr.io/google.com/cloudsdktool/cloud-sdk gcloud auth login'
     print(command_line)
@@ -362,5 +362,6 @@ while p.poll() is None:
     elif pty in r:
         output_from_docker = os.read(pty, 10240)
         #os.write(sys.stdout.fileno(), output_from_docker)
-        print(output_from_docker+'heelllllllloooo')
+        print(output_from_docker)
+        print('#############################################')
 
