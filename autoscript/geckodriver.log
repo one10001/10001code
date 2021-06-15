@@ -269,3 +269,563 @@ JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&
 JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=VHJvcZlDomVjrMMaVoVD2ojFR5shH6&prompt=consent&access_type=offline&code_challenge=5qupDS-xCnXGQA6AqXJkBWnK72A1T5GJM_JCPiGVXDM&code_challenge_method=S256 line 1 > eval line 3145 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
 JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=VHJvcZlDomVjrMMaVoVD2ojFR5shH6&prompt=consent&access_type=offline&code_challenge=5qupDS-xCnXGQA6AqXJkBWnK72A1T5GJM_JCPiGVXDM&code_challenge_method=S256 line 1 > eval line 3145 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
 * Can't use WebGL in headless mode (https://bugzil.la/1375585).
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+1623714287417	geckodriver	INFO	Listening on 127.0.0.1:49899
+1623714287427	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofiledWPQGu"
+*** You are running in headless mode.
+
+(/opt/firefox/firefox-bin:1362770): GLib-GObject-CRITICAL **: 00:44:49.066: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/opt/firefox/firefox-bin:1362791): GLib-GObject-CRITICAL **: 00:44:49.233: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623714290142	Marionette	INFO	Listening on port 36721
+
+(/opt/firefox/firefox-bin:1362870): GLib-GObject-CRITICAL **: 00:44:50.226: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+1623714290261	Marionette	WARN	TLS certificate errors will be ignored for this session
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 772))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 419))
+1623714395290	geckodriver	INFO	Listening on 127.0.0.1:47519
+1623714395301	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileLzGjHK"
+*** You are running in headless mode.
+
+(/opt/firefox/firefox-bin:1363579): GLib-GObject-CRITICAL **: 00:46:36.636: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/opt/firefox/firefox-bin:1363600): GLib-GObject-CRITICAL **: 00:46:36.759: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623714397838	Marionette	INFO	Listening on port 42941
+1623714397936	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+(/opt/firefox/firefox-bin:1363679): GLib-GObject-CRITICAL **: 00:46:37.949: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 772))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 419))
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 6203 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 6203 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/modules/LoginManagerChild.jsm, line 190: NS_ERROR_XPC_JAVASCRIPT_ERROR_WITH_DETAILS: [JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]'[JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]' when calling method: [nsIAutoCompletePopup::selectedIndex]
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 7396 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 7396 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=LbjsZl064EFsBpNh5jziMLudDddx8H&prompt=consent&access_type=offline&code_challenge=n6cDn72e7uWArVbYPV37MXxB_sCVYwynjOmYcu35AVM&code_challenge_method=S256 line 1 > eval line 266 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=LbjsZl064EFsBpNh5jziMLudDddx8H&prompt=consent&access_type=offline&code_challenge=n6cDn72e7uWArVbYPV37MXxB_sCVYwynjOmYcu35AVM&code_challenge_method=S256 line 1 > eval line 266 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+1623715482286	geckodriver	INFO	Listening on 127.0.0.1:37393
+1623715482295	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileKWTBIu"
+*** You are running in headless mode.
+
+(/opt/firefox/firefox-bin:1367462): GLib-GObject-CRITICAL **: 01:04:43.984: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/opt/firefox/firefox-bin:1367483): GLib-GObject-CRITICAL **: 01:04:44.116: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623715485315	Marionette	INFO	Listening on port 43685
+
+(/opt/firefox/firefox-bin:1367567): GLib-GObject-CRITICAL **: 01:04:45.374: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+1623715485438	Marionette	WARN	TLS certificate errors will be ignored for this session
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 772))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 419))
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 2738 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 2738 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/modules/LoginManagerChild.jsm, line 190: NS_ERROR_XPC_JAVASCRIPT_ERROR_WITH_DETAILS: [JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]'[JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]' when calling method: [nsIAutoCompletePopup::selectedIndex]
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 7441 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 7441 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=n0MySu65gVgl7uprwCK0nr1ENIL8Co&prompt=consent&access_type=offline&code_challenge=k787uMW4Mhr9TbbHmaiZ9omcpUxnoE-COoRuDFESec8&code_challenge_method=S256 line 1 > eval line 484 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=n0MySu65gVgl7uprwCK0nr1ENIL8Co&prompt=consent&access_type=offline&code_challenge=k787uMW4Mhr9TbbHmaiZ9omcpUxnoE-COoRuDFESec8&code_challenge_method=S256 line 1 > eval line 484 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+1623715998788	geckodriver	INFO	Listening on 127.0.0.1:42475
+1623715998798	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileDt3biP"
+*** You are running in headless mode.
+
+(/opt/firefox/firefox-bin:1369648): GLib-GObject-CRITICAL **: 01:13:20.462: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/opt/firefox/firefox-bin:1369669): GLib-GObject-CRITICAL **: 01:13:20.622: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+
+(/opt/firefox/firefox-bin:1369746): GLib-GObject-CRITICAL **: 01:13:21.856: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+1623716001932	Marionette	INFO	Listening on port 36629
+1623716002036	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 6097 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 6097 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/modules/LoginManagerChild.jsm, line 190: NS_ERROR_XPC_JAVASCRIPT_ERROR_WITH_DETAILS: [JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]'[JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]' when calling method: [nsIAutoCompletePopup::selectedIndex]
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 2209 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 2209 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=r7puM8YjyS0Zt6OlxJf4H5vPa6ASAf&prompt=consent&access_type=offline&code_challenge=ePq5DFap5mYRaMAvSvfpHs7jDcmb4ulHmJwqYVwgxOE&code_challenge_method=S256 line 1 > eval line 5237 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=r7puM8YjyS0Zt6OlxJf4H5vPa6ASAf&prompt=consent&access_type=offline&code_challenge=ePq5DFap5mYRaMAvSvfpHs7jDcmb4ulHmJwqYVwgxOE&code_challenge_method=S256 line 1 > eval line 5237 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+1623716693631	geckodriver	INFO	Listening on 127.0.0.1:35653
+1623716694645	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileGKx2bu"
+*** You are running in headless mode.
+
+(/opt/firefox/firefox-bin:1372715): GLib-GObject-CRITICAL **: 01:24:56.345: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/opt/firefox/firefox-bin:1372741): GLib-GObject-CRITICAL **: 01:24:56.473: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623716697367	Marionette	INFO	Listening on port 40445
+
+(/opt/firefox/firefox-bin:1372818): GLib-GObject-CRITICAL **: 01:24:57.465: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+1623716697489	Marionette	WARN	TLS certificate errors will be ignored for this session
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 772))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 419))
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1623717132266	geckodriver	INFO	Listening on 127.0.0.1:44207
+1623717132279	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileBp8u7J"
+*** You are running in headless mode.
+
+(/opt/firefox/firefox-bin:1374582): GLib-GObject-CRITICAL **: 01:32:14.079: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/opt/firefox/firefox-bin:1374605): GLib-GObject-CRITICAL **: 01:32:14.204: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623717135586	Marionette	INFO	Listening on port 42057
+1623717135611	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+(/opt/firefox/firefox-bin:1374685): GLib-GObject-CRITICAL **: 01:32:15.641: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 5631 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 5631 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/modules/LoginManagerChild.jsm, line 190: NS_ERROR_XPC_JAVASCRIPT_ERROR_WITH_DETAILS: [JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]'[JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]' when calling method: [nsIAutoCompletePopup::selectedIndex]
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 2644 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 2644 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=3s1IxHwMyInM5HaNeZckRfPbUEnlt4&prompt=consent&access_type=offline&code_challenge=3F8z-Sq1RLRZ-9Y417sHEk5xTepJXK4nsOKJlFMCgBw&code_challenge_method=S256 line 1 > eval line 3405 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=3s1IxHwMyInM5HaNeZckRfPbUEnlt4&prompt=consent&access_type=offline&code_challenge=3F8z-Sq1RLRZ-9Y417sHEk5xTepJXK4nsOKJlFMCgBw&code_challenge_method=S256 line 1 > eval line 3405 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+1623717188696	Marionette	INFO	Stopped listening on port 42057
+1623717379543	geckodriver	INFO	Listening on 127.0.0.1:34847
+1623717379554	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilex9TFDk"
+*** You are running in headless mode.
+
+(/opt/firefox/firefox-bin:1375852): GLib-GObject-CRITICAL **: 01:36:21.194: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/opt/firefox/firefox-bin:1375874): GLib-GObject-CRITICAL **: 01:36:21.339: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623717382242	Marionette	INFO	Listening on port 33317
+1623717382281	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+(/opt/firefox/firefox-bin:1375954): GLib-GObject-CRITICAL **: 01:36:22.338: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 772))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 419))
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 3734 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 3734 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/modules/LoginManagerChild.jsm, line 190: NS_ERROR_XPC_JAVASCRIPT_ERROR_WITH_DETAILS: [JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]'[JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]' when calling method: [nsIAutoCompletePopup::selectedIndex]
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 1950 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 1950 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=gKldxejdG9lYEnqg6WiI2be0cBhVYx&prompt=consent&access_type=offline&code_challenge=j25ksM7kQyYL9654CpfiniEQzHxsdc9iwrhS6UfICFg&code_challenge_method=S256 line 1 > eval line 4727 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=gKldxejdG9lYEnqg6WiI2be0cBhVYx&prompt=consent&access_type=offline&code_challenge=j25ksM7kQyYL9654CpfiniEQzHxsdc9iwrhS6UfICFg&code_challenge_method=S256 line 1 > eval line 4727 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+Exiting due to channel error.
+1623717459945	geckodriver	INFO	Listening on 127.0.0.1:33107
+1623717459952	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileCfXQkx"
+*** You are running in headless mode.
+
+(/opt/firefox/firefox-bin:1376541): GLib-GObject-CRITICAL **: 01:37:41.569: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/opt/firefox/firefox-bin:1376568): GLib-GObject-CRITICAL **: 01:37:41.716: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623717462588	Marionette	INFO	Listening on port 33527
+
+(/opt/firefox/firefox-bin:1376644): GLib-GObject-CRITICAL **: 01:37:42.673: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+1623717462682	Marionette	WARN	TLS certificate errors will be ignored for this session
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 772))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 419))
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 287 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 287 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/modules/LoginManagerChild.jsm, line 190: NS_ERROR_XPC_JAVASCRIPT_ERROR_WITH_DETAILS: [JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]'[JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]' when calling method: [nsIAutoCompletePopup::selectedIndex]
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 2299 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 2299 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=T9929tG8BkBiGut2WqZVpxu2LC6vw7&prompt=consent&access_type=offline&code_challenge=VOY2-sqACYpEKpAW74-LQXZJtVizgvWNwq3qj9VifcI&code_challenge_method=S256 line 1 > eval line 1681 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=T9929tG8BkBiGut2WqZVpxu2LC6vw7&prompt=consent&access_type=offline&code_challenge=VOY2-sqACYpEKpAW74-LQXZJtVizgvWNwq3qj9VifcI&code_challenge_method=S256 line 1 > eval line 1681 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+1623717538546	Marionette	INFO	Stopped listening on port 33527
+1623717586446	geckodriver	INFO	Listening on 127.0.0.1:36833
+1623717586456	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilegc2Ofz"
+*** You are running in headless mode.
+
+(/opt/firefox/firefox-bin:1377513): GLib-GObject-CRITICAL **: 01:39:48.220: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/opt/firefox/firefox-bin:1377540): GLib-GObject-CRITICAL **: 01:39:48.379: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623717589612	Marionette	INFO	Listening on port 37473
+
+(/opt/firefox/firefox-bin:1377618): GLib-GObject-CRITICAL **: 01:39:49.622: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+1623717589693	Marionette	WARN	TLS certificate errors will be ignored for this session
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 772))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 419))
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 5832 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 5832 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/modules/LoginManagerChild.jsm, line 190: NS_ERROR_XPC_JAVASCRIPT_ERROR_WITH_DETAILS: [JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]'[JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]' when calling method: [nsIAutoCompletePopup::selectedIndex]
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 554 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 554 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=fKvQDz76buIkqaiAeNPiBOiG8acnCi&prompt=consent&access_type=offline&code_challenge=GbUQvbpfcLcODL8DK6jfisn8t-ShTsb2pH0lVg6Oj1I&code_challenge_method=S256 line 1 > eval line 660 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=fKvQDz76buIkqaiAeNPiBOiG8acnCi&prompt=consent&access_type=offline&code_challenge=GbUQvbpfcLcODL8DK6jfisn8t-ShTsb2pH0lVg6Oj1I&code_challenge_method=S256 line 1 > eval line 660 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+1623717650200	Marionette	INFO	Stopped listening on port 37473
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0x1F0011,name=PBackgroundStorage::Msg_Observe) Channel error: cannot send/recv
+
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0x1F0011,name=PBackgroundStorage::Msg_Observe) Channel error: cannot send/recv
+
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 772))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 419))
+1623717992279	geckodriver	INFO	Listening on 127.0.0.1:46595
+1623717992286	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileKaGA74"
+*** You are running in headless mode.
+
+(/opt/firefox/firefox-bin:1379552): GLib-GObject-CRITICAL **: 01:46:33.695: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/opt/firefox/firefox-bin:1379573): GLib-GObject-CRITICAL **: 01:46:33.811: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623717994696	Marionette	INFO	Listening on port 45305
+
+(/opt/firefox/firefox-bin:1379651): GLib-GObject-CRITICAL **: 01:46:34.779: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+1623717994819	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 1376 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 1376 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/modules/LoginManagerChild.jsm, line 190: NS_ERROR_XPC_JAVASCRIPT_ERROR_WITH_DETAILS: [JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]'[JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]' when calling method: [nsIAutoCompletePopup::selectedIndex]
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 4756 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 4756 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=tTS6nflRzCaQVBVMuraaLdwR2FDQEF&prompt=consent&access_type=offline&code_challenge=DNG00M7zl6BbpY9BR34cHObZC5cWj7djPev0F12sovY&code_challenge_method=S256 line 1 > eval line 3716 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=tTS6nflRzCaQVBVMuraaLdwR2FDQEF&prompt=consent&access_type=offline&code_challenge=DNG00M7zl6BbpY9BR34cHObZC5cWj7djPev0F12sovY&code_challenge_method=S256 line 1 > eval line 3716 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+1623718048002	Marionette	INFO	Stopped listening on port 45305
+1623718259334	geckodriver	INFO	Listening on 127.0.0.1:44481
+1623718259344	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilecwFSFU"
+*** You are running in headless mode.
+
+(/opt/firefox/firefox-bin:1381289): GLib-GObject-CRITICAL **: 01:51:01.081: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/opt/firefox/firefox-bin:1381310): GLib-GObject-CRITICAL **: 01:51:01.201: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623718262230	Marionette	INFO	Listening on port 44967
+1623718262274	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+(/opt/firefox/firefox-bin:1381385): GLib-GObject-CRITICAL **: 01:51:02.337: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 2456 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 2456 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/modules/LoginManagerChild.jsm, line 190: NS_ERROR_XPC_JAVASCRIPT_ERROR_WITH_DETAILS: [JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]'[JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]' when calling method: [nsIAutoCompletePopup::selectedIndex]
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 7784 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 7784 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1623718314067	geckodriver	INFO	Listening on 127.0.0.1:56319
+1623718314075	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileOkrbFQ"
+*** You are running in headless mode.
+
+(/opt/firefox/firefox-bin:1381679): GLib-GObject-CRITICAL **: 01:51:55.664: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/opt/firefox/firefox-bin:1381700): GLib-GObject-CRITICAL **: 01:51:55.821: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623718316836	Marionette	INFO	Listening on port 38287
+
+(/opt/firefox/firefox-bin:1381776): GLib-GObject-CRITICAL **: 01:51:56.927: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+1623718316936	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 371 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 371 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/modules/LoginManagerChild.jsm, line 190: NS_ERROR_XPC_JAVASCRIPT_ERROR_WITH_DETAILS: [JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]'[JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]' when calling method: [nsIAutoCompletePopup::selectedIndex]
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 6096 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 6096 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=vOw8VugXaWq6nIloVLCQxIgUF5v8Xb&prompt=consent&access_type=offline&code_challenge=5X_NI6x8Bk173GnpvvwdPKJnokFpv6Ocf6RGx-ukjsA&code_challenge_method=S256 line 1 > eval line 2671 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=vOw8VugXaWq6nIloVLCQxIgUF5v8Xb&prompt=consent&access_type=offline&code_challenge=5X_NI6x8Bk173GnpvvwdPKJnokFpv6Ocf6RGx-ukjsA&code_challenge_method=S256 line 1 > eval line 2671 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+1623718621815	geckodriver	INFO	Listening on 127.0.0.1:39155
+1623718621828	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilen32RyO"
+*** You are running in headless mode.
+
+(/opt/firefox/firefox-bin:1383250): GLib-GObject-CRITICAL **: 01:57:03.670: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/opt/firefox/firefox-bin:1383273): GLib-GObject-CRITICAL **: 01:57:03.798: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623718624657	Marionette	INFO	Listening on port 35729
+
+(/opt/firefox/firefox-bin:1383351): GLib-GObject-CRITICAL **: 01:57:04.754: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+1623718624759	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 6793 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 6793 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/modules/LoginManagerChild.jsm, line 190: NS_ERROR_XPC_JAVASCRIPT_ERROR_WITH_DETAILS: [JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]'[JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]' when calling method: [nsIAutoCompletePopup::selectedIndex]
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 5847 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 5847 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=DQx1Q06mW5kuhhJGfaCMEbpTSs1vS9&prompt=consent&access_type=offline&code_challenge=QpgZ2VEWbYI_PirQDM_l6fwjvYikJ-27KxLe1jLjDCQ&code_challenge_method=S256 line 1 > eval line 1308 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=DQx1Q06mW5kuhhJGfaCMEbpTSs1vS9&prompt=consent&access_type=offline&code_challenge=QpgZ2VEWbYI_PirQDM_l6fwjvYikJ-27KxLe1jLjDCQ&code_challenge_method=S256 line 1 > eval line 1308 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+1623718677188	Marionette	INFO	Stopped listening on port 35729
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 772))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 419))
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 772))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 419))
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=0709Faxg2JvhxeAq4gEGj9n3nXsHA2&prompt=consent&access_type=offline&code_challenge=wnTYv7dciuoHvtRswbxWousH5s5hPpiRfy68nTpoS1s&code_challenge_method=S256&flowName=GeneralOAuthFlow line 1 > eval line 3912 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=0709Faxg2JvhxeAq4gEGj9n3nXsHA2&prompt=consent&access_type=offline&code_challenge=wnTYv7dciuoHvtRswbxWousH5s5hPpiRfy68nTpoS1s&code_challenge_method=S256&flowName=GeneralOAuthFlow line 1 > eval line 3912 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=0709Faxg2JvhxeAq4gEGj9n3nXsHA2&prompt=consent&access_type=offline&code_challenge=wnTYv7dciuoHvtRswbxWousH5s5hPpiRfy68nTpoS1s&code_challenge_method=S256&flowName=GeneralOAuthFlow line 1 > eval line 2206 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=0709Faxg2JvhxeAq4gEGj9n3nXsHA2&prompt=consent&access_type=offline&code_challenge=wnTYv7dciuoHvtRswbxWousH5s5hPpiRfy68nTpoS1s&code_challenge_method=S256&flowName=GeneralOAuthFlow line 1 > eval line 2206 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=0709Faxg2JvhxeAq4gEGj9n3nXsHA2&prompt=consent&access_type=offline&code_challenge=wnTYv7dciuoHvtRswbxWousH5s5hPpiRfy68nTpoS1s&code_challenge_method=S256&flowName=GeneralOAuthFlow line 1 > eval line 4692 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=0709Faxg2JvhxeAq4gEGj9n3nXsHA2&prompt=consent&access_type=offline&code_challenge=wnTYv7dciuoHvtRswbxWousH5s5hPpiRfy68nTpoS1s&code_challenge_method=S256&flowName=GeneralOAuthFlow line 1 > eval line 4692 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=0709Faxg2JvhxeAq4gEGj9n3nXsHA2&prompt=consent&access_type=offline&code_challenge=wnTYv7dciuoHvtRswbxWousH5s5hPpiRfy68nTpoS1s&code_challenge_method=S256&flowName=GeneralOAuthFlow line 1 > eval line 2183 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=0709Faxg2JvhxeAq4gEGj9n3nXsHA2&prompt=consent&access_type=offline&code_challenge=wnTYv7dciuoHvtRswbxWousH5s5hPpiRfy68nTpoS1s&code_challenge_method=S256&flowName=GeneralOAuthFlow line 1 > eval line 2183 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=0709Faxg2JvhxeAq4gEGj9n3nXsHA2&prompt=consent&access_type=offline&code_challenge=wnTYv7dciuoHvtRswbxWousH5s5hPpiRfy68nTpoS1s&code_challenge_method=S256&flowName=GeneralOAuthFlow line 1 > eval line 1520 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=0709Faxg2JvhxeAq4gEGj9n3nXsHA2&prompt=consent&access_type=offline&code_challenge=wnTYv7dciuoHvtRswbxWousH5s5hPpiRfy68nTpoS1s&code_challenge_method=S256&flowName=GeneralOAuthFlow line 1 > eval line 1520 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+1623789119230	geckodriver	INFO	Listening on 127.0.0.1:42865
+1623789119241	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileVnkVhW"
+*** You are running in headless mode.
+
+(/opt/firefox/firefox-bin:1564709): GLib-GObject-CRITICAL **: 21:32:01.043: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/opt/firefox/firefox-bin:1564731): GLib-GObject-CRITICAL **: 21:32:01.196: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623789122403	Marionette	INFO	Listening on port 40949
+1623789122489	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+(/opt/firefox/firefox-bin:1564812): GLib-GObject-CRITICAL **: 21:32:02.510: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 3643 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 3643 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1623789215529	geckodriver	INFO	Listening on 127.0.0.1:57413
+1623789215539	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile8MZ8FS"
+*** You are running in headless mode.
+
+(/opt/firefox/firefox-bin:1565231): GLib-GObject-CRITICAL **: 21:33:37.235: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/opt/firefox/firefox-bin:1565252): GLib-GObject-CRITICAL **: 21:33:37.370: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623789218680	Marionette	INFO	Listening on port 40707
+
+(/opt/firefox/firefox-bin:1565337): GLib-GObject-CRITICAL **: 21:33:38.731: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+1623789218772	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 6376 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 6376 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/modules/LoginManagerChild.jsm, line 190: NS_ERROR_XPC_JAVASCRIPT_ERROR_WITH_DETAILS: [JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]'[JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]' when calling method: [nsIAutoCompletePopup::selectedIndex]
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 5 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 5 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=IL0HSjMM6wKXRwHFNCHt0Mjz38WUwY&prompt=consent&access_type=offline&code_challenge=m9WJugkkudJ-BD62ftJ63C072LUu99vgyOGKIhFCV4Y&code_challenge_method=S256 line 1 > eval line 1268 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=IL0HSjMM6wKXRwHFNCHt0Mjz38WUwY&prompt=consent&access_type=offline&code_challenge=m9WJugkkudJ-BD62ftJ63C072LUu99vgyOGKIhFCV4Y&code_challenge_method=S256 line 1 > eval line 1268 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+1623789421906	geckodriver	INFO	Listening on 127.0.0.1:49247
+1623789421917	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileYOzNsu"
+*** You are running in headless mode.
+
+(/opt/firefox/firefox-bin:1566247): GLib-GObject-CRITICAL **: 21:37:03.642: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/opt/firefox/firefox-bin:1566268): GLib-GObject-CRITICAL **: 21:37:03.787: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623789425008	Marionette	INFO	Listening on port 42935
+
+(/opt/firefox/firefox-bin:1566345): GLib-GObject-CRITICAL **: 21:37:05.061: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+1623789425066	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 1245 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 1245 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/modules/LoginManagerChild.jsm, line 190: NS_ERROR_XPC_JAVASCRIPT_ERROR_WITH_DETAILS: [JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]'[JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]' when calling method: [nsIAutoCompletePopup::selectedIndex]
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 6210 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 6210 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=7YjSzO59itDxrWA4E5apzq3FrddfxF&prompt=consent&access_type=offline&code_challenge=UNfH0CWug8dd4-G2m5K9Sv6UFwqrvvSjF_nWC9BqY_4&code_challenge_method=S256 line 1 > eval line 5589 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=7YjSzO59itDxrWA4E5apzq3FrddfxF&prompt=consent&access_type=offline&code_challenge=UNfH0CWug8dd4-G2m5K9Sv6UFwqrvvSjF_nWC9BqY_4&code_challenge_method=S256 line 1 > eval line 5589 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+1623789474849	Marionette	INFO	Stopped listening on port 42935
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+1623790043812	geckodriver	INFO	Listening on 127.0.0.1:44077
+1623790043824	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileNuTRYS"
+*** You are running in headless mode.
+
+(/opt/firefox/firefox-bin:1568209): GLib-GObject-CRITICAL **: 21:47:25.465: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/opt/firefox/firefox-bin:1568230): GLib-GObject-CRITICAL **: 21:47:25.606: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623790046514	Marionette	INFO	Listening on port 34199
+1623790046552	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+(/opt/firefox/firefox-bin:1568307): GLib-GObject-CRITICAL **: 21:47:26.602: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 4832 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 4832 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1623790076934	geckodriver	INFO	Listening on 127.0.0.1:48749
+1623790076943	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileRtP16t"
+*** You are running in headless mode.
+
+(/opt/firefox/firefox-bin:1568619): GLib-GObject-CRITICAL **: 21:47:58.740: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/opt/firefox/firefox-bin:1568640): GLib-GObject-CRITICAL **: 21:47:58.883: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623790079874	Marionette	INFO	Listening on port 39755
+
+(/opt/firefox/firefox-bin:1568715): GLib-GObject-CRITICAL **: 21:47:59.956: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+1623790079970	Marionette	WARN	TLS certificate errors will be ignored for this session
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 772))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 419))
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 366 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 366 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/modules/LoginManagerChild.jsm, line 190: NS_ERROR_XPC_JAVASCRIPT_ERROR_WITH_DETAILS: [JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]'[JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]' when calling method: [nsIAutoCompletePopup::selectedIndex]
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 3438 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 3438 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=tykLIkMZ0sR6RLmlwLPGOxOwT8qBvk&prompt=consent&access_type=offline&code_challenge=v5oxh1ubruo_Rn5ZldVVosz1ANACQtcNb2fDkmugtN8&code_challenge_method=S256 line 1 > eval line 1158 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=tykLIkMZ0sR6RLmlwLPGOxOwT8qBvk&prompt=consent&access_type=offline&code_challenge=v5oxh1ubruo_Rn5ZldVVosz1ANACQtcNb2fDkmugtN8&code_challenge_method=S256 line 1 > eval line 1158 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+1623790129645	Marionette	INFO	Stopped listening on port 39755
+1623795374253	geckodriver	INFO	Listening on 127.0.0.1:47255
+1623795374260	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilefsqVHe"
+*** You are running in headless mode.
+
+(/opt/firefox/firefox-bin:1582860): GLib-GObject-CRITICAL **: 23:16:16.013: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/opt/firefox/firefox-bin:1582881): GLib-GObject-CRITICAL **: 23:16:16.149: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623795377217	Marionette	INFO	Listening on port 44241
+1623795377289	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+(/opt/firefox/firefox-bin:1582958): GLib-GObject-CRITICAL **: 23:16:17.316: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 1748 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 1748 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/modules/LoginManagerChild.jsm, line 190: NS_ERROR_XPC_JAVASCRIPT_ERROR_WITH_DETAILS: [JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]'[JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]' when calling method: [nsIAutoCompletePopup::selectedIndex]
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 4832 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 4832 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=ep6hiqBy1M78W5hKDQ77SNZfA8EsD2&prompt=consent&access_type=offline&code_challenge=wjUVefKoxVmAwcgO3WZHX4RnkIJjxW_9xcr2an9xve8&code_challenge_method=S256 line 1 > eval line 1355 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=ep6hiqBy1M78W5hKDQ77SNZfA8EsD2&prompt=consent&access_type=offline&code_challenge=wjUVefKoxVmAwcgO3WZHX4RnkIJjxW_9xcr2an9xve8&code_challenge_method=S256 line 1 > eval line 1355 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+1623795435163	Marionette	INFO	Stopped listening on port 44241
+1623795470055	geckodriver	INFO	Listening on 127.0.0.1:44027
+1623795470065	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileE0S3Ze"
+*** You are running in headless mode.
+
+(/opt/firefox/firefox-bin:1586229): GLib-GObject-CRITICAL **: 23:17:51.779: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/opt/firefox/firefox-bin:1586255): GLib-GObject-CRITICAL **: 23:17:51.922: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623795473320	Marionette	INFO	Listening on port 39271
+
+(/opt/firefox/firefox-bin:1586353): GLib-GObject-CRITICAL **: 23:17:53.352: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+1623795473405	Marionette	WARN	TLS certificate errors will be ignored for this session
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 772))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 419))
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 6328 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 6328 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/modules/LoginManagerChild.jsm, line 190: NS_ERROR_XPC_JAVASCRIPT_ERROR_WITH_DETAILS: [JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]'[JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]' when calling method: [nsIAutoCompletePopup::selectedIndex]
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 3709 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 3709 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=ZRKEg2Z4jr7C4esHgSe3FPRd2Ff1kQ&prompt=consent&access_type=offline&code_challenge=Z7bvTLQ0p2bm4pZIoK8J2RwYAzCVN7GUp-VOWPLAomE&code_challenge_method=S256 line 1 > eval line 6058 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=ZRKEg2Z4jr7C4esHgSe3FPRd2Ff1kQ&prompt=consent&access_type=offline&code_challenge=Z7bvTLQ0p2bm4pZIoK8J2RwYAzCVN7GUp-VOWPLAomE&code_challenge_method=S256 line 1 > eval line 6058 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+1623795520669	Marionette	INFO	Stopped listening on port 39271
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1623796869723	geckodriver	INFO	Listening on 127.0.0.1:38703
+1623796869734	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilevUqXZ0"
+*** You are running in headless mode.
+
+(/opt/firefox/firefox-bin:1607522): GLib-GObject-CRITICAL **: 23:41:11.391: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/opt/firefox/firefox-bin:1607543): GLib-GObject-CRITICAL **: 23:41:11.551: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623796872767	Marionette	INFO	Listening on port 44915
+
+(/opt/firefox/firefox-bin:1607640): GLib-GObject-CRITICAL **: 23:41:12.815: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+1623796872869	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 5644 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 5644 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/modules/LoginManagerChild.jsm, line 190: NS_ERROR_XPC_JAVASCRIPT_ERROR_WITH_DETAILS: [JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]'[JavaScript Error: "Invalid autocomplete selectedIndex" {file: "resource://gre/actors/AutoCompleteChild.jsm" line: 125}]' when calling method: [nsIAutoCompletePopup::selectedIndex]
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 7580 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 7580 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=4on8FM9DgfU4s8yr5eMEBS07A2zXJC&prompt=consent&access_type=offline&code_challenge=eNfjBcdigB8J0isHfj6eRVvXV6BI3letXJa49P_H20k&code_challenge_method=S256 line 1 > eval line 7735 > eval line 1 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=4on8FM9DgfU4s8yr5eMEBS07A2zXJC&prompt=consent&access_type=offline&code_challenge=eNfjBcdigB8J0isHfj6eRVvXV6BI3letXJa49P_H20k&code_challenge_method=S256 line 1 > eval line 7735 > eval line 1 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+1623796933869	Marionette	INFO	Stopped listening on port 44915
+1623796959041	geckodriver	INFO	Listening on 127.0.0.1:50499
+1623796959052	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile97327q"
+*** You are running in headless mode.
+
+(/opt/firefox/firefox-bin:1610627): GLib-GObject-CRITICAL **: 23:42:40.738: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+
+(/opt/firefox/firefox-bin:1610651): GLib-GObject-CRITICAL **: 23:42:40.868: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1623796961970	Marionette	INFO	Listening on port 39199
+
+(/opt/firefox/firefox-bin:1610841): GLib-GObject-CRITICAL **: 23:42:42.052: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+1623796962081	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 2566 > eval, line 1: WebGL warning: <Create>: Can't use WebGL in headless mode (https://bugzil.la/1375585).
+JavaScript warning: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com line 1 > eval line 2566 > eval, line 1: Failed to create WebGL context: WebGL creation failed: 
+* Can't use WebGL in headless mode (https://bugzil.la/1375585).
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.

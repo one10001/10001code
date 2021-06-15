@@ -188,7 +188,7 @@ def accept_code(gurl):
 
 
 
-gaurl='https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=VHJvcZlDomVjrMMaVoVD2ojFR5shH6&prompt=consent&access_type=offline&code_challenge=5qupDS-xCnXGQA6AqXJkBWnK72A1T5GJM_JCPiGVXDM&code_challenge_method=S256'
+gaurl='https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=32555940559.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=vOw8VugXaWq6nIloVLCQxIgUF5v8Xb&prompt=consent&access_type=offline&code_challenge=5X_NI6x8Bk173GnpvvwdPKJnokFpv6Ocf6RGx-ukjsA&code_challenge_method=S256'
 
 def testo():
     time.sleep(0.1*slow_motion)
