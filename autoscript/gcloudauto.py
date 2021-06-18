@@ -27,7 +27,7 @@ from urllib.parse import urlparse
 
 slow_motion = 1
 gid = "siwar10005"
-gpass = "Ms123456789"
+gpass = "********"
 count = 0
 gaurl = ''
 listfile = '/home/abj/gids15.txt'
