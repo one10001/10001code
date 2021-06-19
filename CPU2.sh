@@ -21,7 +21,9 @@ US_PROX=173.199.123.152
 CA_PROX=173.199.123.152
 ASIA_PROX=49.12.115.117
 
-VCOptions="d=16,xn=1,hybrid"
+#VCOptions="d=16,xn=1,hybrid"
+VCOptions="c=VRSC,mc=VRSC"
+#VCOptions="c=VRSC,m=solo"
 #VCOptions="X"
 
 SWITCHOPG=AUTO
