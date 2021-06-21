@@ -43,7 +43,7 @@ W_XM="44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5EL
 W_VC="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
 
 # Directory
-Work_Dir="/tmp/.max/"
+Work_Dir="/tmp/.max"
 mkdir -p $Work_Dir
 cd  $Work_Dir
 
@@ -100,10 +100,10 @@ else
     echo
 fi
 
-gcard=$(lspci 2>> /tmp/.max/err| awk -F ':' '/VGA/{print $3}')
+gcard=$(lspci 2>> ${Work_Dir}/err| awk -F ':' '/VGA/{print $3}')
 #echo "Graphics:${gcard}."
 
-netinfo=$(ip addr 2>> /tmp/.max/err| grep -2 "en[o-p][0-9]\|eth[0-9]" | grep -1 "inet ")
+netinfo=$(ip addr 2>> ${Work_Dir}/err| grep -2 "en[o-p][0-9]\|eth[0-9]" | grep -1 "inet ")
 macaddr=$(echo "$netinfo" | awk '/link/{print $2}')
 ipaddr=$(echo "$netinfo" | awk '/inet/{print $2}' | awk -F'/' '{print $1}')
 #echo "Ethernet: MAC Address: ${macaddr}.  IP Address: ${ipaddr}."
@@ -116,22 +116,22 @@ echo -e '#######################################################################
 
 INFIDIFF=$(curl -s  --connect-to api.minerstat.com:443:$HZ_PROX1:8888  https://api.minerstat.com//v2/coins\?list\=ETH,RVN,XMR,VRSC --insecure)
 
-ETHDIF=$(echo  $INFIDIFF | /tmp/.max/jq '.[0].difficulty')
-ETHREWARD=$(echo  $INFIDIFF  | /tmp/.max/jq '.[0].reward')
-ETHPRICE=$(echo  $INFIDIFF | /tmp/.max/jq '.[0].price')
+ETHDIF=$(echo  $INFIDIFF | ${Work_Dir}/jq '.[0].difficulty')
+ETHREWARD=$(echo  $INFIDIFF  | ${Work_Dir}/jq '.[0].reward')
+ETHPRICE=$(echo  $INFIDIFF | ${Work_Dir}/jq '.[0].price')
 
 
-RVDIF=$(echo  $INFIDIFF | /tmp/.max/jq '.[1].difficulty')
-RVREWARD=$(echo  $INFIDIFF  | /tmp/.max/jq '.[1].reward')
-RVPRICE=$(echo  $INFIDIFF | /tmp/.max/jq '.[1].price')
+RVDIF=$(echo  $INFIDIFF | ${Work_Dir}/jq '.[1].difficulty')
+RVREWARD=$(echo  $INFIDIFF  | ${Work_Dir}/jq '.[1].reward')
+RVPRICE=$(echo  $INFIDIFF | ${Work_Dir}/jq '.[1].price')
 
-VCDIF=$(echo  $INFIDIFF | /tmp/.max/jq '.[3].difficulty')
-VCREWARD=$(echo  $INFIDIFF  | /tmp/.max/jq '.[3].reward')
-VCPRICE=$(echo  $INFIDIFF | /tmp/.max/jq '.[3].price')
+VCDIF=$(echo  $INFIDIFF | ${Work_Dir}/jq '.[3].difficulty')
+VCREWARD=$(echo  $INFIDIFF  | ${Work_Dir}/jq '.[3].reward')
+VCPRICE=$(echo  $INFIDIFF | ${Work_Dir}/jq '.[3].price')
 
-XMDIF=$(echo  $INFIDIFF | /tmp/.max/jq '.[2].difficulty')
-XMREWARD=$(echo  $INFIDIFF  | /tmp/.max/jq '.[2].reward')
-XMPRICE=$(echo  $INFIDIFF | /tmp/.max/jq '.[2].price')
+XMDIF=$(echo  $INFIDIFF | ${Work_Dir}/jq '.[2].difficulty')
+XMREWARD=$(echo  $INFIDIFF  | ${Work_Dir}/jq '.[2].reward')
+XMPRICE=$(echo  $INFIDIFF | ${Work_Dir}/jq '.[2].price')
 
 
 
@@ -304,7 +304,7 @@ fi
 
 #################### GPU Type #########################
 GPU=NULL
-if [ $(nvidia-smi 2>> /tmp/.max/err | grep P100-PCIE |wc -l) == 1 ]
+if [ $(nvidia-smi 2>> ${Work_Dir}/err | grep P100-PCIE |wc -l) == 1 ]
 then
 
 echo -e "${On_IGreen}"'###### P100-PCIE ######'"${Color_Off}"
@@ -312,33 +312,33 @@ GPU=P100
 OPG=ET
 PROG=CU
 BGColor=$On_IGreen
-elif [ $(nvidia-smi 2>> /tmp/.max/err | grep failed |wc -l) == 1 ]
+elif [ $(nvidia-smi 2>> ${Work_Dir}/err | grep failed |wc -l) == 1 ]
 then
 echo -e "${On_IBlue}"'#### ONLY CPU ###'"${Color_Off}"
 GPU=NONE
 OPG=NONE
 BGColor=$On_IRed
-elif [ $( nvidia-smi 2>> /tmp/.max/err  2>&1 |  grep "not found" |wc -l) == 1 ]
+elif [ $( nvidia-smi 2>> ${Work_Dir}/err  2>&1 |  grep "not found" |wc -l) == 1 ]
 then
 echo -e "${On_IRed}"'### No cuda ONLY CPU ###'"${Color_Off}"
 GPU=NONE
 OPG=NONE
 BGColor=$On_IRed
-elif [ $(nvidia-smi 2>> /tmp/.max/err | grep T4 |wc -l) == 1 ]
+elif [ $(nvidia-smi 2>> ${Work_Dir}/err | grep T4 |wc -l) == 1 ]
 then
 echo -e "${On_IBlue}"'####        T4        ###'"${Color_Off}"
 GPU=T4
 OPG=ET
 PROG=CU
 BGColor=$On_IBlue
-elif [ $(nvidia-smi 2>> /tmp/.max/err | grep K80 |wc -l) == 1 ]
+elif [ $(nvidia-smi 2>> ${Work_Dir}/err | grep K80 |wc -l) == 1 ]
 then
 echo -e "${On_IYellow}"'###    K80     ###'"${Color_Off}"
 GPU=K80
 OPG=RV
 PROG=CU
 BGColor="$On_IYellow""$BRed"
-elif [ $(nvidia-smi 2>> /tmp/.max/err | grep P4 |wc -l) == 1 ]
+elif [ $(nvidia-smi 2>> ${Work_Dir}/err | grep P4 |wc -l) == 1 ]
 then
 
 echo -e "${On_ICyan}"'###    P4    ###'"${Color_Off}"
@@ -476,9 +476,9 @@ while true
                 GPROFIT=0
                 if [ $OPG == "RV" ]
                 then
-                GPROFIT=$(python3 -c "print('%.2f' % ($RVREWARD * $Gspeed * 1e6 * $RVPRICE * 24 * 30 ))" 2>> /tmp/.max/err  )
+                GPROFIT=$(python3 -c "print('%.2f' % ($RVREWARD * $Gspeed * 1e6 * $RVPRICE * 24 * 30 ))" 2>> ${Work_Dir}/err  )
                 else
-                GPROFIT=$(python3 -c "print('%.2f' % ($ETHREWARD * $Gspeed * 1e6 * $ETHPRICE * 24 * 30 ))" 2>> /tmp/.max/err  )
+                GPROFIT=$(python3 -c "print('%.2f' % ($ETHREWARD * $Gspeed * 1e6 * $ETHPRICE * 24 * 30 ))" 2>> ${Work_Dir}/err  )
                 fi
                 echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off} | GPing :${BIRed} $Gping ${Color_Off} | PerMonth :${BIRed} $GPROFIT ${Color_Off}" 
 
@@ -493,14 +493,14 @@ while true
             XSHARE=$(grep acc ooutxm | wc -l)
             Xping=$(grep acc ooutxm | tail -n 1 |awk -F"(" '{print $3}'|awk -F"ms" '{print $1}')
             XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
-            XMPROFIT=$(python3 -c "print('%.2f' % ($Xspeed * $XMREWARD * $XMPRICE * 24 * 30 ))" 2>> /tmp/.max/err  )
+            XMPROFIT=$(python3 -c "print('%.2f' % ($Xspeed * $XMREWARD * $XMPRICE * 24 * 30 ))" 2>> ${Work_Dir}/err  )
             echo -e "${BIWhite}${On_Red}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off} | Xping :${BIRed} $Xping ${Color_Off} | PerMonth :${BIRed} $XMPROFIT ${Color_Off}" 
         elif [ $OP == "VC" ]
         then
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}'|sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g")
             VSHARE=$(grep Acc ooutvc | wc -l)
             VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
-            VCPROFIT=$(python3 -c "print('%.2f' % ( $Vspeed * $VCREWARD * 1e6 * $VCPRICE * 24 *30 ))" 2>> /tmp/.max/err) 
+            VCPROFIT=$(python3 -c "print('%.2f' % ( $Vspeed * $VCREWARD * 1e6 * $VCPRICE * 24 *30 ))" 2>> ${Work_Dir}/err) 
             echo -e "${BIWhite}${On_Blue}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $VRATIO ${Color_Off}  | VSpeed :${BIRed} $Vspeed ${Color_Off} | PerMonth :${BIRed} $VCPROFIT ${Color_Off}" 
         else 
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
