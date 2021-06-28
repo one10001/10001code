@@ -1,4 +1,30 @@
-s
+#!/usr/bin/python
+import shlex
+import subprocess
+from subprocess import Popen, PIPE
+import pytest
+import time
+import pty
+import sys
+import select
+import os
+import re
+import pytest
+import time
+import json
+import sys
+import threading
+import requests
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from urllib.parse import urlparse
+from threading import Thread
+
 slow_motion = 1
 listfile='/home/abj/gids15.txt'
 gid = "siwar10002"
@@ -64,21 +90,39 @@ def rungcloud(gid):
 #run_status= rungcloud(gid)
 #print('>>>>>>>>>> run status : '+ str(run_status) + ' <<<<<<<<<<<<<<' )
 
+class RunThread(Thread):
+    def __init__(self,A):
+        self.gid=gid
+        self.container_status=0
+        #self.gpass=gpass
+        Thread.__init__(self)
+        self.daemon = True
+        self.start()
+    def run(self):
+        self.container_status = rungcloud(gid)
+        print(" ---- gid: "+gid+" status: "+str(container_status)+ " ---- " )
+
 def run_list(listfile):
     file1 = open(listfile, 'r')
     Lines = file1.readlines()
     error_list = []
     count = 0
+    thread_list = []
     for line in Lines:
-        count += 1
         print("GID {}: {}".format(count, line.strip()))
         gid = line.strip('\n')
         gid = gid.strip('\r')
-        container_status = rungcloud(gid)
-        if container_status != 0:
+        thread_list.append(RunThread(gid))
+        if thread_list[count].container_status != 0:
             error_list.append(gid)
-    
+        time.sleep(10)
+        count += 1
+    while True:
+        print( error_list)
+        time.sleep(5)
     return error_list
+
+    
 
 error_list = run_list(listfile)
 

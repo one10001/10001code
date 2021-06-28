@@ -24,15 +24,18 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from urllib.parse import urlparse
+import time
 
 class myClassA(Thread):
-    def __init__(self):
+    def __init__(self,A):
+        self.A=A
         Thread.__init__(self)
         self.daemon = True
         self.start()
     def run(self):
         while True:
-            print('A')
+            time.sleep(0.5)
+            print(self.A)
 
 
 class myClassB(Thread):
@@ -44,8 +47,11 @@ class myClassB(Thread):
         while True:
             print('B')
 
+list=[]
 
-myClassA()
-myClassB()
+for i in range(10):
+    list.append(myClassA(A=str(i)))
+
+#myClassB()
 while True:
     pass
