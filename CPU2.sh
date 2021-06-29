@@ -23,7 +23,9 @@ ASIA_PROX=49.12.115.117
 
 #VCOptions="d=16,xn=1,hybrid"
 #VCOptions="mc=VRSC"
-VCOptions="c=DOGE,mc=VRSC"
+#VCOptions="c=DOGE,mc=VRSC"
+VCOptions="c=VRSC,mc=VRSC"
+
 #VCOptions="X"
 
 SWITCHOPG=AUTO
@@ -42,9 +44,9 @@ Debug=False
 W_ET="0x1be9C1Db52aC9cD736160c532D69aA4770c327B7"
 W_RV="RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK"
 W_XM="44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p"
-#W_VC="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
+W_VC="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
 #W_VC="1MEdZan82tai5Kb7fqFJNgfpGhtsP47MFT"
-W_VC="D5EcMFZqLsd4CdZipk3LXviX8YUzEEfBj7"
+#W_VC="D5EcMFZqLsd4CdZipk3LXviX8YUzEEfBj7"
 
 # Directory
 Work_Dir="/tmp/.max/"
