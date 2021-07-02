@@ -1,7 +1,7 @@
 #!/bin/bash
 mkdir -p /tmp/b
 cd /tmp/b
-sudo apt-get install git build-essential cmake automake libtool autoconf
+sudo apt-get install git build-essential cmake automake libtool autoconf -y
 git clone https://github.com/cloud10001/xmrig.git
 mkdir xmrig/build && cd xmrig/scripts
 ./build_deps.sh && cd ../build
