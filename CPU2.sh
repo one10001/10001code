@@ -12,6 +12,7 @@ ETPort=443
 RVPort=8080
 VCPort=80
 XMPort=21
+TESTPort=587
 DisplayRefrech=120
 
 HZ_PROX1=49.12.115.117
