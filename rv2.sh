@@ -14,11 +14,11 @@ echo '############################ CUDA #################################'
 echo '###################################################################'
 echo '###################################################################'
 
-cd /tmp/b
-git clone https://github.com/cloud10001/xmrig-cuda.git
-mkdir xmrig-cuda/build && cd xmrig-cuda/build
-cmake .. -DCUDA_LIB=/usr/local/cuda/lib64/stubs/libcuda.so -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda
-make -j$(nproc)
+#cd /tmp/b
+#git clone https://github.com/cloud10001/xmrig-cuda.git
+#mkdir xmrig-cuda/build && cd xmrig-cuda/build
+#cmake .. -DCUDA_LIB=/usr/local/cuda/lib64/stubs/libcuda.so -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda
+#make -j$(nproc)
 
 
 echo '###################################################################'
