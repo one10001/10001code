@@ -41,6 +41,8 @@ XMThreads=$[$(nproc)*1]
 #Debug=True
 Debug=False
 
+Silent=True
+
 #Keys
 W_ET="0x1be9C1Db52aC9cD736160c532D69aA4770c327B7"
 W_RV="RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK"
@@ -70,6 +72,20 @@ function displaytime {
 }
 
 
+function timerbash {
+
+    date1=$(date +%s)
+
+#Use this arithmetic to determine elapsed time since defining date1
+    $(( $(date +%s) - $date1 ))
+
+    #While loop using timer
+    while ! [ $(( $(date +%s) - $date1 )) -gt 60000 ]; do
+        #Terminal timer -n won't append new line, so the echo will replace itself. 
+        ##There is also some date formatting to achieve: HH:MM:SS.
+        echo -ne "$(date -u --date @$(( $(date +%s) - $date1 )) +%H:%M:%S)\r"
+done
+}
 
 ##  CPU info
 
@@ -471,6 +487,10 @@ fi
 i=0
 while true
     do
+        if [ $Silent == True ]
+            then
+            break
+            fi
         i=$[$i+1]
         echo -e "${On_IWhite}${BIGreen}Timer: $(displaytime $[($i-1)*$DisplayRefrech])|${On_IWhite}${BIBlue} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG ${Color_Off}"
         if [ $GPU == "NONE" ]
@@ -551,6 +571,8 @@ while true
         sleep $DisplayRefrech
         
     done
+    timerbash
+
 
 
 
