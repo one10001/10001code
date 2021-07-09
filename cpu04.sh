@@ -478,6 +478,7 @@ then
     fi
 else
     # echo "No GPU"
+    echo
 fi
 
 
