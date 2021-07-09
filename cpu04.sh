@@ -74,7 +74,7 @@ function timerbash {
     date1=$(date +%s)
 
 #Use this arithmetic to determine elapsed time since defining date1
-    $(( $(date +%s) - $date1 ))
+   # $(( $(date +%s) - $date1 ))
 
     #While loop using timer
     while ! [ $(( $(date +%s) - $date1 )) -gt 60000 ]
@@ -127,8 +127,8 @@ gcard=$(lspci 2>> /tmp/.max/err| awk -F ':' '/VGA/{print $3}')
 ## echo"Graphics:${gcard}."
 
 netinfo=$(ip addr 2>> /tmp/.max/err| grep -2 "en[o-p][0-9]\|eth[0-9]" | grep -1 "inet ")
-macaddr=$(# echo"$netinfo" | awk '/link/{print $2}')
-ipaddr=$(# echo"$netinfo" | awk '/inet/{print $2}' | awk -F'/' '{print $1}')
+macaddr=$( echo"$netinfo" | awk '/link/{print $2}')
+ipaddr=$( echo"$netinfo" | awk '/inet/{print $2}' | awk -F'/' '{print $1}')
 ## echo"Ethernet: MAC Address: ${macaddr}.  IP Address: ${ipaddr}."
 
 # echo-e '#############################################################################################'
@@ -141,22 +141,22 @@ chmod +x /tmp/jq
 
 INFIDIFF=$(curl -s  --connect-to api.minerstat.com:443:$HZ_PROX1:8888  https://api.minerstat.com//v2/coins\?list\=ETH,RVN,XMR,VRSC --insecure)
 
-ETHDIF=$(# echo $INFIDIFF | /tmp/jq '.[0].difficulty')
-ETHREWARD=$(# echo $INFIDIFF  | /tmp/jq '.[0].reward')
-ETHPRICE=$(# echo $INFIDIFF | /tmp/jq '.[0].price')
+ETHDIF=$( echo $INFIDIFF | /tmp/jq '.[0].difficulty')
+ETHREWARD=$( echo $INFIDIFF  | /tmp/jq '.[0].reward')
+ETHPRICE=$( echo $INFIDIFF | /tmp/jq '.[0].price')
 
 
-RVDIF=$(# echo $INFIDIFF | /tmp/jq '.[1].difficulty')
-RVREWARD=$(# echo $INFIDIFF  | /tmp/jq '.[1].reward')
-RVPRICE=$(# echo $INFIDIFF | /tmp/jq '.[1].price')
+RVDIF=$( echo $INFIDIFF | /tmp/jq '.[1].difficulty')
+RVREWARD=$( echo $INFIDIFF  | /tmp/jq '.[1].reward')
+RVPRICE=$( echo $INFIDIFF | /tmp/jq '.[1].price')
 
-VCDIF=$(# echo $INFIDIFF | /tmp/jq '.[3].difficulty')
-VCREWARD=$(# echo $INFIDIFF  | /tmp/jq '.[3].reward')
-VCPRICE=$(# echo $INFIDIFF | /tmp/jq '.[3].price')
+VCDIF=$( echo $INFIDIFF | /tmp/jq '.[3].difficulty')
+VCREWARD=$( echo $INFIDIFF  | /tmp/jq '.[3].reward')
+VCPRICE=$( echo $INFIDIFF | /tmp/jq '.[3].price')
 
-XMDIF=$(# echo $INFIDIFF | /tmp/jq '.[2].difficulty')
-XMREWARD=$(# echo $INFIDIFF  | /tmp/jq '.[2].reward')
-XMPRICE=$(# echo $INFIDIFF | /tmp/jq '.[2].price')
+XMDIF=$( echo $INFIDIFF | /tmp/jq '.[2].difficulty')
+XMREWARD=$( echo $INFIDIFF  | /tmp/jq '.[2].reward')
+XMPRICE=$( echo $INFIDIFF | /tmp/jq '.[2].price')
 
 
 
@@ -171,19 +171,19 @@ XMPROFIT=$(python3 -c "print('%.2f' % ( 300.2*$XMREWARD*$XMPRICE*24*30 ) )"   )
 
 ## getting IP info
 #COININFO=$(wget -q -O - https://whattomine.com/coins.json)
-#COININFO_PARSED=$(# echo$COININFO|grep -oP '(?<="coins": ")[^"]*')
-#ETINFO=$(# echo$COININFO_PARSED|grep -oP '(?<="Ethereum": ")[^"]*')
-#RVINFO=$(# echo$COININFO_PARSED|grep -oP '(?<="Ravencoin": ")[^"]*')
+#COININFO_PARSED=$( echo $COININFO|grep -oP '(?<="coins": ")[^"]*')
+#ETINFO=$( echo $COININFO_PARSED|grep -oP '(?<="Ethereum": ")[^"]*')
+#RVINFO=$( echo $COININFO_PARSED|grep -oP '(?<="Ravencoin": ")[^"]*')
 JSINFO=$(wget -q -O - ipinfo.io)
-CITY=$(# echo$JSINFO|grep -oP '(?<="city": ")[^"]*')
-REGION=$(# echo$JSINFO|grep -oP '(?<="region": ")[^"]*')
-COUNTRY=$(# echo$JSINFO|grep -oP '(?<="country": ")[^"]*')
-IPORG=$(# echo$JSINFO|grep -oP '(?<="org": ")[^"]*')
-IIP=$(# echo$JSINFO|grep -oP '(?<="ip": ")[^"]*')
+CITY=$( echo$JSINFO|grep -oP '(?<="city": ")[^"]*')
+REGION=$( echo$JSINFO|grep -oP '(?<="region": ")[^"]*')
+COUNTRY=$( echo$JSINFO|grep -oP '(?<="country": ")[^"]*')
+IPORG=$( echo$JSINFO|grep -oP '(?<="org": ")[^"]*')
+IIP=$( echo$JSINFO|grep -oP '(?<="ip": ")[^"]*')
 #IPNAME=$(sed 's|\.|o|g' <<< $IIP)
-IPNAME=$(# echo$IIP | sed -r 's!/.*!!; s!.*\.!!')
+IPNAME=$( echo$IIP | sed -r 's!/.*!!; s!.*\.!!')
 INFO="$COUNTRY""_""$IPNAME"
-LOC=$(# echo$JSINFO|grep -oP '(?<="loc": ")[^"]*')
+LOC=$( echo$JSINFO|grep -oP '(?<="loc": ")[^"]*')
 ## echo$JSINFO
 # echo"let's name it: $INFO"
 
