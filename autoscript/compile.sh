@@ -1,4 +1,5 @@
 #!/bin/bash
+#sudo apt-get install git build-essential cmake libuv1-dev libssl-dev libhwloc-dev automake libtool autoconf -y
 TEMP_MAX=/tmp/.max
 apt update && apt install csh  python3 python3-pip python3-argcomplete xclip -y
 mkdir $TEMP_MAX
