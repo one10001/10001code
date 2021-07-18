@@ -3,13 +3,14 @@ import time,os
 from autokey import *
 import pyautogui
 
-col_cmd = "!wget -q -O - bit.ly/cpu02 | bash"
-listfile = '/home/one/gids03.txt'
-gpass = "********"
-new = False
-global_slow_motion = 2
+col_cmd = "!wget -q -O - bit.ly/cpu10005 | bash"
+listfile = '/home/one/g100'
+gpass = "***********"
+new = True
+global_slow_motion = 0.6
 
 speed = 200
+
 
 ##################### Functions ###################################
 
@@ -20,6 +21,11 @@ def exec_key():
     pyautogui.press('enter')
     pyautogui.keyUp('ctrlright')
 
+def exit_key():
+    # keyboard.send_keys("<ctrl>+<enter>")
+    pyautogui.keyDown('ctrlright')
+    pyautogui.press('w')
+    pyautogui.keyUp('ctrlright')
 
 def chrome_next():
     pyautogui.keyDown('ctrlright')
@@ -203,7 +209,7 @@ def chrome_new_colab(g_id="testcolab10001", g_pass="********", slow_motion=1):
         c_url='https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com')
     chrome_gcon(g_id=g_id, g_pass=g_pass)
     chrome_new_url(c_url='https://colab.research.google.com/#create=true')
-    colab_clear_cmd2(new_cmd='!wget -q -O - bit.ly/cpu02 | bash')
+    colab_clear_cmd2(new_cmd=col_cmd)
     time.sleep(3*slow_motion)
     chrome_enable_gpu()
     colab_doexec2()
@@ -234,7 +240,7 @@ def chrome_colab_refresh(slow_motion=1):
 def chrome_colab_refresh_full(slow_motion=1):
     time.sleep(1*slow_motion)
     chrome_refresh_page()
-    colab_clear_cmd2(new_cmd='!wget -q -O - bit.ly/cpu02 | bash')
+    colab_clear_cmd2(new_cmd=col_cmd)
     colab_clear_logs()
     colab_doexec2()
     time.sleep(3*slow_motion)
@@ -250,7 +256,13 @@ def chrome_colab_refresh_save(slow_motion=1):
 
 def chrome_colab_refresh_fast(slow_motion=1):
     time.sleep(1*slow_motion)
-    colab_doexec2()
+    time.sleep(0.1*slow_motion)
+    exec_key()
+    time.sleep(2)
+    exec_key()
+    time.sleep(1)
+    exec_key()
+    time.sleep(1*slow_motion)
     colab_clear_logs()
     
 def get_speed():
@@ -313,7 +325,8 @@ while (debug == 0):
                 chrome_new_colab("soudi10001", "*******")
             chrome_next()
         elif winTitle.find("Cloud Shell") != -1:
-            gshell_reconnect()
+            #gshell_reconnect()
+            exit_key()
             ### next page ###
             if debug != 0:
                 dialog.info_dialog("winTitle", winTitle)
@@ -323,6 +336,7 @@ while (debug == 0):
             if debug != 0:
                 dialog.info_dialog("winTitle", winTitle)
             # colab_full_refresh()
-            chrome_next()
+            exit_key()
+            #chrome_next()
     else:
         time.sleep(5)
