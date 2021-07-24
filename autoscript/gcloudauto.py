@@ -49,9 +49,7 @@ def accept_code(gid, gpass, gurl):
         "win_firefox": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:83.0) Gecko/20100101 Firefox/83.0",
         "win_chrome": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36",
         "ff2mobile": "Mozilla/5.0 (Android 11; Mobile; rv:68.0) Gecko/68.0 Firefox/88.0"
-
     }
-
     #options = webdriver.ChromeOptions()
     # options.add_argument("start-maximized")
     # options.add_argument("--disable-dev-shm-usage")
@@ -70,7 +68,6 @@ def accept_code(gid, gpass, gurl):
     # #### options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE); #####
     #driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": useragent["original_ch"] })
     #driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
-
     profile = webdriver.FirefoxProfile()
     options = webdriver.FirefoxOptions()
     options.add_argument("--headless")
@@ -80,13 +77,10 @@ def accept_code(gid, gpass, gurl):
                            useragent["ff2mobile"])
     profile.update_preferences()
     desired = DesiredCapabilities.FIREFOX
-
     driver = webdriver.Firefox(firefox_profile=profile, options=options,
                                desired_capabilities=desired)
-
     actions = webdriver.ActionChains(driver)
     print(driver.execute_script("return navigator.userAgent;"))
-
     #####################################################################
     authurl = 'https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com'
     user = gid
@@ -103,7 +97,6 @@ def accept_code(gid, gpass, gurl):
     driver.find_element(By.NAME, "password").send_keys(Keys.ENTER)
     driver.implicitly_wait(10)
     time.sleep(5*slow_motion)
-
     #driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
     driver.get(gurl)
     time.sleep(7*slow_motion)
@@ -145,12 +138,9 @@ def newgcloud(gid):
 
 def docker_create(gid, gpass):
     pty, tty = os.openpty()
-
     p = subprocess.Popen(newgcloud(gid), stdin=tty, stdout=tty, stderr=tty)
-
     status = 4
     looping = 0
-
     while p.poll() is None:
         # Watch two files, STDIN of your Python process and the pseudo terminal
         print("looping: "+str(looping))
@@ -180,7 +170,6 @@ def docker_create(gid, gpass):
                     print('>>> success : '+s)
                     status = 0
             except:
-
                 print("Error in loop : "+str(looping))
                 status = 1
                 traceback.print_exc()
@@ -189,13 +178,11 @@ def docker_create(gid, gpass):
                 try:
                     fullcode = str.encode(accept_code(gid, gpass, gaurl)+'\n')
                     os.write(pty, fullcode)
-
                 except:
                     print("error pasting")
                     traceback.print_exc()
                     status = 2
                     break
-
             print('##########################')
         looping = looping+1
     return status

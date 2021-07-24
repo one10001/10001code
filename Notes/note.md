@@ -10,7 +10,7 @@
 # Python
 sudo apt install -y gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget python3 python-is-python3 python3-pip python3-tk python3-dev git python3-dev python3-tk python3-setuptools python3-wheel python3-pip git python3-dev python3-tk python3-setuptools python3-wxgtk4.0  autokey-gtk autokey-common scrot zsh git python3-dev python3-tk python3-setuptools python3-wheel python3-pip python3-wxgtk4.0 xdotool curl wget
 
-pip3 install selenium  pyautogui pynput   pytest
+pip3 install selenium  pyautogui pynput   pytest urllib3 ushlex
 pip3 install selenium
 pip3 install pytest
 pip3 install pyautogui 
@@ -52,3 +52,12 @@ done
 # Chrome vs firefox
 "Chrome + sessionbox"  < x1.6 < "firefox + multicontainer"
 Chrome 76G <=> 144 
+
+# firefox web webdriver 
+sudo apt-get install firefox=75.0+build3-0ubuntu1
+OLDIR=$PWD
+cd /tmp
+wget -O geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v0.29.1/geckodriver-v0.29.1-linux64.tar.gz
+tar xzf geckodriver.tar.gz
+sudo mv geckodriver /usr/bin/geckodriver
+cd $OLDIR
