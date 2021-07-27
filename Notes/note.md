@@ -61,3 +61,13 @@ wget -O geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/downl
 tar xzf geckodriver.tar.gz
 sudo mv geckodriver /usr/bin/geckodriver
 cd $OLDIR
+## kill all firefox & chrome
+kill -9 $(ps -x | grep firefox)
+kill -9 $(ps -x | grep chrome/chrome)
+
+
+# Docker
+## clean contaners:
+docker container stop $(docker ps -a -q)
+docker container rm $(docker ps -a -q) 
+docker volume prune

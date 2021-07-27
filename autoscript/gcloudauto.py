@@ -116,7 +116,15 @@ def accept_code(gid, gpass, gurl):
     gkey = KeyDriver.text
     print(gkey)
     time.sleep(5*slow_motion)
+
     driver.close()
+    try:
+        cmd2='kill -9 $(ps -x | grep firefox)'
+        results = subprocess.run(cmd2,
+        shell=True, check=True,
+        executable='/bin/bash')
+    except:
+        print('error firefox closing')
     return gkey
 
 
