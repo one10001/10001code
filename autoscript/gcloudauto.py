@@ -70,7 +70,7 @@ def accept_code(gid, gpass, gurl):
     #driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
     profile = webdriver.FirefoxProfile()
     options = webdriver.FirefoxOptions()
-    options.add_argument("--headless")
+    #options.add_argument("--headless")
     profile.set_preference("dom.webdriver.enabled", False)
     profile.set_preference('useAutomationExtension', False)
     profile.set_preference("general.useragent.override",
