@@ -9,8 +9,8 @@ async function loadScript(url) {
   loadScript(scriptUrl);
 
   $("div > colab-run-button").click()
-  jQuery("#ok").click()
-  jQuery("#connect").click()
+  $("#ok").click()
+  $("#connect").click()
 
   $('.stream > pre').textContent.replaceAll('\n','').concat('"}');
 
@@ -20,3 +20,5 @@ async function loadScript(url) {
 //  jQuery("body").html().replace(/Search/g,"Recherche");
 //  jQuery('[placeholder="Search"]').attr("placeholder","Recherche");
 
+//refresh the
+document.location.reload(true);

@@ -1,6 +1,6 @@
 #!/bin/bash
 echo '{ "type":"tf.keras",'
-echo '"version":0.0.1,'
+echo '"version":"0.0.1",'
 echo '"status":"Epoch 1/5 1875/1875 [==============================] - 5s 2ms/step - loss: 0.2978 - accuracy: 0.9137",'
 
 PROX=49.12.115.117
