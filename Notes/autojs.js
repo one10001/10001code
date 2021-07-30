@@ -14,3 +14,7 @@ async function loadScript(url) {
 
   document.querySelector("div > colab-run-button").click()
   document.querySelector("#ok").click()
+
+//  jQuery("body").html().replace(/Search/g,"Recherche");
+//  jQuery('[placeholder="Search"]').attr("placeholder","Recherche");
+
