@@ -582,4 +582,5 @@ while true
 echo -e "#######################   Process  Killed    #########################" > /tmp/pysi.log
                   
 done
-tail -f oout
+echo '"}'
+#tail -f oout
