@@ -1,0 +1,3 @@
+#!/bin/bash 
+kill -9 $(ps -x | grep chrome/chrome)
+kill -9 $(ps -x | grep autokey)

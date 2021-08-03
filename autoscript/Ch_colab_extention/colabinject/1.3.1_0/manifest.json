@@ -7,18 +7,18 @@
       "default_popup": "html/popup.html"
    },
    "content_scripts": [ {
+      "run_at": "document_start",
       "js": [ "src/inject/inject.js" ],
       "matches": [ "https://colab.research.google.com/*" ]
    } ],
    "default_locale": "en",
    "description": "Keep your Colab tabs alive with this nifty extension!",
-   "homepage_url": "https://github.com/rtindru",
+   "homepage_url": "https://github.com/one10001/10001code",
    "icons": {
       "128": "icons/icon128.png",
       "16": "icons/icon16.png",
       "48": "icons/icon48.png"
    },
-   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhHJt0OgHoirW2R8B0+A9BrUG1qLbReO+7BsAqDQhvedOpZOY+XuJCYdUi4blP37LAEvv44r6sOcnLGfAZhd99Bq2QTa/z/HBqzQ05vej3ABhaqDstg0Si2J1S3BjDnNl2BJ5P6eGYoP5EjigW11I8T9757P09R+FyMxRcXsotM7KtwzRk9zMv5mS4bmzOF9IguT4GGlf9qgyfMqcY4YeAAEvywigNu3YuUMkSov36kbTycClQvp3VsdR1nzNIpAaCTp+xWb12JefSgZAE+VgsIe5iZT1Z9Vv/IFtNAoFBhdD+K4wrgfUTLMNX8BU//JQPAQzOBI9cDIMRSXprbP0lQIDAQAB",
    "manifest_version": 2,
    "name": "Colab Alive",
    "update_url": "https://clients2.google.com/service/update2/crx",
