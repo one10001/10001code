@@ -74,3 +74,18 @@ kill -9 $(ps -x | grep chrome/chrome)
 docker container stop $(docker ps -a -q)
 docker container rm $(docker ps -a -q) 
 docker volume prune
+
+
+# edge linux
+## Setup
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
+sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-beta.list'
+sudo rm microsoft.gpg
+## Install
+sudo apt update
+sudo apt install microsoft-edge-beta
+
+
+# mode header selinium https://github.com/bewisse/modheader_selenium
+npm install firefox-modheader
