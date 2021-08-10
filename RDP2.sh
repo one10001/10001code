@@ -2,7 +2,7 @@
 #!/bin/bash
 echo 
 echo -e '####################################################################################'
-echo -e '##################         '"RDP"' Ver:0.7.9        ################################'
+echo -e '##################         '"RDP"' Ver:0.8.9        ################################'
 echo -e '####################################################################################'
 echo 
 echo 
@@ -26,6 +26,7 @@ sudo DEBIAN_FRONTEND=noninteractive \
 apt install --assume-yes xfce4 desktop-base
 sudo bash -c 'echo "exec /etc/X11/Xsession /usr/bin/xfce4-session" > /etc/chrome-remote-desktop-session' 
 echo "export CHROME_REMOTE_DESKTOP_DEFAULT_DESKTOP_SIZES=1366×768,1920×1080"   >> /home/one/.profile 
+sudo sed -i 's+DEFAULT_SIZES = \"1600x1200,3840x2560\"+DEFAULT_SIZES = \"1366x768,1920x1080\"+g'  /opt/google/chrome-remote-desktop/chrome-remote-desktop
 sudo apt install --assume-yes xscreensaver
 sudo systemctl disable lightdm.service
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -48,31 +49,3 @@ printf 'Your SUDO Pasword Is 8426 \n'
 
 
 tail -f oout
-
-
-#/etc/pam.d/chrome-remote-desktop
-
-auth        required    pam_unix.so
-account     required    pam_unix.so
-password    required    pam_unix.so
-session     required    pam_unix.so
-
-
-#/opt/google/chrome-remote-desktop/chrome-remote-desktop
-
-DEFAULT_SIZES = "1366x768,1920x1080"
-DEFAULT_SIZE_NO_RANDR = "1366x768"
-
-FIRST_X_DISPLAY_NUMBER = 0
-
-# while os.path.exists(X_LOCK_FILE_TEMPLATE % display):
-#  display += 1
-
-def launch_session(self, x_args):
-    self._init_child_env()
-    self._setup_pulseaudio()
-    self._setup_gnubby()
-    #self._launch_x_server(x_args)
-    #self._launch_x_session()
-    display = self.get_unused_display_number()
-    self.child_env["DISPLAY"] = ":%d" % display

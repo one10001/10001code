@@ -64,7 +64,8 @@ wget -O geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/downl
 tar xzf geckodriver.tar.gz
 sudo mv geckodriver /usr/bin/geckodriver
 cd $OLDIR
-## kill all firefox & chrome
+## kill all firefox & chrome /bin/kcolab
+#!/bin/bash
 kill -9 $(ps -x | grep firefox)
 kill -9 $(ps -x | grep chrome/chrome)
 
@@ -84,7 +85,7 @@ sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/edge sta
 sudo rm microsoft.gpg
 ## Install
 sudo apt update
-sudo apt install microsoft-edge-beta
+sudo apt install microsoft-edge-beta -y
 
 
 # mode header selinium https://github.com/bewisse/modheader_selenium

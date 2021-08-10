@@ -1,5 +1,51 @@
 // simulate(document.getElementById("btn"), "click", { pointerX: 123, pointerY: 321 })
 // simulate(document.getElementById("btn"), "click");
+console.log("Colab riviver -- keep allive v0.0.1");
+
+
+function navigator_simulater() {
+    'use strict';
+    var navigator = window.navigator;
+    var modifiedNavigator;
+    console.log("Modifing the Navigator");
+    if ('userAgent' in Navigator.prototype) {
+        // Chrome 43+ moved all properties from navigator to the prototype,
+        // so we have to modify the prototype instead of navigator.
+        modifiedNavigator = Navigator.prototype;
+
+    } else {
+        // Chrome 42- defined the property on navigator.
+        modifiedNavigator = Object.create(navigator);
+        Object.defineProperty(window, 'navigator', {
+            value: modifiedNavigator,
+            configurable: false,
+            enumerable: false,
+            writable: false
+        });
+    }
+    // Pretend to be Windows XP
+    Object.defineProperties(modifiedNavigator, {
+        userAgent: {
+            value: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36 Edg/92.0.902.67',
+            configurable: false,
+            enumerable: true,
+            writable: false
+        },
+        appVersion: {
+            value: '5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36 Edg/92.0.902.67',
+            configurable: false,
+            enumerable: true,
+            writable: false
+        },
+        platform: {
+            value: 'Win32',
+            configurable: false,
+            enumerable: true,
+            writable: false
+        },
+    });
+};
+
 
 function simulate(element, eventName) {
     var options = extend(defaultOptions, arguments[2] || {});
@@ -169,14 +215,15 @@ function stop_cmd() {
     }
 }
 
-async function enable_gpu() {
+async function enable_gpu(s) {
     console.log("enable_gpu at" + Date());
     try {
         document.querySelector('[command="notebook-settings"]').click()
-        document.querySelector('#accelerator').options.selectedIndex = 0 //cpu
-        document.querySelector('#accelerator').options.selectedIndex = 1 //gpu
+        document.querySelector('#accelerator').options.selectedIndex = 0; //cpu
+        document.querySelector('#accelerator').options.selectedIndex = 1; //gpu
         await sleep(200);
-        document.querySelector("#ok").click()
+        document.querySelector("#ok").click();
+        s.is_gpu = true;
     } catch (error) {
         console.log(error);
     }
@@ -188,21 +235,24 @@ async function enable_gpu_plus() {
 
     enable_gpu();
     await sleep(200);
-
+    stop_cmd();
+    await sleep(2000);
     run_force();
     await sleep(2000);
 
     setTimeout(() => {
-        if (document.querySelector("#ok").textContent.match("GPU") != null) {
-            console.log("No more GPU");
-            disable_gpu();
-            return false;
+        if (document.querySelector("#ok")) {
+            if (document.querySelector("#ok").textContent.match("GPU") != null) {
+                console.log("No more GPU");
+                ok_cleaner();
+                return false;
+            }
         }
     }, 5000)
 }
 
 
-function disable_gpu() {
+async function disable_gpu(s) {
     console.log("disable_gpu at" + Date());
 
 
@@ -211,7 +261,8 @@ function disable_gpu() {
         document.querySelector('#accelerator').options.selectedIndex = 1 //cpu
         document.querySelector('#accelerator').options.selectedIndex = 0 //gpu
         await sleep(200);
-        document.querySelector("#ok").click()
+        document.querySelector("#ok").click();
+        s.is_gpu = false;
     } catch (error) {
         console.log(error);
     }
@@ -250,7 +301,28 @@ async function check_status() {
         ok_type: null,
         connected: null,
         runing_cmd: null,
-        info: null,
+        info: {
+            "type": "tf.keras",
+            "version": "0.0.1",
+            "status": "Epoch 1/5 1875/1875 [==============================] - 5s 2ms/step - loss: 0.2978 - accuracy: 0.9137",
+            "df": 30,
+            "nproc": 2,
+            "ip_backend": "",
+            "ET_pro": null,
+            "RV_pro": null,
+            "VC_pro": null,
+            "XM_pro": null,
+            "ip": null,
+            "org": null,
+            "city": null,
+            "country": null,
+            "region": null,
+            "cpu_type": null,
+            "gpu_type": null,
+            "opc": null,
+            "opg": null,
+            "wating": null
+        },
         is_gpu: false,
         time_exec: null
 
@@ -262,6 +334,7 @@ async function check_status() {
         } catch (error) {
             console.log(error);
         }
+        /*
         try {
             document.querySelector('[command="notebook-settings"]').click()
             if (document.querySelector('#accelerator').options.selectedIndex == 1) //gpu
@@ -281,7 +354,7 @@ async function check_status() {
                 cleaner_plus();
             } catch (error) { console.log("double error") };
             console.log(error);
-        }
+        }*/
         if (document.querySelector(
                 "div.output-iframe-container colab-static-output-renderer > div:nth-child(1) > div > pre")) {
             try {
@@ -448,9 +521,17 @@ function colab_dialog_close() {
     console.log("colab_dialog_close at" + Date());
 
     for (var i = 0; i < 20; i++) {
-        if (document.querySelector("colab-dialog")) {
-            document.querySelector("colab-dialog").close()
+        try {
+            if (document.querySelector("colab-dialog")) {
+                if (typeof(document.querySelector("colab-dialog").close()) !== 'undefined') {
+                    document.querySelector("colab-dialog").close();
+                }
+            }
+
+        } catch (e) {
+            console.log(e);
         }
+
     }
 }
 
@@ -504,7 +585,10 @@ function reload_colab() {
 }
 
 chrome.extension.sendMessage({}, function(response) {
-    //
+
+    console.log("function chrome.extention ...");
+
+    navigator_simulater();
 
     //jqueryImport();
     //jqueryImport();
@@ -515,45 +599,59 @@ chrome.extension.sendMessage({}, function(response) {
     // Code that uses jQuery's $ can follow here.
     if (window.location.href.match('drive')) {
 
+        console.log("matching drive ...");
+
+
         var colabStatus = {}
 
-        if (document.readyState === "complete") {
-            setTimeout(() => {
-                setTimeout(enable_gpu(), 3000)
-                var readyStateCheckInterval = setInterval(function() {
+
+        setTimeout(() => {
+            setTimeout(enable_gpu(colabStatus), 3000)
+            var readyStateCheckInterval = setInterval(function() {
 
 
 
-                    colabStatus = check_status()
-                        // ----------------------------------------------------------
-                        // This part of the script triggers when page is done loading
-                    console.log("status :" + colabStatus.cmd);
-
-                    ok_cleaner();
-
-                    if (colabStatus.info.gpu_type == "NONE" && colabStatus.is_gpu) {
-                        disable_gpu();
-                    } else if (colabStatus.info.gpu_type == "K80" && colabStatus.is_gpu) {
-                        disable_gpu();
-                    }
-
+                colabStatus = check_status()
                     // ----------------------------------------------------------
-                    //setInterval(()=>{status=check_status}, 20000);	//1 minute
-                    //setInterval(clickConnect, 20000);	//20 sec
+                    // This part of the script triggers when page is done loading
+                console.log("status :" + colabStatus.cmd);
 
 
-                }, 20000);
-                var SmartConnect = setInterval(clickConnectSmart(), 40000);
-                var RunningStatus = setInterval(run_force(), 40000);
-                var OkStatus = setInterval(cleaner_plus2(), 1200000);
-                var StopingStatus = setInterval(stop_cmd(), 2400000);
-                var dismissStatus = setInterval(dismiss_all(), 600000);
-                var testgpu = setInterval(enable_gpu(), 14400000)
-                    //var reloadpage = setInterval(reload_colab(), Math.floor(Math.random() * 700))
+                ok_cleaner();
+                try {
+                    if (typeof(colabStatus.info.gpu_type) !== 'undefined' && (colabStatus.info.gpu_type) !== null) {
+                        if (colabStatus.info.gpu_type == "NONE" && colabStatus.is_gpu) {
+                            disable_gpu(colabStatus);
+                        } else if (colabStatus.info.gpu_type == "K80") {
+                            disable_gpu(colabStatus);
+                        }
+
+                    }
+                } catch (error) {
+                    console.log("error kill all session")
+                }
+
+                // ----------------------------------------------------------
+                //setInterval(()=>{status=check_status}, 20000);	//1 minute
+                //setInterval(clickConnect, 20000);	//20 sec
+
+
+            }, 20000);
+            var SmartConnect = setInterval(clickConnectSmart(), 40000);
+            var RunningStatus = setInterval(run_force(), 40000);
+            var OkStatus = setInterval(cleaner_plus2(), 1200000);
+            var StopingStatus = setInterval(stop_cmd(), 2400000);
+            var dismissStatus = setInterval(dismiss_all(), 600000);
+            var testgpu = setInterval(enable_gpu_plus(), 14400000)
+                //var reloadpage = setInterval(reload_colab(), Math.floor(Math.random() * 700))
 
 
 
-            }, 50000);
+        }, 50000);
+
+
+        if (document.readyState === "complete") {
+
 
         }
     }
