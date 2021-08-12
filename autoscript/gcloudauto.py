@@ -26,11 +26,16 @@ from urllib.parse import urlparse
 ############## Parames ####################
 
 slow_motion = 1
+
 gid = "siwar10005"
-gpass = "********"
+
+gpass = 'Ms123456789'
+
 count = 0
+
 gaurl = ''
-listfile = '/home/abj/gids15.txt'
+
+listfile = '/home/one/g609'
 
 ##############################################
 
@@ -212,9 +217,13 @@ def run_list(listfile, gpass):
         container_status = docker_create(gid, gpass)
         if container_status != 0:
             error_list.append(gid)
+            print('XXXXXXXXXXXXXXXXXXXXXX '+gid+' XXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
     
     return error_list
 
 error_list = run_list(listfile, gpass)
+f = open(listfile+'.err', "a+")
+f.write(error_list)
+f.close()
 
 print(error_list)

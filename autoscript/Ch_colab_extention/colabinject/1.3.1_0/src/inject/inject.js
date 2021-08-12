@@ -324,6 +324,7 @@ async function check_status() {
             "wating": null
         },
         is_gpu: false,
+        is_running: false,
         time_exec: null
 
     }
@@ -331,6 +332,17 @@ async function check_status() {
     try {
         try {
             status.cmd = document.querySelector("div.codecell-input-output span").textContent;
+        } catch (error) {
+            console.log(error);
+        }
+        try {
+            var getExTitle = document.querySelector("div > colab-run-button").getInnerHTML();
+            if (getExTitle.match("running") != null) {
+                console.log("Click run ...")
+                status.is_running = true;
+            } else {
+                status.is_running = false;
+            }
         } catch (error) {
             console.log(error);
         }
@@ -630,15 +642,20 @@ chrome.extension.sendMessage({}, function(response) {
                 } catch (error) {
                     console.log("error kill all session")
                 }
+                try {
+                    if (colabStatus.is_running == false) { run_force() }
+                } catch (e) {
+                    console.log("error run cmd")
+                }
 
                 // ----------------------------------------------------------
                 //setInterval(()=>{status=check_status}, 20000);	//1 minute
                 //setInterval(clickConnect, 20000);	//20 sec
 
 
-            }, 20000);
+            }, 30000);
             var SmartConnect = setInterval(clickConnectSmart(), 40000);
-            var RunningStatus = setInterval(run_force(), 40000);
+            //var RunningStatus = setInterval(run_force(), 40000);
             var OkStatus = setInterval(cleaner_plus2(), 1200000);
             var StopingStatus = setInterval(stop_cmd(), 2400000);
             var dismissStatus = setInterval(dismiss_all(), 600000);

