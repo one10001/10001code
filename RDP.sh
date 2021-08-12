@@ -3,7 +3,7 @@
 # # !i=0001;cmd=RDP;x=ly;y=bit;wget -q -O RDP ${y}.${x}/${cmd}${i} ;bash RDP
 echo 
 echo -e '####################################################################################'
-echo -e '##################         '"RDP"' Ver:0.7.9        ################################'
+echo -e '##################         '"RDP"' Ver:0.9.9        ################################'
 echo -e '####################################################################################'
 echo 
 echo 
@@ -53,7 +53,12 @@ pip3 install selenium  pyautogui pynput   pytest urllib3 ushlex
 #printf "\nSetup Completed " >&2 ||
 #printf "\nError Occured " >&2
 #printf '\nCheck https://remotedesktop.google.com/headless  Copy Command Of Debian Linux And Paste Down\n'
-read -p "Paste Here: " CRP
+if [ -z "$1" ] 
+then
+    read -p "Paste Here: " CRP
+else
+CRP=$1
+fi
 #CRP=$(echo $CRP | sed "s|hostname|$INFO|g")
 CRP=$CRP" --pin 55507770"
 su - one -c """$CRP"""
