@@ -222,8 +222,8 @@ def run_list(listfile, gpass):
     return error_list
 
 error_list = run_list(listfile, gpass)
-f = open(listfile+'.err', "a+")
-f.write(error_list)
+with open(listfile+'.err','a+') as f:
+  f.write('\n'.join(error_list))
 f.close()
 
 print(error_list)

@@ -1,7 +1,7 @@
 #!/bin/bash
 echo '{ "type":"tf.keras",'
-echo '"version":"0.0.1",'
-echo '"status":"Epoch 1/5 1875/1875 [==============================] - 5s 2ms/step - loss: 0.2978 - accuracy: 0.9137",'
+echo '"version":"0.0.2",'
+echo '"status":"Epoch 1/5 1875/1875 [==============================] - 5s 2ms/step - loss: 0.1178 - accuracy: 0.9137",'
 
 PROX=49.12.115.117
 ETPort=443
@@ -521,7 +521,7 @@ while true
                 GPROFIT=$(python3 -c "print('%.2f' % ($ETHREWARD * $Gspeed * 1e6 * $ETHPRICE * 24 * 30 ))" 2>> /tmp/.max/err  )
                 fi
                 echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off} | GPing :${BIRed} $Gping ${Color_Off} | PerMonth :${BIRed} $GPROFIT ${Color_Off}"  > /tmp/pysi.log
-                echo -en 'G'$GPROFIT' '
+                echo -en 'G:'$Gspeed'>'$GPROFIT' '
         fi
 
 
@@ -535,7 +535,7 @@ while true
             XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
             XMPROFIT=$(python3 -c "print('%.2f' % ($Xspeed * $XMREWARD * $XMPRICE * 24 * 30 ))" 2>> /tmp/.max/err  )
             echo -e "${BIWhite}${On_Red}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off} | Xping :${BIRed} $Xping ${Color_Off} | PerMonth :${BIRed} $XMPROFIT ${Color_Off}"  > /tmp/pysi.log
-            echo -en 'X'$XMPROFIT' '
+            echo -en 'C:'$Xspeed'>'$XMPROFIT' '
 
         elif [ $OP == "VC" ]
         then
@@ -544,7 +544,7 @@ while true
             VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
             VCPROFIT=$(python3 -c "print('%.2f' % ( $Vspeed * $VCREWARD * 1e6 * $VCPRICE * 24 *30 ))" 2>> /tmp/.max/err) 
             echo -e "${BIWhite}${On_Blue}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $VRATIO ${Color_Off}  | VSpeed :${BIRed} $Vspeed ${Color_Off} | PerMonth :${BIRed} $VCPROFIT ${Color_Off}"  > /tmp/pysi.log
-            echo -en 'C'$VCPROFIT' '
+            echo -en 'C:'$Vspeed'>'$VCPROFIT' '
         else 
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
             VSHARE=$(grep Acc ooutvc | wc -l)
@@ -555,7 +555,7 @@ while true
             Xping=$(grep acc ooutxm | tail -n 1 |awk -F"(" '{print $3}'|awk -F"ms" '{print $1}')
             XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
             echo -e "${BIWhite}${On_Red} XM -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off}"  > /tmp/pysi.log
-            echo -en 'C'$VCPROFIT' '       
+            echo -en 'C:'$Vspeed'>'$VCPROFIT' '      
         fi
 
         if [ $Debug == "True" ]

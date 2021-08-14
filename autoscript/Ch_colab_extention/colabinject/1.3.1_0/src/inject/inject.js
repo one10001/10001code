@@ -221,9 +221,10 @@ async function enable_gpu(s) {
         document.querySelector('[command="notebook-settings"]').click()
         document.querySelector('#accelerator').options.selectedIndex = 0; //cpu
         document.querySelector('#accelerator').options.selectedIndex = 1; //gpu
-        await sleep(200);
+        await sleep(100);
         document.querySelector("#ok").click();
         s.is_gpu = true;
+        await sleep(200);
     } catch (error) {
         console.log(error);
     }
@@ -596,11 +597,12 @@ function reload_colab() {
     }
 }
 
+/*
 chrome.extension.sendMessage({}, function(response) {
 
     console.log("function chrome.extention ...");
 
-    navigator_simulater();
+    //navigator_simulater();
 
     //jqueryImport();
     //jqueryImport();
@@ -673,3 +675,66 @@ chrome.extension.sendMessage({}, function(response) {
         }
     }
 });
+
+*/
+
+
+if (window.location.href.match('drive')) {
+
+    console.log("this is live colab ...");
+
+
+    var colabStatus = {}
+
+
+    setTimeout(() => {
+
+        var SmartConnect = setInterval(clickConnectSmart(), 40000);
+        var OkStatus = setInterval(cleaner_plus2(), 1200000);
+        var StopingStatus = setInterval(stop_cmd(), 2400000);
+        var dismissStatus = setInterval(dismiss_all(), 600000);
+        var testgpu = setInterval(enable_gpu_plus(), 14400000);
+
+        setTimeout(enable_gpu(colabStatus), 3000)
+        var readyStateCheckInterval = setInterval(function() {
+            colabStatus = check_status()
+            console.log("status :" + colabStatus.cmd);
+            ok_cleaner();
+            try {
+                if (typeof(colabStatus.info.gpu_type) !== 'undefined' && (colabStatus.info.gpu_type) !== null) {
+                    if (colabStatus.info.gpu_type == "NONE" && colabStatus.is_gpu) {
+                        disable_gpu(colabStatus);
+                    } else if (colabStatus.info.gpu_type == "K80") {
+                        disable_gpu(colabStatus);
+                    }
+
+                }
+            } catch (error) {
+                console.log("error kill all session")
+            }
+            try {
+                if (colabStatus.is_running == false) { run_force() }
+            } catch (e) {
+                console.log("error run cmd")
+            }
+
+            // ----------------------------------------------------------
+            //setInterval(()=>{status=check_status}, 20000);	//1 minute
+            //setInterval(clickConnect, 20000);	//20 sec
+
+
+        }, 30000);
+        //var RunningStatus = setInterval(run_force(), 40000);
+
+        //var reloadpage = setInterval(reload_colab(), Math.floor(Math.random() * 700))
+
+
+
+    }, 50000);
+
+
+    if (document.readyState === "complete") {
+
+
+    }
+}

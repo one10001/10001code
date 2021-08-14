@@ -87,11 +87,10 @@ tar xzf geckodriver.tar.gz
 sudo mv geckodriver /usr/bin/geckodriver
 cd $OLDIR
 ## kill all firefox & chrome /bin/kcolab
-> sudo chmod +x /bin/kcolab
-> 
-echo '#!/bin/bash' > /bin/kcolab
-echo 'kill -9 $(ps -x | grep firefox)' >> /bin/kcolab
-echo 'kill -9 $(ps -x | grep chrome/chrome)' >> /bin/kcolab
+sudo echo '#!/bin/bash' > /bin/kcolab
+sudo echo 'kill -9 $(ps -x | grep firefox)' >> /bin/kcolab
+sudo echo 'kill -9 $(ps -x | grep chrome/chrome)' >> /bin/kcolab
+sudo chmod +x /bin/kcolab
 
 
 # Docker
