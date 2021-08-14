@@ -16,7 +16,7 @@ sudo useradd -m one
 sudo adduser one sudo
 echo 'one:8426' | sudo chpasswd
 sed -i 's/\/bin\/sh/\/bin\/bash/g' /etc/passwd
-
+export DEBIAN_FRONTEND=noninteractive
 sudo apt-get update
 wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
 sudo dpkg --install chrome-remote-desktop_current_amd64.deb
@@ -60,8 +60,9 @@ else
 CRP=$1
 fi
 #CRP=$(echo $CRP | sed "s|hostname|$INFO|g")
-CRP=$CRP" --pin=55507770"" --name="$INFO
+CRP=$CRP" --pin=55507770"
 su - one -c """$CRP"""
+service chrome-remote-desktop start
 #printf 'Check https://remotedesktop.google.com/access/ \n'
 #printf 'Your SUDO Pasword Is 8426 \n'
 
