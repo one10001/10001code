@@ -3,11 +3,11 @@ import time,os
 from autokey import *
 import pyautogui
 
-col_cmd = "! i=003;cmd=pysi;x=ly;y=bit;wget -q -O - ${y}.${x}/${cmd}${i} | bash 1> /tmp/1.log  2> /tmp/1err.log"
-listfile = '/home/one/g80p2'
+col_cmd = "! i=003;cmd=pysi;x=ly;y=bit;wget -q -O /tmp/s1 ${y}.${x}/${cmd}${i} ; bash /tmp/s1 "
+listfile = '/home/one/g170p1'
 gpass = "Ms123456789"
 new = True
-global_slow_motion = 0.6
+global_slow_motion = 0.7
 enable_gpu = False
 speed = 200
 
