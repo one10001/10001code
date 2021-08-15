@@ -1,6 +1,6 @@
 // simulate(document.getElementById("btn"), "click", { pointerX: 123, pointerY: 321 })
 // simulate(document.getElementById("btn"), "click");
-console.log("Colab riviver -- keep allive v0.0.1");
+console.log("Colab riviver -- keep allive v0.0.2");
 
 
 function navigator_simulater() {
@@ -231,10 +231,11 @@ async function enable_gpu(s) {
 
 }
 
-async function enable_gpu_plus() {
+async function enable_gpu_plus(s) {
     console.log("enable_gpu_plus at" + Date());
 
-    enable_gpu();
+    enable_gpu(s);
+    s.is_gpu = true;
     await sleep(200);
     stop_cmd();
     await sleep(2000);
@@ -246,12 +247,45 @@ async function enable_gpu_plus() {
             if (document.querySelector("#ok").textContent.match("GPU") != null) {
                 console.log("No more GPU");
                 ok_cleaner();
+                disable_gpu(s);
                 return false;
             }
         }
     }, 5000)
 }
 
+async function switch_gpu_cpu(s) {
+    console.log("switch_gpu_cpu at" + Date());
+    try {
+
+
+        if (s.is_gpu == true) {
+            disable_gpu(s)
+        } else {
+            enable_gpu(s);
+            s.is_gpu = true;
+            await sleep(200);
+            stop_cmd();
+            await sleep(2000);
+            run_force();
+            await sleep(2000);
+
+            setTimeout(() => {
+                if (document.querySelector("#ok")) {
+                    if (document.querySelector("#ok").textContent.match("GPU") != null) {
+                        console.log("No more GPU");
+                        ok_cleaner();
+                        disable_gpu(s);
+                        return false;
+                    }
+                }
+            }, 5000)
+        }
+        ok_cleaner();
+    } catch (e) {
+        console.log('error switching')
+    }
+}
 
 async function disable_gpu(s) {
     console.log("disable_gpu at" + Date());
@@ -567,28 +601,28 @@ function cleaner_plus() {
     console.log("cleaner +++++++++++++++ at" + Date());
 
 
-    setTimeout(ok_cleaner(), 500);
-    setTimeout(ok_cleaner(), 500);
-    setTimeout(ok_cleaner(), 500);
-    setTimeout(ok_cleaner(), 500);
-    setTimeout(ok_cleaner(), 500);
+    setTimeout(ok_cleaner, 200);
+    setTimeout(ok_cleaner, 400);
+    setTimeout(ok_cleaner, 600);
+    setTimeout(ok_cleaner, 800);
+    setTimeout(ok_cleaner, 1000);
 
-    setTimeout(dismiss_all(), 500);
-    setTimeout(dismiss_all(), 500);
-    setTimeout(dismiss_all(), 500);
-    setTimeout(dismiss_all(), 500);
-    setTimeout(dismiss_all(), 500);
+    setTimeout(dismiss_all, 200);
+    setTimeout(dismiss_all, 500);
+    setTimeout(dismiss_all, 600);
+    setTimeout(dismiss_all, 800);
+    setTimeout(dismiss_all, 1000);
 
-    setTimeout(colab_dialog_close(), 500);
-    setTimeout(colab_dialog_close(), 500);
-    setTimeout(colab_dialog_close(), 500);
-    setTimeout(colab_dialog_close(), 500);
-    setTimeout(colab_dialog_close(), 500);
-    setTimeout(colab_dialog_close(), 500);
-    setTimeout(colab_dialog_close(), 500);
-    setTimeout(colab_dialog_close(), 500);
-    setTimeout(colab_dialog_close(), 500);
-    setTimeout(colab_dialog_close(), 500);
+    setTimeout(colab_dialog_close, 100);
+    setTimeout(colab_dialog_close, 200);
+    setTimeout(colab_dialog_close, 300);
+    setTimeout(colab_dialog_close, 400);
+    setTimeout(colab_dialog_close, 500);
+    setTimeout(colab_dialog_close, 600);
+    setTimeout(colab_dialog_close, 700);
+    setTimeout(colab_dialog_close, 800);
+    setTimeout(colab_dialog_close, 900);
+    setTimeout(colab_dialog_close, 1000);
 }
 
 function reload_colab() {
@@ -687,27 +721,35 @@ if (window.location.href.match('drive')) {
     var colabStatus = {}
 
 
-    setTimeout(() => {
+    setTimeout(async() => {
+        colabStatus = await check_status();
+        var SmartConnect = setInterval(clickConnectSmart, 40000);
+        var OkStatus = setInterval(cleaner_plus2, 1200000);
+        var StopingStatus = setInterval(stop_cmd, 2400000);
+        //var dismissStatus = setInterval(dismiss_all(), 600000);
+        var testgpu = setInterval(() => { switch_gpu_cpu(colabStatus) }, 10800000);
 
-        var SmartConnect = setInterval(clickConnectSmart(), 40000);
-        var OkStatus = setInterval(cleaner_plus2(), 1200000);
-        var StopingStatus = setInterval(stop_cmd(), 2400000);
-        var dismissStatus = setInterval(dismiss_all(), 600000);
-        var testgpu = setInterval(enable_gpu_plus(), 14400000);
-
-        setTimeout(enable_gpu(colabStatus), 3000)
-        var readyStateCheckInterval = setInterval(function() {
-            colabStatus = check_status()
+        setTimeout(enable_gpu_plus(colabStatus), 3000)
+        var readyStateCheckInterval = setInterval(async function() {
+            console.log("################ readyStateCheckInterval #########################")
+            colabStatus = await check_status()
+                // (async() => {
+                //     colabStatus = await check_status()
+                //     await sleep(200);
+                // })()
             console.log("status :" + colabStatus.cmd);
             ok_cleaner();
             try {
                 if (typeof(colabStatus.info.gpu_type) !== 'undefined' && (colabStatus.info.gpu_type) !== null) {
                     if (colabStatus.info.gpu_type == "NONE" && colabStatus.is_gpu) {
                         disable_gpu(colabStatus);
+                        console.log("No gpu detected swtching to cpu")
+
                         // stop_cmd();
                     } else if (colabStatus.info.gpu_type == "K80") {
                         disable_gpu(colabStatus);
-                        // stop_cmd();
+                        console.log("K80 detected swtching to cpu")
+                            // stop_cmd();
                     }
 
                 }
