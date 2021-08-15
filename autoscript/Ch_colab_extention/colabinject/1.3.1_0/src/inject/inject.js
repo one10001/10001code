@@ -704,8 +704,10 @@ if (window.location.href.match('drive')) {
                 if (typeof(colabStatus.info.gpu_type) !== 'undefined' && (colabStatus.info.gpu_type) !== null) {
                     if (colabStatus.info.gpu_type == "NONE" && colabStatus.is_gpu) {
                         disable_gpu(colabStatus);
+                        // stop_cmd();
                     } else if (colabStatus.info.gpu_type == "K80") {
                         disable_gpu(colabStatus);
+                        // stop_cmd();
                     }
 
                 }
