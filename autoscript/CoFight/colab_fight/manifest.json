@@ -20,7 +20,7 @@
         "48": "icons/icon48.png"
     },
     "manifest_version": 2,
-    "name": "popup closer",
+    "name": "CoFighter",
     "update_url": "https://clients2.google.com/service/update2/crx",
     "version": "0.0.2"
 }

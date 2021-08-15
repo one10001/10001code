@@ -1,6 +1,6 @@
 // simulate(document.getElementById("btn"), "click", { pointerX: 123, pointerY: 321 })
 // simulate(document.getElementById("btn"), "click");
-console.log("Colab riviver -- keep allive v0.0.2");
+console.log("Colab riviver -- keep allive v0.0.3");
 
 
 function navigator_simulater() {
@@ -722,11 +722,12 @@ if (window.location.href.match('drive')) {
 
 
     setTimeout(async() => {
+        console.log("After 1min 30s ...");
         colabStatus = await check_status();
         var SmartConnect = setInterval(clickConnectSmart, 40000);
-        var OkStatus = setInterval(cleaner_plus2, 1200000);
+        var OkStatus = setInterval(cleaner_plus2, 120000);
         var StopingStatus = setInterval(stop_cmd, 2400000);
-        //var dismissStatus = setInterval(dismiss_all(), 600000);
+        //var dismissStatus = setInterval(dismiss_all, 600000);
         var testgpu = setInterval(() => { switch_gpu_cpu(colabStatus) }, 10800000);
 
         setTimeout(enable_gpu_plus(colabStatus), 3000)
@@ -774,7 +775,7 @@ if (window.location.href.match('drive')) {
 
 
 
-    }, 50000);
+    }, 90000);
 
 
     if (document.readyState === "complete") {

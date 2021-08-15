@@ -105,7 +105,7 @@ def chrome_new_url(x_ok=600, y_ok=80, slow_motion=1, c_url='https://accounts.goo
     time.sleep(0.1*slow_motion)
     # keyboard.send_keys("<enter>")
     pyautogui.press('enter')
-    time.sleep(30*slow_motion)
+    time.sleep(10*slow_motion)
 
 
 def chrome_gcon(x_ok=680, y_ok=360, y_pass=390, slow_motion=1, g_id="testcolab10001", g_pass="********"):
@@ -145,7 +145,7 @@ def colab_clear_logs(x=80, y=280, slow_motion=1):
 
 
 def colab_clear_cmd2(x_clear_cmd=300, y_clear_cmd=245, new_cmd='!wget -q -O - bit.ly/CPU01 | bash', slow_motion=1):
-    time.sleep(1*slow_motion)
+    time.sleep(5*slow_motion)
     colab_top()
     time.sleep(1*slow_motion)
     human_click(x_clear_cmd, y_clear_cmd)
@@ -317,6 +317,10 @@ def gids_file_lanch(listfile,gpass,enable_gpu=True):
             gid = line.strip('\n')
             gid = gid.strip('\r')
             chrome_new_colab(gid, gpass,enable_gpu=enable_gpu)
+            winTitle = window.get_active_title()
+            winClass = window.get_active_class()
+            if winTitle.find("Cloud Colab") != -1:
+                exit_key()
 
 # refresh
 def keep_allive(debug=0,slow_motion=1):
