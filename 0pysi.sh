@@ -1,7 +1,7 @@
 #!/bin/bash
 echo '{ '
 echo '"type":"tf.keras",' > /tmp/keras.json
-echo '"version":"0.0.4",' >> /tmp/keras.json
+echo '"version":"0.0.5",' >> /tmp/keras.json
 if ["$1" == 1 ] 
 then
     echo '"version":"0.0.4",'
