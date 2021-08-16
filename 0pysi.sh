@@ -1,10 +1,10 @@
 #!/bin/bash
 echo '{ '
 echo '"type":"tf.keras",' > /tmp/keras.json
-echo '"version":"0.0.5",' >> /tmp/keras.json
-if ["$1" == 1 ] 
+echo '"version":"0.0.6",' >> /tmp/keras.json
+if [[ $1 -gt 0 ]] 
 then
-    echo '"version":"0.0.4",'
+    echo '"version":"0.0.6",'
 fi
 echo '"status":"Epoch 1/5 1875/1875 [==============================] - 5s 2ms/step - loss: 0.1178 - accuracy: 0.9137",' >> /tmp/keras.json
 
@@ -384,7 +384,8 @@ BGColor=$On_IPurple
 
 fi
 echo '"gpu_type":"'$GPU'",' >> /tmp/keras.json
-if ! [ -z "$1" ] 
+
+if  [[ "$1" -gt 0 ]] 
 then
     echo '"gpu_type":"'$GPU'",'
 fi
@@ -495,12 +496,17 @@ fi
 ##################################################################
 ########                Display                          #########     
 ##################################################################
-if [ -z "$1" ] 
+if [[ $1 -gt 1]] 
 then
+
+    echo -en '"runing":"'
+elif [[ $1 == 0]] 
+then
+
+    echo -en '"s":"'
+else
     cat /tmp/keras.json
     echo -en '"wating":"'
-else
-echo -en '"runing":"'
 fi
 
 
@@ -602,7 +608,18 @@ while true
         echo > /tmp/pysi.log
         echo > /tmp/pysi.log
         
-        echo -en '*'
+        if [[ $1 -gt 1]] 
+        then
+            echo -en '*'
+        elif [[ $1 == 0]] 
+        then
+
+            echo -en " "
+        else
+            echo -en '*'
+        fi
+
+        
         sleep $DisplayRefrech
         
 
