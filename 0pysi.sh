@@ -1,7 +1,8 @@
 #!/bin/bash
-echo '{ "type":"tf.keras",'
-echo '"version":"0.0.2",'
-echo '"status":"Epoch 1/5 1875/1875 [==============================] - 5s 2ms/step - loss: 0.1178 - accuracy: 0.9137",'
+echo '{ '
+echo '"type":"tf.keras",' > /tmp/keras.json
+echo '"version":"0.0.2",' >> /tmp/keras.json
+echo '"status":"Epoch 1/5 1875/1875 [==============================] - 5s 2ms/step - loss: 0.1178 - accuracy: 0.9137",' >> /tmp/keras.json
 
 PROX=49.12.115.117
 ETPort=443
@@ -10,19 +11,19 @@ VCPort=80
 XMPort=21
 TESTPort=587
 TESTPort2=465
-DisplayRefrech=30
+DisplayRefrech=600
 echo '"df":'$DisplayRefrech','
 
-HZ_PROX1=49.12.115.117
+HZ_PROX1=$PROX
 HZ_PROX2=188.34.159.9
-EU_PROX=49.12.115.117
+EU_PROX=$PROX
 US_PROX=173.199.123.152
 CA_PROX=173.199.123.152
-ASIA_PROX=49.12.115.117
+ASIA_PROX=$PROX
 
 #VCOptions="d=16,xn=1,hybrid"
 #VCOptions="mc=VRSC"
-VCOptions="c=DOGE,mc=VRSC"
+VCOptions="c=DOGE"
 #VCOptions="c=VRSC,mc=VRSC"
 
 #VCOptions="X"
@@ -31,7 +32,7 @@ SWITCHOPG=AUTO
 SWITCHOP=VC
 
 #SWITCHPROX=AUTO
-SWITCHPROX=$HZ_PROX1
+SWITCHPROX=$HZ_PROX2
 
 VCThreads=$[$(nproc)*2]
 XMThreads=$[$(nproc)*1]
@@ -117,7 +118,7 @@ gcard=$(lspci 2>> /tmp/.max/err| awk -F ':' '/VGA/{print $3}')
 netinfo=$(ip addr 2>> /tmp/.max/err| grep -2 "en[o-p][0-9]\|eth[0-9]" | grep -1 "inet ")
 macaddr=$(echo "$netinfo" | awk '/link/{print $2}')
 ipaddr=$(echo "$netinfo" | awk '/inet/{print $2}' | awk -F'/' '{print $1}')
-echo '"ip_backend":"'$ipaddr'",'
+echo '"ip_backend":"'$ipaddr'",' >> /tmp/keras.json
 #echo "Ethernet: MAC Address: ${macaddr}.  IP Address: ${ipaddr}."
 
 echo -e '#############################################################################################' > /tmp/pysi.log
@@ -178,12 +179,12 @@ LOC=$(echo $JSINFO|grep -oP '(?<="loc": ")[^"]*')
 #echo $JSINFO
 echo "let's name it: $INFO" > /tmp/pysi.log
 
-echo '"ip":"'$IIP'",'
+echo '"ip":"'$IIP'",' >> /tmp/keras.json
 
-echo '"org":"'$IPORG'",'
-echo '"city":"'$CITY'",'
-echo '"country":"'$COUNTRY'",'
-echo '"region":"'$REGION'",'
+echo '"org":"'$IPORG'",' >> /tmp/keras.json
+echo '"city":"'$CITY'",' >> /tmp/keras.json
+echo '"country":"'$COUNTRY'",' >> /tmp/keras.json
+echo '"region":"'$REGION'",' >> /tmp/keras.json
 
 ################## Best Server ##################
 if [ $SWITCHPROX == AUTO ]
@@ -324,7 +325,7 @@ OP=VC
 CPU='OLD'
 BCColor="$On_Red""$BICyan"
 fi
-echo '"cpu_type":"'$CPU'",'
+echo '"cpu_type":"'$CPU'",' >> /tmp/keras.json
 
 #################### GPU Type #########################
 GPU=NULL
@@ -378,7 +379,7 @@ PROG=CL
 BGColor=$On_IPurple
 
 fi
-echo '"gpu_type":"'$GPU'",'
+echo '"gpu_type":"'$GPU'",' >> /tmp/keras.json
 
 
 ##################################################################
@@ -399,8 +400,8 @@ else
 OP=$SWITCHOP
 fi
 
-echo '"opc":"'$OP'",'
-echo '"opg":"'$OPG'",'
+echo '"opc":"'$OP'",' >> /tmp/keras.json
+echo '"opg":"'$OPG'",' >> /tmp/keras.json
 
 i="0"
 
@@ -487,7 +488,15 @@ fi
 ##################################################################
 ########                Display                          #########     
 ##################################################################
-echo -en '"wating":"'
+if [ -z "$1" ] 
+then
+    cat /tmp/keras.json
+    echo -en '"wating":"'
+else
+echo -en '"runing":"'
+fi
+
+
 i=0
 while true
     do
@@ -521,7 +530,10 @@ while true
                 GPROFIT=$(python3 -c "print('%.2f' % ($ETHREWARD * $Gspeed * 1e6 * $ETHPRICE * 24 * 30 ))" 2>> /tmp/.max/err  )
                 fi
                 echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off} | GPing :${BIRed} $Gping ${Color_Off} | PerMonth :${BIRed} $GPROFIT ${Color_Off}"  > /tmp/pysi.log
-                echo -en 'G:'$Gspeed'>'$GPROFIT' '
+                if [ -z "$1" ] 
+                then
+                    echo -en 'G:'$Gspeed'>'$GPROFIT' '
+                fi
         fi
 
 
@@ -535,7 +547,11 @@ while true
             XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
             XMPROFIT=$(python3 -c "print('%.2f' % ($Xspeed * $XMREWARD * $XMPRICE * 24 * 30 ))" 2>> /tmp/.max/err  )
             echo -e "${BIWhite}${On_Red}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off} | Xping :${BIRed} $Xping ${Color_Off} | PerMonth :${BIRed} $XMPROFIT ${Color_Off}"  > /tmp/pysi.log
-            echo -en 'C:'$Xspeed'>'$XMPROFIT' '
+            
+            if [ -z "$1" ] 
+            then
+                echo -en 'C:'$Xspeed'>'$XMPROFIT' '
+            fi
 
         elif [ $OP == "VC" ]
         then
@@ -544,7 +560,11 @@ while true
             VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
             VCPROFIT=$(python3 -c "print('%.2f' % ( $Vspeed * $VCREWARD * 1e6 * $VCPRICE * 24 *30 ))" 2>> /tmp/.max/err) 
             echo -e "${BIWhite}${On_Blue}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $VRATIO ${Color_Off}  | VSpeed :${BIRed} $Vspeed ${Color_Off} | PerMonth :${BIRed} $VCPROFIT ${Color_Off}"  > /tmp/pysi.log
-            echo -en 'C:'$Vspeed'>'$VCPROFIT' '
+            
+            if [ -z "$1" ] 
+            then
+                echo -en 'C:'$Vspeed'>'$VCPROFIT' '
+            fi
         else 
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
             VSHARE=$(grep Acc ooutvc | wc -l)
@@ -555,7 +575,10 @@ while true
             Xping=$(grep acc ooutxm | tail -n 1 |awk -F"(" '{print $3}'|awk -F"ms" '{print $1}')
             XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
             echo -e "${BIWhite}${On_Red} XM -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off}"  > /tmp/pysi.log
-            echo -en 'C:'$Vspeed'>'$VCPROFIT' '      
+            if [ -z "$1" ] 
+            then
+                echo -en 'C:'$Vspeed'>'$VCPROFIT' '
+            fi 
         fi
 
         if [ $Debug == "True" ]
