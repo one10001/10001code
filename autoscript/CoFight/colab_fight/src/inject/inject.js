@@ -1,6 +1,6 @@
 // simulate(document.getElementById("btn"), "click", { pointerX: 123, pointerY: 321 })
 // simulate(document.getElementById("btn"), "click");
-console.log("Colab riviver -- keep allive v0.0.3");
+console.log("Colab riviver -- keep allive v0.0.4");
 
 
 function navigator_simulater() {
@@ -713,7 +713,7 @@ chrome.extension.sendMessage({}, function(response) {
 */
 
 
-if (window.location.href.match('drive')) {
+if (window.location.href.match('drive') || window.location.href.match('create')) {
 
     console.log("this is live colab ...");
 
