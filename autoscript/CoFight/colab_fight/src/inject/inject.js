@@ -755,7 +755,7 @@ if (window.location.href.match('drive') || window.location.href.match('create'))
 
                 }
             } catch (error) {
-                console.log("error kill all session")
+                console.log("error disabling wrong gpu")
             }
             try {
                 if (colabStatus.is_running == false) { run_force() }

