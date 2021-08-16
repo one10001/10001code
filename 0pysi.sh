@@ -2,7 +2,7 @@
 echo '{ '
 echo '"type":"tf.keras",' > /tmp/keras.json
 echo '"version":"0.0.4",' >> /tmp/keras.json
-if ! [ -z "$1" ] 
+if ["$1" == 1 ] 
 then
     echo '"version":"0.0.4",'
 fi
@@ -83,7 +83,7 @@ function displaytime {
 echo -e '#####################################   CPU info  ###########################################' > /tmp/pysi.log
 
 VCPUNUM=$(nproc)
-echo '"nproc":'$VCPUNUM','
+echo '"nproc":'$VCPUNUM',' >> /tmp/keras.json
 
 cpufile=/proc/cpuinfo
 test -f $cpufile || exit 1
