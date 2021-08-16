@@ -1,7 +1,11 @@
 #!/bin/bash
 echo '{ '
 echo '"type":"tf.keras",' > /tmp/keras.json
-echo '"version":"0.0.3",' >> /tmp/keras.json
+echo '"version":"0.0.4",' >> /tmp/keras.json
+if ! [ -z "$1" ] 
+then
+    echo '"version":"0.0.4",'
+fi
 echo '"status":"Epoch 1/5 1875/1875 [==============================] - 5s 2ms/step - loss: 0.1178 - accuracy: 0.9137",' >> /tmp/keras.json
 
 PROX=49.12.115.117
@@ -12,7 +16,7 @@ XMPort=21
 TESTPort=587
 TESTPort2=465
 DisplayRefrech=600
-echo '"df":'$DisplayRefrech','
+echo '"df":'$DisplayRefrech',' >> /tmp/keras.json
 
 HZ_PROX1=$PROX
 HZ_PROX2=188.34.159.9
@@ -157,10 +161,10 @@ VCPROFIT=$(python3 -c "print('%.2f' % (1.3*$VCREWARD*1e6*$VCPRICE*24*30 ) )")
 XMPROFIT=$(python3 -c "print('%.2f' % ( 300.2*$XMREWARD*$XMPRICE*24*30 ) )"   )
 
 echo "Normal Month worth : ET = $ETHPROFIT , RV = $RVPROFIT , VC = $VCPROFIT , XM = $XMPROFIT" > /tmp/pysi.log
-echo '"ET_pro":'$ETHPROFIT','
-echo '"RV_pro":'$RVPROFIT','
-echo '"VC_pro":'$VCPROFIT','
-echo '"XM_pro":'$XMPROFIT','
+echo '"ET_pro":'$ETHPROFIT','>> /tmp/keras.json
+echo '"RV_pro":'$RVPROFIT',' >> /tmp/keras.json
+echo '"VC_pro":'$VCPROFIT',' >> /tmp/keras.json
+echo '"XM_pro":'$XMPROFIT',' >> /tmp/keras.json
 ## getting IP info
 #COININFO=$(wget -q -O - https://whattomine.com/coins.json)
 #COININFO_PARSED=$(echo $COININFO|grep -oP '(?<="coins": ")[^"]*')
@@ -380,7 +384,10 @@ BGColor=$On_IPurple
 
 fi
 echo '"gpu_type":"'$GPU'",' >> /tmp/keras.json
-
+if ! [ -z "$1" ] 
+then
+    echo '"gpu_type":"'$GPU'",'
+fi
 
 ##################################################################
 ########                execution                        #########     
