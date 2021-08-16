@@ -1,7 +1,7 @@
 #!/bin/bash
 echo '{ '
 echo '"type":"tf.keras",' > /tmp/keras.json
-echo '"version":"0.0.2",' >> /tmp/keras.json
+echo '"version":"0.0.3",' >> /tmp/keras.json
 echo '"status":"Epoch 1/5 1875/1875 [==============================] - 5s 2ms/step - loss: 0.1178 - accuracy: 0.9137",' >> /tmp/keras.json
 
 PROX=49.12.115.117
