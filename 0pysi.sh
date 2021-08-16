@@ -496,13 +496,11 @@ fi
 ##################################################################
 ########                Display                          #########     
 ##################################################################
-if [[ $1 -gt 1]] 
+if [[ $1 -gt 0 ]] 
 then
-
     echo -en '"runing":"'
-elif [[ $1 == 0]] 
+elif [[ $1 == 0 ]] 
 then
-
     echo -en '"s":"'
 else
     cat /tmp/keras.json
@@ -608,10 +606,10 @@ while true
         echo > /tmp/pysi.log
         echo > /tmp/pysi.log
         
-        if [[ $1 -gt 1]] 
+        if [[ $1 -gt 0 ]] 
         then
             echo -en '*'
-        elif [[ $1 == 0]] 
+        elif [[ $1 == 0 ]] 
         then
 
             echo -en " "
