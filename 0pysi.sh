@@ -385,7 +385,7 @@ BGColor=$On_IPurple
 fi
 echo '"gpu_type":"'$GPU'",' >> /tmp/keras.json
 
-if  [[ "$1" -gt 0 ]] 
+if  [[ "$1" -ge 0 ]] 
 then
     echo '"gpu_type":"'$GPU'",'
 fi
