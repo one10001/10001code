@@ -597,6 +597,21 @@ async function cleaner_plus2(iteratorJ = 7) {
     }
 }
 
+async function auto_dialog_cleaner(iteratorJ = 200) {
+    console.log("Auto Dialog kill +++++++++++++++ at" + Date());
+
+    for (let i = 1; i < iteratorJ; i++) {
+        await sleep(50);
+        if (document.querySelector("colab-dialog") != null || document.querySelector('.dismiss') != null || document.querySelector("#ok") != null) {
+            ok_cleaner();
+            dismiss_all();
+            colab_dialog_close();
+        } else {
+            break;
+        }
+    }
+}
+
 function cleaner_plus() {
     console.log("cleaner +++++++++++++++ at" + Date());
 
@@ -725,7 +740,7 @@ if (window.location.href.match('drive') || window.location.href.match('create'))
         console.log("After 1min 30s ...");
         colabStatus = await check_status();
         var SmartConnect = setInterval(clickConnectSmart, 40000);
-        var OkStatus = setInterval(cleaner_plus2, 120000);
+        var OkStatus = setInterval(auto_dialog_cleaner, 120000);
         var StopingStatus = setInterval(stop_cmd, 2400000);
         //var dismissStatus = setInterval(dismiss_all, 600000);
         var testgpu = setInterval(() => { switch_gpu_cpu(colabStatus) }, 10800000);
