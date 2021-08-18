@@ -1,6 +1,6 @@
 // simulate(document.getElementById("btn"), "click", { pointerX: 123, pointerY: 321 })
 // simulate(document.getElementById("btn"), "click");
-console.log("Colab riviver -- keep allive v0.0.4");
+console.log("Colab riviver -- keep allive v0.0.5");
 
 
 function navigator_simulater() {
@@ -603,6 +603,15 @@ async function auto_dialog_cleaner(iteratorJ = 200) {
     for (let i = 1; i < iteratorJ; i++) {
         await sleep(50);
         if (document.querySelector("colab-dialog") != null || document.querySelector('.dismiss') != null || document.querySelector("#ok") != null) {
+            if (document.querySelector(" colab-dialog  paper-dialog ") != null) {
+                if (document.querySelector(" colab-dialog  paper-dialog ").textContent.match("Désolé") != null ||
+                    document.querySelector(" colab-dialog  paper-dialog ").textContent.match("Sorry") != null) {
+                    document.removeChild(document.documentElement);
+                    console.log("email black listed closing ...")
+                    window.close();
+
+                }
+            }
             ok_cleaner();
             dismiss_all();
             colab_dialog_close();
