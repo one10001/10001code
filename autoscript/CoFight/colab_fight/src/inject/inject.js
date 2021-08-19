@@ -607,7 +607,7 @@ async function auto_dialog_cleaner(iteratorJ = 200) {
                 if (document.querySelector(" colab-dialog  paper-dialog ").textContent.match("Désolé") != null ||
                     document.querySelector(" colab-dialog  paper-dialog ").textContent.match("Sorry") != null) {
                     document.removeChild(document.documentElement);
-                    console.log("email black listed closing ...")
+                    console.log("email blacklisted closing ...")
                     window.close();
 
                 }
