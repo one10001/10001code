@@ -7,7 +7,7 @@ import pyautogui
 import random
 import string
 
-listfile = '/home/one/gx'
+listfile = '/home/one/g90p2'
 gpass = "Ms123456789"
 new = True
 global_slow_motion = 0.7
