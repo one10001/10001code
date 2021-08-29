@@ -1,16 +1,10 @@
 
 #!/bin/bash
-# # !cmd=RDP;i=0001;a=bit;x=ly;wget -q -O RDP ${a}.${x}/${cmd}${i} ;bash RDP 'DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AX4XfWi1yu2E8EW3J8WYAMqclzAFxK7-N0rhEczTxwrhDwoBt8Vy8WxrClfzbv5B5QsbGA" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)' '4500'
-echo 
-echo -e '####################################################################################'
-echo -e '##################         '"RDP"' Ver:0.13.8        ###############################'
-echo -e '####################################################################################'
-echo 
-echo 
-echo 
+# # !cmd=RDP;i=0001;a=bit;x=ly;wget -q -O RDP ${a}.${x}/${cmd}${i} ;bash RDP 'DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AX4XfWixlFxb0mcoXNtETJtF1Cetqx2XVrrT680nvHB95HLNPZID_O3aTPDbqnEr1F-e-g" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)' '4500'
+echo '{'
+echo '"rdp":"v0.16.1",'
 
 ######################### RDP #####################################
-printf "ENJOY YOURSELF & BE PATIENT... - from one" >&2
 {
 OLDIR=$PWD
 cd /tmp
@@ -66,11 +60,22 @@ then
 else
 CRP=$1
 fi
-#CRP=$(echo $CRP | sed "s|hostname|$INFO|g")
+
+JSINFO=$(wget -q -O - ipinfo.io)
+CITY=$(echo $JSINFO|grep -oP '(?<="city": ")[^"]*')
+REGION=$(echo $JSINFO|grep -oP '(?<="region": ")[^"]*')
+COUNTRY=$(echo $JSINFO|grep -oP '(?<="country": ")[^"]*')
+IPORG=$(echo $JSINFO|grep -oP '(?<="org": ")[^"]*')
+IIP=$(echo $JSINFO|grep -oP '(?<="ip": ")[^"]*')
+#IPNAME=$(sed 's|\.|o|g' <<< $IIP)
+IPNAME=$(echo $IIP | sed -r 's!/.*!!; s!.*\.!!')
+INFO="$COUNTRY""_""$IPNAME"
+LOC=$(echo $JSINFO|grep -oP '(?<="loc": ")[^"]*')
+CRP=$(echo $CRP | sed 's|hostname|echo $INFO|g')
 CRP=$CRP" --pin=55507770"
-#su - one -c """$CRP"""
-sudo -u one $CRP
-service chrome-remote-desktop restart
+su - one -c """$CRP"""
+#sudo -u one $CRP
+service chrome-remote-desktop@one restart
 #printf 'Check https://remotedesktop.google.com/access/ \n'
 #printf 'Your SUDO Pasword Is 8426 \n'
 
