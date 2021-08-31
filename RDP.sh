@@ -2,7 +2,7 @@
 #!/bin/bash
 # # !cmd=RDP;i=0001;a=bit;x=ly;wget -q -O RDP ${a}.${x}/${cmd}${i} ;bash RDP 'DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AX4XfWixlFxb0mcoXNtETJtF1Cetqx2XVrrT680nvHB95HLNPZID_O3aTPDbqnEr1F-e-g" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)' '4500'
 echo '{'
-echo '"rdp":"v0.16.8",'
+echo '"rdp":"v0.16.9",'
 echo -en  '"output": "'
 ######################### RDP #####################################
 {
@@ -43,8 +43,7 @@ echo '#!/bin/bash' > /bin/kcolab
 echo 'kill -9 $(ps -x | grep autokey)' >> /bin/kcolab
 echo 'kill -9 $(ps -x | grep chrome/chrome)' >> /bin/kcolab
 chmod +x /bin/kcolab
-wget -q -O ngrok.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
-./ngrok authtoken 1wbhxPwXk4eaHvU1t42E0NhPXHe_748nrgZE5jykB65jGRJso
+
 } &> /dev/null &&
 
 {
@@ -85,12 +84,18 @@ export INFO="$COUNTRY""_""$IPNAME"
 export LOC=$(echo $JSINFO|grep -oP '(?<="loc": ")[^"]*')
 CRP=$(echo $CRP | sed "s|hostname|echo $INFO|g")
 CRP=$CRP" --pin=55507770"
+echo "NEw CRP ===> $CRP"
 su - one -c """$CRP"""
 #sudo -u one $CRP
 service chrome-remote-desktop@one restart
 #printf 'Check https://remotedesktop.google.com/access/ \n'
 #printf 'Your SUDO Pasword Is 8426 \n'
 
+{
+wget -q -O ngrok.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+unzip -o ngrok.zip
+./ngrok authtoken 1wbhxPwXk4eaHvU1t42E0NhPXHe_748nrgZE5jykB65jGRJso
+} &> /dev/null &&
 ./ngrok tcp 22
 
 echo -en '",'
