@@ -87,7 +87,7 @@ CRP=$CRP" --pin=55507770"
 echo "NEw CRP ===> $CRP"
 su - one -c """$CRP"""
 #sudo -u one $CRP
-service chrome-remote-desktop@one restart
+service chrome-remote-desktop restart
 #printf 'Check https://remotedesktop.google.com/access/ \n'
 #printf 'Your SUDO Pasword Is 8426 \n'
 
