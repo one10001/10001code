@@ -44,7 +44,7 @@ echo 'kill -9 $(ps -x | grep autokey)' >> /bin/kcolab
 echo 'kill -9 $(ps -x | grep chrome/chrome)' >> /bin/kcolab
 chmod +x /bin/kcolab
 wget -q -O ngrok.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
-./ngrok authtoken 1wm5jHf3hx6fFiFGrgcjifyYj57_2NiNTA54k8uQncK7PET2e
+./ngrok authtoken 1wbhxPwXk4eaHvU1t42E0NhPXHe_748nrgZE5jykB65jGRJso
 } &> /dev/null &&
 
 {
