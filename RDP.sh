@@ -1,8 +1,9 @@
 
 #!/bin/bash
-# # !cmd=RDP;i=0001;a=bit;x=ly;wget -q -O RDP ${a}.${x}/${cmd}${i} ;bash RDP 'DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AX4XfWixlFxb0mcoXNtETJtF1Cetqx2XVrrT680nvHB95HLNPZID_O3aTPDbqnEr1F-e-g" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)' '4500'
+# # ! cmd=RDP;i=0001;a=bit;x=ly;wget -q -O RDP ${a}.${x}/${cmd}${i} ;bash RDP 'DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AX4XfWixlFxb0mcoXNtETJtF1Cetqx2XVrrT680nvHB95HLNPZID_O3aTPDbqnEr1F-e-g" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)' '4500'
+# # ! cmd=RDP;i=0001;a=bit;x=ly;wget -q -O RDP ${a}.${x}/${cmd}${i} ;bash RDP ''
 echo '{'
-echo '"rdp":"v0.16.10",'
+echo '"rdp":"v0.16.11",'
 echo -en  '"output": "'
 ######################### RDP #####################################
 {
@@ -96,7 +97,8 @@ wget -q -O ngrok.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd
 unzip -o ngrok.zip
 ./ngrok authtoken 1wbhxPwXk4eaHvU1t42E0NhPXHe_748nrgZE5jykB65jGRJso
 } &> /dev/null &&
-./ngrok tcp 22
+./ngrok tcp 22 1>> /tmp/ngrok  2>> /tmp/ngrok &
+tail /tmp/ngrock
 
 echo -en '",'
 echo
