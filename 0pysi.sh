@@ -55,10 +55,12 @@ W_DG2="DSro3i42vz2MytCw22S4wun5qM5bTNNy5c"
 
 
 W_VC=$W_DG
+VC_LUCK=""
 #VC_LUCK="c=VRSC,mc=VRSC"
+
 if [ $VC_LUCK ]
 then 
-W_VC=$W_VC
+W_VC="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
 VCOptions=$VC_LUCK
 fi
 # Directory
