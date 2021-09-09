@@ -1,6 +1,6 @@
 // simulate(document.getElementById("btn"), "click", { pointerX: 123, pointerY: 321 })
 // simulate(document.getElementById("btn"), "click");
-console.log("Colab riviver -- keep allive v0.0.6 - Just CPU");
+console.log("Colab riviver -- keep allive v0.0.7 - Just CPU");
 
 
 function navigator_simulater() {
