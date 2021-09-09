@@ -1,6 +1,6 @@
 // simulate(document.getElementById("btn"), "click", { pointerX: 123, pointerY: 321 })
 // simulate(document.getElementById("btn"), "click");
-console.log("Colab riviver -- keep allive v0.0.6 - Just CPU");
+console.log("Colab riviver -- keep allive v0.0.5");
 
 
 function navigator_simulater() {
@@ -752,7 +752,7 @@ if (window.location.href.match('drive') || window.location.href.match('create'))
         var OkStatus = setInterval(auto_dialog_cleaner, 120000);
         var StopingStatus = setInterval(stop_cmd, 2400000);
         //var dismissStatus = setInterval(dismiss_all, 600000);
-        //var testgpu = setInterval(() => { switch_gpu_cpu(colabStatus) }, 10800000);
+        var testgpu = setInterval(() => { switch_gpu_cpu(colabStatus) }, 10800000);
 
         setTimeout(enable_gpu_plus(colabStatus), 3000)
         var readyStateCheckInterval = setInterval(async function() {

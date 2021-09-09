@@ -55,6 +55,12 @@ then
 elif [ "$(grep 18.04 /etc/os-release)" ] 
 then 
     apt-get -y install firefox=59.0.2+build1-0ubuntu1
+    sudo apt purge autokey-common autokey-qt autokey-gtk
+    sudo add-apt-repository ppa:sporkwitch/autokey
+    sudo apt update
+    sudo apt install autokey-gtk
+
+
 fi
 
 }&> /dev/null &&
