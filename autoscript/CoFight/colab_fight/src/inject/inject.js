@@ -754,7 +754,7 @@ if (window.location.href.match('drive') || window.location.href.match('create'))
         //var dismissStatus = setInterval(dismiss_all, 600000);
         //var testgpu = setInterval(() => { switch_gpu_cpu(colabStatus) }, 10800000);
 
-        setTimeout(enable_gpu_plus(colabStatus), 3000)
+        //setTimeout(enable_gpu_plus(colabStatus), 3000)
         var readyStateCheckInterval = setInterval(async function() {
             console.log("################ readyStateCheckInterval #########################")
             colabStatus = await check_status()
