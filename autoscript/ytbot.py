@@ -30,8 +30,8 @@ gid = "siwar10005"
 gpass = "Ms123456789"
 count = 0
 gaurl = ''
-listfile = '/home/abj/gids15.txt'
-gurl = 'https://youtube.com'
+#listfile = '/home/abj/gids15.txt'
+gurl = 'https://m.youtube.com/watch?reload=9&v=5xFSvU2ASQ8&skip_registered_account_check=true&noapp=1'
 ##############################################
 
 
@@ -101,8 +101,8 @@ time.sleep(5*slow_motion)
 driver.get(gurl)
 time.sleep(7*slow_motion)
 driver.implicitly_wait(10)
-
-
+Suscribing = driver.find_element(By.CSS_SELECTOR, '.slim-owner-subscribe-button   button:nth-child(1)'))
+Suscribing.click()
 # print('########### accept_code ############')
 # try:
 #     Acchoose = driver.find_element(By.CSS_SELECTOR, "ul li div div")
