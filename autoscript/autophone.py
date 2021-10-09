@@ -1,4 +1,16 @@
 #!/usr/bin/python
+
+G_profile={
+    "fn":"adam",
+    "ln":"lokn",
+    "b_day":11,
+    "b_month":1,
+    "b_year":1995,
+    "sex":2,
+    "increment":10001
+
+}
+
 import shlex
 import subprocess
 from subprocess import Popen, PIPE
@@ -17,6 +29,7 @@ import traceback
 import requests
 from ppadb.client import Client as AdbClient
 import random
+import PyChromeDevTools
 import string
 import logging
 client = AdbClient(host="127.0.0.1", port=5037) # Default is "127.0.0.1" and 5037
@@ -25,22 +38,21 @@ if len(devices) == 0:
     print('No devices')
     quit()
 
+listsuccess=''
+listall=''
+list_arabe_name=''
+
 device = devices[0]
+device.shell("forward tcp:9222 localabstract:chrome_devtools_remote")
 
-G_profile={
-    "fn":"adam",
-    "ln":"lokn",
-    "b_day":11,
-    "b_month":1,
-    "b_year":1995,
-    "sex":2
 
-}
+
 
 MobileHwawei_disp0={
     "Name":"HUAWEI SCL-L21",
     "ADB_ID":"3MSDU15C08006757",
     "rotation":0,
+    "display":[720,1280,320],
     "cleaner":[521,1258,0,360,1110,360,400],
     "action_touch":[665,1130],
     "Chrome_link":[300,105],
@@ -65,6 +77,7 @@ MobileHwawei_disp1={
     "Name":"HUAWEI SCL-L21",
     "ADB_ID":"3MSDU15C08006757",
     "rotation":1,
+    "display":[720,1280,320],
     "cleaner":[521,1258,0,360,1110,360,400],
     "action_touch":[1101,678],
     "Chrome_link":[300,111],
@@ -87,6 +100,8 @@ MobileHwawei_disp1={
 
 Mobile=MobileHwawei_disp0
 
+chrome = None
+
 def fixrotation(Mobile=Mobile):
     device.shell(f"content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:0")
     if(Mobile["rotation"]==0):
@@ -108,10 +123,20 @@ def swipe_pgend(Mobile=Mobile):
     y1=Mobile["swipe_pgend"][1]
     x2=Mobile["swipe_pgend"][2]
     y2=Mobile["swipe_pgend"][3]
-    #for i in range(7):
+    for i in range(5):
     #    device.shell(f"input swipe {x1} {y1} {int(x2/2)} {int(y2/2)} &&  swipe {int(x2/2)} {int(y2/2)} {x2/2} {y2/2}")
-    device.shell(f"input roll 15 15")
+        device.shell(f"input roll 15 15")
 
+def mob_faker(Mobile=Mobile):
+    w=Mobile['display'][0]
+    h=Mobile['display'][1]
+    d=Mobile['display'][2]
+    model='Huawei SCL-L27'
+    #device.shell(f'wm density {d+random.randrange(5)}')#chqnge density
+    device.shell(f'wm size {w+random.randrange(5)*2}x{h+random.randrange(5)*2}')
+    device.shell(f'content insert --uri content://settings/global --bind name:s:device_name --bind value:s:\"{model}\"')
+    print(device.shell("adb shell settings get global device_name"))
+    print(device.shell("wm size"))
 
 def mob_clean(Mobile=Mobile):
     x=Mobile["cleaner"][0]
@@ -161,23 +186,33 @@ def nav_open(browser_type=0,Mobile=Mobile):
     if browser_type==0:
         device.shell("am force-stop com.android.chrome")
         device.shell("am start -n com.android.chrome/org.chromium.chrome.browser.incognito.IncognitoTabLauncher")
-        rsleep(4)
+        time.sleep(4)
         device.shell(f"input tap {x} {y}")
-        rsleep(2)
+        time.sleep(2)
         device.shell("input text 'console.cloud.google.com'")
-        rsleep(0.3)
+        time.sleep(0.3)
         device.shell('input keyevent "KEYCODE_ENTER" ')
-        rsleep(2)
+        time.sleep(2)
+    elif browser_type==3:
+        device.shell("am start -n com.android.chrome/org.chromium.chrome.browser.incognito.IncognitoTabLauncher")
+        time.sleep(7)
+        device.shell("forward tcp:9222 localabstract:chrome_devtools_remote")
+        time.sleep(3)
+        chrome = PyChromeDevTools.ChromeInterface(host="127.0.0.1",port=9222)
+        chrome.Network.enable()
+        chrome.Page.enable()
+        chrome.Page.navigate(url="https://console.cloud.google.com/")
+        chrome.wait_event("Page.loadEventFired", timeout=60)
     elif browser_type==1:
         device.shell("am force-stop com.hsv.privatebrowser")
         device.shell("am start -n com.hsv.privatebrowser/com.google.android.apps.chrome.Main -d console.cloud.google.com")
     elif browser_type==2:
         device.shell("am start -n org.mozilla.focus/org.mozilla.focus.activity.MainActivity ")
-        rsleep(2)
+        time.sleep(2)
         device.shell(f"input tap {x} {y}")
-        rsleep(2)
+        time.sleep(2)
         device.shell("input text 'console.cloud.google.com'")
-        rsleep(0.3)
+        time.sleep(0.3)
         device.shell('input keyevent "KEYCODE_ENTER" ')
     rsleep(7)    
 
@@ -187,6 +222,7 @@ def click_create_acc(Mobile=Mobile):
     ca_y=Mobile["Chrome_ca"][1]
     cm_x=Mobile["Chrome_cm"][0]
     cm_y=Mobile["Chrome_cm"][1]
+    rtouch(10,450)
     if(Mobile["rotation"]!=0):
         swipe_pgend(Mobile)
     rtouch(ca_x,ca_y) # click create account
@@ -201,10 +237,14 @@ def action_touch(Mobile=Mobile):
     y=Mobile["action_touch"][1]
     rtouch(x,y)
 
-def first_step(fn='amine',ln='zazil',incerment=10001 ,Mobile=Mobile):
+def first_step(G_Profile=G_profile ,Mobile=Mobile):
+    fn=G_Profile["fn"]
+    ln=G_Profile["ln"]
+    incerment=G_Profile["increment"]
     fn_x=Mobile["Chrome_fn"][0]
     fn_y=Mobile["Chrome_fn"][1]
     gid=f"{fn}{ln}{incerment}"
+    print('first_step: '+gid)
     rtouch(fn_x,fn_y) #first name
     rsleep(0.7)
     #rtouch(fn_x,fn_y)
@@ -233,7 +273,12 @@ def first_step(fn='amine',ln='zazil',incerment=10001 ,Mobile=Mobile):
     rsleep(7)
 
 
-def se_step(sex=2,day=7,month=1,year=1995,Mobile=Mobile):
+def se_step(G_Profile=G_profile,Mobile=Mobile):
+    sex=G_profile["sex"]
+    day=G_profile["b_day"]
+    month=G_profile["b_month"]
+    year=G_profile["b_year"]
+    print("second_step")
     x_em=Mobile["Chrome_em"][0]
     y_em=Mobile["Chrome_em"][1]
     rsleep(0.1)
@@ -266,6 +311,7 @@ def se_step(sex=2,day=7,month=1,year=1995,Mobile=Mobile):
     rsleep(7)
 
 def tird_step(Mobile=Mobile):
+    print("third_step")
     #for i in range(8):
     #    device.shell('input keyevent "KEYCODE_TAB" ')
     #    rsleep(0.1)
@@ -278,26 +324,59 @@ def tird_step(Mobile=Mobile):
 def newip():
     print(device.shell('curl https://api.myip.com --insecure -4'))
     os.system("ssh root@10.10.0.3 ifup DSL2")
-    rsleep(5)
+    time.sleep(7)
     print(device.shell('curl https://api.myip.com --insecure -4'))
+
+def check_succes():
+    device.shell("forward tcp:9222 localabstract:chrome_devtools_remote")
+    time.sleep(3)
+    chrome = PyChromeDevTools.ChromeInterface(host="127.0.0.1",port=9222)
+    chrome.Network.enable()
+    chrome.Page.enable()
+    chrome.Page.navigate(url="https://console.cloud.google.com")
+    time.sleep(10)
+    event,messages=chrome.wait_event("Page.frameStoppedLoading", timeout=60)
+    try:
+        if str(messages).find("https://console.cloud.google.com/m") != -1:
+            print('success')
+            return True
+    except:
+        print('error check success')
+    # for m in messages:
+    #     if "method" in m and m["method"] == "Network.responseReceived":
+    #         try:
+    #             url=m["params"]["response"]["url"]
+    #             if url.find("https://console.cloud.google.com/m") != -1:
+    #                 print('success')
+    #                 return True
+    #         except:
+    #             pass
+    print('check_succes: False ')
+    return False
 
 if __name__ == '__main__':
     #device = client.device("3MSDU15C08006757")
     strpp=f'Connected to :{device}'
     print(strpp)
-    #newip()
-    mob_clean(Mobile)
-    fixrotation(Mobile)
-    nav_open(0) 
-    rsleep(5)
-    click_create_acc(Mobile)
-    rsleep(5)
-    first_step(fn='marwan',ln='malok',incerment=10008 ,Mobile=Mobile)
-
-    ########### non critical step
-    reset_rotation()
-    rsleep(5)
-    se_step(sex=2,day=7,month=1,year=1995,Mobile=Mobile)
-    rsleep(5)
-    tird_step()
-    rsleep(5)
+    newip()
+    #mob_faker(Mobile=Mobile)
+    for i in range(3):
+        mob_clean(Mobile)
+        fixrotation(Mobile)
+        nav_open(3) 
+        #chrome.wait_event("Page.loadEventFired", timeout=60)
+        rsleep(5)
+        click_create_acc(Mobile)
+        rsleep(5)
+        #chrome.wait_event("Page.loadEventFired", timeout=60)
+        first_step(fn='ahmed',ln='elaramo',incerment=10001+i ,Mobile=Mobile)
+        ########### non critical step
+        reset_rotation()
+        rsleep(5)
+        se_step(sex=2,day=9,month=1,year=1995,Mobile=Mobile)
+        rsleep(5)
+        tird_step()
+        rsleep(5)
+        if (check_succes()==False):
+            print("error ")
+            break
