@@ -9,7 +9,6 @@ adb shell am force-stop com.hsv.privatebrowser
 #adb shell input keyevent  "FLAG_EDITOR_ACTION" 
 #3- Android Private Browser steps
 adb shell dumpsys window windows | grep -E 'mCurrentFocus|mFocusedApp'
-adb shell am start -n com.android.chrome/org.chromium.chrome.browser.incognito.IncognitoTabLauncher
 #adb shell am start -n com.hsv.privatebrowser/com.google.android.apps.chrome.Main -d console.cloud.google.com
 adb shell input tap 300 111
 adb shell input text 'console.cloud.google.com'
@@ -65,6 +64,13 @@ adb shell input tap 560 850 # Next ---
 adb shell am force-stop com.hsv.privatebrowser
 
 
+#rotation
+#1- disable auto rot
+adb shell content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:0
+#2- rotate to landscape
+adb shell content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:1
+#3- rotate to portrait
+adb shell content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0
 
 
 # 0 -->  "KEYCODE_UNKNOWN" 

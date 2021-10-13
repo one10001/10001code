@@ -101,7 +101,7 @@ time.sleep(5*slow_motion)
 driver.get(gurl)
 time.sleep(7*slow_motion)
 driver.implicitly_wait(10)
-Suscribing = driver.find_element(By.CSS_SELECTOR, '.slim-owner-subscribe-button   button:nth-child(1)'))
+Suscribing = driver.find_element(By.CSS_SELECTOR, '.slim-owner-subscribe-button   button:nth-child(1)')
 Suscribing.click()
 # print('########### accept_code ############')
 # try:
