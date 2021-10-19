@@ -31,56 +31,111 @@ import random
 import PyChromeDevTools
 import string
 import logging
-client = AdbClient(host="127.0.0.1", port=5037) # Default is "127.0.0.1" and 5037
-devices = client.devices()
-if len(devices) == 0:
-    print('No devices')
-    quit()
 
 
-
-### Name Generator ####
-G_profile={
-    "fn":"amine",
-    "ln":"ettayibi",
-    "b_day":15,
-    "b_month":1,
-    "b_year":1995,
-    "sex":2,
-    "increment":10001
+MobilInfixi2_disp0={
+    "Name":"Infinix X5516B",
+    "ADB_ID":"0412911988106599",
+    "rotation":0,
+    "display":[720,1440,252],
+    "cleaner":[350,1220,2,350,1220,350,1220],
+    "action_touch":[662,1285],
+    "Chrome_link":[300,105],
+    "Focus_link":[300,107],
+    "Chrome_fn":[331,540],
+    "Focus_fn":[331,517],
+    "Chrome_ca":[150,964],# click create account
+    "Focus_ca":[163,964],# click create account
+    "Chrome_cm":[181,1060],# click me only
+    "Focus_cm":[181,1060],# click me only
+    "Chrome_em":[346,536],
+    "Focus_em":[346,536],
+    "Chrome_last":[570,1038],
+    "Focus_last":[570,1038],
+    "swipe_pgend":[300,700,300,300],
+    "accept":[570,1038],
+    "Speed":1,
 
 }
-def nameArabeGen():
-    pass
+
+MobilInfixi2_disp1={
+    "Name":"Infinix X5516B",
+    "ADB_ID":"0412911988106599",
+    "rotation":1,
+    "display":[720,1440,252],
+    "cleaner":[350,1220,2,350,1220,350,1220],
+    "action_touch":[1188,688],
+    "Chrome_link":[300,111],
+    "Focus_link":[300,107],
+    "Chrome_fn":[472,597],
+    "Focus_fn":[446,629],
+    "Chrome_ca":[390,390],# click create account
+    "Focus_ca":[390,390],# click create account
+    "Chrome_cm":[430,490],# click me only
+    "Focus_cm":[430,490],# click me only
+    "Chrome_em":[346,536],
+    "Focus_em":[346,536],
+    "Chrome_last":[560,850],
+    "Focus_last":[560,850],
+    "swipe_pgend":[235,560,241,231],
+    "accept":[561,877],
+    "Speed":1,
 
 
-#### Profile Generator ###
+
+}
 
 
-def genarate_gawri_profile(G_profile=G_profile):
-    sex=random.randrange(2)+1
-    while True:
-        if sex==1:
-            G_profile["fn"]=names.get_first_name(gender='female').lower()
-        else:
-            G_profile["fn"]=names.get_first_name(gender='male').lower()
-        G_profile["ln"]="el"+names.get_last_name().lower()+"i"
-        with open(listerror, 'r') as file:
-            data = file.read()
-        with open(listsuccess, 'r') as file:
-            data2 = file.read()    
-        data=data+data2
-        if data.find(G_profile["fn"]+G_profile["ln"]) == -1:
-                break
-    G_profile["b_day"]=random.randrange(28)+1
-    G_profile["b_month"]=random.randrange(28)+1
-    G_profile["b_year"]=random.randrange(53)+1950
-    G_profile["sex"]=sex
-    return G_profile
 
-device = devices[0]
-os.system("adb forward tcp:9222 localabstract:chrome_devtools_remote")
+MobilSMJ7_disp0={
+    "Name":"Sumsung SM-J7008",
+    "ADB_ID":"ece4d41a",
+    "rotation":0,
+    "display":[720,1280,252],
+    "cleaner":[350,1220,2,350,1220,350,1220],
+    "action_touch":[666,1212],
+    "Chrome_link":[300,105],
+    "Focus_link":[300,107],
+    "Chrome_fn":[331,540],
+    "Focus_fn":[331,517],
+    "Chrome_ca":[163,964],# click create account
+    "Focus_ca":[163,964],# click create account
+    "Chrome_cm":[120,765],# click me only
+    "Focus_cm":[120,765],# click me only
+    "Chrome_em":[346,536],
+    "Focus_em":[346,536],
+    "Chrome_last":[560,850],
+    "Focus_last":[560,850],
+    "swipe_pgend":[300,700,300,300],
+    "accept":[561,877],
+    "Speed":1,
 
+}
+# Y fn 540-> 490
+MobilSMJ7_disp1={
+    "Name":"Sumsung SM-J7008",
+    "ADB_ID":"ece4d41a",
+    "rotation":1,
+    "display":[720,1280,252],
+    "cleaner":[675,675,2,675,675,675,675],
+    "action_touch":[1188,688],
+    "Chrome_link":[300,111],
+    "Focus_link":[300,107],
+    "Chrome_fn":[472,597],
+    "Focus_fn":[446,629],
+    "Chrome_ca":[390,390],# click create account
+    "Focus_ca":[390,390],# click create account
+    "Chrome_cm":[430,490],# click me only
+    "Focus_cm":[430,490],# click me only
+    "Chrome_em":[346,536],
+    "Focus_em":[346,536],
+    "Chrome_last":[560,850],
+    "Focus_last":[560,850],
+    "swipe_pgend":[235,560,241,231],
+    "accept":[561,877],
+    "Speed":1,
+
+}
 
 
 
@@ -134,9 +189,55 @@ MobileHwawei_disp1={
 
 }
 
-Mobile=MobileHwawei_disp0
 
-chrome = None
+
+
+Mobiles=[MobilSMJ7_disp0,MobileHwawei_disp0,MobilSMJ7_disp1,MobileHwawei_disp1]
+#Mobile=MobileHwawei_disp0
+Mobile=MobilSMJ7_disp0
+#device = devices[0]
+
+### Name Generator ####
+G_profile={
+    "fn":"amine",
+    "ln":"ettayibi",
+    "b_day":15,
+    "b_month":1,
+    "b_year":1995,
+    "sex":2,
+    "increment":10001
+
+}
+def nameArabeGen():
+    pass
+
+
+#### Profile Generator ###
+
+
+def genarate_gawri_profile(G_profile=G_profile):
+    sex=random.randrange(2)+1
+    while True:
+        if sex==1:
+            G_profile["fn"]=names.get_first_name(gender='female').lower()
+        else:
+            G_profile["fn"]=names.get_first_name(gender='male').lower()
+        G_profile["ln"]="el"+names.get_last_name().lower()+"i"
+        with open(listerror, 'r') as file:
+            data = file.read()
+        with open(listsuccess, 'r') as file:
+            data2 = file.read()    
+        data=data+data2
+        if data.find(G_profile["fn"]+G_profile["ln"]) == -1:
+                break
+    G_profile["b_day"]=random.randrange(28)+1
+    G_profile["b_month"]=random.randrange(28)+1
+    G_profile["b_year"]=random.randrange(53)+1950
+    G_profile["sex"]=sex
+    return G_profile
+
+
+
 
 def fixrotation(Mobile=Mobile):
     device.shell(f"content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:0")
@@ -199,6 +300,16 @@ def mob_clean(Mobile=Mobile):
         rsleep(1)
         device.shell(f"input swipe {x1} {y1} {x2} {y2}")
         rsleep(0.2)
+    if(Mobile["cleaner"][2]==2):
+        #device.shell(f"input tap {x} {y}")
+        device.shell(f"input keyevent KEYCODE_HOME")
+        rsleep(1)
+        device.shell(f"input keyevent KEYCODE_APP_SWITCH")
+        rsleep(4)
+        device.shell(f"input tap {x} {y}")
+        #rsleep(1)
+        #device.shell(f"input tap {x} {y}")
+        rsleep(0.2)
 
 def write_string(s):
     for c in s:
@@ -232,7 +343,8 @@ def nav_open(browser_type=0,Mobile=Mobile):
     elif browser_type==3:
         device.shell("am start -n com.android.chrome/org.chromium.chrome.browser.incognito.IncognitoTabLauncher")
         time.sleep(7)
-        os.system("adb forward tcp:9222 localabstract:chrome_devtools_remote")
+        os.system("adb forward --remove-all")
+        os.system("adb  -s "+Mobile["ADB_ID"]+" forward tcp:9222 localabstract:chrome_devtools_remote")
         time.sleep(3)
         chrome = PyChromeDevTools.ChromeInterface(host="127.0.0.1",port=9222)
         chrome.Network.enable()
@@ -366,7 +478,8 @@ def newip():
     print(device.shell('curl https://api.myip.com --insecure -4 --max-time 10 --retry 10 --retry-max-time 40 -s'))
 
 def check_succes():
-    os.system("adb forward tcp:9222 localabstract:chrome_devtools_remote")
+    os.system("adb forward --remove-all")
+    os.system("adb  -s "+Mobile["ADB_ID"]+" forward tcp:9222 localabstract:chrome_devtools_remote")
     time.sleep(3)
     chrome = PyChromeDevTools.ChromeInterface(host="127.0.0.1",port=9222)
     chrome.Network.enable()
@@ -393,49 +506,76 @@ def check_succes():
     return False
 
 
+def phone_select(phone_i,Mobiles):
+    for i in range(len(Mobiles)):
+        #if phone_i%len(Mobiles) == 0 :
+        print("*********** selected phone: "+Mobiles[phone_i%len(Mobiles)]['Name']
+        +     " ***********")
+        return Mobiles[phone_i%len(Mobiles)]
+
+chrome = None
+
+phone_i=0
+
+Mobiles=[MobileHwawei_disp1,MobilSMJ7_disp1,MobileHwawei_disp0,MobilSMJ7_disp0]
 #if __name__ == '__main__':
-while True:    
-    #device = client.device("3MSDU15C08006757")
-    strpp=f'Connected to :{device}'
-    print(strpp)
-    ### random Dispo 
-    if random.randrange(2) == 0:
-        Mobile=MobileHwawei_disp0
-    else:
-        Mobile=MobileHwawei_disp1
-    newip()
-    G_profile=genarate_gawri_profile(G_profile)
-    #mob_faker(Mobile=Mobile)
-    for i in range(3):
-        mob_clean(Mobile)
-        fixrotation(Mobile)
-        nav_open(3) 
-        #chrome.wait_event("Page.loadEventFired", timeout=60)
-        rsleep(5)
-        click_create_acc(Mobile)
-        rsleep(5)
-        #chrome.wait_event("Page.loadEventFired", timeout=60)
-        new_gid=first_step(G_Profile=G_profile,loop_i=i ,Mobile=Mobile)
-        ########### non critical step
-        reset_rotation()
-        rsleep(5)
-        se_step(G_Profile=G_profile ,Mobile=Mobile)
-        rsleep(5)
-        tird_step()
-        rsleep(5)
-        if (check_succes()==False):
-            print("error ")
-            with open(listerror, "a") as error_list:
-                print("Wirting in sccess list")
-                error_list.write("\n")
-                error_list.write(new_gid)
-            break
-        else:
-            print("------>   "+new_gid+"   <------")
-            with open(listsuccess, "a") as success_list:
-                print("Wirting in sccess list")
-                success_list.write("\n")
-                success_list.write(new_gid)
+while True:   
+    try:
+        Mobile=phone_select(phone_i,Mobiles)
+        #Mobile=MobilSMJ7_disp1
+    ### Ininit cnx ###########
+        client = AdbClient(host="127.0.0.1", port=5037) # Default is "127.0.0.1" and 5037
+        devices = client.devices()
+        if len(devices) == 0:
+            print('No devices')
+            quit()
+        device = client.device(Mobile["ADB_ID"])
+        strpp=f'Connected to :{device}'
+
+        os.system("adb forward --remove-all")
+        os.system("adb -s "+Mobile["ADB_ID"]+" forward tcp:9222 localabstract:chrome_devtools_remote")
+    #############################
+
+
+        device = client.device(Mobile["ADB_ID"])
+        os.system("adb -s "+Mobile["ADB_ID"]+" forward tcp:9222 localabstract:chrome_devtools_remote")
+        newip()
+        G_profile=genarate_gawri_profile(G_profile)
+        #mob_faker(Mobile=Mobile)
+        for i in range(3):
+            mob_clean(Mobile)
+            fixrotation(Mobile)
+            nav_open(3) 
+            #chrome.wait_event("Page.loadEventFired", timeout=60)
+            rsleep(5)
+            click_create_acc(Mobile)
+            rsleep(5)
+            #chrome.wait_event("Page.loadEventFired", timeout=60)
+            new_gid=first_step(G_Profile=G_profile,loop_i=i ,Mobile=Mobile)
+            ########### non critical step
+            reset_rotation()
+            rsleep(5)
+            se_step(G_Profile=G_profile ,Mobile=Mobile)
+            rsleep(5)
+            tird_step()
+            rsleep(5)
+            if (check_succes()==False):
+                print("error ")
+                with open(listerror, "a") as error_list:
+                    print("Wirting in sccess list")
+                    error_list.write("\n")
+                    error_list.write(new_gid)
+                break
+            else:
+                print("------>   "+new_gid+"   <------")
+                with open(listsuccess, "a") as success_list:
+                    print("Wirting in sccess list")
+                    success_list.write("\n")
+                    success_list.write(new_gid)
+        
+    except:
+        print("big error :"+str(phone_i))
+    phone_i=phone_i+1
     for i  in range(2):
         time_sleep=3000+random.randrange(600)
         print("*** sleeping for :"+str(time_sleep/60)+'min')

