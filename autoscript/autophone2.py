@@ -494,8 +494,9 @@ def newip():
         print(os.system('curl https://api.myip.com --insecure -4 --max-time 10 --retry 10 --retry-max-time 40 -s'))
     except:
         print('erreur ip')
-def check_succes():
+def check_succes(Mobile=Mobile):
     os.system("adb forward --remove-all")
+    time.sleep(2)
     os.system("adb  -s "+Mobile["ADB_ID"]+" forward tcp:17777 localabstract:chrome_devtools_remote")
     time.sleep(phone_speed+3)
     chrome = PyChromeDevTools.ChromeInterface(host="127.0.0.1",port=17777)
@@ -508,7 +509,7 @@ def check_succes():
     time.sleep(phone_speed+10)
     event,messages=chrome.wait_event("Page.frameStoppedLoading", timeout=60)
     try:
-        if str(messages).find("https://mail.google.com") != -1:
+        if str(messages).find("https://mail.google.com/mail/mu/") != -1:
             print('success')
             return True
     except:
@@ -564,7 +565,7 @@ while True:
         for i in range(3):
             mob_clean(Mobile)
             fixrotation(Mobile)
-            nav_open(3) 
+            nav_open(3,Mobile=Mobile) 
             #chrome.wait_event("Page.loadEventFired", timeout=60)
             rsleep(5)
             click_create_acc(Mobile)
@@ -578,7 +579,7 @@ while True:
             rsleep(5)
             tird_step(Mobile=Mobile)
             rsleep(5)
-            if (check_succes()==False):
+            if (check_succes(Mobile)==False):
                 print("error ")
                 with open(listerror, "a") as error_list:
                     print("Wirting in Error list")

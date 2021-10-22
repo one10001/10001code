@@ -485,11 +485,12 @@ def newip():
     time.sleep(7)
     print(device.shell('curl https://api.myip.com --insecure -4 --max-time 10 --retry 10 --retry-max-time 40 -s'))
 
-def check_succes():
+def check_succes(Mobile=Mobile):
     os.system("adb forward --remove-all")
-    os.system("adb  -s "+Mobile["ADB_ID"]+" forward tcp:9222 localabstract:chrome_devtools_remote")
+    time.sleep(2)
+    os.system("adb  -s "+Mobile["ADB_ID"]+" forward tcp:19222 localabstract:chrome_devtools_remote")
     time.sleep(3)
-    chrome = PyChromeDevTools.ChromeInterface(host="127.0.0.1",port=9222)
+    chrome = PyChromeDevTools.ChromeInterface(host="127.0.0.1",port=19222)
     chrome.Network.enable()
     chrome.Page.enable()
     chrome.Page.navigate(url="https://console.cloud.google.com")
@@ -513,7 +514,37 @@ def check_succes():
     print('check_succes: False ')
     return False
 
-
+def check_succes2(Mobile=Mobile):
+    os.system("adb forward --remove-all")
+    time.sleep(2)
+    os.system("adb  -s "+Mobile["ADB_ID"]+" forward tcp:17777 localabstract:chrome_devtools_remote")
+    time.sleep(phone_speed+3)
+    chrome = PyChromeDevTools.ChromeInterface(host="127.0.0.1",port=17777)
+    time.sleep(phone_speed+3)
+    chrome.Network.enable()
+    time.sleep(phone_speed+3)
+    chrome.Page.enable()
+    time.sleep(phone_speed+3)
+    chrome.Page.navigate(url="https://gmail.com")
+    time.sleep(phone_speed+10)
+    event,messages=chrome.wait_event("Page.frameStoppedLoading", timeout=60)
+    try:
+        if str(messages).find("https://mail.google.com/mail/mu/") != -1:
+            print('success')
+            return True
+    except:
+        print('error check success')
+    # for m in messages:
+    #     if "method" in m and m["method"] == "Network.responseReceived":
+    #         try:
+    #             url=m["params"]["response"]["url"]
+    #             if url.find("https://console.cloud.google.com/m") != -1:
+    #                 print('success')
+    #                 return True
+    #         except:
+    #             pass
+    print('check_succes: False ')
+    return False
 def phone_select(phone_i,Mobiles):
     for i in range(len(Mobiles)):
         #if phone_i%len(Mobiles) == 0 :
@@ -535,7 +566,7 @@ while True:
         Mobile=phone_select(phone_i,Mobiles)
         device = client.device(Mobile["ADB_ID"])
         os.system("adb forward --remove-all")
-        os.system("adb -s "+Mobile["ADB_ID"]+" forward tcp:9222 localabstract:chrome_devtools_remote")
+        os.system("adb -s "+Mobile["ADB_ID"]+" forward tcp:19222 localabstract:chrome_devtools_remote")
     #############################
         newip()
         G_profile=genarate_gawri_profile(G_profile)
@@ -557,7 +588,7 @@ while True:
             rsleep(5)
             tird_step(Mobile=Mobile)
             rsleep(5)
-            if (check_succes()==False):
+            if (check_succes2(Mobile=Mobile)==False):
                 print("error ")
                 with open(listerror, "a") as error_list:
                     print("Wirting in sccess list")
