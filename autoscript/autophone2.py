@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/bin/python3
 
 import os
 home_dir=os.path.expanduser('~')
@@ -8,6 +8,7 @@ listerror=home_dir+'/Gerror_list.txt'
 list_arabe_male_name=home_dir+'/list_arabe_male_name.txt'
 list_arabe_female_name=home_dir+'/list_arabe_female_name.txt'
 
+phone_speed=5
 
 import shlex
 import subprocess
@@ -31,6 +32,8 @@ import random
 import PyChromeDevTools
 import string
 import logging
+
+
 
 
 MobilInfixi0={
@@ -193,9 +196,9 @@ MobileHwawei_disp1={
 
 
 
-Mobiles=[MobilSMJ7_disp0,MobileHwawei_disp0,MobilSMJ7_disp1,MobileHwawei_disp1]
+Mobiles=[MobilInfixi0,MobilInfixi1]
 #Mobile=MobileHwawei_disp0
-Mobile=MobilSMJ7_disp0
+Mobile=MobilInfixi1
 #device = devices[0]
 
 ### Name Generator ####
@@ -252,9 +255,13 @@ def reset_rotation():
     device.shell(f"content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:0")
 
 
-def rsleep(time_s,pec=50):
+def rsleep(time_s,pec=50,phone_speed=phone_speed):
     x=(random.randrange(100)-49)*time_s/pec
-    time.sleep(time_s+x)
+    time.sleep(phone_speed+time_s+x)
+
+def keysleep(time_s,pec=50,phone_speed=phone_speed):
+    x=(random.randrange(100)-49)*time_s/pec
+    time.sleep(phone_speed*0.2+time_s+x)
 
 def swipe_pgend(Mobile=Mobile):
     x1=Mobile["swipe_pgend"][0]
@@ -262,8 +269,8 @@ def swipe_pgend(Mobile=Mobile):
     x2=Mobile["swipe_pgend"][2]
     y2=Mobile["swipe_pgend"][3]
     for i in range(5):
-    #    device.shell(f"input swipe {x1} {y1} {int(x2/2)} {int(y2/2)} &&  swipe {int(x2/2)} {int(y2/2)} {x2/2} {y2/2}")
-        device.shell(f"input roll 15 15")
+        device.shell(f"input swipe {x1} {y1} {int(x2/2)} {int(y2/2)} &&  swipe {int(x2/2)} {int(y2/2)} {x2/2} {y2/2}")
+        #device.shell(f"input roll 15 15")
 
 def mob_faker(Mobile=Mobile):
     w=Mobile['display'][0]
@@ -285,7 +292,6 @@ def mob_clean(Mobile=Mobile):
     y2=Mobile["cleaner"][6]
     device.shell(f"content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:0")
     device.shell(f"content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0")
-    
     if(Mobile["cleaner"][2]==0):
         #device.shell(f"input tap {x} {y}")
         device.shell(f"input keyevent KEYCODE_HOME")
@@ -317,7 +323,7 @@ def mob_clean(Mobile=Mobile):
 
 def write_string(s):
     for c in s:
-        rsleep(0.3,50)
+        keysleep(0.3,50)
         if c.isupper():
             device.shell('input text '+c)
         else:
@@ -337,26 +343,25 @@ def nav_open(browser_type=0,Mobile=Mobile):
     if browser_type==0:
         device.shell("am force-stop com.android.chrome")
         device.shell("am start -n com.android.chrome/org.chromium.chrome.browser.incognito.IncognitoTabLauncher")
-        time.sleep(4)
+        time.sleep(phone_speed+4)
         device.shell(f"input tap {x} {y}")
-        time.sleep(2)
+        time.sleep(phone_speed+2)
         device.shell("input text 'console.cloud.google.com'")
-        time.sleep(0.3)
+        time.sleep(phone_speed+0.3)
         device.shell('input keyevent "KEYCODE_ENTER" ')
-        time.sleep(2)
+        time.sleep(phone_speed+2)
     elif browser_type==3:
         device.shell("am start -n com.android.chrome/org.chromium.chrome.browser.incognito.IncognitoTabLauncher")
-        time.sleep(20)
+        time.sleep(phone_speed+20)
         os.system("adb forward --remove-all")
-        os.system("adb  -s "+Mobile["ADB_ID"]+" forward tcp:19222 localabstract:chrome_devtools_remote")
-        time.sleep(9)
-        chrome = PyChromeDevTools.ChromeInterface(host="127.0.0.1",port=19222)
+        os.system("adb  -s "+Mobile["ADB_ID"]+" forward tcp:17777 localabstract:chrome_devtools_remote")
+        time.sleep(phone_speed+5)
+        chrome = PyChromeDevTools.ChromeInterface(host="127.0.0.1",port=17777)
+        time.sleep(phone_speed+3)
         chrome.Network.enable()
-        time.sleep(2)
+        time.sleep(phone_speed+3)
         chrome.Page.enable()
-        time.sleep(2)
-        chrome.Page.navigate(url="https://console.cloud.google.com/")
-        time.sleep(2)
+        time.sleep(phone_speed+3)
         chrome.Page.navigate(url="https://console.cloud.google.com/")
         chrome.wait_event("Page.loadEventFired", timeout=60)
     elif browser_type==1:
@@ -364,11 +369,11 @@ def nav_open(browser_type=0,Mobile=Mobile):
         device.shell("am start -n com.hsv.privatebrowser/com.google.android.apps.chrome.Main -d console.cloud.google.com")
     elif browser_type==2:
         device.shell("am start -n org.mozilla.focus/org.mozilla.focus.activity.MainActivity ")
-        time.sleep(2)
+        time.sleep(phone_speed+2)
         device.shell(f"input tap {x} {y}")
-        time.sleep(2)
+        time.sleep(phone_speed+2)
         device.shell("input text 'console.cloud.google.com'")
-        time.sleep(0.3)
+        time.sleep(phone_speed+0.3)
         device.shell('input keyevent "KEYCODE_ENTER" ')
     rsleep(7)    
 
@@ -480,23 +485,30 @@ def tird_step(Mobile=Mobile):
     rtouch(Mobile['accept'][0],Mobile['accept'][1])
 
 def newip():
-    print(device.shell('curl https://api.myip.com --insecure -4 --max-time 10 --retry 10 --retry-max-time 40 -s'))
-    os.system("ssh root@10.10.0.3 ifup DSL2")
-    time.sleep(7)
-    print(device.shell('curl https://api.myip.com --insecure -4 --max-time 10 --retry 10 --retry-max-time 40 -s'))
-
+    try:
+        print(os.system('curl https://api.myip.com --insecure -4 --max-time 10 --retry 10 --retry-max-time 40 -s'))
+        #os.system("ssh root@10.10.0.3 ifup DSL2")
+        os.system("python3 /home/one/ytbot/resetip.py")
+        time.sleep(phone_speed+7)
+        os.system("kill -9 $(ps -x | grep firefox)")
+        print(os.system('curl https://api.myip.com --insecure -4 --max-time 10 --retry 10 --retry-max-time 40 -s'))
+    except:
+        print('erreur ip')
 def check_succes():
     os.system("adb forward --remove-all")
-    os.system("adb  -s "+Mobile["ADB_ID"]+" forward tcp:9222 localabstract:chrome_devtools_remote")
-    time.sleep(3)
-    chrome = PyChromeDevTools.ChromeInterface(host="127.0.0.1",port=9222)
+    os.system("adb  -s "+Mobile["ADB_ID"]+" forward tcp:17777 localabstract:chrome_devtools_remote")
+    time.sleep(phone_speed+3)
+    chrome = PyChromeDevTools.ChromeInterface(host="127.0.0.1",port=17777)
+    time.sleep(phone_speed+3)
     chrome.Network.enable()
+    time.sleep(phone_speed+3)
     chrome.Page.enable()
-    chrome.Page.navigate(url="https://console.cloud.google.com")
-    time.sleep(10)
+    time.sleep(phone_speed+3)
+    chrome.Page.navigate(url="https://gmail.com")
+    time.sleep(phone_speed+10)
     event,messages=chrome.wait_event("Page.frameStoppedLoading", timeout=60)
     try:
-        if str(messages).find("https://console.cloud.google.com/m") != -1:
+        if str(messages).find("https://mail.google.com") != -1:
             print('success')
             return True
     except:
@@ -521,36 +533,45 @@ def phone_select(phone_i,Mobiles):
         +     " ***********")
         return Mobiles[phone_i%len(Mobiles)]
 
-chrome = None
 
+
+Mobiles=[MobilInfixi0,MobilInfixi1]
+
+
+
+chrome = None
 phone_i=0
-execep=0
-#Mobiles=[MobileHwawei_disp1,MobilSMJ7_disp1,MobileHwawei_disp0,MobilSMJ7_disp0]
-Mobiles=[MobilSMJ7_disp0,MobileHwawei_disp1,MobilSMJ7_disp1,MobileHwawei_disp0]
-#if __name__ == '__main__':
 client = AdbClient(host="127.0.0.1", port=5037) # Default is "127.0.0.1" and 5037
 devices = client.devices()
-while True:   
-    try:
+iex=0
+
+#if __name__ == '__main__':
+while True:
+    try:    
         Mobile=phone_select(phone_i,Mobiles)
-        device = client.device(Mobile["ADB_ID"])
-        os.system("adb forward --remove-all")
-        os.system("adb -s "+Mobile["ADB_ID"]+" forward tcp:9222 localabstract:chrome_devtools_remote")
-    #############################
-        newip()
+        try:
+            device = client.device(Mobile["ADB_ID"])
+        except:
+            print("Error CNX Device")
+        #os.system("adb forward --remove-all")
+        #os.system("adb -s "+Mobile["ADB_ID"]+" forward tcp:17777 localabstract:chrome_devtools_remote")
+        time.sleep(10)
+        if iex ==0 :
+           newip()
+    #os.system("python3 /home/one/ytbot/resetip.py")
         G_profile=genarate_gawri_profile(G_profile)
-        #mob_faker(Mobile=Mobile)
+    #mob_faker(Mobile=Mobile)
         for i in range(3):
             mob_clean(Mobile)
             fixrotation(Mobile)
-            nav_open(3,Mobile=Mobile) 
+            nav_open(3) 
             #chrome.wait_event("Page.loadEventFired", timeout=60)
             rsleep(5)
             click_create_acc(Mobile)
             rsleep(5)
             #chrome.wait_event("Page.loadEventFired", timeout=60)
             new_gid=first_step(G_Profile=G_profile,loop_i=i ,Mobile=Mobile)
-            ########### non critical step
+        ########### non critical step
             reset_rotation()
             rsleep(5)
             se_step(G_Profile=G_profile ,Mobile=Mobile)
@@ -560,29 +581,26 @@ while True:
             if (check_succes()==False):
                 print("error ")
                 with open(listerror, "a") as error_list:
-                    print("Wirting in sccess list")
+                    print("Wirting in Error list")
                     error_list.write("\n")
                     error_list.write(new_gid)
                 break
             else:
                 print("------>   "+new_gid+"   <------")
                 with open(listsuccess, "a") as success_list:
-                    print("Wirting in Error list")
+                    print("Wirting in Success list")
                     success_list.write("\n")
                     success_list.write(new_gid)
-        execep=0
-        phone_i=phone_i+1
+        iex=0
     except:
-        print("big error :"+str(phone_i))
-        execep=execep+1
-        if execep>2:
-            phone_i=phone_i+1
-        else:
+        if iex<2:
+            iex= iex+1
             continue
-
-    for i  in range(2):
-        time_sleep=3000+random.randrange(1200)
+        print("XXXXXXXXXXXXXXXXXX error XXXXXXXXXXXXXXXXXX")
+    for i  in range(5):
+        time_sleep=3000+random.randrange(600)
         print("*** sleeping for :"+str(time_sleep/60)+'min')
         #rsleep(3600)
-        time.sleep(time_sleep)
+        time.sleep(phone_speed+time_sleep)
         print("*")
+    phone_i=phone_i+1
