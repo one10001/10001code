@@ -33,7 +33,7 @@ import string
 import logging
 
 
-MobilInfixi2_disp0={
+MobilInfixi0={
     "Name":"Infinix X5516B",
     "ADB_ID":"0412911988106599",
     "rotation":0,
@@ -58,7 +58,8 @@ MobilInfixi2_disp0={
 
 }
 
-MobilInfixi2_disp1={
+
+MobilInfixi1={
     "Name":"Infinix X5516B",
     "ADB_ID":"0412911988106599",
     "rotation":1,
@@ -67,7 +68,7 @@ MobilInfixi2_disp1={
     "action_touch":[1188,688],
     "Chrome_link":[300,111],
     "Focus_link":[300,107],
-    "Chrome_fn":[472,597],
+    "Chrome_fn":[472,613],
     "Focus_fn":[446,629],
     "Chrome_ca":[390,390],# click create account
     "Focus_ca":[390,390],# click create account
@@ -78,7 +79,7 @@ MobilInfixi2_disp1={
     "Chrome_last":[560,850],
     "Focus_last":[560,850],
     "swipe_pgend":[235,560,241,231],
-    "accept":[561,877],
+    "accept":[555,1021],
     "Speed":1,
 
 
@@ -282,6 +283,9 @@ def mob_clean(Mobile=Mobile):
     y1=Mobile["cleaner"][4]
     x2=Mobile["cleaner"][5]
     y2=Mobile["cleaner"][6]
+    device.shell(f"content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:0")
+    device.shell(f"content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0")
+    
     if(Mobile["cleaner"][2]==0):
         #device.shell(f"input tap {x} {y}")
         device.shell(f"input keyevent KEYCODE_HOME")
@@ -342,13 +346,17 @@ def nav_open(browser_type=0,Mobile=Mobile):
         time.sleep(2)
     elif browser_type==3:
         device.shell("am start -n com.android.chrome/org.chromium.chrome.browser.incognito.IncognitoTabLauncher")
-        time.sleep(7)
+        time.sleep(20)
         os.system("adb forward --remove-all")
-        os.system("adb  -s "+Mobile["ADB_ID"]+" forward tcp:9222 localabstract:chrome_devtools_remote")
-        time.sleep(3)
-        chrome = PyChromeDevTools.ChromeInterface(host="127.0.0.1",port=9222)
+        os.system("adb  -s "+Mobile["ADB_ID"]+" forward tcp:19222 localabstract:chrome_devtools_remote")
+        time.sleep(9)
+        chrome = PyChromeDevTools.ChromeInterface(host="127.0.0.1",port=19222)
         chrome.Network.enable()
+        time.sleep(2)
         chrome.Page.enable()
+        time.sleep(2)
+        chrome.Page.navigate(url="https://console.cloud.google.com/")
+        time.sleep(2)
         chrome.Page.navigate(url="https://console.cloud.google.com/")
         chrome.wait_event("Page.loadEventFired", timeout=60)
     elif browser_type==1:
@@ -516,36 +524,26 @@ def phone_select(phone_i,Mobiles):
 chrome = None
 
 phone_i=0
-
-Mobiles=[MobileHwawei_disp1,MobilSMJ7_disp1,MobileHwawei_disp0,MobilSMJ7_disp0]
+execep=0
+#Mobiles=[MobileHwawei_disp1,MobilSMJ7_disp1,MobileHwawei_disp0,MobilSMJ7_disp0]
+Mobiles=[MobilSMJ7_disp0,MobileHwawei_disp1,MobilSMJ7_disp1,MobileHwawei_disp0]
 #if __name__ == '__main__':
+client = AdbClient(host="127.0.0.1", port=5037) # Default is "127.0.0.1" and 5037
+devices = client.devices()
 while True:   
     try:
         Mobile=phone_select(phone_i,Mobiles)
-        #Mobile=MobilSMJ7_disp1
-    ### Ininit cnx ###########
-        client = AdbClient(host="127.0.0.1", port=5037) # Default is "127.0.0.1" and 5037
-        devices = client.devices()
-        if len(devices) == 0:
-            print('No devices')
-            quit()
         device = client.device(Mobile["ADB_ID"])
-        strpp=f'Connected to :{device}'
-
         os.system("adb forward --remove-all")
         os.system("adb -s "+Mobile["ADB_ID"]+" forward tcp:9222 localabstract:chrome_devtools_remote")
     #############################
-
-
-        device = client.device(Mobile["ADB_ID"])
-        os.system("adb -s "+Mobile["ADB_ID"]+" forward tcp:9222 localabstract:chrome_devtools_remote")
         newip()
         G_profile=genarate_gawri_profile(G_profile)
         #mob_faker(Mobile=Mobile)
         for i in range(3):
             mob_clean(Mobile)
             fixrotation(Mobile)
-            nav_open(3) 
+            nav_open(3,Mobile=Mobile) 
             #chrome.wait_event("Page.loadEventFired", timeout=60)
             rsleep(5)
             click_create_acc(Mobile)
@@ -557,7 +555,7 @@ while True:
             rsleep(5)
             se_step(G_Profile=G_profile ,Mobile=Mobile)
             rsleep(5)
-            tird_step()
+            tird_step(Mobile=Mobile)
             rsleep(5)
             if (check_succes()==False):
                 print("error ")
@@ -569,15 +567,19 @@ while True:
             else:
                 print("------>   "+new_gid+"   <------")
                 with open(listsuccess, "a") as success_list:
-                    print("Wirting in sccess list")
+                    print("Wirting in Error list")
                     success_list.write("\n")
                     success_list.write(new_gid)
-        
+        execep=0
+        phone_i=phone_i+1
     except:
         print("big error :"+str(phone_i))
-    phone_i=phone_i+1
+        execep=execep+1
+        if execep>2:
+            phone_i=phone_i+1
+
     for i  in range(2):
-        time_sleep=3000+random.randrange(600)
+        time_sleep=3000+random.randrange(1200)
         print("*** sleeping for :"+str(time_sleep/60)+'min')
         #rsleep(3600)
         time.sleep(time_sleep)
