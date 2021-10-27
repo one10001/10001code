@@ -7,7 +7,9 @@ listsuccess=home_dir+'/Gsuccess_list.txt'
 listerror=home_dir+'/Gerror_list.txt'
 list_arabe_male_name=home_dir+'/list_arabe_male_name.txt'
 list_arabe_female_name=home_dir+'/list_arabe_female_name.txt'
+loop_hour=4
 
+import arname
 
 import shlex
 import subprocess
@@ -113,12 +115,13 @@ MobilSMJ7_disp0={
 
 }
 # Y fn 540-> 490
+#"cleaner":[675,675,2,675,675,675,675],
 MobilSMJ7_disp1={
     "Name":"Sumsung SM-J7008",
     "ADB_ID":"ece4d41a",
     "rotation":1,
     "display":[720,1280,252],
-    "cleaner":[675,675,2,675,675,675,675],
+    "cleaner":[350,1220,2,350,1220,350,1220],
     "action_touch":[1188,688],
     "Chrome_link":[300,111],
     "Focus_link":[300,107],
@@ -235,10 +238,33 @@ def genarate_gawri_profile(G_profile=G_profile):
     G_profile["b_month"]=random.randrange(28)+1
     G_profile["b_year"]=random.randrange(53)+1950
     G_profile["sex"]=sex
+    r=random.randrange(1,9)
+    G_profile["increment"]=r*10000+r
     return G_profile
 
 
-
+def genarate_arabe_profile(G_profile=G_profile):
+    sex=random.randrange(2)+1
+    while True:
+        if sex==1:
+            G_profile["fn"]=arname.femal_fn_gen().lower()
+        else:
+            G_profile["fn"]=arname.mal_fn_gen().lower()
+        G_profile["ln"]=arname.rand_ln_gen()
+        with open(listerror, 'r') as file:
+            data = file.read()
+        with open(listsuccess, 'r') as file:
+            data2 = file.read()    
+        data=data+data2
+        if data.find(G_profile["fn"]+G_profile["ln"]) == -1:
+                break
+    G_profile["b_day"]=random.randrange(28)+1
+    G_profile["b_month"]=random.randrange(28)+1
+    G_profile["b_year"]=random.randrange(53)+1950
+    G_profile["sex"]=sex
+    r=random.randrange(1,9)
+    G_profile["increment"]=r*10000+r
+    return G_profile
 
 def fixrotation(Mobile=Mobile):
     device.shell(f"content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:0")
@@ -283,9 +309,9 @@ def mob_clean(Mobile=Mobile):
     y1=Mobile["cleaner"][4]
     x2=Mobile["cleaner"][5]
     y2=Mobile["cleaner"][6]
-    device.shell(f"content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:0")
-    device.shell(f"content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0")
-    
+    #device.shell(f"content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:0")
+    #device.shell(f"content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0")
+    reset_rotation()
     if(Mobile["cleaner"][2]==0):
         #device.shell(f"input tap {x} {y}")
         device.shell(f"input keyevent KEYCODE_HOME")
@@ -350,7 +376,7 @@ def nav_open(browser_type=0,Mobile=Mobile):
         os.system("adb forward --remove-all")
         os.system("adb  -s "+Mobile["ADB_ID"]+" forward tcp:19222 localabstract:chrome_devtools_remote")
         time.sleep(9)
-        chrome = PyChromeDevTools.ChromeInterface(host="127.0.0.1",port=19222)
+        chrome = PyChromeDevTools.ChromeInterface(host="127.0.0.1",port=19222,timeout=120)
         chrome.Network.enable()
         time.sleep(2)
         chrome.Page.enable()
@@ -490,7 +516,7 @@ def check_succes(Mobile=Mobile):
     time.sleep(2)
     os.system("adb  -s "+Mobile["ADB_ID"]+" forward tcp:19222 localabstract:chrome_devtools_remote")
     time.sleep(3)
-    chrome = PyChromeDevTools.ChromeInterface(host="127.0.0.1",port=19222)
+    chrome = PyChromeDevTools.ChromeInterface(host="127.0.0.1",port=19222,timeout=120)
     chrome.Network.enable()
     chrome.Page.enable()
     chrome.Page.navigate(url="https://console.cloud.google.com")
@@ -517,9 +543,9 @@ def check_succes(Mobile=Mobile):
 def check_succes2(Mobile=Mobile):
     os.system("adb forward --remove-all")
     time.sleep(2)
-    os.system("adb  -s "+Mobile["ADB_ID"]+" forward tcp:17777 localabstract:chrome_devtools_remote")
+    os.system("adb  -s "+Mobile["ADB_ID"]+" forward tcp:19222 localabstract:chrome_devtools_remote")
     time.sleep(phone_speed+3)
-    chrome = PyChromeDevTools.ChromeInterface(host="127.0.0.1",port=17777)
+    chrome = PyChromeDevTools.ChromeInterface(host="127.0.0.1",port=19222,timeout=120)
     time.sleep(phone_speed+3)
     chrome.Network.enable()
     time.sleep(phone_speed+3)
@@ -545,6 +571,7 @@ def check_succes2(Mobile=Mobile):
     #             pass
     print('check_succes: False ')
     return False
+
 def phone_select(phone_i,Mobiles):
     for i in range(len(Mobiles)):
         #if phone_i%len(Mobiles) == 0 :
@@ -556,6 +583,7 @@ chrome = None
 
 phone_i=0
 execep=0
+phone_speed=0.2
 #Mobiles=[MobileHwawei_disp1,MobilSMJ7_disp1,MobileHwawei_disp0,MobilSMJ7_disp0]
 Mobiles=[MobilSMJ7_disp0,MobileHwawei_disp1,MobilSMJ7_disp1,MobileHwawei_disp0]
 #if __name__ == '__main__':
@@ -569,9 +597,9 @@ while True:
         os.system("adb -s "+Mobile["ADB_ID"]+" forward tcp:19222 localabstract:chrome_devtools_remote")
     #############################
         newip()
-        G_profile=genarate_gawri_profile(G_profile)
+        G_profile=genarate_arabe_profile(G_profile)
         #mob_faker(Mobile=Mobile)
-        for i in range(3):
+        for i in range(loop_hour):
             mob_clean(Mobile)
             fixrotation(Mobile)
             nav_open(3,Mobile=Mobile) 
@@ -591,23 +619,26 @@ while True:
             if (check_succes2(Mobile=Mobile)==False):
                 print("error ")
                 with open(listerror, "a") as error_list:
-                    print("Wirting in sccess list")
+                    print("Wirting in Error list")
                     error_list.write("\n")
                     error_list.write(new_gid)
                 break
             else:
                 print("------>   "+new_gid+"   <------")
                 with open(listsuccess, "a") as success_list:
-                    print("Wirting in Error list")
+                    print("Wirting in Success list")
                     success_list.write("\n")
                     success_list.write(new_gid)
         execep=0
         phone_i=phone_i+1
-    except:
-        print("big error :"+str(phone_i))
+    except Exception as e:
+    #except:
+        print("XXXXXXXXXXXXXXXX big error: "+str(phone_i) + " XXXXXXXXXXXXXXXXXXXXX")
+        print(e)
+        print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
         execep=execep+1
         if execep>2:
-            phone_i=phone_i+1
+            phone_i=phone_i-1
         else:
             continue
 
