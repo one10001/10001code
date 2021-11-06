@@ -7,8 +7,8 @@ listsuccess=home_dir+'/Gsuccess_list.txt'
 listerror=home_dir+'/Gerror_list.txt'
 list_arabe_male_name=home_dir+'/list_arabe_male_name.txt'
 list_arabe_female_name=home_dir+'/list_arabe_female_name.txt'
-loop_hour=4
-
+loop_hour=5
+autophone_version="0.1.2"
 import arname
 
 import shlex
@@ -583,14 +583,16 @@ chrome = None
 
 phone_i=0
 execep=0
-phone_speed=0.2
+phone_speed=9
+print("Autophone Ver: "+autophone_version)
 #Mobiles=[MobileHwawei_disp1,MobilSMJ7_disp1,MobileHwawei_disp0,MobilSMJ7_disp0]
-Mobiles=[MobilSMJ7_disp0,MobileHwawei_disp1,MobilSMJ7_disp1,MobileHwawei_disp0]
+Mobiles=[MobilSMJ7_disp1,MobileHwawei_disp0,MobilSMJ7_disp0,MobileHwawei_disp1]
 #if __name__ == '__main__':
 client = AdbClient(host="127.0.0.1", port=5037) # Default is "127.0.0.1" and 5037
 devices = client.devices()
 while True:   
     try:
+        phone_speed=phone_speed+random.randrange(5)
         Mobile=phone_select(phone_i,Mobiles)
         device = client.device(Mobile["ADB_ID"])
         os.system("adb forward --remove-all")
@@ -599,7 +601,7 @@ while True:
         newip()
         G_profile=genarate_arabe_profile(G_profile)
         #mob_faker(Mobile=Mobile)
-        for i in range(loop_hour):
+        for i in range(3):
             mob_clean(Mobile)
             fixrotation(Mobile)
             nav_open(3,Mobile=Mobile) 
@@ -633,16 +635,18 @@ while True:
         phone_i=phone_i+1
     except Exception as e:
     #except:
-        print("XXXXXXXXXXXXXXXX big error: "+str(phone_i) + " XXXXXXXXXXXXXXXXXXXXX")
+        print("XXXXXXXXXXXXXXXX big error n°"+str(execep)+": "+Mobile["ADB_ID"] +
+              " Rotation:"+Mobile["rotation"] + " XXXXXXXXXXXXXXXXXXXXX")
         print(e)
         print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
         execep=execep+1
+        time.sleep(60)
         if execep>2:
-            phone_i=phone_i-1
+            phone_i=phone_i+1
         else:
             continue
 
-    for i  in range(2):
+    for i  in range(loop_hour):
         time_sleep=3000+random.randrange(1200)
         print("*** sleeping for :"+str(time_sleep/60)+'min')
         #rsleep(3600)
