@@ -27,7 +27,7 @@ def get_random_string(length):
     print("Random string of length", length, "is:", result_str)
 
 def rand_ln_gen():
-    midel=''.join(str(random.choice('zrtsdfghjkylmwbn'))+str(random.choice(['a','o','e','i','ou','u','ai','en','ah','oh','ih']))for i in range(2,5))
+    midel=''.join(str(random.choice('zrtsdfghjkylmwbn'))+str(random.choice(['a','o','i','ou',]))for i in range(2,5))
     #return str(random.choice(["el"+midel,'al'+midel,'e'+midel[0]+midel,'a'+midel[0]+midel]))
     return str(random.choice(["el"+midel,'al'+midel]))
 

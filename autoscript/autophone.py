@@ -585,8 +585,8 @@ phone_i=0
 execep=0
 phone_speed=9
 print("Autophone Ver: "+autophone_version)
-#Mobiles=[MobileHwawei_disp1,MobilSMJ7_disp1,MobileHwawei_disp0,MobilSMJ7_disp0]
-Mobiles=[MobilSMJ7_disp1,MobileHwawei_disp0,MobilSMJ7_disp0,MobileHwawei_disp1]
+Mobiles=[MobileHwawei_disp0,MobilSMJ7_disp1,MobileHwawei_disp1,MobilSMJ7_disp0]
+#Mobiles=[MobilSMJ7_disp1,MobileHwawei_disp0,MobilSMJ7_disp0,MobileHwawei_disp1]
 #if __name__ == '__main__':
 client = AdbClient(host="127.0.0.1", port=5037) # Default is "127.0.0.1" and 5037
 devices = client.devices()
