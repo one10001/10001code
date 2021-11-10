@@ -78,6 +78,8 @@ function simulate(element, eventName) {
     return element;
 }
 
+
+
 function extend(destination, source) {
     for (var property in source)
         destination[property] = source[property];
@@ -126,6 +128,13 @@ function clickConnect() {
     }
 }
 
+function no_thanks(){
+    try {
+        document.querySelector("body > colab-callout").shadowRoot.querySelector("#dismiss").shadowRoot.querySelector("slot").click()
+    } catch (error) {
+            console.log(error);
+        }
+}
 function clickConnectSmart() {
     console.log("SmartConnect at" + Date());
     try {
@@ -751,6 +760,7 @@ if (window.location.href.match('drive') || window.location.href.match('create'))
         var SmartConnect = setInterval(clickConnectSmart, 40000);
         var OkStatus = setInterval(auto_dialog_cleaner, 120000);
         var StopingStatus = setInterval(stop_cmd, 2400000);
+        var notif_false = setInterval(no_thanks; 120);
         //var dismissStatus = setInterval(dismiss_all, 600000);
         //var testgpu = setInterval(() => { switch_gpu_cpu(colabStatus) }, 10800000);
 
