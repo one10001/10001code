@@ -450,7 +450,9 @@ then
     vcvc() {
     while true
     do
-        timeout $(($RANDOM%180 + 180)) ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" -p "$VCOptions" 
+        TimePause=$(($RANDOM%180 + 180))
+        timeout $TimePause ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" -p "$VCOptions" 
+        sleep $(($TimePause + $RANDOM%45))
     done
     }
     vcvc 1>> ooutvc 2>> ooutvc &
