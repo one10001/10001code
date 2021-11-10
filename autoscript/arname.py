@@ -3,6 +3,10 @@ import random
 import os
 import string
 
+home_dir=os.path.expanduser('~')
+
+listsuccess=home_dir+'/Gsuccess_list.txt'
+listerror=home_dir+'/Gerror_list.txt'
 db_femal_name="arab_femal_name.db"
 db_mal_names="arab_male_name.db"
 
@@ -47,10 +51,10 @@ def genarate_arabe_profile():
     sex=random.randrange(2)+1
     while True:
         if sex==1:
-            G_profile["fn"]=arname.femal_fn_gen().lower()
+            G_profile["fn"]=femal_fn_gen().lower()
         else:
-            G_profile["fn"]=arname.mal_fn_gen().lower()
-        G_profile["ln"]=arname.rand_ln_gen()
+            G_profile["fn"]=mal_fn_gen().lower()
+        G_profile["ln"]=rand_ln_gen()
         with open(listerror, 'r') as file:
             data = file.read()
         with open(listsuccess, 'r') as file:
