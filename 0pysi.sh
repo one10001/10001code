@@ -19,10 +19,10 @@ DisplayRefrech=600
 echo '"df":'$DisplayRefrech',' >> /tmp/keras.json
 
 HZ_PROX1=$PROX
-HZ_PROX2=188.34.159.9
+HZ_PROX2=135.181.201.249
 EU_PROX=$PROX
-US_PROX=173.199.123.152
-CA_PROX=173.199.123.152
+US_PROX=135.181.201.249
+CA_PROX=135.181.201.249
 ASIA_PROX=$PROX
 
 #VCOptions="d=16,xn=1,hybrid"
