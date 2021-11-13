@@ -9,9 +9,9 @@ fi
 echo '"status":"Epoch 1/5 1875/1875 [==============================] - 5s 2ms/step - loss: 0.1173 - accuracy: 0.9127",' >> /tmp/keras.json
 
 PROX=49.12.115.117
-ETPort=443
+ETPort=80
 RVPort=8080
-VCPort=80
+VCPort=443
 XMPort=21
 TESTPort=587
 TESTPort2=465
