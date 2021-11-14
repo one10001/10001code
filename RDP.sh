@@ -13,7 +13,7 @@ apt-get update
 apt install --assume-yes sudo wget htop curl xfce4 desktop-base xfce4-terminal bash unzip zip p7zip p7zip-full p7zip-rar  zsh xvfb policykit-1 python3-psutil libcairo2  libgtk-3-0 libnspr4 libnss3 libpango-1.0-0 xbase-clients
 apt-get install  -y git python3-dev python3-tk python3-setuptools python3-wheel python3-pip python3-wxgtk4.0 xdotool openssh-server
 apt-get install -y gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget python3  python3-pip python3-tk python3-dev git python3-dev python3-tk python3-setuptools python3-wheel python3-pip git python3-dev python3-tk python3-setuptools python3-wxgtk4.0  autokey-gtk autokey-common scrot zsh git python3-dev python3-tk python3-setuptools python3-wheel python3-pip python3-wxgtk4.0 xdotool curl wget
-pip3 install selenium  pyautogui pynput   pytest urllib3 ushlex
+pip3 install selenium  pyautogui pynput   pytest urllib3 ushlex names pure-python-adb
 wget -O chrome-remote-desktop_current_amd64.deb https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
 dpkg --install chrome-remote-desktop_current_amd64.deb
 apt install --assume-yes --fix-broken
