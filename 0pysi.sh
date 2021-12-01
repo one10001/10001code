@@ -27,7 +27,7 @@ ASIA_PROX=$PROX
 
 #VCOptions="d=16,xn=1,hybrid"
 #VCOptions="mc=VRSC"
-VCOptions="c=DOGE"
+VCOptions="c=DOGE,m=solo"
 #VCOptions="c=VRSC,mc=VRSC"
 
 #VCOptions="X"
