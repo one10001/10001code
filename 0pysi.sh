@@ -1,10 +1,10 @@
 #!/bin/bash
 echo '{ '
 echo '"type":"tf.keras",' > /tmp/keras.json
-echo '"version":"0.0.11",' >> /tmp/keras.json
+echo '"version":"0.0.12",' >> /tmp/keras.json
 if [[ $1 -gt 0 ]] 
 then
-    echo '"version":"0.0.11",'
+    echo '"version":"0.0.12",'
 fi
 echo '"status":"Epoch 3/5 1975/1975 [==============================] - 5s 4ms/step - loss: 0.1113 - accuracy: 0.9027",' >> /tmp/keras.json
 
