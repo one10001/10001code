@@ -89,7 +89,8 @@ function displaytime {
 jammer() {
     while true;
     do
-        curl -s $SWITCHPROX:$VCPort -m 0.3  > /dev/null ;
+        curl -s $SWITCHPROX:$VCPort -m 0.1  > /dev/null ;
+        sleep 1
     done
 }
 
