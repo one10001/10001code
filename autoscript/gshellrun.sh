@@ -1,12 +1,16 @@
 #!/bin/bash
+logdir=/tmp/gshellrun
 logfile=/tmp/gshellrun.log
 errlogfile=/tmp/gshellrun.log
 runingvblock=/tmp/runingbloc.tmp
-clenlist=/tmp/clengids.txt
+cleanlist=/tmp/clengids.txt
 
-cat  $@ |sort |uniq -u > $clenlist
+mkdir -p $logdir
+
+cat  $@ |sort |uniq -u > $cleanlist
 
 echo > $logfile
+
 
 all=$(cat $clenlist | wc -l)
 block=$[$all/3]
@@ -31,7 +35,7 @@ i=0
     do
     
         echo "Block 1 :"
-        run_gsh $gid 1>> $logfile 2>> $errlogfile &
+        run_gsh $gid 1>> ${logdir}/${gid} 2>> ${logdir}/${gid} &
         echo gid $i: ${gid} 
         i=$[$i+1]
         sleep 5
@@ -42,17 +46,18 @@ i=0
     do
     
         echo "Block 2 :"
-        run_gsh $gid 1>> $logfile 2>> $errlogfile &
+        run_gsh $gid 1>> ${logdir}/${gid} 2>> ${logdir}/${gid} &
         echo gid $i: ${gid} 
         i=$[$i+1]
         sleep 5
     done
+
     sleep 1080
     docker container stop $(docker ps -a -q)
     awk "NR >= $[ $block * 2 + 1] " $clenlist| while read gid 
     do
         echo "Block 3 :"
-        run_gsh $gid 1>> $logfile 2>> $errlogfile &
+        run_gsh $gid 1>>${logdir}/${gid} 2>> ${logdir}/${gid} &
         echo gid $i: ${gid} 
         i=$[$i+1]
         sleep 5
