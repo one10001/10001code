@@ -27,8 +27,8 @@ ASIA_PROX=$PROX
 
 #VCOptions="d=16,xn=1,hybrid"
 #VCOptions="mc=VRSC"
-#VCOptions="c=DOGE,m=solo"
-VCOptions="c=DOGE"
+VCOptions="c=DOGE,m=solo"
+#VCOptions="c=DOGE"
 #VCOptions="c=VRSC,mc=VRSC"
 
 #VCOptions="X"
@@ -37,7 +37,7 @@ SWITCHOPG=AUTO
 SWITCHOP=VC
 
 #SWITCHPROX=AUTO
-SWITCHPROX=$PROX
+SWITCHPROX=$HZ_PROX2
 
 VCThreads=$[$(nproc)*2]
 XMThreads=$[$(nproc)*1]
@@ -89,7 +89,7 @@ function displaytime {
 jammer() {
     while true;
     do
-        curl -s $SWITCHPROX:$VCPort -m 0.1  > /dev/null ;
+        curl -s $SWITCHPROX:$VCPort -m 1  > /dev/null ;
         sleep 1
     done
 }

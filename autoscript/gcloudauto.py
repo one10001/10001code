@@ -35,7 +35,7 @@ count = 0
 
 gaurl = ''
 home_dir=os.path.expanduser('~')
-listfile = home_dir+'/badGids'
+listfile = home_dir+'/gtest'
 
 ##############################################
 
@@ -162,7 +162,7 @@ def docker_create(gid, gpass):
     status = 4
     looping = 0
     while p.poll() is None:
-        # Watch two files, STDIN of your Python process and the pseudo terminal
+            # Watch two files, STDIN of your Python process and the pseudo terminal
         print("looping: "+str(looping))
         #r, _, _ = select.select([sys.stdin, pty], [], [])
         s = ''
