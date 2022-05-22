@@ -128,13 +128,14 @@ function clickConnect() {
     }
 }
 
-function no_thanks(){
+function no_thanks() {
     try {
         document.querySelector("body > colab-callout").shadowRoot.querySelector("#dismiss").shadowRoot.querySelector("slot").click()
     } catch (error) {
-            console.log(error);
-        }
+        console.log(error);
+    }
 }
+
 function clickConnectSmart() {
     console.log("SmartConnect at" + Date());
     try {
@@ -556,7 +557,7 @@ function resetGPU(s) {
     if (s.info.gpu_type == "NULL") {
         console.log("No gpu")
         return "false"
-    } else if (s.info.gpu_type == "K80") {
+    } else if (s.info.gpu_type == "K40") {
         stop_cmd();
         enable_gpu();
         kill_this_session();
@@ -781,7 +782,7 @@ if (window.location.href.match('drive') || window.location.href.match('create'))
                         console.log("No gpu detected swtching to cpu")
 
                         // stop_cmd();
-                    } else if (colabStatus.info.gpu_type == "K80") {
+                    } else if (colabStatus.info.gpu_type == "K40") {
                         disable_gpu(colabStatus);
                         console.log("K80 detected swtching to cpu")
                             // stop_cmd();

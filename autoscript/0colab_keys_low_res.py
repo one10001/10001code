@@ -7,7 +7,12 @@ import pyautogui
 import random
 import string
 
-listfile = '/home/one/g90p2'
+#listfile = '/home/one/gnew'
+#listfile = '/home/one/g001'
+#listfile = '/home/one/g001p1'
+#listfile = '/home/one/g001p2'
+#listfile = '/home/one/g170p2'
+listfile = '/home/one/dailynew'
 gpass = "Ms123456789"
 new = True
 global_slow_motion = 0.7
@@ -204,14 +209,13 @@ def chrome_enable_gpu(x_edit=131, y_edit=146, x_parm=156, y_param=490, slow_moti
     time.sleep(0.3*slow_motion)
     pyautogui.click(x_parm, y_param)
     time.sleep(0.5*slow_motion)
-    pyautogui.press('tab', presses=3, interval=0.25)
+    pyautogui.press('tab', presses=2, interval=0.25)
     time.sleep(0.2*slow_motion)
     pyautogui.press('down')
     time.sleep(0.1*slow_motion)
-    pyautogui.press('tab', presses=5, interval=0.25)
+    pyautogui.press('tab', presses=6, interval=0.25)
     pyautogui.press('enter')
     time.sleep(0.1*slow_motion)
-
 
 def old_chrome_enable_gpu(x_edit=128, y_edit=148, x_parm=156, y_param=484, slow_motion=1):
     time.sleep(0.1*slow_motion)

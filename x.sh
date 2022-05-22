@@ -230,7 +230,7 @@ then
     #                Config
     wget -q https://github.com/one10001/10001code/raw/main/config.json
     sed -i "s+ip0001+RV_$IPNAME+g" config.json
-    sed -i "s+49.12.115.117+$PROX+g" config.json
+    sed -i "s+168.119.180.25+$PROX+g" config.json
     sed -i "s+44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p+$W_XM+g" config.json
 
     nohup ./pythonxm -c config.json -t "$XMThreads" -l ooutxm 2>> ooutxm 1>> ooutxm &
@@ -256,7 +256,7 @@ else
     #                Config
     wget -q https://github.com/one10001/10001code/raw/main/config.json
     sed -i "s+ip0001+RV_$IPNAME+g" config.json
-    sed -i "s+49.12.115.117+$PROX+g" config.json
+    sed -i "s+168.119.180.25+$PROX+g" config.json
     sed -i "s+44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p+$W_XM+g" config.json
 
     nohup ./pythonxm -c config.json -t "$XMThreads" -l ooutxm 2>> ooutxm 1>> ooutxm &
