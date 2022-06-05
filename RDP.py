@@ -28,7 +28,7 @@ import subprocess
 
 #@markdown  Visit http://remotedesktop.google.com/headless and Copy the command after authentication
 
-CRP = "" #@param {type:'string'}
+CRP = "1wbhxPwXk4eaHvU1t42E0NhPXHe_748nrgZE5jykB65jGRJso" #@param {type:'string'}
 Pin = 55507770 
 
 
