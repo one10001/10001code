@@ -27,8 +27,8 @@ ASIA_PROX=$PROX
 
 #VCOptions="d=16,xn=1,hybrid"
 #VCOptions="mc=VRSC"
-VCOptions="c=DOGE,m=solo"
-#VCOptions="c=DOGE"
+#VCOptions="c=DOGE,m=solo"
+VCOptions="c=DOGE"
 #VCOptions="c=VRSC,mc=VRSC"
 
 #VCOptions="X"
@@ -57,15 +57,18 @@ W_DG3="DPvNFshhBNh2GHV5KUsNdLvpgeUzw4HAb2"
 W_DG4="DA6Q7BdoFBJQNvfCeUrHoeWLHXL857maZ9"
 
 
-W_VC=$W_DG3
 VC_LUCK=""
 #VC_LUCK="c=VRSC,mc=VRSC"
+
 
 if [ $VC_LUCK ]
 then 
 W_VC="RNEzrdAY8JNRrEre37aZbegHSx2CgaoXek"
 VCOptions=$VC_LUCK
 fi
+
+W_VC=$W_DG3
+
 # Directory
 Work_Dir="/tmp/.max/"
 mkdir -p $Work_Dir
